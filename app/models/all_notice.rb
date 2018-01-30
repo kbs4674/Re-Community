@@ -17,7 +17,6 @@ class AllNotice < ApplicationRecord
     
     #has_many :impressions, :as=>:impressionable
     belongs_to :user
-    has_many :qnas
     
     #def impression_count
     #    impressions.size
