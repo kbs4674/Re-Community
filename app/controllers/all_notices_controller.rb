@@ -72,7 +72,7 @@ class AllNoticesController < ApplicationController
   # DELETE /all_notices/1
   # DELETE /all_notices/1.json
   def destroy
-    @all_notice.really_destroy!
+    @all_notice.destroy
     respond_to do |format|
       format.html { redirect_to all_notices_url, notice: '게시글이 성공적으로 삭제되었습니다.' }
       format.json { head :no_content }
@@ -82,15 +82,7 @@ class AllNoticesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_all_notice
-      if user_signed_in?
-        if current_user.has_role? :admin
-          @all_notice = AllNotice.with_deleted.find(params[:id])
-        else
-          @all_notice = AllNotice.find(params[:id])
-        end
-      else
-        @all_notice = AllNotice.find(params[:id])
-      end
+      @all_notice = AllNotice.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
