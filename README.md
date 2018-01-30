@@ -15,6 +15,8 @@ Kangwon Univ. Community Prototype, Second Challenger
 `rake sunspot:reindex`<br/><br/>
 `whenever --update-crontab`<br/>
 `whenever`<br/>
+3. [Furthermore : 서버셋팅 전용]<br/>
+`rake db:migrate RAILS_ENV=production`
 
 
 # 알아두면 좋은 지식
