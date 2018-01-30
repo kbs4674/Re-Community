@@ -1,0 +1,50 @@
+<div style="background: linear-gradient(45deg, #8ae0ff, #e69fe0 ); padding: 10px 0px 20px 0px;">
+    <div class="col-12 col-sm-12 col-md-12" style="color: white; font-size: 30px;">
+          <div align="center"><b>1주일 Hot 컨텐츠</b></div>
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-0" style="color: black;">
+          <!-- Nav tabs -->
+          <table width="100%">
+            <tr>
+              <td>
+
+                <ul class="nav nav-tabs" role="tablist" style="justify-content: center">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#hot_week_community_m" role="tab" style="margin-bottom: 10px; color: white; font-size: 13px;">커뮤니티글!</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#hot_week_community_like_m" role="tab" style="margin-bottom: 10px; color: white; font-size: 13px;">커뮤니티 좋아요!</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#hot_week_community_qna_m" role="tab" style="margin-bottom: 10px; color: white; font-size: 13px;">나도 궁금한 질문!</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link hidden-xs-down" data-toggle="tab" href="#like_qna_reply_m" role="tab" style="margin-bottom: 10px; color: white; font-size: 13px;">Best 답변!</a>
+                  </li>
+                </ul>
+
+              </td>
+            </tr>
+            <tr>
+              <td height="250px">
+              <!-- Tab panes -->
+                <div class="tab-content" style="margin-top: 20px;">
+                  <div class="tab-pane fade show active" id="hot_week_community_m" role="tabpanel">
+                    <%= render "homes/hots/impressions_community_week" %>
+                  </div>
+                  <div class="tab-pane fade" id="hot_week_community_like_m" role="tabpanel">
+                    <%= render "homes/hots/impressions_community_week_like" %>
+                  </div>
+                  <div class="tab-pane fade" id="hot_week_community_qna_m" role="tabpanel">
+                    <%= render "homes/hots/likes_qna_week" %>
+                  </div>
+                  <div class="tab-pane fade" id="like_qna_reply_m" role="tabpanel">
+                    <%= render "homes/hots/likes_qna_comment" %>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+</div>

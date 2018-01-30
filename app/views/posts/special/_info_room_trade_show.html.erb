@@ -1,0 +1,115 @@
+<br/><br/>
+<span class="special_form_title">방 구매 정보</span>
+<div class="special_form_area" style="margin-top: 10px;">
+    <%# PC버전 크기에서만 보임. %>
+    <div class="hidden-sm-down">
+        <table width="100%" border="0">
+            <tr>
+                <td colspan="1" rowspan="5" width="30%" align="center">
+                    <% if @post.image.present? %>
+                        <div class="panel-body"><%= image_tag ("#{@post.image}"), class: "card-img-top", width: "320px", height: "170px;" %></div>
+                    <% else %>
+                        <div class="panel-body"><%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "318px", height: "179px;" %></div>
+                    <% end %>
+                </td>
+                <td width="15%" align="right">
+                    가격
+                </td>
+                <td>
+                    <div style="margin-left: 30px;"><%= @post.price_room %>원 (<b><%= @post.room_select %></b>)</div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    보증금
+                </td>
+                <td>
+                    <div style="margin-left: 30px;">
+                        <%= @post.deposit != nil ? "#{@post.deposit}" : 0 %>원
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    방 넓이(㎡ / 평수)
+                </td>
+                <td>
+                    <div style="margin-left: 30px;">
+                        <% if @post.scale.empty? %>
+                         -
+                        <% else %>
+                            <%= @post.scale %>
+                        <% end %>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    위치
+                </td>
+                <td>
+                    <div style="margin-left: 30px;">
+                        <% if @post.location.empty? %>
+                         -
+                        <% else %>
+                            <%= @post.location %>
+                        <% end %>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    연락처
+                </td>
+                <td>
+                    <div style="margin-left: 30px;">0<%= @post.phone_num %></b> <%= link_to '<i class="fas fa-phone"></i>'.html_safe, "tel:0#{@post.phone_num}", class: "badge badge-pill badge-success" %></div>
+                </td>
+            </tr>
+        </table>
+        <hr/>
+        <%= content_tag(:div, " 주의사항", class: "fas fa-exclamation-circle", style: "color: #ef7d45") %><br/>
+        <small>
+        1) 저희 홈페이지에 올라오는 매물은 개인 사용자가 등록한 것으로, 피해에 대한 보상은 책임지지 않습니다.
+        </small>
+    </div>
+    
+    <%# 태블릿, 모바일 버전에서만 보임. %>
+    <div class="hidden-md-up">
+        <% if @post.image.present? %>
+            <div class="panel-body" align="center"><%= image_tag ("#{@post.image}"), class: "card-img-top", width: "320px", height: "170px;" %></div>
+        <% else %>
+            <div class="panel-body" align="center"><%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "318px", height: "179px;" %></div>
+        <% end %>
+        <hr/>
+        <div class="row">
+            <div class="col-3 col-sm-3">가격</div>
+            <div class="col-9 col-sm-9"><%= @post.price_room %>원 (<b><%= @post.room_select %></b>)</div>
+            
+            <div class="col-3 col-sm-3">보증금</div>
+            <div class="col-9 col-sm-9"><%= @post.deposit != nil ? "#{@post.deposit}" : 0 %>원</div>
+            
+            <div class="col-3 col-sm-3">방 넓이</div>
+            <div class="col-9 col-sm-9">
+                <% if @post.scale.empty? %>
+                    -
+                <% else %>
+                    <%= @post.scale %>
+                <% end %>
+            </div>
+            
+            <div class="col-3 col-sm-3">위치</div>
+            <div class="col-9 col-sm-9">
+                <% if @post.location.empty? %>
+                    -
+                <% else %>
+                    <%= @post.location %>
+                <% end %>
+            </div>
+            
+            <div class="col-3 col-sm-3">연락처</div>
+            <div class="col-9 col-sm-9">
+                0<%= @post.phone_num %></b> <%= link_to '<i class="fas fa-phone"></i>'.html_safe, "tel:0#{@post.phone_num}", class: "badge badge-pill badge-success" %>
+            </div>
+        </div>
+    </div>
+</div>

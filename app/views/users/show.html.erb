@@ -1,0 +1,325 @@
+<body class="home_gray">
+    <div class="board hidden-xs-down" style="background: url('/img/title_img3.jpg') no-repeat fixed; background-size: 100% 70%; background-position:0px -180px;">
+        <div class="container" align="center">
+            <span class="post_title"><%= link_to "#{content_tag(:span, truncate( raw( sanitize(@user.nickname, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 20, :omission => "..."), class: "etc")}".html_safe, "/users/#{current_user.id}", class: "board_title" %></span>
+        </div>
+    </div>
+    <div class="board_mobile hidden-sm-up" style="background: url('/img/title_img3.jpg') no-repeat center center/cover scroll;">
+        <span class="post_title">
+            <%= link_to "#{content_tag(:span, truncate( raw( sanitize(@user.nickname, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 20, :omission => "..."), class: "etc")}".html_safe, "/users/#{current_user.id}", class: "board_title" %>
+        </span>
+    </div>
+    <% #경고메세지 출력 (아이디, 비밀번호 잘못 칠 시 등등...) %>
+    <% if alert %>
+        <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #FF4B5C; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+        <%= alert %>
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+        <% elsif notice %>
+        <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #43AC6A; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+        <%= notice %>
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    <% end %>
+    
+    <div class="container">
+        <div class="hidden-xs-down" style="margin-top: 30px;"></div>
+        <div class="row">
+            <div class="offset-md-1 col-12 col-sm-12 col-md-5 main_board" style="margin-top: 10px; padding: 20px; text-align: left">
+            <font size="5px;" style="font-weight: bold"><span style="padding:10px 1px; background-color: black; color: black; font-size: 10px">　</span> 개인 프로필</font>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-6 col-sm-4 col-md-4"><i class="far fa-address-card"></i> 닉네임</div>
+                    <div class="col-6 col-sm-8 col-md-8 etc">
+                        <% if current_user.profile_icon.present? || current_user.profile_banner.present? %>
+                            <% if current_user.profile_select == "profile_icon" %>
+                                <%= image_tag ("#{current_user.profile_icon}"), width: "20px", height: "20px;" %> <%= current_user.nickname %>
+                            <% elsif current_user.profile_select == "profile_banner" %>
+                                <%= image_tag ("#{current_user.profile_banner}"), width: "70px", height: "20px;" %>
+                            <% else %>
+                                <%= @user.nickname %>
+                            <% end %>
+                        <% else %>
+                            <%= @user.nickname %>
+                        <% end %>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4"><i class="far fa-envelope"></i> 이메일</div>
+                    <div class="col-6 col-sm-8 col-md-8 etc"><%= @user.email %></div>
+                    <div class="col-6 col-sm-4 col-md-4"><i class="fas fa-check"></i> 보유권한</div>
+                    <div class="col-6 col-sm-8 col-md-8">
+                        <% if current_user.has_role? :admin %>
+                            <b><%= link_to "관리자", rails_admin_path, style: "color: #30da30;" %></b>
+                        <% end %>
+                        
+                        <% if current_user.has_role? :block_yellow %>
+                            <font color="red"><b>정지계정<font color="yellow">■</font></b></font>
+                        <% elsif current_user.has_role? :block_red %>
+                            <font color="red"><b>정지계정<font color="red">■</font></b></font>
+                        <% else %>
+                            <% if current_user.has_role? :student %>
+                                재학생
+                            <% end %>
+                            <% if current_user.has_role? :graduate_student %>
+                                졸업생
+                            <% end %>
+                            <% if current_user.has_role? :special_icon %>
+                                <span style="color: #3da7f5; font-weight: bold">Speicial</span>
+                            <% end %>
+                            <% if current_user.has_role? :special_vip %>
+                                <span style="color: #ffb370; font-weight: bold">VIP</span>
+                            <% end %>
+                            <% if current_user.has_role? :store_boss %>
+                                사장님 계정
+                            <% end %>
+                            <% if current_user.has_role? :univ_professor %>
+                                교수님 계정
+                            <% end %>
+                            <% if current_user.has_role? :univ_official %>
+                                학교 관계자님
+                            <% end %>
+                            <% if current_user.has_role? :real_estate %>
+                                부동산 중개업
+                            <% end %>
+                        <% end %>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4"><i class="fas fa-user-secret"></i> 마지막 접속IP</div>
+                    <div class="col-6 col-sm-8 col-md-8 etc"><%= current_user.last_sign_in_ip %> <%= link_to "", "https://whois.kisa.or.kr/kor/whois/whois_.jsp?query=#{current_user.last_sign_in_ip}", target: "_blank", class: "fas fa-check", style: "color: white; background-color: #949494; border-radius: 100%; padding: 3px; font-size: 10px;"%></div>
+                    <div class="col-6 col-sm-4 col-md-4"><i class="fas fa-user-secret"></i> 마지막 접속시간</div>
+                    <div class="col-6 col-sm-8 col-md-8 etc"><%= current_user.last_sign_in_at.strftime('%Y-%m-%d %H:%M:%S') %></div>
+                </div>
+            </div>
+            
+            <div class="offset-md-1 col-12 col-sm-12 col-md-5 main_board" style="margin-top: 10px; padding: 20px; text-align: left">
+            <font size="5px;" style="font-weight: bold"><span style="padding:10px 1px; background-color: black; color: black; font-size: 10px">　</span> 한마디</font>
+                <div style="margin-top: 20px;">
+                    <%= @user.do_say %>
+                </div>
+            </div>
+            
+            <div class="offset-md-1 col-12 col-sm-12 col-md-11 main_board" style="margin-top: 10px; padding: 20px; text-align: left">
+            <font size="5px;" style="font-weight: bold"><span style="padding:10px 1px; background-color: black; color: black; font-size: 10px">　</span> 게시글 기록</font><br/>
+                <small>* 게시물 기록은 지난 1년간의 기록물만 조회됩니다.</small>
+                <div class="row">
+                    
+                    <div class="offset-md-1 col-12 col-sm-12 col-md-5">
+                        <h5 style="margin-top: 20px;">모든 일반게시글</h5>
+                        <hr/>
+                        <div style="padding: 10px; overflow-y:scroll; overflow-x: hidden; height: 200px;">
+                            <div class="row">
+                            <% @posts.order("created_at DESC").each do |post| %>
+                                <% if Time.now - post.created_at <= 1.years %>
+                                    <% if post.user_id == current_user.id %>
+                                        <div class="col-8 col-sm-9 col-md-8 etc table_separate">
+                                        <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                                            <%= content_tag(:div, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 50, :omission => "..."), class: "etc") %>
+                                        <% end %>
+                                        </div>
+                                        <div class="col-3 col-sm-2 col-md-3 table_separate">
+                                            <i class="far fa-comments"></i> <%= post.comment_threads.count %>
+                                        </div>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 col-sm-12 col-md-5">
+                        <h5 style="margin-top: 20px;">질문답변</h5>
+                        <hr/>
+                        <div style="padding: 10px; overflow-y:scroll; overflow-x: hidden; height: 200px;">
+                            <div class="row">
+                            <% @qnas.order("created_at DESC").each do |post| %>
+                                <% if Time.now - post.created_at <= 1.years %>
+                                    <% if post.user_id == current_user.id %>
+                                    <div class="col-8 col-sm-9 col-md-8 etc table_separate">
+                                    <%= link_to post do %>
+                                        <%= content_tag(:div, post.title, class: "etc") %>
+                                    <% end %>
+                                    </div>
+                                    <div class="col-3 col-sm-2 col-md-3 table_separate">
+                                        <% if post.comment_qnas.count == 0 %>
+                                            <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
+                                        <% else %>
+                                            <span class="badge badge-success" style="padding-top: 5px;"><%= post.comment_qnas.count %> 개의 답변</span>
+                                        <% end %>
+                                    </div>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="offset-md-1 col-12 col-sm-12 col-md-5">
+                        <h5 style="margin-top: 20px;">댓글</h5>
+                        <hr/>
+                        <div style="padding: 10px; overflow-y:scroll; overflow-x: hidden; height: 200px;">
+                            <div class="row">
+                                <% @comements.order("created_at DESC").each do |post| %>
+                                    <% if Time.now - post.created_at <= 1.years %>
+                                        <% if post.user_id == current_user.id %>
+                                            <% if post.commentable_type == "AllNotice" %>
+                                                <div class="col-8 col-sm-8 col-md-8 etc table_separate">
+                                                    <%= link_to all_notice_path(post.commentable) do %>
+                                                        <%= content_tag(:div, post.body, class: "etc") %>
+                                                    <% end %>
+                                                </div>
+                                                <div class="col-3 col-sm-3 col-md-3 table_separate">
+                                                    <% if post.get_upvotes.size - post.get_downvotes.size > 0 %>
+                                                        <%= content_tag(:div, " <b>#{post.get_upvotes.size - post.get_downvotes.size}</b>".html_safe, class: "far fa-thumbs-up etc", style: "color: #43d843") %>
+                                                    <% elsif post.get_upvotes.size - post.get_downvotes.size < 0 %>
+                                                        <%= content_tag(:div, " <b>#{post.get_upvotes.size - post.get_downvotes.size}</b>".html_safe, class: "far fa-thumbs-up etc", style: "color: red") %>
+                                                    <% else %>
+                                                        <%= content_tag(:div, " <b>#{post.get_upvotes.size - post.get_downvotes.size}</b>".html_safe, class: "far fa-thumbs-up etc") %>
+                                                    <% end %>
+                                                </div>
+                                            <% else %>
+                                                <div class="col-11 col-sm-11 col-md-11 etc table_separate">
+                                                    <%= link_to bulletin_post_path(post.bulletin, post.commentable) do %>
+                                                        <%= content_tag(:div, post.body, class: "etc") %>
+                                                    <% end %>
+                                                </div>
+                                            <% end %>
+                                        <% end %>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 col-sm-12 col-md-5">
+                        <h5 style="margin-top: 20px;">질문글에 대한 <%= current_user.nickname %> 님의 답변</h5>
+                        <hr/>
+                        <div style="padding: 10px; overflow-y:scroll; overflow-x: hidden; height: 200px;">
+                            <div class="row">
+                            <% @comement_qnas.order("created_at DESC").each do |qna| %>
+                                <% if Time.now - qna.created_at <= 1.years %>
+                                    <% if qna.user_id == current_user.id %>
+                                    <div class="col-3 col-sm-3 col-md-2 table_separate">
+                                        <%= link_to qna_path(qna.qna) do %>
+                                            <% if qna.get_upvotes.size - qna.get_downvotes.size > 0 %>
+                                                <%= content_tag(:div, " <b>#{qna.get_upvotes.size - qna.get_downvotes.size}</b>".html_safe, class: "far fa-thumbs-up etc", style: "color: #43d843") %>
+                                            <% elsif qna.get_upvotes.size - qna.get_downvotes.size < 0 %>
+                                                <%= content_tag(:div, " <b>#{qna.get_upvotes.size - qna.get_downvotes.size}</b>".html_safe, class: "far fa-thumbs-up etc", style: "color: red") %>
+                                            <% else %>
+                                                <%= content_tag(:div, " <b>#{qna.get_upvotes.size - qna.get_downvotes.size}</b>".html_safe, class: "far fa-thumbs-up etc") %>
+                                            <% end %>
+                                        <% end %>
+                                    </div>
+                                    <div class="col-8 col-sm-8 col-md-9 table_separate">
+                                        <%= link_to qna_path(qna.qna) do %>
+                                            <%= content_tag(:div, truncate( raw( sanitize(qna.body, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 30, :omission => "..."), class: "etc") %>
+                                        <% end %>
+                                    </div>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <% if current_user.has_role? :admin %>
+                <div class="offset-md-1 col-12 col-sm-12 col-md-11 main_board" style="margin-top: 10px; padding: 20px; text-align: left">
+                <font size="5px;" style="font-weight: bold"><span style="padding:10px 1px; background-color: black; color: black; font-size: 10px">　</span> 관리자</font>
+                    <div style="margin-top: 20px;">
+                        <%= link_to '<i class="fab fa-telegram-plane" aria-hidden="true"></i> 카테고리 설정'.html_safe, bulletins_path %><br/>
+                        <%= link_to '<i class="fab fa-telegram-plane" aria-hidden="true"></i> 관리자 메뉴'.html_safe, rails_admin_path %>
+                    </div>
+                </div>
+            <% end %>
+            
+            <% if current_user.has_any_role? :store_boss, :admin %>
+                <div class="offset-md-1 col-12 col-sm-12 col-md-11 main_board" style="margin-top: 10px; padding: 20px; text-align: left">
+                    <font size="5px;" style="font-weight: bold"><span style="padding:10px 1px; background-color: black; color: black; font-size: 10px">
+                    <% @bulletins.each do |bulletin| %>
+                        <% if bulletin.title == "사장님 공지사항" %>
+                            </span> <%= link_to "사장님 공지사항", bulletin_posts_path(bulletin) %></font>
+                        <% end %>
+                    <% end %>
+                    <div style="margin-top: 20px;"></div>
+                    <div class="row">
+                        <div class="col-6 col-sm-6 col-md-8 table_title" align="center">제목</div>
+                        <div class="col-4 col-sm-4 col-md-3 table_title" align="center">작성일</div>
+                        <div class="col-2 col-sm-2 col-md-1 table_title" align="center">조회수</div>
+                    </div>
+                    <% @bulletins.each do |bulletin| %>
+                        <% if bulletin.title == "사장님 공지사항" %>
+                            <% bulletin.posts.page(params[:page]).per(5).each do |post| %>
+                                <div class="row">
+                                    <div class="col-6 col-sm-6 col-md-8 table_separate">
+                                        <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                                            <%= content_tag(:div, post.title, class: "etc") %>
+                                        <% end %>
+                                    </div>
+                                    <div class="col-4 col-sm-4 col-md-3 table_separate" align="center"><%= "#{time_ago_in_words(post.created_at)} 전" %></div>
+                                    <div class="col-2 col-sm-2 col-md-1 table_separate" align="center"><%= post.unique_impression_count %></div>
+                                </div>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                    <% if current_user.has_role? :admin %>
+                        <div align="right" style="margin-top: 30px;">
+                            <% @bulletins.each do |bulletin| %>
+                                <% if bulletin.title == "사장님 공지사항" %>
+                                    <%= link_to '글 쓰기', (new_bulletin_post_path(bulletin)), class: "btn btn-primary btn-sm" %>
+                                <% end %>
+                            <% end %>
+                        </div>
+                    <% end %>
+                    <div class="d-flex flex-column", style="margin-top: 30px;">
+                        <%= paginate @posts.page(params[:page]).per(5) %>
+                    </div>
+                </div>
+            <% end %>
+            
+            <% if current_user.has_any_role? :univ_professor, :univ_official, :admin %>
+                <div class="offset-md-1 col-12 col-sm-12 col-md-11 main_board" style="margin-top: 10px; padding: 20px; text-align: left">
+                    <font size="5px;" style="font-weight: bold"><span style="padding:10px 1px; background-color: black; color: black; font-size: 10px">
+                    <% @bulletins.each do |bulletin| %>
+                        <% if bulletin.title == "학교 관계자 공지사항" %>
+                            </span> <%= link_to "학교 관계자님 공지사항", bulletin_posts_path(bulletin) %></font>
+                        <% end %>
+                    <% end %>
+                    <div style="margin-top: 20px;"></div>
+                    <div class="row">
+                        <div class="col-6 col-sm-6 col-md-8 table_title" align="center">제목</div>
+                        <div class="col-4 col-sm-4 col-md-3 table_title" align="center">작성일</div>
+                        <div class="col-2 col-sm-2 col-md-1 table_title" align="center">조회수</div>
+                    </div>
+                    <% @bulletins.each do |bulletin| %>
+                        <% if bulletin.title == "학교 관계자 공지사항" %>
+                            <% bulletin.posts.page(params[:page]).per(5).each do |post| %>
+                                <div class="row">
+                                    <div class="col-6 col-sm-6 col-md-8 table_separate">
+                                        <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                                            <%= content_tag(:div, post.title, class: "etc") %>
+                                        <% end %>
+                                    </div>
+                                    <div class="col-4 col-sm-4 col-md-3 table_separate" align="center"><%= "#{time_ago_in_words(post.created_at)} 전" %></div>
+                                    <div class="col-2 col-sm-2 col-md-1 table_separate" align="center"><%= post.unique_impression_count %></div>
+                                </div>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                    <% if current_user.has_role? :admin %>
+                        <div align="right" style="margin-top: 30px;">
+                            <% @bulletins.each do |bulletin| %>
+                                <% if bulletin.title == "학교 관계자 공지사항" %>
+                                    <%= link_to '글 쓰기', (new_bulletin_post_path(bulletin)), class: "btn btn-primary btn-sm" %>
+                                <% end %>
+                            <% end %>
+                        </div>
+                    <% end %>
+                    <div class="d-flex flex-column", style="margin-top: 30px;">
+                        <%= paginate @posts.page(params[:page]).per(5) %>
+                    </div>
+                </div>
+            <% end %>
+            
+        </div>
+        <div style="margin-top: 100px;"></div>
+    </div>
+</body>

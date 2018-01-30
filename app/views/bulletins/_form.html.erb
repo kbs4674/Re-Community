@@ -1,0 +1,36 @@
+  <%= form_with(model: bulletin, local: true) do |f| %>
+    <div class="form-group">
+      <%= f.label :"게시판 제목 명" %>
+      <%= f.text_field :title, id: :bulletin_title, class: "form-control no-border" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :내용 %>
+      <%= tinymce %>
+      <%= f.text_area :content, id: :bulletin_content, class: "form-control tinymce", rows: "10" %>
+      <% f.number_field :user_id %>
+    </div>
+  
+    <div class="col-12 col-sm-8 col-md-5" style="background-color: #ffd4d4; margin-top: 30px; padding: 10px;"><font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 어드민 전용 : 게시판 특수기능 설정</font></div>
+    <div align="left" style="margin-top: 10px;">
+      <%= f.label :main_hidden, "메인 숨김 여부" %> <%= f.check_box :main_hidden, id: :bulletin_main_hidden %><br/>
+      <%= f.label :member_boss, "사장님만" %> <%= f.check_box :member_boss, id: :bulletin_member_boss %><br/>
+      <%= f.label :member_univ, "학교 관계자만" %> <%= f.check_box :member_univ, id: :bulletin_member_univ %><br/>
+      <%= f.label :member_real_estate, "부동산 중개업자 관계자만" %> <%= f.check_box :member_real_estate, id: :bulletin_member_real_estate %><br/><br/>
+      
+      <%= f.label :search_job, "1) 구인 양식" %> <%= f.check_box :search_job, id: :bulletin_search_job %><br/>
+      <%= f.label :seeking_job, "2) 구직 양식" %> <%= f.check_box :seeking_job, id: :bulletin_seeking_job %><br/>
+      <%= f.label :info_no_named, "3) 익명 게시판 양식" %> <%= f.check_box :info_no_named, id: :bulletin_info_no_named %><br/>
+      <%= f.label :info_room_trade, "4) 방정보 양식" %> <%= f.check_box :info_room_trade, id: :bulletin_info_room_trade %><br/>
+      <%= f.label :info_trade, "5) '아나바다' 거래게시판 양식" %> <%= f.check_box :info_trade, id: :bulletin_info_trade %><br/>
+      <%= f.label :promote_store, "6) 홍보 게시판 양식" %> <%= f.check_box :promote_store, id: :bulletin_promote_store %><br/>
+      <%= f.label :vote, "7) 투표 게시판 양식" %> <%= f.check_box :vote, id: :bulletin_vote %><br/>
+      <%= f.label :seeking_room, "7) '방 구함' 게시판 양식" %> <%= f.check_box :seeking_room, id: :bulletin_seeking_room %><br/>
+    </div>
+  
+    <center>
+      <div class="form-actions" style="margin-top: 20px;">
+        <%= f.button :글쓰기, class: "btn btn-primary" %>
+        <%= link_to '목록', bulletins_path, class: "btn btn-info" %>
+      </div>
+    </center>
+  <% end %>

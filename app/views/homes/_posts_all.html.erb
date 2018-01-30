@@ -1,0 +1,21 @@
+<div style="padding: 5px;">
+    <% @posts_all.first(5).each do |post| %>
+      <% if not post.bulletin.main_hidden == true %>
+        <% if post.reports.size >= post.num %>
+          <% if can? :for_admin, @posts %>
+            <%= link_to bulletin_post_path(post.bulletin, post) do %>
+              <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "color: red; font-weight: normal !important; margin-left: 10px;") %>
+              <%= content_tag(:span, " #{post.title}", class: "etc", style: "color: red; font-weight: normal !important;") %><br/>
+            <% end %>
+          <% else %>
+            <font color="#6E6E6E" style="margin-left: 10px;"><i class="fas fa-caret-right"></i> <i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font><br/>
+          <% end %>
+        <% else %>
+          <%= link_to bulletin_post_path(post.bulletin, post) do %>
+            <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "font-weight: normal !important; margin-left: 10px;") %>
+            <%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 25, :omission => "..."), class: "etc") %><br/>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+</div>

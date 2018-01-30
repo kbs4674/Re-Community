@@ -1,0 +1,70 @@
+<body class="home_gray">
+  <% #경고메세지 출력 (아이디, 비밀번호 잘못 칠 시 등등...) %>
+  <% if alert %>
+    <div style="margin-top: 30px;">&nbsp</div>
+    <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #FF4B5C; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+    <%= alert %>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    <% elsif notice %>
+    <div style="margin-top: 30px;">&nbsp</div>
+    <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #43AC6A; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+    <%= notice %>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    <% else %>
+    <div style="margin-top: 30px;">&nbsp</div>
+  <% end %>
+  <div style="margin-top: 30px;">&nbsp</div>
+  
+  <div class="container col-12 col-sm-7 col-md-4" align="center" style="padding-top: 10px; padding-bottom: 10px; border: 1px solid #F2F2F2; border-radius: 4px; background: white; ">
+  <h2 style="margin-top: 20px;"><%= t('.sign_up') %></h2>
+  <hr class="col-5 col-sm-5 col-md-5">
+  
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <div class="col-12 col-sm-12 col-md-12">
+    <%= devise_error_messages! %>
+  </div>
+    
+  <div class="field col-12 col-sm-11 col-md-10" align="left">
+    <%= f.label :이메일 %><br />
+    <%= f.text_field :email , class: "form-control no-border", placeholder: "이메일주소", autofocus: true, :required => true %>
+  </div><br />
+  
+  <div class="field col-12 col-sm-11 col-md-10" align="left">
+    <%= f.label :비밀번호 %>
+    <% if @minimum_password_length %>
+    <% end %><br />
+    <%= f.password_field :password, placeholder: "6글자 이상", class: "form-control no-border", autocomplete: "off", :required => true %><br/>
+  </div>
+  
+  <div class="field col-12 col-sm-11 col-md-10" align="left">
+    <%= f.label :비밀번호_재확인 %><br />
+    <%= f.password_field :password_confirmation, class: "form-control no-border", autocomplete: "off", :required => true %><br/>
+  </div>
+  
+  <div class="field col-12 col-sm-11 col-md-10" align="left">
+  	<%= f.label "닉네임" %><br/>
+  	<%= f.text_field :nickname, class: "form-control no-border", :required => true %><br/>
+  </div>
+  
+  <div class="field col-12 col-sm-11 col-md-10" align="left">
+    	<%= f.label "한 마디" %>
+      <%= f.text_area :do_say, class: "form-control", autofocus: true, rows: 3 %>
+      <small>* HTML 태그 비허용</small><br/><br/>
+  </div>
+  
+  <div class="field col-12 col-sm-11 col-md-10" align="left">
+    	<%= f.label "운영 방침" %>
+        <%= render "devise/shared/agree_manage" %>
+      <div align="right"><%= f.check_box :manage_agree, :required => true %> <%= f.label :manage_agree, "해당 운영방침에 동의합니다. (필수)" %></div>
+  </div>
+  
+  <div class="actions" align="center" style="margin-bottom: 20px;"><br/>
+    <%= f.submit t('.sign_up'), class: "btn btn-primary" %>
+  </div>
+  <% end %>
+  </div>
+  <div style="margin-top:10px;"></div>
+  <center><%= render "devise/shared/info" %></center>
+</body>

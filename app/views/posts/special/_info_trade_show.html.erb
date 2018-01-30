@@ -1,0 +1,131 @@
+<br/><br/>
+<span class="special_form_title">거래정보</span>
+<div class="special_form_area" style="margin-top: 10px;">
+    <%# PC버전 크기에서만 보임. %>
+    <div class="hidden-sm-down">
+        <table width="100%" border="0">
+            <tr>
+                <td colspan="1" rowspan="5" width="30%" align="center">
+                    <% if @post.image.present? %>
+                        <div class="panel-body"><%= image_tag ("#{@post.image}"), class: "card-img-top", width: "320px", height: "170px;" %></div>
+                    <% else %>
+                        <div class="panel-body"><%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "318px", height: "179px;" %></div>
+                    <% end %>
+                </td>
+                <td width="20%" align="right">
+                    가격
+                </td>
+                <td>
+                    <div style="margin-left: 30px;"><%= @post.price %>원</div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    거래방법
+                </td>
+                <td>
+                    <div style="margin-left: 30px;">
+                        <%= @post.trade_way %>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    연락처 혹은 SNS계정
+                </td>
+                <td>
+                    <div style="margin-left: 30px;">
+                        <%= @post.sns %>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    IP주소
+                    <% if can? :ip, @post %>
+                        <%= link_to "", "https://whois.kisa.or.kr/kor/whois/whois_.jsp?query=#{@post.remote_ip}", target: "_blank", class: "fas fa-check", style: "color: white; background-color: #949494; border-radius: 100%; padding: 3px; font-size: 10px;"%>
+                    <% end %>
+                </td>
+                <td>
+                    <div style="margin-left: 30px;">
+                        <% if can? :ip, @post %>
+                          <%= content_tag(:span, " #{@post.remote_ip.split('.').take(2).join('.')}.*.*", data: {toggle: "tooltip", placement: "top"}, title: "#{@post.remote_ip}") %><br/>
+                        <% else %>
+                          <%= content_tag(:span, " #{@post.remote_ip.split('.').take(2).join('.')}.*.*") %><br/>
+                        <% end %>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    더 치트 조회하기
+                </td>
+                <td>
+                    <div style="margin-left: 30px;">
+                        <%= link_to "더 치트", "https://thecheat.co.kr/rb/?mod=_search", target: "_blank", class: "badge badge-info" %>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <% if @post.agree == true %>
+            <p align="center" style="margin-top: 20px; margin-bottom: 20px;">" <b><%= @post.user != nil ? @post.user.nickname : @post.user_name %></b> 님은 <u>정직한 거래</u>를 <b style="color: #5cb85c">약속</b> 하셨습니다. "</p>
+        <% else %>
+            <p align="center" style="margin-top: 20px; margin-bottom: 20px;">" <b><%= @post.user != nil ? @post.user.nickname : @post.user_name %></b> 님은 <u>정직한 거래</u>를 <font color="red"><b>약속하지 않으셨습니다.</b></font> "</p>
+        <% end %>
+        <hr/>
+        <%= content_tag(:div, " 주의사항", class: "fas fa-exclamation-circle", style: "color: #ef7d45") %><br/>
+        <small>
+        1) 저희 홈페이지에 올라오는 매물은 개인 사용자가 등록한 것으로, 피해에 대한 보상은 책임지지 않습니다.<br/>
+        2) 판매 게시물 중, 사진이 없는 게시물은 피해 최소화를 위해 개인적으로 (추가적인) 인증요청 및 물건구매를 자제 바랍니다.
+        </small>
+    </div>
+    
+    <%# 태블릿, 모바일 버전에서만 보임. %>
+    <div class="hidden-md-up">
+        <% if @post.image.present? %>
+            <div class="panel-body" align="center"><%= image_tag ("#{@post.image}"), class: "card-img-top", width: "320px", height: "170px;" %></div>
+        <% else %>
+            <div class="panel-body" align="center"><%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "318px", height: "179px;" %></div>
+        <% end %>
+        <hr/>
+        <div class="row">
+            <div class="col-6 col-sm-5">가격</div>
+            <div class="col-6 col-sm-7"><%= @post.price %>원</div>
+            
+            <div class="col-6 col-sm-5">거래방법</div>
+            <div class="col-6 col-sm-7"><%= @post.trade_way %></div>
+            
+            <div class="col-6 col-sm-5">연락처 혹은 SNS 계정</div>
+            <div class="col-6 col-sm-7"><%= @post.sns %></div>
+            
+            <div class="col-6 col-sm-5">
+                IP주소
+                <% if can? :ip, @post %>
+                    <span class="badge badge-pill badge-default"><%= link_to "", "https://whois.kisa.or.kr/kor/whois/whois_.jsp?query=#{@post.remote_ip}", target: "_blank", class: "fas fa-check", style: "color: white"%></span>
+                <% end %>
+            </div>
+            <div class="col-6 col-sm-7">
+                <% if can? :ip, @post %>
+                    <%= content_tag(:span, " #{@post.remote_ip.split('.').take(2).join('.')}.*.*", data: {toggle: "tooltip", placement: "top"}, title: "#{@post.remote_ip}") %><br/>
+                <% else %>
+                    <%= content_tag(:span, " #{@post.remote_ip.split('.').take(2).join('.')}.*.*") %><br/>
+                <% end %>
+            </div>
+            <div class="col-6 col-sm-5">더 치트 조회하기</div>
+            <div class="col-6 col-sm-7"><%= link_to "더 치트", "https://thecheat.co.kr/rb/?mod=_search", target: "_blank", class: "badge badge-info" %></div>
+            <div class="col-12 col-sm-12">
+            <% if @post.agree == true %>
+                <p align="center" style="margin-top: 20px; margin-bottom: 20px;">" <b><%= @post.user != nil ? @post.user.nickname : @post.user_name %></b> 님은 <u>정직한 거래</u>를 <b style="color: #5cb85c">약속</b> 하셨습니다. "</p>
+            <% else %>
+                <p align="center" style="margin-top: 20px; margin-bottom: 20px;">" <b><%= @post.user != nil ? @post.user.nickname : @post.user_name %></b> 님은 <u>정직한 거래</u>를 <font color="red"><b>약속하지 않으셨습니다.</b></font> "</p>
+            <% end %>
+            <hr/>
+            <%= content_tag(:div, " 주의사항", class: "fas fa-exclamation-circle", style: "color: #ef7d45") %><br/>
+            <small>
+            1) 저희 홈페이지에 올라오는 매물은 개인 사용자가 등록한 것으로, 이에 대한 피해에 대한 보상은 책임지지 않습니다.<br/>
+            2) 판매 게시물 중, 사진이 없는 게시물은 피해 최소화를 위해 개인적으로 (추가적인) 인증요청 및 물건구매를 자제 바랍니다.
+            </small>
+            </div>
+        </div>
+    </div>
+</div>

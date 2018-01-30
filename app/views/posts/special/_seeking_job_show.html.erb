@@ -1,0 +1,24 @@
+<br/><br/>
+<span class="special_form_title">구직 정보</span>
+<div class="special_form_area" style="margin-top: 10px;">
+    <div class="col-12 col-sm-12 col-md-12" style="margin-bottom: 30px;" align="center">
+        <h3>" <%= @post.short_talk %> "</h3>
+    </div>
+    <div>
+        <b>자기소개</b>
+        <hr/>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-5 col-md-6">
+            <span style="margin-left: 15px; margin-right: 81px;" type="square">급여</span><b><%= @post.price_job %></b> 원<br/>
+            <span style="margin-left: 15px; margin-right: 20px;" type="square">희망 근무기간</span><b><%= @post.time %></b><br/>
+        </div>
+        <div class="col-12 col-sm-5 col-md-6">
+            <span style="margin-left: 15px; margin-right: 42px;" type="square">기술(스킬)</span><b><%= @post.skill %></b><br/>
+            <span style="margin-left: 15px; margin-right: 63px;" type="square">연락처</span>
+            <% if @post.phone_num != nil %>
+                <b>0<%= @post.phone_num %></b> <%= link_to '<i class="fas fa-phone"></i>'.html_safe, "tel:0#{@post.phone_num}", class: "badge badge-pill badge-success" %><br/>
+            <% end %>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<br/><br/>
+<span class="special_form_title">구인 정보</span>
+<div class="special_form_area" style="margin-top: 10px;">
+    <div class="col-12 col-sm-12 col-md-12" style="margin-bottom: 30px;" align="center">
+        <h3>"<%= @post.short_talk %>"</h3>
+    </div>
+    <div>
+        <b>근무 조건</b>
+        <hr/>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-5 col-md-6">
+            <span style="margin-left: 15px; margin-right: 58px;" type="square">급여</span><b><%= @post.price_job %></b> 원<br/>
+            <span style="margin-left: 15px; margin-right: 30px;" type="square">모집인원</span><b><%= @post.person %></b> 명<br/>
+            <span style="margin-left: 15px; margin-right: 30px;" type="square">근무개월</span><b><%= @post.time %></b><br/>
+        </div>
+        <div class="col-12 col-sm-5 col-md-6">
+            <span style="margin-left: 15px; margin-right: 40px;" type="square">연락처</span>
+            <% if @post.phone_num != nil %>
+                <b>0<%= @post.phone_num %></b> <%= link_to '<i class="fas fa-phone"></i>'.html_safe, "tel:0#{@post.phone_num}", class: "badge badge-pill badge-success" %><br/>
+            <% end %>
+            <span style="margin-left: 15px; margin-right: 58px;" type="square">위치</span><b><%= @post.location %></b><br/>
+            <span style="margin-left: 15px; margin-right: 30px;" type="square">요구사항</span><b><%= @post.skill %></b><br/>
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12" style="margin-top: 30px;">
+        <% if @post.agree == true %>
+            <p align="center">" <b><%= @post.user != nil ? @post.user.nickname : @post.user_name %></b> 님은 <u>최저시급 준수</u>에 대한 안내를 받으셨고, 이에 <b style="color: #5cb85c">동의</b> 하셨습니다. "</p>
+        <% else %>
+            <p align="center">" <b><%= @post.user != nil ? @post.user.nickname : @post.user_name %></b> 님은 <u>최저시급 준수</u>에 대한 안내를 받으셨고, 이에 <font color="red"><b>동의하지 않으셨습니다.</b></font> "</p>
+        <% end %>
+    </div>
+</div>

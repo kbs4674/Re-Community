@@ -1,0 +1,107 @@
+<div class="board hidden-xs-down" style="background: url('/img/title_img1.jpg') no-repeat center center/cover scroll;"><span style="color: white; background:rgba(0,0,0,0.6); padding: 10px; border-radius: 10px;"><%= link_to "카테고리 설정", bulletins_path, class: "board_title" %></span></div>
+<div class="board_mobile hidden-sm-up" style="background: url('/img/title_img1.jpg') no-repeat center center/cover scroll;"><span style="color: white; background:rgba(0,0,0,0.6); padding: 10px; border-radius: 10px;"><%= link_to "카테고리 설정", bulletins_path, class: "board_title" %></span></div>
+
+<% #경고메세지 출력 (아이디, 비밀번호 잘못 칠 시 등등...) %>
+<% if alert %>
+    <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #FF4B5C; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+    <%= alert %>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    <% elsif notice %>
+    <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #43AC6A; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+    <%= notice %>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+<% end %>
+
+<div class="container" style="margin-top:30px; margin-bottom: 100px;">
+    <%= content_tag(:p, alert,  class: 'alert alert-danger alert-dismissible fa fa-exclamation-triangle' ) if alert  %>
+    <h2><b><%= @bulletin.title %></h2></b><br/>
+    
+    <div class="row">
+        <% # [그리드] PC, 모바일 공통에서 볼 경우 : 닉네임 %>
+        <div class="col-4"><%= @bulletin.user != nil ? @bulletin.user.nickname : @bulletin.user_name %></div>
+        <% # [그리드] Only 모바일 에서 볼 경우 : 글 작성시간 %>
+        <div class="col-8 hidden-md-up" align="right"><span><%= @bulletin.created_at.in_time_zone("Asia/Seoul").strftime('%Y-%m-%d %H:%M') %></span></div>
+    </div>
+    <% # 그리드 끝 %>
+    
+    <hr/>
+    
+    <% # [그리드] Only PC에서 볼 경우 : 카테고리 게시판 주소, 글 작성시간, 조회수 %>
+    <div class="row hidden-sm-down">
+        <div align="left" class="col-md-4"><i class="fa fa-external-link" aria-hidden="true"></i>
+         카테고리 내 게시판 주소 | 
+            <div class="badge badge-pill badge-primary", style="">
+             <%= link_to "바로가기", "#{request.protocol}#{request.host}/bulletins/#{@bulletin.id}/posts", style: "color: white; padding: 10px;" %>
+            </div>
+        </div>
+        <div align="right" class="col-md-8"><%= @bulletin.created_at.in_time_zone("Asia/Seoul").strftime('%Y-%m-%d %H:%M') %></span></div>
+    </div>
+    <% # 그리드 : PC 끝 %>
+    
+    <% # [그리드] Only 모바일에서 볼 경우 : 카테고리 게시판 주소, 조회수 %>
+    <div class="row hidden-md-up" >
+        <div class="col-10", style="padding-right: 0px;"><i class="fa fa-external-link" aria-hidden="true"></i> 카테고리 내 게시판 주소 | <div class="badge badge-pill badge-primary", style=""> <%= link_to "바로가기", "#{request.protocol}#{request.host}/bulletins/#{@bulletin.id}/posts", style: "color: white; padding: 10px;" %></div></div>
+    </div>
+    <% # 그리드 : 모바일 끝 %>
+    
+    <br/>
+    <%= content_tag(:div, @bulletin.content.html_safe, style: "margin-top: 20px;", :class => "panel-body") %>
+    
+    <div align="right" style="margin-top: 30px;">
+        <% if @bulletin.search_job == true %>
+            <span class="badge badge-pill badge-default">구인</span>
+        <% end %>
+        <% if @bulletin.seeking_job == true %>
+            <span class="badge badge-pill badge-default">구직</span>
+        <% end %>
+        <% if @bulletin.info_no_named == true %>
+            <span class="badge badge-pill badge-default">익명</span>
+        <% end %>
+        <% if @bulletin.info_room_trade == true %>
+            <span class="badge badge-pill badge-default">방 거래</span>
+        <% end %>
+        <% if @bulletin.info_trade == true %>
+            <span class="badge badge-pill badge-default">아나바다</span>
+        <% end %>
+        <% if @bulletin.promote_store == true %>
+            <span class="badge badge-pill badge-default">가게 홍보</span>
+        <% end %>
+        <% if @bulletin.vote == true %>
+            <span class="badge badge-pill badge-default">투표</span>
+        <% end %>
+        <% if @bulletin.seeking_room == true %>
+            <span class="badge badge-pill badge-default">복덕방</span>
+        <% end %>
+        <% if @bulletin.main_hidden == true %>
+            <span class="badge badge-pill badge-danger">메인 노출 금지</span>
+        <% end %>
+        <% if @bulletin.member_boss == true %>
+            <span class="badge badge-pill badge-info">사장님만 열람 허용</span>
+        <% end %>
+        <% if @bulletin.member_univ == true %>
+            <span class="badge badge-pill badge-info">학교 관계자만 열람 허용</span>
+        <% end %>
+        <% if @bulletin.member_real_estate == true %>
+            <span class="badge badge-pill badge-info">부동산 중개업자만 열람 허용</span>
+        <% end %>
+    </div>
+    <hr/>
+    
+    <div class= "row">
+        <div class="col-5 col-sm-4 col-md-2">
+            <%= link_to '목록', bulletins_path, class: "btn btn-secondary btn-sm" %>
+            <% if can? :update, @bulletin %>
+            <%= link_to '수정', edit_bulletin_path(@bulletin), class: "btn btn-secondary btn-sm" %>
+            <% end %>
+            <% if can? :destroy, @bulletin %>
+            <%= link_to "삭제", @bulletin, method: :delete, data: { confirm: '진짜로 지울건가요???' }, class: "btn btn-secondary btn-sm"%>
+            <% end %>
+        </div>
+        
+        <div class="offset-3 offset-sm-5 offset-md-8 col-1 col-sm-2 col-md-2">
+            <%= link_to '카테고리 생성', new_bulletin_path, class: "btn btn-primary btn-sm" %></span>
+        </div>
+    </div>
+</div>

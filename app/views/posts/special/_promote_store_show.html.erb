@@ -1,0 +1,36 @@
+<br/><br/>
+<span class="special_form_title">가게 정보</span>
+<div class="special_form_area" style="margin-top: 10px;">
+    <%# PC버전 크기에서만 보임. %>
+    <div class="hidden-sm-down">
+        <table width="100%" border="0">
+            <tr>
+                <td colspan="1" rowspan="5" width="40%" align="center">
+                    <% if @post.image.present? %>
+                        <div class="panel-body"><%= image_tag ("#{@post.image}"), class: "card-img-top panel-body", width: "320px", height: "170px;" %></div>
+                    <% else %>
+                        <div class="panel-body"><%= image_tag ("/img/no_image.png"), class: "card-img-top panel-body", width: "318px", height: "179px;" %></div>
+                    <% end %>
+                </td>
+                <td width="40%" align="center">
+                    <h3>" <%= @post.short_talk %> "</h3>
+                    <div align="left" style="margin-left: 45px;"><span class="badge badge-info" style="padding-top: 5px;">연락처</span> 0<%= @post.phone_num %></b> <%= link_to '<i class="fas fa-phone"></i>'.html_safe, "tel:0#{@post.phone_num}", class: "badge badge-pill badge-success" %></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <%# 태블릿, 모바일 버전에서만 보임. %>
+    <div class="hidden-md-up">
+        <% if @post.image.present? %>
+            <div class="panel-body" align="center"><%= image_tag ("#{@post.image}"), class: "card-img-top", width: "320px", height: "170px;" %></div>
+        <% else %>
+            <div class="panel-body" align="center"><%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "318px", height: "179px;" %></div>
+        <% end %>
+        <hr/>
+        <div class="col-12 col-sm-12 col-md-12">
+            <h3>" <%= @post.short_talk %> "</h3>
+            <div><span class="badge badge-info" style="padding-top: 5px;">연락처</span> 0<%= @post.phone_num %></b> <%= link_to '<i class="fas fa-phone"></i>'.html_safe, "tel:0#{@post.phone_num}", class: "badge badge-pill badge-success" %></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="comment_qna_header">
+  <h5><i class="far fa-comment-alt" aria-hidden="true"></i> 답변</h5>
+  <small>* 허위 답변은 자제 바랍니다.</small>
+</div>
+<div class="comment_qnas_list">
+  <%= render "comment_qnas/list" %>
+</div>
+<div class='comment_qnas_form'>
+  <%= render "comment_qnas/form", comment_qna: @qna.comment_qnas.new %>
+</div>

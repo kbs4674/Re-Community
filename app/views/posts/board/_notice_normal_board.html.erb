@@ -1,0 +1,106 @@
+<% # 공지 Badge %>
+<div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down">
+    <%= content_tag(:span, "공지", class: "badge badge-primary etc", align: "center", style: "margin-top: 5px;") %>
+</div>
+      
+<%# 익명 게시판 : 가상 닉네임 %>
+<% if @bulletin.info_no_named == true %>
+    <div align="center" class="col-md-2 table_separate hidden-sm-down">
+        <% if post.reports.size >= post.num %>
+            <% if can? :for_admin, post %>
+                <%= content_tag(:div, "#{post.nickname}", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}", style: "color: red") %>
+            <% else %>
+                -
+            <% end %>
+        <% else %>
+            <% if can? :for_admin, post %>
+                <%= content_tag(:div, "#{post.nickname}", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+            <% else %>
+                <%= content_tag(:div, "#{post.nickname}") %>
+            <% end %>
+        <% end %>
+    </div>
+    
+    <%# 일반 게시판 : 닉네임 %>
+    <% else %>
+        <div align="center" class="col-0 col-sm-0 col-md-2 etc table_separate hidden-sm-down">
+            <%= render 'posts/special/nickname_post_index', post: post %>
+        </div>
+<% end %>
+                
+<%# 게시글 제목 %>
+<div align="left" class="col-7 col-sm-3 col-md-4 etc table_separate">
+    <% if post.reports.size >= post.num %>
+        <% if can? :for_admin, post %>
+            <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                <%= content_tag(:div, post.title, class: "etc", style: "color: red") %>
+            <% end %>
+        <% else %>
+            <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
+        <% end %>
+    <% else %>
+        <%= link_to bulletin_post_path(post.bulletin, post) do %>
+            <%= content_tag(:div, post.title, class: "etc") %>
+        <% end %>
+    <% end %>
+</div>
+                    
+<%# 댓글 %>
+<div align="center" class="col-2 col-sm-2 col-md-1 table_separate">
+    <b><%= post.comment_threads.count %></b>
+</div>
+            
+<%# 시간 %>
+<div align="center" class="col-0 col-sm-3 col-md-2 table_separate hidden-xs-down">
+    <%= "#{time_ago_in_words(post.created_at)} 전" %>
+</div>
+                        
+<%# 조회수 / 페이 %>
+<% if @bulletin.seeking_job == true || @bulletin.search_job == true %>
+    <div align="center" class="col-0 col-sm-2 col-md-1 table_separate hidden-xs-down">
+        <% if post.unique_impression_count >= 10000 %>
+            <%= "#{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
+        <% else %>
+            <%= "#{post.unique_impression_count}" %>
+        <% end %>
+    </div>
+     
+    <div align="center" class="col-3 col-sm-0 col-md-0 table_separate hidden-sm-up">
+        <small>
+            <% if post.price_job < 10000 %>
+            <%= post.price_job %> 원
+            <% else %>
+            <%= post.price_job/10000.to_f %> 만원
+            <% end %>
+        </small>
+    </div>
+<% else %>
+    <div align="center" class="col-3 col-sm-2 col-md-1 table_separate">
+        <% if post.unique_impression_count >= 10000 %>
+            <%= "#{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
+        <% else %>
+            <%= "#{post.unique_impression_count}" %>
+        <% end %>
+    </div>
+<% end %>
+                
+<%# 좋아요 / 희망금액 %>
+<% if @bulletin.seeking_job == true || @bulletin.search_job == true %>
+    <div align="center" class="col-0 col-sm-2 col-md-1 table_separate hidden-xs-down">
+        <small>
+            <% if post.price_job < 10000 %>
+                <%= post.price_job %> 원
+            <% else %>
+                <%= post.price_job/10000.to_f %> 만원
+            <% end %>
+        </small>
+    </div>
+<% else %>
+    <div align="center" class="col-0 col-sm-2 col-md-1 table_separate hidden-xs-down">
+        <% if not @bulletin.info_room_trade == true || @bulletin.seeking_room == true || @bulletin.info_trade == true %>
+            <i class="far fa-thumbs-up" aria-hidden="true"></i> <%= post.get_upvotes.size %>
+        <% else %>
+            -
+        <% end %>
+    </div>
+<% end %>

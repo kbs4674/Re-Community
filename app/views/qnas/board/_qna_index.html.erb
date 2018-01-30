@@ -1,0 +1,191 @@
+<%# PC인 경우 %>
+<div class="hidden-sm-down">
+  <div class="row qna_table_separate_no_answer hidden-sm-down" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+    <div align="center" style="margin-top: 10px;" class="col-0 col-sm-0 col-md-1 hidden-sm-down">
+      <% if qna.comment_qnas.count == 0 %>
+        <b><%= qna.id %></b>
+      <% else %>
+        <b class="qna_answerd"><%= qna.id %></b>
+      <% end %>
+    </div>
+    
+    <%# 게시글 제목 %>
+    <div align="left" style="margin-top: 10px;" class="col-11 col-sm-11 col-md-10 etc">
+      <div class="offset-1 offset-sm-1"></div>
+      <% if qna.report_qnas.size >= qna.num %>
+        <% if can? :for_admin, @post %>
+          <%= link_to qna do %>
+            <h5><%= content_tag(:div, qna.title, class: "etc", style: "color: red") %></h5>
+          <% end %>
+        <% else %>
+          <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
+        <% end %>
+      <% else %>
+        <%= link_to qna do %>
+            <% if (current_user.has_role? :admin) && qna.deleted? %>
+                <h5><%= content_tag(:div, qna.title, class: "etc", style: "color: #8e68e4") %></h5>
+            <% else %>
+                <h5><%= content_tag(:div, qna.title, class: "etc") %></h5>
+            <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="offset-1 offset-sm-1 offset-md-1"></div>
+  
+    <%# 답변갯수(댓글), PC화면 크기에서만 보임. %>
+    <div align="left" style="padding: 10px 10px 10px 10px;" class="col-0 col-sm-0 col-md-1 hidden-sm-down">
+      <% if qna.comment_qnas.count == 0 %>
+        <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
+      <% else %>
+        <span class="badge badge-success" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
+      <% end %>
+    </div>
+  
+    <%# 내용 %>
+    <div align="left" style="margin-top: 10px;" class="col-11 col-sm-11 col-md-10 etc">
+      <% if qna.report_qnas.size >= qna.num %>
+        <% if can? :for_admin, @qna %>
+          <%= link_to qna do %>
+            <%= content_tag(:div, qna.content.html_safe, class: "etc", style: "color: red") %>
+          <% end %>
+        <% else %>
+          <font color="#6E6E6E"> </font>
+        <% end %>
+      <% else %>
+        <%= link_to qna do %>
+          <%= content_tag(:div, truncate( raw( sanitize(qna.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 110, :omission => "..."), class: "etc") %>
+        <% end %>
+      <% end %>
+    </div>
+  
+    <%# 답변갯수(댓글), 태블릿 이하 화면 크기에서만 보임. %>
+    <div align="left" class="col-5 col-sm-2 col-md-0 hidden-md-up">
+      <% if qna.comment_qnas.count == 0 %>
+        <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
+      <% else %>
+        <span class="badge badge-success" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
+      <% end %>
+    </div>
+
+    <%# 닉네임 %>
+    <div class="col-md-6 hidden-sm-down"></div>
+    <div align="left" class="col-4 col-sm-3 col-md-2 etc">
+      <%= render 'posts/special/nickname_qna_index', qna: qna %>
+    </div>
+    
+    <%# 시간 %>
+    <div align="left" class="col-0 col-sm-3 col-md-2 hidden-xs-down"><%= "#{time_ago_in_words(qna.created_at)} 전" %></div>
+            
+    <%# 조회수 %>
+    <div align="left" class="col-0 col-sm-2 col-md-1 hidden-xs-down"><i class="fas fa-eye" aria-hidden="true"></i>
+      <% if qna.unique_impression_count >= 10000 %>
+        <%= "#{qna.unique_impression_count/10000}만#{qna.unique_impression_count%10000}" %>
+      <% else %>
+        <%= "#{qna.unique_impression_count}" %>
+      <% end %>
+    </div>
+  
+    <%# 궁금해요 %>
+    <div align="left" class="col-3 col-sm-2 col-md-1">
+      <i class="fa fa-paw" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="저도 궁금해요! (발도장 꾹)"></i> <%= qna.get_upvotes.size %>
+    </div>
+  </div>
+</div>
+
+<%# 모바일인 경우 %>
+<div class="hidden-md-up">
+  <% if qna.comment_qnas.count == 0 %>
+  <div class="row qna_table_separate_no_answer hidden-md-up" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+  <% else %>
+  <div class="row qna_table_separate_answered hidden-md-up" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+  <% end %>
+      <div align="center" style="margin-top: 10px;" class="col-0 col-sm-0 col-md-1 hidden-sm-down">
+        <% if qna.comment_qnas.count == 0 %>
+          <b><%= qna.id %></b>
+        <% else %>
+          <b class="qna_answerd"><%= qna.id %></b>
+        <% end %>
+      </div>
+      
+      <%# 게시글 제목 %>
+      <div align="left" style="margin-top: 10px;" class="col-11 col-sm-11 col-md-10 etc">
+        <div class="offset-1 offset-sm-1"></div>
+        <% if qna.report_qnas.size >= qna.num %>
+          <% if can? :for_admin, @post %>
+            <%= link_to qna do %>
+              <h5><%= content_tag(:div, qna.title, class: "etc", style: "color: red") %></h5>
+            <% end %>
+          <% else %>
+            <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
+          <% end %>
+        <% else %>
+          <%= link_to qna do %>
+              <% if (current_user.has_role? :admin) && qna.deleted? %>
+                  <h5><%= content_tag(:div, qna.title, class: "etc", style: "color: #8e68e4") %></h5>
+              <% else %>
+                  <h5><%= content_tag(:div, qna.title, class: "etc") %></h5>
+              <% end %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="offset-1 offset-sm-1 offset-md-1"></div>
+    
+      <%# 답변갯수(댓글), PC화면 크기에서만 보임. %>
+      <div align="left" style="padding: 10px 10px 10px 10px;" class="col-0 col-sm-0 col-md-1 hidden-sm-down">
+        <% if qna.comment_qnas.count == 0 %>
+          <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
+        <% else %>
+          <span class="badge badge-success" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
+        <% end %>
+      </div>
+    
+      <%# 내용 %>
+      <div align="left" style="margin-top: 10px;" class="col-11 col-sm-11 col-md-10 etc">
+        <% if qna.report_qnas.size >= qna.num %>
+          <% if can? :for_admin, @qna %>
+            <%= link_to qna do %>
+              <%= content_tag(:div, qna.content.html_safe, class: "etc", style: "color: red") %>
+            <% end %>
+          <% else %>
+            <font color="#6E6E6E"> </font>
+          <% end %>
+        <% else %>
+          <%= link_to qna do %>
+            <%= content_tag(:div, truncate( raw( sanitize(qna.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 110, :omission => "..."), class: "etc") %>
+          <% end %>
+        <% end %>
+      </div>
+    
+      <%# 답변갯수(댓글), 태블릿 이하 화면 크기에서만 보임. %>
+      <div align="left" class="col-5 col-sm-2 col-md-0 hidden-md-up">
+        <% if qna.comment_qnas.count == 0 %>
+          <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
+        <% else %>
+          <span class="badge badge-success" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
+        <% end %>
+      </div>
+  
+      <%# 닉네임 %>
+      <div class="col-md-6 hidden-sm-down"></div>
+      <div align="left" class="col-4 col-sm-3 col-md-2 etc">
+        <%= render 'posts/special/nickname_qna_index', qna: qna %>
+      </div>
+      
+      <%# 시간 %>
+      <div align="left" class="col-0 col-sm-3 col-md-2 hidden-xs-down"><%= "#{time_ago_in_words(qna.created_at)} 전" %></div>
+              
+      <%# 조회수 %>
+      <div align="left" class="col-0 col-sm-2 col-md-1 hidden-xs-down"><i class="fas fa-eye" aria-hidden="true"></i>
+        <% if qna.unique_impression_count >= 10000 %>
+          <%= "#{qna.unique_impression_count/10000}만#{qna.unique_impression_count%10000}" %>
+        <% else %>
+          <%= "#{qna.unique_impression_count}" %>
+        <% end %>
+      </div>
+    
+      <%# 궁금해요 %>
+      <div align="left" class="col-3 col-sm-2 col-md-1">
+        <i class="fa fa-paw" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="저도 궁금해요! (발도장 꾹)"></i> <%= qna.get_upvotes.size %>
+      </div>
+  </div>
+</div>

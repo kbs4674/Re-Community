@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>강원대 커뮤니티</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+    <!-- jquery, 드랍박스 활성화 -->
+    <script type="text/javascript" src="/js/drop-down.js"></script>
+    
+    <!-- 카카오톡 썸네일 -->
+    <meta property="og:image" content="/img/op_thum.png">
+    
+    <!-- 개인 CSS / JS -->  
+    <link rel="stylesheet" href="/css/image-box.css">
+    <script type="text/javascript" src="/js/count_down.js"></script>
+    <script type="text/javascript" src="/js/tool-tip.js"></script>
+    <script type="text/javascript" src="/js/smooth-scroll.js"></script>
+    <script type="text/javascript" src="/js/fold&unfold.js"></script>
+    <script type="text/javascript" src="/js/checked.js"></script>
+    
+    <!-- 부트스트랩 CDN, AWESOME 폰트 CDN -->  
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="//v4-alpha.getbootstrap.com/assets/css/docs.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">-->
+    <!--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>-->
+    
+    <!-- 상단 메뉴 관련 -->
+    <link rel="stylesheet" type="text/css" href="/nav-bar/paper-kit.css">
+    <script src="/nav-bar/paper-kit.js"></script>
+    <script src="/nav-bar/tether.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <%# 폰트어썸 4버전 %>
+    <!-- <link rel="stylesheet" href="/css/font-awesome.css"> -->
+    <%# 폰트어썸 5버전 %>
+    <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet">
+    
+    <!-- 폰트 -->
+    <style>
+    	/* 나눔고딕 */
+    	@font-face {
+    	font-family: 'NanumGothic', '나눔고딕', sas-serif !important;
+    	src: url('/font/NanumGothic.eot');
+    	src: local('※'), 
+    	url('/font/NanumGothic.woff') format('woff'), 
+    	url('/font/NanumGothic.ttf') format('truetype')
+    	}
+    	
+    	/* 나눔 손글씨 */
+    	@font-face {
+    	 font-family:'Nanum Pen Script';
+    	 font-style:normal;
+    	 font-weight:400;
+    	 src: url(//cdn.jsdelivr.net/font-nanum/1.0/nanumpenscript/v2/NanumPenScript-Regular.eot);
+    	 src: url(//cdn.jsdelivr.net/font-nanum/1.0/nanumpenscript/v2/NanumPenScript-Regular.eot?#iefix) format('embedded-opentype'),
+    	 url(//cdn.jsdelivr.net/font-nanum/1.0/nanumpenscript/v2/NanumPenScript-Regular.woff) format('woff'),
+    	 url(//cdn.jsdelivr.net/font-nanum/1.0/nanumpenscript/v2/NanumPenScript-Regular.ttf) format('truetype')
+    	}
+    	
+    	/* 웹 페이지 기본 글씨체 */
+    	body{
+    	  font-family: 'NanumGothic', '나눔고딕', sas-serif;
+    	  font-size: 15px;
+    	}
+    </style>
+  </head>
+
+  <body style="margin: 0px 0px 0px 0px">
+    <!-- Navigation 상단 메뉴 -->
+    <nav class="navbar navbar-toggleable-md fixed-top" color-on-scroll="-1">
+    <% #원본 <nav class="navbar navbar-toggleable-md fixed-top navbar-transparent" color-on-scroll="50"> %>
+      <div class="container">
+        <div class="navbar-translate">
+        <button class="navbar-toggler navbar-toggler-right navbar-burger" style="margin-top: 15px;" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-bar"></span>
+          <span class="navbar-toggler-bar"></span>
+          <span class="navbar-toggler-bar"></span>
+        </button>
+        <%= link_to(image_tag("/img/logo.png", style: "width: 150px; margin-top: -30px;"), "/", class: "navbar-brand hidden-lg-up") %>
+        <%= link_to(image_tag("/img/logo.png", style: "width: 170px; margin-top: 0px;"), "/", class: "hidden-md-down") %>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarToggler">
+        <ul class="navbar-nav ml-auto">
+          <% #모바일에서만 보여지는 메뉴 %>
+          <% if user_signed_in? %>
+            <li class="nav-item dropdown hidden-lg-up">
+              <%= link_to "#", class: "nav-link dropdown-toggle", data: {toggle: "dropdown" }, role: "button", aria: {haspopup: "true", expanded: "false" } do %>
+                <% if current_user.profile_icon.present? || current_user.profile_banner.present? %>
+                  <% if current_user.profile_select == "profile_icon" %>
+                    <%= image_tag ("#{current_user.profile_icon}"), width: "20px", height: "20px;" %> <%= current_user.nickname %>
+                  <% elsif current_user.profile_select == "profile_banner" %>
+                    <%= image_tag ("#{current_user.profile_banner}"), width: "70px", height: "20px;" %>
+                  <% else %>
+                    <i class="fas fa-id-card" aria-hidden="true" style="font-size: 15px;"></i> <%= current_user.nickname.truncate(10, omission: '...') %>
+                  <% end %>
+                <% else %>
+                  <i class="fas fa-id-card" aria-hidden="true" style="font-size: 15px;"></i> <%= current_user.nickname.truncate(10, omission: '...') %>
+                <% end %>
+              <% end %>
+              <ul class="dropdown-menu dropdown-menu-right dropdown-info">
+                <li class="dropdown-item"><%= link_to '내 활동'.html_safe, "/users/#{current_user.id}" %></li>
+                <% if current_user.admin? %>
+                  <li class="dropdown-item"><%= link_to '어드민 관리창'.html_safe, rails_admin_path %></li>
+                <% end %>
+                <li class="dropdown-item"><%= link_to "정보 수정", "/users/edit", method: :get %></li>
+                <li class="dropdown-item"><%= link_to "로그아웃", destroy_user_session_path, method: :delete %></li>
+              </ul>
+            </li>
+          <% else %>
+            <li class="nav-item hidden-lg-up">로그인 해주세요!<br/><%= link_to '<p style="margin-left: 10px"></p>시작하기<p style="margin-left: 10px"></p>'.html_safe, "/users/sign_in", class: "nav-link btn btn-secondary btn-round" %></li>
+          <% end %>
+          
+          <div style="border-bottom: 1px solid black; margin-left: -30px;" class="hidden-lg-up"></div>
+          <% #모바일에서만 보여지는 메뉴 끝 %>
+
+          <li class="nav-item"><%= link_to '공지사항'.html_safe, all_notices_path, class: "nav-link" %></li>
+        
+          <% #PC에서만 보여지는 메뉴  %>
+          <li class="nav-item dropdown">
+            <%= link_to '커뮤니티'.html_safe, "#", class: "nav-link", data: {toggle: "dropdown" }, role: "button", aria: {haspopup: "true", expanded: "false" } %>
+            <ul class="dropdown-menu dropdown-menu-right dropdown-info">
+              <li class="dropdown-item"><%= link_to "자유게시판", bulletin_posts_path(1) %></li>
+              <li class="dropdown-item"><%= link_to "유머게시판", bulletin_posts_path(2) %></li>
+              <li class="dropdown-item"><%= link_to "동아리 홍보 게시판", bulletin_posts_path(3) %></li>
+              <li class="dropdown-item"><%= link_to 'Foreigner Board'.html_safe, bulletin_posts_path(4) %></li>
+              <li class="dropdown-item"><%= link_to '토론장'.html_safe, bulletin_posts_path(5) %></li>
+              <li class="dropdown-item"><%= link_to "피드백 게시판", bulletin_posts_path(6) %></li>
+            </ul>
+          </li>
+          <% #PC에서만 보여지는 메뉴 끝 %>
+          
+          <li class="nav-item"><%= link_to '질문'.html_safe, qnas_path, class: "nav-link" %></li>
+          
+          <li class="nav-item dropdown">
+            <%= link_to '익명'.html_safe, "#", class: "nav-link", data: {toggle: "dropdown" }, role: "button", aria: {haspopup: "true", expanded: "false" } %>
+            <ul class="dropdown-menu dropdown-menu-right dropdown-info">
+              <li class="dropdown-item"><%= link_to "익명 게시판", bulletin_posts_path(7) %></li>
+              <li class="dropdown-item"><%= link_to "연애상담 게시판", bulletin_posts_path(8) %></li>
+              <li class="dropdown-item"><%= link_to '고민고백 게시판'.html_safe, bulletin_posts_path(9) %></li>
+            </ul>
+          </li>
+          
+          <li class="nav-item dropdown">
+            <%= link_to '명소가게 탐방'.html_safe, "#", class: "nav-link", data: {toggle: "dropdown" }, role: "button", aria: {haspopup: "true", expanded: "false" } %>
+            <ul class="dropdown-menu dropdown-menu-right dropdown-info">
+              <li class="dropdown-item"><%= link_to "우리가게 홍보", bulletin_posts_path(10) %></li>
+              <li class="dropdown-item"><%= link_to "가게 방문후기", bulletin_posts_path(11) %></li>
+            </ul>
+          </li>
+          
+          <li class="nav-item dropdown">
+            <%= link_to '구인구직'.html_safe, "#", class: "nav-link", data: {toggle: "dropdown" }, role: "button", aria: {haspopup: "true", expanded: "false" } %>
+            <ul class="dropdown-menu dropdown-menu-right dropdown-info">
+              <li class="dropdown-item"><%= link_to "일자리 : 구인", bulletin_posts_path(12) %></li>
+              <li class="dropdown-item"><%= link_to "일자리 : 구직", bulletin_posts_path(13) %></li>
+            </ul>
+          </li>
+          
+          <li class="nav-item dropdown">
+            <%= link_to '거래'.html_safe, "#", class: "nav-link", data: {toggle: "dropdown" }, role: "button", aria: {haspopup: "true", expanded: "false" } %>
+            <ul class="dropdown-menu dropdown-menu-right dropdown-info">
+              <li class="dropdown-item"><%= link_to '복덕방', bulletin_posts_path(14) %></li>
+              <li class="dropdown-item"><%= link_to '방 구해요'.html_safe, bulletin_posts_path(15) %></li>
+              <li class="dropdown-item"><%= link_to '아나바다', bulletin_posts_path(16) %></li>
+            </ul>
+          </li>
+          
+          <% if user_signed_in? %>
+            <li class="nav-item dropdown">
+              <% if (current_user.new_notifications.unread_by(current_user).count) >= 1 %>
+                <%= link_to " #{current_user.new_notifications.unread_by(current_user).count}", "#", class: "fas fa-bell nav-link", style: "font-weight: bold; color: #ffbe00", data: {toggle: "dropdown" }, role: "button", aria: {haspopup: "true", expanded: "false" } %>
+              <% else %>
+                <%= link_to " #{current_user.new_notifications.unread_by(current_user).count}", "#", class: "fa fa-bell nav-link", style: "font-weight: bold", data: {toggle: "dropdown" }, role: "button", aria: {haspopup: "true", expanded: "false" } %>
+              <% end %>
+              <ul class="dropdown-menu dropdown-menu-right dropdown-info">
+                <li class="dropdown-item"><%= link_to '<b>모든 알림 지우기</b>'.html_safe, new_notifications_read_all_path %></li>
+                <li class="dropdown-item etc"><%= render partial: "new_notifications/new_notification", collection: current_user.new_notifications.unread_by(current_user) %></li>
+              </ul>
+            </li>
+          <% end %>
+        
+          <% # PC에서만 보여지는 메뉴 %>
+          <% if user_signed_in? %>
+            <li class="nav-item dropdown hidden-md-down">
+              <%= link_to "#", class: "nav-link dropdown-toggle", data: {toggle: "dropdown" }, role: "button", aria: {haspopup: "true", expanded: "false" } do %>
+                <% if current_user.profile_icon.present? || current_user.profile_banner.present? %>
+                  <% if current_user.profile_select == "profile_icon" %>
+                    <%= image_tag ("#{current_user.profile_icon}"), width: "20px", height: "20px;" %> <%= current_user.nickname %>
+                  <% elsif current_user.profile_select == "profile_banner" %>
+                    <%= image_tag ("#{current_user.profile_banner}"), width: "70px", height: "20px;" %>
+                  <% else %>
+                    <i class="fas fa-id-card" aria-hidden="true" style="font-size: 15px;"></i> <%= current_user.nickname.truncate(10, omission: '...') %>
+                  <% end %>
+                <% else %>
+                  <i class="fas fa-id-card" aria-hidden="true" style="font-size: 15px;"></i> <%= current_user.nickname.truncate(10, omission: '...') %>
+                <% end %>
+              <% end %>
+              <ul class="dropdown-menu dropdown-menu-right dropdown-info">
+                <li class="dropdown-item"><%= link_to '내 활동'.html_safe, "/users/#{current_user.id}" %></li>
+                <% if current_user.admin? %>
+                  <li class="dropdown-item"><%= link_to '어드민 관리창'.html_safe, rails_admin_path %></li>
+                <% end %>
+                <li class="dropdown-item"><%= link_to "정보 수정", "/users/edit", method: :get %></li>
+                <li class="dropdown-item"><%= link_to "로그아웃", destroy_user_session_path, method: :delete %></li>
+              </ul>
+            </li>
+          <% else %>
+            <li class="nav-item hidden-md-down">
+              <%= link_to '<p style="margin-left: 10px"></p>시작하기<p style="margin-left: 10px"></p>'.html_safe, "/users/sign_in", class: "nav-link btn btn-secondary btn-round", style: "margin-top: 20px;" %>
+            </li>
+          <% end %>
+          <% # PC에서만 보여지는 메뉴 끝 %>
+        </ul>
+        </div>
+      </div>
+    </nav>
+	  <!-- Navigation 상단메뉴 종료 -->
+	  <%= tinymce_assets %>
+    <%= yield %>
+  </body>
+</html>

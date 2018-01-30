@@ -1,0 +1,59 @@
+<% comments.order("created_at ASC").each do |comment| %>  
+<hr/>
+<div class="comments-show">
+  <div class="comment">
+    <div class="row" style="margin-top: 15px; margin-bottom: 15px;">
+      <div class="col-6 col-sm-4 col-md-4 etc">
+        <%= render 'posts/special/nickname_comment', comment: comment %>
+      </div>
+
+      <div class="col-6 col-sm-8 col-md-8" align="right">
+        <% if not (comment.report_comments.size >= comment.num) || (comment.comment_destroys.size >= 1) %>
+          <span style="margin-right: 10px;"><%= link_to '<i class="fas fa-cut" aria-hidden="true"></i>'.html_safe, comment_report_comment_path(comment), :method => :post, data: { confirm: '한번 신고 요청 하시면 취소가 안됩니다. 정말 하시겠습니까??' }, class: "badge badge-pill badge-danger" %></span>
+        <% end %>
+        <% if can? :destroy, comment %>
+          <% if not comment.comment_destroys.size >= 1 %>
+            <% if not comment.report_comments.size >= comment.num %>
+              <span style="margin-right: 10px;">|</span>
+              <span><%= link_to "", comment_comment_destroys_path(comment), class: "fas fa-times", :method => :post, data: { confirm: "정말로 지우시겠습니까?" } %></span>
+              <%#= link_to "", comment_path(comment), method: :delete, remote: false, data: { confirm: "정말로 지우시겠습니까?" }, class: "fas fa-times" %>
+            <% elsif (comment.report_comments.size >= comment.num) && (current_user.has_role? :admin) %>
+              <%= link_to "", comment_path(comment), method: :delete, remote: false, data: { confirm: "이번에 지우면 로그 기록에서도 영영 사라집니다. 정말 지우시겠습니까?" }, class: "fas fa-times", style: "color: red" %>
+            <% end %>
+          <% elsif (comment.comment_destroys.size >= 1) && (current_user.has_role? :admin) %>
+            <%= link_to "", comment_path(comment), method: :delete, remote: false, data: { confirm: "이번에 지우면 로그 기록에서도 영영 사라집니다. 정말 지우시겠습니까?" }, class: "fas fa-times", style: "color: red" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+      
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-12" style="">
+        <% if comment.comment_destroys.size >= 1 %>
+          <% if can? :for_admin, comment %>
+            <font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 삭제된 댓글</font><br/>
+            <b style="color: #6E6E6E;"><%= comment.body %></b>
+          <% else %>
+            <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 삭제된 댓글입니다.</font>
+          <% end %>
+        <% else %>
+          <% if comment.report_comments.size >= comment.num %>
+            <% if can? :for_admin, comment %>
+              <font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 신고 처리된 댓글</font><br/>
+              <b style="color: #6E6E6E;"><%= comment.body %></b>
+            <% else %>
+              <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 신고 처리된 댓글입니다.</font>
+            <% end %>
+          <% else %>
+            <%= comment.body %>
+          <% end %>
+        <% end %>
+        <div align="right">
+            <small class="hidden-md-up"><%= time_ago_in_words(comment.created_at) %>전</small>
+            <small class="hidden-sm-down" style="margin-right: 10px;"><%= time_ago_in_words(comment.created_at) %>전 (<%= comment.created_at.strftime('%Y-%m-%d %H:%M') %>)</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

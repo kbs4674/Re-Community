@@ -1,0 +1,33 @@
+<% # 게시글 제목 %>
+<div align="left" class="col-7 col-sm-5 col-md-7 etc table_separate">
+<%= link_to post do %>
+    <% if post.title_tag_permission == true %>
+        <%= content_tag(:div, post.title.html_safe, class: "etc") %>
+    <% else %>
+        <%= content_tag(:div, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc" ) %>
+    <% end %>
+<% end %>
+</div>
+                    
+<% # 댓글 %>
+<div align="center" class="col-2 col-sm-2 col-md-1 table_separate">
+    <% if post.comment_permission == true %>
+        <b><%= post.comment_threads.count %></b>
+    <% else %>
+        <b>×</b>
+    <% end %>
+</div>
+
+<% # 시간 %>
+<div align="center" class="col-0 col-sm-3 col-md-2 table_separate hidden-xs-down">
+    <%= "#{time_ago_in_words(post.created_at)} 전" %>
+</div>
+                        
+<% # 조회수 %>
+<div align="center" class="col-3 col-sm-2 col-md-1 table_separate">
+    <% if post.impressionist_count >= 10000 %>
+        <%= "#{post.impressionist_count/10000}만#{post.impressionist_count%10000}" %>
+    <% else %>
+        <%= "#{post.impressionist_count}" %>
+    <% end %>
+</div>

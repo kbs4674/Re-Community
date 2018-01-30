@@ -1,0 +1,264 @@
+<div class="board hidden-sm-down" style="background: url('/img/title_img2.jpg') no-repeat fixed; background-size: 100% 70%; background-position:0px -180px;">
+  <div class="container" align="left">
+    <span class="post_title"><%= link_to @bulletin.title, bulletin_posts_path(@bulletin.id), class: "board_title" %></span>
+  </div>
+</div>
+<div class="board_mobile hidden-md-up" style="background: url('/img/title_img2.jpg') no-repeat center center/cover scroll;">
+  <span class="post_title"><%= link_to @bulletin.title, bulletin_posts_path(@bulletin.id), class: "board_title" %></span>
+</div>
+
+<% #경고메세지 출력 (아이디, 비밀번호 잘못 칠 시 등등...) %>
+<% if alert %>
+    <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #FF4B5C; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+    <%= alert %>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    <% elsif notice %>
+    <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #43AC6A; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+    <%= notice %>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+<% end %>
+
+<div class="container" style="margin-bottom: 100px;">
+  <% if @bulletin.info_room_trade == true || @bulletin.seeking_room == true || @bulletin.info_trade == true %>
+    <%= render 'posts/special/sub_menu_trade' %>
+  <% elsif @bulletin.seeking_job == true || @bulletin.search_job == true %>
+    <%= render 'posts/special/sub_menu_job' %>
+  <% elsif @bulletin.promote_store == true || @bulletin.title == "가게 방문후기" %>
+    <%= render 'posts/special/sub_menu_promote' %>
+  <% else %>
+    <div align="right">
+      <p class="badge badge-pill badge-success hidden-xs-down" style="margin-top:20px; margin-bottom: 20px;">
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+        <%= @bulletin.title == "Foreigner Board" ? "Current Time(KST)" : "현재 시간" %>
+        <span> <%= Time.zone.now.strftime('%Y-%m-%d %H:%M:%S') %></span>
+      </p>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <% if @bulletin.vote == true %>
+      <div class="col-0 col-sm-0 col-md-1 table_title hidden-sm-down" align="center">No</div>
+      <div class="col-0 col-sm-0 col-md-2 table_title hidden-sm-down" align="center">작성자</div>
+      <div class="col-6 col-sm-5 col-md-4 table_title" align="center">제목</div>
+      <div class="col-2 col-sm-2 col-md-1 table_title hidden-md-up" align="center">댓글</div>
+      <div class="col-0 col-sm-2 col-md-1 table_title hidden-xs-down" align="center">조회수</div>
+      <div class="col-4 col-sm-3 col-md-4 table_title" align="center">투표</div>
+    <% else %>
+      <div class="col-0 col-sm-0 col-md-1 table_title hidden-sm-down" align="center">No.</div>
+      
+      <% if @bulletin.info_no_named == true %>
+        <div class="col-0 col-sm-0 col-md-2 table_title hidden-sm-down" align="center">가상 닉네임</div>
+      <% else %>
+        <div class="col-0 col-sm-0 col-md-2 table_title hidden-sm-down" align="center"><%= @bulletin.title == "Foreigner Board" ? "Writer" : "작성자" %></div>
+      <% end %>
+
+      <div class="col-7 col-sm-5 col-md-5 table_title" align="center"><%= @bulletin.title == "Foreigner Board" ? "Title" : "제목" %></div>
+        
+      <div class="col-0 col-sm-3 col-md-2 table_title hidden-xs-down" align="center"><%= @bulletin.title == "Foreigner Board" ? "Time" : "작성시간" %></div>
+        
+      <div class="col-0 col-sm-2 col-md-1 table_title hidden-xs-down" align="center"><%= @bulletin.title == "Foreigner Board" ? "Hit" : "조회수" %></div>
+
+      <div class="col-2 col-sm-0 col-md-0 table_title hidden-sm-up" align="center"><small><%= @bulletin.title == "Foreigner Board" ? '<i class="far fa-comments"></i>'.html_safe : "댓글" %></small></div>
+      
+      <% if @bulletin.seeking_job == true || @bulletin.search_job == true %>
+        <div class="col-3 col-sm-0 col-md-0 table_title hidden-sm-up" align="center">페이</div>
+      <% else %>
+        <div class="col-3 col-sm-0 col-md-0 table_title hidden-sm-up" align="center"><small><%= @bulletin.title == "Foreigner Board" ? "Hit" : "조회수" %></small></div>
+      <% end %>
+      
+      <% if @bulletin.seeking_job == true || @bulletin.search_job == true %>
+        <div class="col-0 col-sm-2 col-md-1 table_title hidden-xs-down" align="center">페이</div>
+      <% else %>
+        <div class="col-0 col-sm-2 col-md-1 table_title hidden-xs-down" align="center"><%= @bulletin.title == "Foreigner Board" ? '<i class="far fa-thumbs-up" aria-hidden="true"></i>'.html_safe : "따봉" %></div>
+      <% end %>
+    <% end %>
+  </div>
+  
+  <%# 전체 공지사항 %>
+  <% @all_notices.each do |post| %>
+    <% if post.all_notice == true %>
+      <div class="row table_notice">
+        <% # 공지 Badge %>
+        <div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down">
+          <%= content_tag(:span, '<span class="badge badge-warning">전체공지</span>'.html_safe, class: "etc", align: "center", style: "margin-top: 5px;") %>
+        </div>
+        <% if @bulletin.vote == true %>
+          <%= render "all_notices/list/board_all_notice_post_vote_index", post: post %>
+        <% else %>
+          <%= render "all_notices/list/board_all_notice_post_index", post: post %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+    
+  <% if @posts.empty? %>
+    <h2 class="text-center" style="margin-top: 30px;">게시글이 없습니다.</h2>
+  <% elsif @bulletin.vote == true %>
+    <%= render 'posts/special/vote_notice_index' %>
+  <% else %>
+    <%# 공지 게시글 %>
+    <% @posts.each do |post| %>
+      <% if post.notice == true %>
+        <div class="row table_sub_notice" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+          <%= render 'posts/board/notice_normal_board', post: post %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+    
+    <%# 특수 게시물 : 복덕방 게시판 %>
+    <% if @bulletin.info_room_trade == true %>
+      <%= render 'posts/board/info_room_trade_index' %>
+
+    <%# 특수게시물 : 거래 게시판 %>
+    <% elsif @bulletin.info_trade == true %>
+      <%= render 'posts/board/info_trade_index' %>
+      
+    <%# 특수게시물 : 가게홍보 게시판 %>
+    <% elsif @bulletin.promote_store == true %>
+      <%= render 'posts/board/promote_store_index' %>
+      
+    <%# 특수게시물 : 토론장(투표) 게시판 %>
+    <% elsif @bulletin.vote == true %>
+      <% if current_user.has_role? :admin %>
+        <% @posts.with_deleted.each do |post| %>
+          <%= render 'posts/board/vote_index', post: post %>
+        <% end %>
+      <% else %>
+        <% @posts.each do |post| %>
+          <%= render 'posts/board/vote_index', post: post %>
+        <% end %>
+      <% end %>
+      
+    <%# 특수권한 게시물 : 사장님 공지사항 게시판 %>
+    <% elsif @bulletin.member_boss == true %>
+      <% if current_user.has_role? :admin %>
+        <% @posts.with_deleted.each do |post| %>
+          <%= render 'posts/board/special_member_index', post: post %>
+        <% end %>
+      <% elsif current_user.has_role? :store_boss %>
+        <% @posts.each do |post| %>
+          <%= render 'posts/board/special_member_index', post: post %>
+        <% end %>
+      <% else %>
+        <div class="alert alert-danger" role="alert" style="margin-top: 30px;">
+            <div align="center">
+                <i class="fas fa-exclamation-triangle" aria-hidden="true" style="color: red"></i> <b style="color: red">권한경고</b> : 허가받지 않은 유저
+                <hr/>
+                <div align="left">
+                    <b><%= current_user.nickname %></b> 님은 해당 게시판 글 열람 권한이 없습니다.
+                </div>
+            </div>
+        </div>
+      <% end %>
+    
+    <%# 특수권한 게시물 : 학교 관계자 공지사항 게시판 %>
+    <% elsif @bulletin.member_univ == true %>
+      <% if current_user.has_role? :admin %>
+        <% @posts.with_deleted.each do |post| %>
+          <%= render 'posts/board/special_member_index', post: post %>
+        <% end %>
+      <% elsif current_user.has_any_role? :univ_professor, :univ_official %>
+        <% @posts.each do |post| %>
+          <%= render 'posts/board/special_member_index', post: post %>
+        <% end %>
+      <% else %>
+        <div class="alert alert-danger" role="alert" style="margin-top: 30px;">
+            <div align="center">
+                <i class="fas fa-exclamation-triangle" aria-hidden="true" style="color: red"></i> <b style="color: red">권한경고</b> : 허가받지 않은 유저
+                <hr/>
+                <div align="left">
+                    <b><%= current_user.nickname %></b> 님은 해당 게시판 글 열람 권한이 없습니다.
+                </div>
+            </div>
+        </div>
+      <% end %>
+    
+    <%# 특수게시물 : 익명 게시판 %>
+    <% elsif @bulletin.info_no_named == true %>
+      <% if current_user.has_role? :admin %>
+        <% @posts.with_deleted.each do |post| %>
+          <%= render 'posts/board/no_named_index', post: post %>
+        <% end %>
+      <% else %>
+        <% @posts.each do |post| %>
+          <%= render 'posts/board/no_named_index', post: post %>
+        <% end %>
+      <% end %>
+      
+    <%# 특수게시물 : 구인(search) %>
+    <% elsif @bulletin.search_job == true || @bulletin.seeking_job == true %>
+      <% if current_user.has_role? :admin %>
+        <% @posts.with_deleted.each do |post| %>
+          <%= render 'posts/board/job_index', post: post %>
+        <% end %>
+      <% else %>
+        <% @posts.each do |post| %>
+          <%= render 'posts/board/job_index', post: post %>
+        <% end %>
+      <% end %>
+    
+    <%# 특수 게시물 : 방 구해요 %>
+    <% elsif @bulletin.seeking_room == true %>
+      <% if current_user.has_role? :admin %>
+        <% @posts.with_deleted.each do |post| %>
+          <%= render 'posts/board/seeking_room_index', post: post %>
+        <% end %>
+      <% else %>
+        <% @posts.each do |post| %>
+          <%= render 'posts/board/seeking_room_index', post: post %>
+        <% end %>
+      <% end %>
+    
+    <% else %>
+      <%# 일반 게시글 %>
+      <% if current_user.has_role? :admin %>
+        <% @posts.with_deleted.each do |post| %>
+          <div class="row" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+            <%= render 'posts/board/normal_index', post: post %>
+          </div>
+        <% end %>
+      <% else %>
+        <% @posts.each do |post| %>
+          <div class="row" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+            <%= render 'posts/board/normal_index', post: post %>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  
+  <br/>
+  <div align="right">
+    <% if @bulletin.promote_store == true %>
+      <% if current_user.has_role? :store_boss %>
+        <%= link_to "글 쓰기", new_bulletin_post_path(@bulletin), class: "btn btn-primary", style: "margin-top: -10px;" %>
+      <% end %>
+    <% elsif @bulletin.member_boss == true || @bulletin.member_univ == true || @bulletin.member_real_estate == true %>
+      <% if current_user.has_role? :admin %>
+        <%= link_to "글 쓰기", new_bulletin_post_path(@bulletin), class: "btn btn-primary", style: "margin-top: -10px;" %>
+      <% end %>
+    <% else %>
+      <% if (not current_user.has_any_role? :block_yellow, :block_red) || (current_user.has_role? :admin) %>
+        <%= link_to "#{@bulletin.title == "Foreigner Board" ? "Write" : "글 쓰기"}", new_bulletin_post_path(@bulletin), class: "btn btn-primary", style: "margin-top: -10px;" %>
+      <% end %>
+    <% end %>
+  </div>
+  
+  <div class="d-flex flex-column", style="margin-bottom: 10px; margin-top: 30px;">
+    <%= paginate @posts %>
+  </div>
+  
+  <%# 검색엔진 %>
+  <%= form_tag searches_path, :method => :get do %>
+  <div class="row">
+    <div class="offset-2 offset-sm-3 offset-md-4 col-6 col-sm-5 col-md-3">
+      <%= text_field_tag :search, params[:search], required: "true", class: "form-control no-border", placeholder: "제목 또는 내용" %>
+    </div>
+    <div class="col-2 col-sm-1 col-md-1">
+      <%= submit_tag "검색", class: "search_button", :name => nil %>
+    </div>
+  </div>
+  <% end %>
+</div>

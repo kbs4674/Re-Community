@@ -1,0 +1,29 @@
+<%= form_with(model: all_notice, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :제목 %>
+    <%= form.text_field :title, id: :all_notice_title, class: "form-control no-border" %><br/>
+  </div>
+
+  <div class="field">
+    <%= form.label :내용 %>
+    <%= tinymce :language => "en" %>
+    <%= form.text_area :content, id: :all_notice_content, class: "form-control tinymce", rows: "10" %>
+  </div>
+  
+  <% if can? :for_admin, @all_notice %>
+    <div class="col-12 col-sm-8 col-md-5" style="background-color: #ffd4d4; margin-top: 30px; padding: 10px;"><font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 어드민 전용 : 해당 게시글 설정</font></div>
+    <div align="left" style="margin-top: 10px;">
+      <%= form.label :notice, "1) 공지사항 설정" %> <%= form.check_box :notice, id: :all_notice_notice %><br/>
+      <%= form.label :all_notice, "2) 전체 게시물 공지사항 설정" %> <%= form.check_box :all_notice, id: :all_notice_all_notice %><br/>
+      <%= form.label :comment_permission, "3) 댓글 활성 여부" %> <%= form.check_box :comment_permission, id: :all_notice_comment_permission %><br/>
+      <%= form.label :title_tag_permission, "4) 제목 태그 허용 여부" %> <%= form.check_box :title_tag_permission, id: :all_notice_title_tag_permission %>
+    </div>
+  <% end %>
+  
+  <center>
+  <div class="form-actions" style="margin-top: 20px;">
+    <%= form.button :글쓰기, class: "btn btn-primary" %>
+  <% end %>
+    <%= link_to '목록', @all_notice, class: "btn btn-secondary" %>
+  </div>
+</center>

@@ -1,0 +1,12 @@
+<% if (not current_user.has_any_role? :block_yellow, :block_red) || (current_user.has_role? :admin) %>
+  <%= form_for @new_comment do |f| %>  
+    <%= f.hidden_field :commentable_id, value: @new_comment.commentable_id %>
+    <%= f.hidden_field :commentable_type, value: @new_comment.commentable_type %>
+    <div class="field form-group">
+      <%= f.text_area :body, class: 'form-control', style: "margin-top: 30px;", placeholder: '마음의 상처를 입히는 댓글은 피해주세요..ㅠ_ㅠ', required: "true" %>
+    </div>
+    <div class="field form-group">
+      <%= submit_tag "댓글", class: 'btn btn-info', style: "float: right" %><br/>
+    </div>
+  <% end %>
+<% end %>

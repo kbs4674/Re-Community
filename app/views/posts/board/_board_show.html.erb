@@ -1,0 +1,337 @@
+<h4 class="col-12" style="padding: 0px;">
+    <% if @post.reports.size >= @post.num %>
+            <% if current_user.has_role? :admin %>
+                <%# 삽니다/팝니다 표시 %>
+            <% if @bulletin.info_trade == true %>
+                <% if @post.vender == '팝니다' %>
+                    <span class="badge badge-success">팝니다</span>
+                <% elsif @post.vender == '삽니다' %>
+                    <span class="badge badge-primary">삽니다</span>
+                <% end %>
+            <%# 장기/단기 표시 %>
+            <% elsif @bulletin.seeking_room == true %>
+                <% if @post.contract_day == '장기' %>
+                    <span class="badge badge-primary">장기</span>
+                <% else %>
+                    <span class="badge badge-info">단기</span>
+                <% end %>
+            <% end %>
+            
+            <% if @bulletin.promote_store == true %>
+                <%= @post.title.html_safe %>
+            <% else %>
+                <%= @post.title %>
+            <% end %>
+        <% else %>
+            <font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리된 게시글입니다.</font>
+        <% end %>
+    <% else %>
+        <%# 삽니다/팝니다 표시 %>
+        <% if @bulletin.info_trade == true %>
+            <% if @post.vender == '팝니다' %>
+                <span class="badge badge-success">팝니다</span>
+            <% elsif @post.vender == '삽니다' %>
+                <span class="badge badge-primary">삽니다</span>
+            <% end %>
+        <%# 장기/단기 표시 %>
+        <% elsif @bulletin.seeking_room == true %>
+            <% if @post.contract_day == '장기' %>
+                <span class="badge badge-primary">장기</span>
+            <% else %>
+                <span class="badge badge-info">단기</span>
+            <% end %>
+        <% end %>
+        <%# 게시글 제목 %>
+        <% if @bulletin.promote_store == true %>
+            <%= @post.title.html_safe %>
+        <% else %>
+            <%= @post.title %>
+        <% end %>
+    <% end %>
+</h4>
+
+<div class="row">
+    <div class="col-4 etc">
+        <% # [그리드] PC, 모바일 공통에서 볼 경우 : 닉네임 %>
+        <% if @bulletin.info_no_named == true %>
+            <% if @post.reports.size >= @post.num %>
+                <% if can? :for_admin, @post %>
+                    <%= content_tag(:div, "#{@post.nickname}", class: "etc", data: {toggle: "tooltip", placement: "top"}, title: "#{@post.user != nil ? @post.user.nickname : @post.user_name}", style: "color: red") %>
+                <% else %>
+                    -
+                <% end %>
+            <% else %>
+                <% if can? :for_admin, @post %>
+                    <%= content_tag(:div, "#{@post.nickname}", class: "etc", data: {toggle: "tooltip", placement: "top"}, title: "#{@post.user != nil ? @post.user.nickname : @post.user_name}") %>
+                <% else %>
+                    <%= @post.nickname %>
+                <% end %>
+            <% end %>
+        <% else %>
+            <%= render 'posts/special/nickname_post_show' %>
+        <% end %>
+    </div>
+    
+    <% # [그리드] Only 모바일 에서 볼 경우 : 글 작성시간 %>
+    <div class="col-8" align="right">
+        <span style="margin-right: 10px;"><%= @bulletin.created_at.in_time_zone("Asia/Seoul").strftime('%Y-%m-%d %H:%M') %></span>
+        |<i class="fas fa-eye" aria-hidden="true" style="margin-left: 15px;"></i> <%= "#{@post.unique_impression_count}" %>
+    </div>
+</div>
+
+<% if can? :for_admin, @post %>
+    <% if @post.reports.size >= @post.num %>
+        <font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리된 게시글, 관리자 권한을 통해 열람중.</font>
+    <% end %>
+<% end %>
+
+<%# '익명'게시판 전용 : IP %>
+<% if @bulletin.info_no_named == true %>
+    <% if can? :ip, @post %>
+        <%= content_tag(:div, " #{@post.remote_ip.split('.').take(2).join('.')}.*.*", data: {toggle: "tooltip", placement: "top"}, title: "#{@post.remote_ip}", style: "float: right; margin-top: 10px;", class: "fas fa-desktop") %><br/>
+    <% else %>
+        <%= content_tag(:div, " #{@post.remote_ip.split('.').take(2).join('.')}.*.*", style: "float: right; margin-top: 10px;", class: "fas fa-desktop") %><br/>
+    <% end %>
+<% end %>
+
+<hr/>
+
+<%# 좋아요 기능 %>
+<% if not @bulletin.info_trade == true || @bulletin.info_room_trade == true || @bulletin.seeking_job == true || @bulletin.search_job == true || @bulletin.vote == true || @bulletin.seeking_room == true || @post.reports.size >= @post.num %>
+<div style="float: right; font-size: 15px">
+    <% if current_user == @post.user %>
+        <div align="right"><i class="far fa-thumbs-up" aria-hidden="true"></i> <%= @post.get_upvotes.size %> <%= @bulletin.title == "Foreigner Board" ? "Likes!" : "명이 좋아합니다!" %></div>
+    <% else %>
+        <% if (current_user.voted_up_on? @post) == true %>
+            <div align="right"><%= link_to '<span class="badge badge-pill badge-primary"><i class="far fa-thumbs-up" aria-hidden="true"></i></span>'.html_safe, bulletin_post_like_path(@bulletin, @post), method: :put %> <%= @post.get_upvotes.size %> <%= @bulletin.title == "Foreigner Board" ? "Likes!" : "명이 좋아합니다!" %></div>
+        <% else %>
+            <div align="right"><%= link_to '<span class="badge badge-pill badge-default"><i class="far fa-thumbs-up" aria-hidden="true"></i></span>'.html_safe, bulletin_post_like_path(@bulletin, @post), method: :put %> <%= @post.get_upvotes.size %> <%= @bulletin.title == "Foreigner Board" ? "Likes!" : "명이 좋아합니다!" %></div>
+        <% end %>
+    <% end %>
+</div>
+<% end %>
+
+<div style="float: left">  
+    <% if current_user.is_report?(@post) %>
+        <i class="fas fa-exclamation" aria-hidden="true"></i> <%= @bulletin.title == "Foreigner Board" ? "Apply to your report." : "신고 요청 완료." %>
+    <% elsif @post.reports.size >= @post.num %>
+        <i class="fas fa-exclamation" aria-hidden="true"></i> <%= @bulletin.title == "Foreigner Board" ? "It has Applied to report." : "신고 처리된 게시글." %>
+    <% else %>
+        <% if not @bulletin.member_boss == true || @bulletin.member_univ == true %>
+            <%= link_to "#{@bulletin.title == "Foreigner Board" ? " Request block post" : " 신고 요청"}", "/bulletins/#{@bulletin.id}/posts/#{@post.id}/report", class: "badge badge-pill badge-danger fas fa-cut", :method => :post, data: { confirm: "#{@bulletin.title == "Foreigner Board" ? "If you request report, it couldn't cancel. Proceed?" : "한번 신고 요청 하시면 취소가 안됩니다. 정말 하시겠습니까??"}" } %>
+        <% end %>
+    <% end %>
+</div>
+
+<% if (not @post.reports.size >= @post.num) || (current_user.has_role? :admin) %>
+    <%# '구인' 전용 show %>
+    <% if @bulletin.search_job == true %>
+        <%= render "posts/special/search_job_show" %>
+    <% end %>
+    
+    <%# '구직' 전용 show %>
+    <% if @bulletin.seeking_job == true %>
+        <%= render "posts/special/seeking_job_show" %>
+    <% end %>
+    
+    <%# '방 거래' 전용 show %>
+    <% if @bulletin.info_room_trade == true %>
+        <%= render "posts/special/info_room_trade_show" %>
+    <% end %>
+    
+    <%# '물품 거래' 전용 show %>
+    <% if @bulletin.info_trade == true %>
+        <%= render "posts/special/info_trade_show" %>
+    <% end %>
+    
+    <%# 특수게시물 : 가게홍보 게시판 %>
+    <% if @bulletin.promote_store == true %>
+        <%= render 'posts/special/promote_store_show' %>
+    <% end %>
+<% end %>
+
+<br/>
+<div style="margin-top: 20px;">
+    <%# 사장님 전용 공지사항 %>
+    <% if @bulletin.member_boss == true %>
+        <% if current_user.has_any_role? :store_boss, :admin %>
+            <%= content_tag(:div, @post.content.html_safe, :class => "panel-body", style: "margin-bottom: 70px;") %>
+        <% else %>
+            <div class="alert alert-danger" role="alert" style="margin-top: 30px;">
+                <div align="center">
+                    <i class="fas fa-exclamation-triangle" aria-hidden="true" style="color: red"></i> <b style="color: red">권한경고</b> : 허가받지 않은 유저
+                    <hr/>
+                    <div align="left">
+                    <b><%= current_user.nickname %></b> 님은 해당 게시판 글 열람 권한이 없습니다.
+                </div>
+            </div>
+        </div>
+        <% end %>
+    <%# 학교 관계자님 전용 공지사항 %>
+    <% elsif @bulletin.member_univ == true %>
+        <% if current_user.has_any_role? :univ_official, :univ_professor, :admin %>
+            <%= content_tag(:div, @post.content.html_safe, :class => "panel-body", style: "margin-bottom: 70px;") %>
+        <% else %>
+        <div class="alert alert-danger" role="alert" style="margin-top: 30px;">
+            <div align="center">
+                <i class="fas fa-exclamation-triangle" aria-hidden="true" style="color: red"></i> <b style="color: red">권한경고</b> : 허가받지 않은 유저
+                <hr/>
+                <div align="left">
+                    <b><%= current_user.nickname %></b> 님은 해당 게시판 글 열람 권한이 없습니다.
+                </div>
+            </div>
+        </div>
+        <% end %>
+        
+    <%# 그 외 %>
+    <% else %>
+        <% if can? :for_admin, @post %>
+            <%= content_tag(:div, @post.content.html_safe, :class => "panel-body", style: "margin-bottom: 70px;") %>
+        <% elsif @post.reports.size >= @post.num %>
+            <font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리된 게시글입니다.</font><br/>
+        <% else %>
+            <%= content_tag(:div, @post.content.html_safe, :class => "panel-body", style: "margin-bottom: 70px;") %>
+        <% end %>
+    <% end %>
+</div>
+
+<%# 투표기능 %>
+<% if @bulletin.vote == true %>
+<div align="center" style="margin-top: 20px;">
+    <% if @post.reports.size >= @post.num %>
+    <font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리된 게시글입니다.</font><br/><br/>
+        <% if current_user.has_role? :admin %>
+        <div class="progress" style="width: 300px;">
+            <div class="progress-bar bg-info" role="progressbar" style="width: <%= @post.get_upvotes.size.to_f / @post.votes_for.size * 100 %>%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+                <% if @post.get_upvotes.size >= 1 %>
+                <%= @post.get_upvotes.size.to_f / @post.votes_for.size * 100 %>%
+                <% end %>
+            </div>
+            <div class="progress-bar bg-danger" role="progressbar" style="width: <%= @post.get_downvotes.size.to_f / @post.votes_for.size * 100 %>%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
+                <% if @post.get_upvotes.size >= 1 %>
+                    <%= @post.get_upvotes.size.to_f / @post.votes_for.size * 100 %>%
+                <% end %>
+            </div>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <% if (current_user.voted_up_on? @post) == true %>
+                <%= link_to " #{@post.get_upvotes.size}", bulletin_post_like_path(@bulletin, @post), method: :put, class: "badge badge-pill badge-success far fa-thumbs-up", style:"font-size: 30px;" %>
+                <%= link_to " #{@post.get_downvotes.size}", bulletin_post_dislike_path(@bulletin, @post), method: :put, class: "badge badge-pill badge-danger far fa-thumbs-down", style:"font-size: 30px;" %>
+            <% elsif (current_user.voted_down_on? @post) == true %>
+                <%= link_to " #{@post.get_upvotes.size}", bulletin_post_like_path(@bulletin, @post), method: :put, class: "badge badge-pill badge-primary far fa-thumbs-up", style:"font-size: 30px;" %>
+                <%= link_to " #{@post.get_downvotes.size}", bulletin_post_dislike_path(@bulletin, @post), method: :put, class: "badge badge-pill badge-success far fa-thumbs-down", style:"font-size: 30px;" %>
+            <% else %>
+                <%= link_to " ", bulletin_post_like_path(@bulletin, @post), method: :put, class: "badge badge-pill badge-primary far fa-thumbs-up", style:"font-size: 30px;" %>
+                <%= link_to " ", bulletin_post_dislike_path(@bulletin, @post), method: :put, class: "badge badge-pill badge-danger far fa-thumbs-down", style:"font-size: 30px;" %>
+            <% end %>
+        </div>
+        <% end %>
+    
+    <% else %>
+    <div class="progress" style="width: 300px;">
+        <div class="progress-bar bg-info" role="progressbar" style="width: <%= @post.get_upvotes.size.to_f / @post.votes_for.size * 100 %>%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+            <% if @post.get_upvotes.size >= 1 %>
+            <%= @post.get_upvotes.size.to_f / @post.votes_for.size * 100 %>%
+            <% end %>
+        </div>
+        <div class="progress-bar bg-danger" role="progressbar" style="width: <%= @post.get_downvotes.size.to_f / @post.votes_for.size * 100 %>%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
+            <% if @post.get_upvotes.size >= 1 %>
+            <%= @post.get_upvotes.size.to_f / @post.votes_for.size * 100 %>%
+            <% end %>
+        </div>
+    </div>
+    
+    <div style="margin-top: 20px;">
+        <% if (current_user.voted_up_on? @post) == true %>
+            <%= link_to " #{@post.get_upvotes.size}", bulletin_post_like_path(@bulletin, @post), method: :put, class: "badge badge-pill badge-success far fa-thumbs-up", style:"font-size: 30px;" %>
+            <%= link_to " #{@post.get_downvotes.size}", bulletin_post_dislike_path(@bulletin, @post), method: :put, class: "badge badge-pill badge-danger far fa-thumbs-down", style:"font-size: 30px;" %>
+        <% elsif (current_user.voted_down_on? @post) == true %>
+            <%= link_to " #{@post.get_upvotes.size}", bulletin_post_like_path(@bulletin, @post), method: :put, class: "badge badge-pill badge-primary far fa-thumbs-up", style:"font-size: 30px;" %>
+            <%= link_to " #{@post.get_downvotes.size}", bulletin_post_dislike_path(@bulletin, @post), method: :put, class: "badge badge-pill badge-success far fa-thumbs-down", style:"font-size: 30px;" %>
+        <% else %>
+            <%= link_to " ", bulletin_post_like_path(@bulletin, @post), method: :put, class: "badge badge-pill badge-primary far fa-thumbs-up", style:"font-size: 30px;" %>
+            <%= link_to " ", bulletin_post_dislike_path(@bulletin, @post), method: :put, class: "badge badge-pill badge-danger far fa-thumbs-down", style:"font-size: 30px;" %>
+        <% end %>
+    </div>
+    <% end %>
+</div>
+<% end %>
+
+<%# 광고 %>
+<%#= render 'posts/special/ad_show' %>
+
+<div class= "row" style="margin-top: 30px;">
+    <div class="col-7 col-md-6" align="left">
+        <%= link_to "#{@bulletin.title == "Foreigner Board" ? "List" : "목록"}", "/bulletins/#{@bulletin.id}/posts", class: "btn btn-secondary btn-sm" %>
+        <% if can? :update, @post %>
+            <%= link_to "#{@bulletin.title == "Foreigner Board" ? "Modify" : "수정"}", (@bulletin.present? ? edit_bulletin_post_path(@bulletin)  : edit_post_path(@post)), class: "btn btn-secondary btn-sm" %>
+        <% end %>
+        <% if (can? :destroy, @post) && (@post.deleted? == false) %>
+            <%= link_to "#{@bulletin.title == "Foreigner Board" ? "Delete" : "삭제"}", (@bulletin.present? ? [@post.bulletin, @post] : @post), method: :delete, data: { confirm: "#{@bulletin.title == "Foreigner Board" ? "R U Sure Delete..!?" : "정말로 지우시겠습니까?"}" }, class: "btn btn-secondary btn-sm" %>
+        <% end %>
+        <% if (current_user.has_role? :admin) && (@post.deleted? == true)%>
+            <%= link_to "#{@bulletin.title == "Foreigner Board" ? "Permanent Delete" : "영구 삭제"}", (@bulletin.present? ? [@post.bulletin, @post] : @post), method: :delete, data: { confirm: '삭제 시 로그에 안남는 채로 삭제됩니다. 정말로 영원히 삭제하시겠습니까?' }, class: "btn btn-danger btn-sm" %>
+        <% end %>
+    </div>
+    <div class="col-5 col-md-6" align="right">
+        <% if @bulletin.promote_store == true %>
+            <% if current_user.has_role? :store_boss %>
+                <%= link_to '글 쓰기', (@bulletin.present? ?  new_bulletin_post_path(@bulletin) : new_post_path), class: "btn btn-primary btn-sm", align: "right" %>
+            <% end %>
+        <% elsif @bulletin.member_boss == true || @bulletin.member_univ == true %>
+            <% if current_user.has_role? :admin %>
+                <%= link_to '글 쓰기', (@bulletin.present? ?  new_bulletin_post_path(@bulletin) : new_post_path), class: "btn btn-primary btn-sm", align: "right" %>
+            <% end %>
+        <% else %>
+            <% if (not current_user.has_any_role? :block_yellow, :block_red) || (current_user.has_role? :admin) %>
+                <%= link_to "#{@bulletin.title == "Foreigner Board" ? "Write" : "글 쓰기"}", (@bulletin.present? ?  new_bulletin_post_path(@bulletin) : new_post_path), class: "btn btn-primary btn-sm", align: "right" %>
+            <% end %>
+        <% end %>
+    </div>
+</div>
+
+<% if can? :for_admin, @post %>
+    <% if @bulletin.info_no_named == true %>
+        <%= render partial: "comments_no_named/template", locals: {commentable: @post, new_comment: @comment} %>
+    <% elsif @bulletin.member_boss == true %>
+        <% if current_user.has_any_role? :store_boss, :admin %>
+            <%= render partial: "comments/template", locals: {commentable: @post, new_comment: @comment} %>
+        <% else %>
+            <hr/>
+            <center><font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true" style="margin-top: 20px;"></i> 허가받지 않은 유저는 댓글 확인이 불가합니다.</font></center>
+        <% end %>
+    <% elsif @bulletin.member_univ == true %>
+        <% if current_user.has_any_role? :univ_official, :univ_professor, :admin %>
+            <%= render partial: "comments/template", locals: {commentable: @post, new_comment: @comment} %>
+        <% else %>
+            <hr/>
+            <center><font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true" style="margin-top: 20px;"></i> 허가받지 않은 유저는 댓글 확인이 불가합니다.</font></center>
+        <% end %>
+    <% else %>
+        <%= render partial: "comments/template", locals: {commentable: @post, new_comment: @comment} %>
+    <% end %>
+    <% elsif @post.reports.size >= @post.num %>
+        <hr/>
+        <center><font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true" style="margin-top: 20px;"></i> 블라인드 처리된 게시글에서는 댓글 확인이 불가합니다.</font></center>
+    <% else %>
+        <% if @bulletin.info_no_named == true %>
+            <%= render partial: "comments_no_named/template", locals: {commentable: @post, new_comment: @comment} %>
+        <% elsif @bulletin.member_boss == true %>
+            <% if current_user.has_any_role? :store_boss, :admin %>
+            <%= render partial: "comments/template", locals: {commentable: @post, new_comment: @comment} %>
+        <% else %>
+            <hr/>
+            <center><font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true" style="margin-top: 20px;"></i> 허가받지 않은 유저는 댓글 확인이 불가합니다.</font></center>
+        <% end %>
+    <% elsif @bulletin.member_univ == true %>
+        <% if current_user.has_any_role? :univ_official, :univ_professor, :admin %>
+            <%= render partial: "comments/template", locals: {commentable: @post, new_comment: @comment} %>
+        <% else %>
+            <hr/>
+            <center><font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true" style="margin-top: 20px;"></i> 허가받지 않은 유저는 댓글 확인이 불가합니다.</font></center>
+        <% end %>
+    <% else %>
+        <%= render partial: "comments/template", locals: {commentable: @post, new_comment: @comment} %>
+    <% end %>
+<% end %>

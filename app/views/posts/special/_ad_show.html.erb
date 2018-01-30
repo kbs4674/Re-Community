@@ -1,0 +1,45 @@
+<div class="col-12 col-sm-12 col-md-0 ad_zone" style="margin-bottom: 30px;">
+<div style="margin-bottom: 10px;"><small><span class="badge badge-default" style="padding-top: 5px;">AD</span> <b>사장님 광고</b></small></div>
+<% Bulletin.all.each do |bulletin| %>
+    <% if bulletin.promote_store == true %>
+        <% bulletin.posts.sample(1).each do |post| %>
+            <% if Time.now - post.created_at <= 2.month %>
+                <%# PC버전 크기에서만 보임. %>
+                    <%= link_to bulletin_post_path(5, post) do %>
+                    <div class="hidden-sm-down">
+                        <table width="100%" border="0">
+                            <tr>
+                                <td colspan="1" rowspan="5" width="30%" align="center">
+                                    <% if post.image.present? %>
+                                    <%= image_tag ("#{post.image}"), class: "card-img-top", width: "180px", height: "110px;" %>
+                                    <% else %>
+                                    <%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "180px", height: "110px;" %>
+                                    <% end %>
+                                </td>
+                                <td width="80%" align="left">
+                                    <h3>" <%= post.short_talk %> "</h3>
+                                    <%= post.title.html_safe %>
+                                    <div><span class="badge badge-info" style="padding-top: 5px;">연락처</span> 0<%= post.phone_num %></b> <%= link_to '<i class="fas fa-phone"></i>'.html_safe, "tel:0#{post.phone_num}", class: "badge badge-pill badge-success" %></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                
+                
+                <%# 태블릿, 모바일 버전에서만 보임. %>
+                <div class="hidden-md-up">
+                    <% if post.image.present? %>
+                        <center><%= image_tag ("#{post.image}"), class: "card-img-top", width: "180px", height: "100px;" %></center>
+                    <% else %>
+                        <center><%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "180px", height: "100px;" %></center>
+                    <% end %>
+                    <hr/>
+                    <h3 align="center">" <%= post.short_talk %> "</h3>
+                    <div align="center"><%= post.title.html_safe %></div>
+                </div>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>
+</div>

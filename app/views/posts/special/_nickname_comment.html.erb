@@ -1,0 +1,15 @@
+<% if not comment.user == nil %>
+    <% if comment.user.profile_icon.present? || comment.user.profile_banner.present? %>
+        <% if comment.user.profile_select == "profile_icon" %>
+            <%= image_tag ("#{comment.user.profile_icon}"), width: "20px", height: "20px;" %> <b><%= comment.user != nil ? comment.user.nickname : comment.user_name %></b>
+        <% elsif comment.user.profile_select == "profile_banner" %>
+            <%= image_tag ("#{comment.user.profile_banner}"), width: "70px", height: "20px;", data: {toggle: "tooltip", placement: "top"}, title: "#{comment.user != nil ? comment.user.nickname : comment.user_name}" %>
+        <% else %>
+            <b><%= comment != nil ? User.find(comment.user_id).nickname : comment.user_name %></b>
+        <% end %>
+    <% else %>
+        <b><%= comment != nil ? User.find(comment.user_id).nickname : comment.user_name %></b>
+    <% end %>
+<% else %>
+    <b><%= comment != nil ? User.find(comment.user_id).nickname : comment.user_name %></b>
+<% end %>

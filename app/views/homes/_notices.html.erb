@@ -1,0 +1,8 @@
+<div style="padding: 5px;">
+    <% @notices_all.first(5).each do |post| %>
+        <%= link_to all_notice_path(post) do %>
+          <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "font-weight: normal !important; margin-left: 10px;") %>
+          <%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 25, :omission => "..."), class: "etc") %><br/>
+    <% end %>
+    <% end %>
+</div>

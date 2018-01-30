@@ -1,0 +1,15 @@
+<% if not @qna.user == nil %>
+    <% if @qna.user.profile_icon.present? || @qna.user.profile_banner.present? %>
+        <% if @qna.user.profile_select == "profile_icon" %>
+            <%= image_tag ("#{@qna.user.profile_icon}"), width: "20px", height: "20px;" %> <%= @qna.user != nil ? @qna.user.nickname : @qna.user_name %>
+        <% elsif @qna.user.profile_select == "profile_banner" %>
+            <%= image_tag ("#{@qna.user.profile_banner}"), width: "70px", height: "20px;", data: {toggle: "tooltip", placement: "top"}, title: "#{@qna.user != nil ? @qna.user.nickname : @qna.user_name}" %>
+        <% else %>
+            <%= @qna.user != nil ? @qna.user.nickname : @qna.user_name %>
+        <% end %>
+    <% else %>
+        <%= @qna.user != nil ? @qna.user.nickname : @qna.user_name %>
+    <% end %>
+<% else %>
+    <%= @qna.user != nil ? @qna.user.nickname : @qna.user_name %>
+<% end %>

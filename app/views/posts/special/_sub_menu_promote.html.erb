@@ -1,0 +1,11 @@
+<div align="left" style="margin-top:20px;" class="row">
+    <% @bulletins.each do |bulletin| %>
+        <% if bulletin.title == "우리가게 홍보" %>
+            <p class="col-4 col-sm-3 col-md-2"><%= link_to "우리가게 홍보", bulletin_posts_path(bulletin), class: "sub_menu-link" %></p>
+        <% end %>
+        <% if bulletin.title == "가게 방문후기" %>
+            <p class="col-4 col-sm-3 col-md-2"><%= link_to "가게 방문후기", bulletin_posts_path(bulletin), class: "sub_menu-link" %></p>
+        <% end %>
+    <% end %>
+    <p class="offset-sm-2 offset-md-6 badge badge-pill badge-success hidden-xs-down" style="padding: 5px"><i class="fa fa-clock-o" aria-hidden="true"></i> 현재 시간 </span> <span><%= Time.zone.now.strftime('%Y-%m-%d %H:%M:%S') %></p>
+</div>

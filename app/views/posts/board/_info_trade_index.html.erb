@@ -1,0 +1,132 @@
+<div style="margin-top: 30px;"></div>
+<div class="card-deck">
+    <%# 운영자가 볼 시 삭제된 게시글도 조회 %>
+    <% if current_user.has_role? :admin %>
+        <% @posts.with_deleted.each do |post| %>
+            <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                <div style="margin-left: 350px;" class="hidden-sm-down"></div>
+                <div class="card" style="width: 20rem;">
+                    <div style="position: relative;">
+                        <% if post.image.present? %>
+                            <% if post.reports.size >= post.num %>
+                                <%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "318px", height: "179px;" %>
+                            <% else %>
+                                <%= image_tag ("#{post.image}"), class: "card-img-top", width: "318px", height: "179px;" %>
+                            <% end %>
+                        <% else %>
+                            <%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "318px", height: "179px;" %>
+                        <% end %>
+                        <div align="center" class="image_overfext etc">
+                            <% if current_user.has_role? :admin %>
+                                <% if post.reports.size >= post.num %>
+                                    <b><%= content_tag(:div, post.title, class: "etc", style: "color: red; text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;") %></b>
+                                <% elsif post.deleted? %>
+                                    <b><%= content_tag(:div, post.title, class: "etc", style: "color: #8e68e4; text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;") %></b>
+                                <% else %>
+                                    <b><%= content_tag(:div, post.title, class: "etc") %></b>
+                                <% end %>
+                            <% else %>
+                                <% if post.reports.size >= post.num %>
+                                    <b style="color: red; text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 신고 처리 된 게시글</b>
+                                <% else %>
+                                    <b><%= content_tag(:div, post.title, class: "etc") %></b>
+                                <% end %>
+                            <% end %>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <div align="left">
+                            <b><%= post.price != nil ? "#{post.price}" : "0" %> 원</b>
+                        </div>
+                        <hr/>
+                        
+                        <div class="row" align="left">
+                            <div class="offset-3 offset-sm-3 offset-md-3 col-3 col-sm-3 col-md-3">
+                                <i class="fas fa-eye"></i>
+                                <% if post.unique_impression_count >= 10000 %>
+                                    <%= "#{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
+                                <% else %>
+                                    <%= "#{post.unique_impression_count}" %>
+                                <% end %>
+                            </div>
+                            <div class="col-3 col-sm-3 col-md-3">
+                                <i class="far fa-comments"></i> <%= post.comment_threads.count %>
+                            </div>
+                            <div class="col-3 col-sm-3 col-md-3">
+                                <% if post.vender == '팝니다' %>
+                                    <span class="badge badge-success">팝니다</span>
+                                <% elsif post.vender == '삽니다' %>
+                                    <span class="badge badge-primary">삽니다</span>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        <% end %>
+    <%# 일반 유저가 볼 시 %>
+    <% else %>
+        <% @posts.each do |post| %>
+            <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                <div style="margin-left: 350px;" class="hidden-sm-down"></div>
+                <div class="card" style="width: 20rem;">
+                    <div style="position: relative;">
+                        <% if post.image.present? %>
+                            <% if post.reports.size >= post.num %>
+                                <%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "318px", height: "179px;" %>
+                            <% else %>
+                                <%= image_tag ("#{post.image}"), class: "card-img-top", width: "318px", height: "179px;" %>
+                            <% end %>
+                        <% else %>
+                            <%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "318px", height: "179px;" %>
+                        <% end %>
+                        <div align="center" class="image_overfext etc">
+                            <% if current_user.has_role? :admin %>
+                                <% if post.reports.size >= post.num %>
+                                    <b><%= content_tag(:div, post.title, class: "etc", style: "color: red; text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;") %></b>
+                                <% elsif post.deleted? %>
+                                    <b><%= content_tag(:div, post.title, class: "etc", style: "color: #8e68e4; text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;") %></b>
+                                <% else %>
+                                    <b><%= content_tag(:div, post.title, class: "etc") %></b>
+                                <% end %>
+                            <% else %>
+                                <% if post.reports.size >= post.num %>
+                                    <b style="color: red; text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 신고 처리 된 게시글</b>
+                                <% else %>
+                                    <b><%= content_tag(:div, post.title, class: "etc") %></b>
+                                <% end %>
+                            <% end %>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <div align="left">
+                            <b><%= post.price != nil ? "#{post.price}" : "0" %> 원</b>
+                        </div>
+                        <hr/>
+                        
+                        <div class="row" align="left">
+                            <div class="offset-3 offset-sm-3 offset-md-3 col-3 col-sm-3 col-md-3">
+                                <i class="fas fa-eye"></i>
+                                <% if post.unique_impression_count >= 10000 %>
+                                    <%= "#{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
+                                <% else %>
+                                    <%= "#{post.unique_impression_count}" %>
+                                <% end %>
+                            </div>
+                            <div class="col-3 col-sm-3 col-md-3">
+                                <i class="far fa-comments"></i> <%= post.comment_threads.count %>
+                            </div>
+                            <div class="col-3 col-sm-3 col-md-3">
+                                <% if post.vender == '팝니다' %>
+                                    <span class="badge badge-success">팝니다</span>
+                                <% elsif post.vender == '삽니다' %>
+                                    <span class="badge badge-primary">삽니다</span>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        <% end %>
+    <% end %>
+</div>

@@ -1,0 +1,41 @@
+<body class="home_gray">
+  <% #경고메세지 출력 (아이디, 비밀번호 잘못 칠 시 등등...) %>
+  <% if alert %>
+    <div style="margin-top: 30px;">&nbsp</div>
+    <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #FF4B5C; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+    <%= alert %>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    <% elsif notice %>
+    <div style="margin-top: 30px;">&nbsp</div>
+    <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #43AC6A; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+    <%= notice %>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    <% else %>
+    <div style="margin-top: 30px;">&nbsp</div>
+  <% end %>
+  <div style="margin-top: 30px;">&nbsp</div>
+  
+  <div class="container col-12 col-sm-7 col-md-4" align="center" style="padding-top: 10px; padding-bottom: 30px; border: 1px solid #F2F2F2; border-radius: 4px; background: white;">
+    <h2 style="margin-top: 20px;"><%= t('.forgot_your_password') %></h2>
+    <hr class="col-5 col-sm-5 col-md-5">
+  
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <div class="col-12 col-sm-12 col-md-12">
+        <%= devise_error_messages! %>
+      </div>
+      
+      <div class="field col-12 col-sm-11 col-md-10" align="left">
+        <%= f.label :이메일 %><br />
+        <%= f.email_field :email, class: "form-control no-border", autofocus: true %>
+      </div><br/>
+      
+      <div class="action" align="center">
+        <%= f.submit t('.send_me_reset_password_instructions'), class: "btn btn-primary" %> <%= render "devise/shared/links" %>
+      </div>
+    <% end %>
+  </div>
+  <div style="margin-top:10px;"></div>
+  <center><%= render "devise/shared/info" %></center>
+</body>

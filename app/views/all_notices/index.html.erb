@@ -1,0 +1,97 @@
+<div class="board hidden-sm-down" style="background: url('/img/title_img2.jpg') no-repeat fixed; background-size: 100% 70%; background-position:0px -180px;">
+  <div class="container" align="left">
+    <span  class="post_title"><%= link_to "공지사항", all_notices_path, class: "board_title" %></span>
+  </div>
+</div>
+<div class="board_mobile hidden-md-up" style="background: url('/img/title_img2.jpg') no-repeat center center/cover scroll;">
+  <span class="post_title"><%= link_to "공지사항", all_notices_path, class: "board_title" %></span>
+</div>
+
+<% #경고메세지 출력 (아이디, 비밀번호 잘못 칠 시 등등...) %>
+<% if alert %>
+    <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #FF4B5C; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+    <%= alert %>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    <% elsif notice %>
+    <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #43AC6A; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+    <%= notice %>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+<% end %>
+
+<div class="container" style="margin-bottom: 100px;">
+  <div align="right">
+    <p class="badge badge-pill badge-success hidden-xs-down" style="margin-top:20px; margin-bottom: 20px;"><i class="fa fa-clock-o" aria-hidden="true"></i> 현재 시간 </span> <span><%= Time.zone.now.strftime('%Y-%m-%d %H:%M:%S') %></p>
+  </div>
+  <center>
+  <div class="row">
+    <div class="col-0 col-sm-0 col-md-1 table_title hidden-sm-down" align="center">No.</div>
+    <div class="col-0 col-sm-0 col-md-2 table_title hidden-sm-down" align="center">작성자</div>
+    <div class="col-6 col-sm-6 col-md-5 table_title" align="center">제목</div>
+    <div class="col-1 col-sm-1 col-md-1 table_title" align="center"></div>
+    <div class="col-0 col-sm-3 col-md-2 table_title hidden-xs-down" align="center">작성시간</div>
+    <div class="col-0 col-sm-2 col-md-1 table_title hidden-xs-down" align="center">조회수</div>
+    <div class="col-2 col-sm-0 col-md-0 table_title hidden-sm-up" align="center"><small>댓글</small></div>
+    <div class="col-3 col-sm-0 col-md-0 table_title hidden-sm-up" align="center"><small>조회수</small></div>
+    <div class="col-md-1 hidden-sm-down"></div>
+  </div>
+  
+  <%# 전체 공지사항 %>
+  <% @all_notices.each do |post| %>
+    <% if post.all_notice == true %>
+      <div class="row table_notice">
+        <% # 공지 Badge %>
+        <div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down">
+          <%= content_tag(:span, '<span class="badge badge-warning">전체공지</span>'.html_safe, class: "etc", align: "center", style: "margin-top: 5px;") %>
+        </div>
+        <%= render "all_notices/list/board_all_notice_index", post: post %>
+      </div>
+    <% end %>
+  <% end %>
+  <% if @all_notices.empty? %>
+    <h2 class="text-center" style="margin-top: 30px;">게시글이 없습니다.</h2>
+  <% else %>
+    <%# 공지 게시글 %>
+    <% @all_notices.each do |post| %>
+      <% if post.notice == true %>
+        <div class="row table_sub_notice" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+          <% # 공지 Badge %>
+          <div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down">
+            <%= content_tag(:span, "공지사항", class: "badge badge-primary etc", align: "center", style: "margin-top: 5px;") %>
+          </div>
+          <div align="center" class="col-0 col-sm-0 col-md-2 etc table_separate hidden-sm-down">
+            <%= render 'posts/special/nickname_post_index', post: post %>
+          </div>
+          <%= render "all_notices/list/board_notice_normal_index", post: post %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <%# 일반 게시글 %>
+    <% @all_notices.each do |post| %>
+      <%= render 'all_notices/list/notice_index', post: post %>
+    <% end %>
+  <% end %>
+
+  <% if can? :new, @all_notices %>
+    <div align="right"><%= link_to "글 쓰기", new_all_notice_path, class: "btn btn-primary", style: "margin-top: 30px;" %></div>
+  <% end %>
+  
+  <div class="d-flex flex-column", style="margin-bottom: 10px; margin-top: 50px">
+    <%= paginate @all_notices %>
+  </div>
+  
+  <%# 검색엔진 %>
+  <%= form_tag search_all_notices_path, :method => :get do %>
+  <div class="row">
+    <div class="offset-2 offset-sm-3 offset-md-4 col-6 col-sm-5 col-md-3">
+      <%= text_field_tag :search, params[:search], required: "true", class: "form-control no-border", placeholder: "제목 또는 내용" %>
+    </div>
+    <div class="col-1 col-sm-1 col-md-1">
+      <%= submit_tag "검색", class: "search_button", :name => nil %>
+    </div>
+  </div>
+  <% end %>
+  
+</div>

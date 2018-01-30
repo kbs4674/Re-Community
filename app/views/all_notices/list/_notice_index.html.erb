@@ -1,0 +1,21 @@
+<div class="row" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+    <% # 글 번호 %>
+    <% if post.notice == true || post.all_notice == true %>
+      <div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down">
+    <% else %>
+      <div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down">
+    <% end %>
+      <%= post.id %>
+    </div>
+    
+    <%# 작성자 %>
+    <% if post.notice == true || post.all_notice == true %>
+      <div align="center" class="col-0 col-sm-0 col-md-2 etc table_separate hidden-sm-down">
+    <% else %>
+      <div align="center" class="col-0 col-sm-0 col-md-2 etc table_separate hidden-sm-down">
+    <% end %>
+      <%= render 'posts/special/nickname_post_index', post: post %>
+    </div>
+    
+    <%= render "all_notices/list/board_notice_normal_index", post: post %>
+</div>

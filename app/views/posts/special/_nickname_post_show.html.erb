@@ -1,0 +1,15 @@
+<% if not @post.user == nil %>
+    <% if @post.user.profile_icon.present? || @post.user.profile_banner.present? %>
+        <% if @post.user.profile_select == "profile_icon" %>
+            <%= image_tag ("#{@post.user.profile_icon}"), width: "20px", height: "20px;" %> <%= @post.user != nil ? @post.user.nickname : @post.user_name %>
+        <% elsif @post.user.profile_select == "profile_banner" %>
+            <%= image_tag ("#{@post.user.profile_banner}"), width: "70px", height: "20px;", data: {toggle: "tooltip", placement: "top"}, title: "#{@post.user != nil ? @post.user.nickname : @post.user_name}" %>
+        <% else %>
+            <%= @post.user != nil ? @post.user.nickname : @post.user_name %>
+        <% end %>
+    <% else %>
+        <%= @post.user != nil ? @post.user.nickname : @post.user_name %>
+    <% end %>
+<% else %>
+    <%= @post.user != nil ? @post.user.nickname : @post.user_name %>
+<% end %>

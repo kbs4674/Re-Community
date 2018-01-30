@@ -1,0 +1,57 @@
+<body class="home_gray">
+  <% #경고메세지 출력 (아이디, 비밀번호 잘못 칠 시 등등...) %>
+  <% if alert %>
+  <div style="margin-top: 30px;">&nbsp</div>
+    <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #FF4B5C; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+      <%= alert %>
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+  <% elsif notice %>
+    <div style="margin-top: 30px;">&nbsp</div>
+    <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #43AC6A; color: white; border-radius: 0; margin-bottom: 0; border: 0">
+      <%= notice %>
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+  <% else %>
+    <div style="margin-top: 30px;">&nbsp</div>
+  <% end %>
+  
+  <div class="container">
+    <div class="row">
+      <%# 전체 공지사항 %>
+      <div class="offset-md-1 col-12 col-sm-12 col-md-4 home_notice">
+        <div class="home_index_title table_notice"><%= link_to '<b style="margin-left: 10px; margin-bottom: 5px;"><i class="fas fa-bullhorn"></i> 공지사항</b>'.html_safe, all_notices_path %></div>
+        <%= render "homes/notices" %>
+      </div>
+      <div class="offset-0 offset-sm-0 offset-md-0"></div>
+      
+      <%# 전체 posts(커뮤니티) 게시글 목록 %>
+      <div class="offset-md-1 col-12 col-sm-12 col-md-4 home_index">
+        <div class="home_index_title"><b style="margin-left: 10px; margin-bottom: 5px;"><i class="fa fa-check" aria-hidden="true"></i> 전체 커뮤니티 게시판</b></div>
+        <%= render "homes/posts_all" %>
+      </div>
+      
+      <%# QNA 게시판 목록 (render 처리) %>
+      <%= render "homes/qnas" %>
+      <div class="offset-0 offset-sm-1 offset-md-0"></div>
+      
+      <%# 전체 카테고리 및 5개의 posts(커뮤니티) 게시글 %>
+      <% @bulletins.each do |bulletin| %>
+        <% if not bulletin.main_hidden == true %>
+          <div class="offset-md-1 col-12 col-sm-12 col-md-4 home_index">
+            <div class="home_index_title"><b style="margin-left: 10px; margin-bottom: 5px;"><i class="" aria-hidden="true"></i> <%= link_to "#{bulletin.title}", bulletin_posts_path(bulletin.id) %></b></div>
+            <%= render "homes/posts", title: bulletin.title, posts: bulletin.posts %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  
+  <div style="margin-top: 50px;"></div>
+  <%# 오늘의 Hot issue 커뮤니티 글 %>
+  <div class="hidden-sm-down"><%= render "homes/hot_pc" %></div>
+  <div class="hidden-md-up"><%= render "homes/hot_mobile" %></div>
+  
+  <%# 광고 영역 %>
+  <%= render "homes/ad" %>
+</body>

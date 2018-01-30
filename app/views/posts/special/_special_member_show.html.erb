@@ -1,0 +1,33 @@
+<% @posts.each do |post| %>
+        <div class="row" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+            <% # 글 번호 %>
+            <div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down"><%= post.id %></div>
+            <div align="center" class="col-0 col-sm-0 col-md-2 etc table_separate hidden-sm-down">
+                <%= render 'posts/special/nickname_post_index', post: post %>
+            </div>
+            
+            <% # 게시글 제목 %>
+            <div align="left" class="col-7 col-sm-5 col-md-5 etc table_separate">
+                <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                    <%= content_tag(:div, post.title, class: "etc") %>
+                <% end %>
+            </div>
+            
+            <%# 댓글 %>
+            <div align="center" class="col-2 col-sm-2 col-md-1 table_separate">
+              <b><%= post.comment_threads.count %></b>
+            </div>
+            
+            <%# 조회수 %>
+            <div align="center" class="col-3 col-sm-2 col-md-1 table_separate">
+              <% if post.unique_impression_count >= 10000 %>
+                <%= "#{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
+              <% else %>
+                <%= "#{post.unique_impression_count}" %>
+              <% end %>
+            </div>
+            
+            <% # 시간 %>
+            <div align="center" class="col-0 col-sm-3 col-md-2 table_separate hidden-xs-down"><%= "#{time_ago_in_words(post.created_at)} 전" %></div>
+        </div>
+<% end %>

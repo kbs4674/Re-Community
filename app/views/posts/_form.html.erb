@@ -1,0 +1,257 @@
+<%= form_with(model: @bulletin.present? ? [@post.bulletin, @post] : @post, local: true) do |f| %>
+  
+  <%# '익명' 전용 양식 %>
+  <% if @bulletin.info_no_named == true %>
+  <div class="form-inputs">
+    <%= f.label :"가상 닉네임" %>
+    <%= f.text_field :nickname, id: :post_nickname, class: "col-5 col-sm-4 col-md-3 form-control no-border" %>
+    <br/>
+  </div>
+  <% end %>
+  
+  <div class="form-inputs">
+    <% if @bulletin.promote_store == true %>
+      <%= f.label :제목 %>
+      <%= f.text_field :title, id: :post_title, class: "form-control no-border", required: "true", placeholder: "제목 HTML 태그 사용이 허용됩니다, 단 홈페이지에 영향을 끼치는 태그는 사용 금지 바랍니다." %>
+    <% elsif @bulletin.seeking_room == true %>
+      <div class="row">
+        <div class="col-3 col-sm-3 col-md-2">
+          <span style="color: red">*</span>
+          <%= f.label :"유형 선택" %><br/>
+          <%= f.select :contract_day, ['장기', '단기'] %>
+        </div>
+        <div class="col-9 col-sm-9 col-md-10">
+          <%= f.label :제목 %>
+          <%= f.text_field :title, id: :post_title, class: "form-control no-border", required: "true" %>
+        </div>
+      </div>
+    <% else %>
+      <%= f.label :"#{@bulletin.title == "Foreigner Board" ? "Title" : "제목"}" %>
+      <%= f.text_field :title, id: :post_title, class: "form-control no-border", required: "true" %>
+    <% end %><br/>
+  </div> 
+    
+  <%# '구인' 전용 양식 %>
+  <% if @bulletin.search_job == true %>
+    <div class="row special_form_area">
+      <div class="col-5 col-sm-4 col-md-2">
+        <span style="color: red">*</span>
+        <%= f.label :"시급(월급)" %>
+        <%= f.text_field :price_job, id: :post_price, class: "form-control no-border job_inform", required: "true", style: "background: #d9f6fd", placeholder: "숫자" %>
+      </div>
+      
+      <div class="col-7 col-sm-8 col-md-3">
+        <%= f.label :"희망 근무 개월(시간)" %>
+        <%= f.text_field :time, id: :post_time, class: "form-control no-border job_inform", style: "background: #d9f6fd", placeholder: "ex. 최소 3개월" %>
+      </div>
+      
+      <div class="col-12 col-sm-4 col-md-2">
+        <%= f.label :"모집인원", class: "hidden-sm-down" %>
+        <%= f.label :"모집인원", class: "hidden-md-up", style: "margin-top: 15px;" %>
+        <%= f.text_field :person, id: :post_person, class: "form-control no-border job_inform", style: "background: #d9f6fd", placeholder: "숫자" %>
+      </div>
+      
+      <div class="col-12 col-sm-8 col-md-5">
+        <%= f.label :"요구사항", class: "hidden-sm-down" %>
+        <%= f.label :"요구사항", class: "hidden-md-up", style: "margin-top: 15px;" %>
+        <%= f.text_field :skill, id: :post_skill, class: "form-control no-border", style: "background: #d9f6fd", placeholder: "ex. 지각 안하시는분" %>
+      </div>
+      
+      <div class="col-12 col-sm-4 col-md-5">
+        <span style="color: red">*</span>
+        <%= f.label :"연락처", style: "margin-top: 15px;" %>
+        <%= f.text_field :phone_num, id: :post_phone_num, class: "form-control no-border job_inform", required: "true", style: "background: #d9f6fd", value: "#{@post.phone_num != nil ? "0#{@post.phone_num}" : nil}", placeholder: "ex. 0100000000" %>
+      </div>
+      
+      <div class="col-12 col-sm-8 col-md-7">
+        <%= f.label :"위치", style: "margin-top: 15px;" %>
+        <%= f.text_field :location, id: :post_location, class: "form-control no-border job_inform", style: "background: #d9f6fd", placeholder: "ex. 이 세상 어딘가에" %>
+      </div>
+      
+      <div class="col-12 col-sm-12 col-md-12">
+        <%= f.label :"짧은 한마디", style: "margin-top: 15px;" %>
+        <%= f.text_field :short_talk, id: :post_short_talk, class: "form-control no-border job_inform", style: "background: #d9f6fd", placeholder: "ex. 성실한 학생을 뽑습니다." %>
+      </div>
+    </div>
+    <br/>
+  <% end %>
+  
+  <%# '구직' 전용 양식 %>
+  <% if @bulletin.seeking_job == true %>
+    <div class="row special_form_area">
+      <div class="col-7 col-sm-5 col-md-3">
+        <span style="color: red">*</span>
+        <%= f.label :"희망 시급(월급)" %>
+        <%= f.text_field :price_job, id: :post_price, class: "form-control no-border job_inform", required: "true", style: "background: #d9f6fd", placeholder: "숫자만 입력" %>
+      </div>
+      <div class="col-5 col-sm-7 col-md-3">
+        <span style="color: red">*</span>
+        <%= f.label :"희망 근무기간" %>
+        <%= f.text_field :time, id: :post_time, class: "form-control no-border job_inform", required: "true", style: "background: #d9f6fd", placeholder: "ex. 3개월" %>
+      </div>
+      <div class="col-12 col-sm-12 col-md-6">
+        <%= f.label :"본인 기술(skill)", class: "hidden-sm-down" %>
+        <%= f.label :"본인 기술(skill)", class: "hidden-md-up", style: "margin-top: 15px;" %>
+        <%= f.text_field :skill, id: :post_skill, class: "form-control no-border", style: "background: #d9f6fd", placeholder: "ex. 발이 안보일 정도로 능숙합니다!" %>
+      </div>
+      <div class="col-12 col-sm-4 col-md-3">
+        <%= f.label :"연락처", style: "margin-top: 15px;" %>
+        <%= f.text_field :phone_num, id: :post_phone_num, class: "form-control no-border job_inform", style: "background: #d9f6fd", value: "#{@post.phone_num != nil ? "0#{@post.phone_num}" : nil}" , placeholder: "ex. 0100000000, 선택사항" %>
+      </div>
+      <div class="col-12 col-sm-12 col-md-9">
+        <%= f.label :"짧은 한마디", style: "margin-top: 15px;" %>
+        <%= f.text_field :short_talk, id: :post_short_talk, class: "form-control no-border job_inform", style: "background: #d9f6fd", placeholder: "ex. 성실히 뛰어다니겠습니다!" %>
+      </div>
+    </div>
+    <br/>
+  <% end %>
+  
+  <%# '방 정보' 전용 양식 %>
+  <% if @bulletin.info_room_trade == true %>
+    <div class="row special_form_area">
+      <div class="col-6 col-sm-6 col-md-2">
+        <span style="color: red">*</span>
+        <%= f.label :"월세/전세 선택" %><br/>
+        <%= f.label :room_select, "월세" %>
+        <%= radio_button("post", "room_select", "월세", required: 'required') %>　
+        <%= f.label :room_select, "전세" %>
+        <%= radio_button("post", "room_select", "전세", required: 'required') %>
+      </div>
+      <div class="col-6 col-sm-6 col-md-2">
+        <span style="color: red">*</span>
+        <%= f.label :"가격" %>
+        <%= f.text_field :price_room, id: :post_price_room, class: "form-control no-border", required: "true", style: "background: #d9f6fd", placeholder: "숫자" %>
+      </div>
+      <div class="col-6 col-sm-6 col-md-2">
+        <%= f.label :"보증금", class:"hidden-sm-down" %>
+        <%= f.label :"보증금", class:"hidden-md-up", style: "margin-top: 15px;" %>
+        <%= f.text_field :deposit, id: :post_deposit, class: "form-control no-border job_inform", style: "background: #d9f6fd", placeholder: "숫자" %>
+      </div>
+      <div class="col-6 col-sm-6 col-md-2">
+        <%= f.label :"방 넓이(평수)", class:"hidden-sm-down" %>
+        <%= f.label :"방 넓이(평수)", class:"hidden-md-up", style: "margin-top: 15px;" %>
+        <%= f.text_field :scale, id: :post_scale, class: "form-control no-border job_inform", style: "background: #d9f6fd", placeholder: "ex. 33㎡ (10평)" %>
+      </div>
+      <div class="col-12 col-sm-12 col-md-4">
+        <%= f.label :"연락처", class:"hidden-sm-down" %>
+        <%= f.label :"연락처", class:"hidden-md-up", style: "margin-top: 15px;" %>
+        <%= f.text_field :phone_num, id: :post_phone_num, class: "form-control no-border job_inform", style: "background: #d9f6fd", value: "#{@post.phone_num != nil ? "0#{@post.phone_num}" : nil}" , placeholder: "ex. 0100000000, 선택사항" %>
+      </div>
+      <div class="col-12 col-sm-12 col-md-6">
+        <span style="color: red">*</span>
+        <%= f.label :"위치", style: "margin-top: 15px;" %><br/>
+        <%= f.text_field :location, id: :post_location, class: "form-control no-border job_inform", required: "true", style: "background: #d9f6fd", placeholder: "ex. 이 세상 어딘가에" %>
+      </div>
+      <div class="col-12 col-sm-12 col-md-6">
+        <%= f.label :"방 사진 썸네일 업로드", style: "margin-top: 15px;" %><br/>
+        <%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
+      </div>
+    </div>
+    <br/>
+  <% end %>
+  
+  <%# '물건거래 정보' 전용 양식 %>
+  <% if @bulletin.info_trade == true %>
+    <div class="row special_form_area">
+      <div class="col-6 col-sm-6 col-md-2">
+        <span style="color: red">*</span>
+        <%= f.label :"유형 선택" %><br/>
+        <%= f.select :vender, ['팝니다', '삽니다']%>
+      </div>
+      <div class="col-6 col-sm-6 col-md-2">
+        <span style="color: red">*</span>
+        <%= f.label :"가격" %>
+        <%= f.text_field :price, id: :post_price, class: "form-control no-border", required: "true", style: "background: #d9f6fd", placeholder: "숫자" %>
+      </div>
+      <div class="col-12 col-sm-12 col-md-2">
+        <span style="color: red">*</span>
+        <%= f.label :"거래 방법" %><br/>
+        <%= f.text_field :trade_way, id: :post_trade_way, class: "form-control no-border job_inform", required: "true", style: "background: #d9f6fd", placeholder: "후불택배 거래" %>
+      </div>
+      <div class="col-12 col-sm-12 col-md-3">
+        <span style="color: red">*</span>
+        <%= f.label :"연락처 혹은 SNS계정", class:"hidden-sm-down" %>
+        <%= f.label :"연락처 혹은 SNS계정", class:"hidden-md-up", style: "margin-top: 15px;" %>
+        <%= f.text_field :sns, id: :post_sns, class: "form-control no-border job_inform", style: "background: #d9f6fd", required: "true", value: "#{@post.sns != nil ? "#{@post.sns}" : nil}" , placeholder: "ex. (카톡) kangwon4674" %>
+      </div>
+      <div class="col-12 col-sm-12 col-md-6">
+        <%= f.label :"상품 사진 썸네일 업로드", style: "margin-top: 15px;" %><br/>
+        <%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
+      </div>
+    </div>
+    <br/>
+  <% end %>
+  
+  <%# '가게홍보' 전용 양식 %>
+  <% if @bulletin.promote_store == true %>
+    <div class="row special_form_area">
+      
+      <div class="col-0 col-sm-12 col-md-12 hidden-xs-down">
+        <i class="fas fa-info-circle"></i> <a onclick="showHide('info_html')" onfocus="this.blur()"><b>HTML 태그 도움말</b></a>
+        <div id="info_html" style="display:none; margin-top: 10px;">
+          <code style="color: #757575">&lt;font color="red"&gt;안녕&lt;/font&gt;하세요</code> <font color="red">안녕</font>하세요<br/>
+          <code style="color: #757575">&lt;b&gt;굵은&lt;/b&gt;글씨 표기</code> <b>굵은</b>글씨 표기<br/>
+          <code style="color: #757575">&lt;u&gt;밑줄&lt;/u&gt; 친 글꼴</code> <u>밑줄</u> 친 글꼴<br/>
+        <hr/>
+        </div>
+      </div>
+      
+      <div class="col-12 col-sm-12 col-md-12">
+        <%= f.label :"사진 썸네일 업로드", style: "margin-top: 15px;" %><br/>
+        <%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
+      </div>
+      <div class="col-12 col-sm-8 col-md-7">
+        <span style="color: red">*</span>
+        <%= f.label :"짧은 한마디", style: "margin-top: 15px;" %>
+        <%= f.text_field :short_talk, id: :post_short_talk, class: "form-control no-border job_inform", style: "background: #d9f6fd" , required: "true", placeholder: "ex. 질로 승부하는 명품가게!" %>
+      </div>
+      <div class="col-12 col-sm-12 col-md-5">
+        <%= f.label :"연락처", style: "margin-top: 15px;" %>
+        <%= f.text_field :phone_num, id: :post_phone_num, class: "form-control no-border job_inform", style: "background: #d9f6fd", value: "#{@post.phone_num != nil ? "0#{@post.phone_num}" : nil}" , placeholder: "ex. 0100000000, 선택사항" %>
+      </div>
+    </div>
+    <br/>
+  <% end %>
+    
+  <%# 기본 내용 입력 %>
+  <div class="form-inputs">
+    <%= f.label :"#{@bulletin.title == "Foreigner Board" ? "Content" : "내용"}" %>
+    <%= tinymce :language => "en" %>
+    <%= f.text_area :content, id: :post_content, class: "form-control tinymce", rows: "10" %>
+  </div>
+  
+  <%# 어드민 메뉴 %>
+  <% if can? :for_admin, @post %>
+    <div class="col-12 col-sm-8 col-md-5" style="background-color: #ffd4d4; margin-top: 30px; padding: 10px;"><font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 어드민 전용 : 해당 게시글 설정</font></div>
+    <div align="left" style="margin-top: 10px;">
+      <%= f.label :notice, "1) 공지사항 설정" %> <%= f.check_box :notice, id: :post_notice %><br/>
+      <%= f.label :blind_limit, "2) 해당 게시글 블라인드 Limit" %>
+      <%= f.text_field :num, id: :post_num, value: "#{@post.num != nil ? @post.num : 10}", class: "form-control no-border col-3 col-sm-3 col-md-2" %>
+    </div>
+  <% else %>
+    <%= f.hidden_field :num, id: :post_num, value: "#{@post.num != nil ? @post.num : 10}", class: "form-control no-border col-3 col-sm-3 col-md-2" %>
+  <% end %>
+  
+  <%# '구인' 전용 양식 %>
+  <% if @bulletin.search_job == true %>
+    <div align="center" style="margin-top: 30px;">
+      <span style="color: red">*</span>
+      <%= f.label :agree, "본인 <b>#{current_user.nickname}</b>은(는) <u>최저시급 준수</u>를 약속합니다.".html_safe %> <%= f.check_box :agree, id: :post_agree, required: "true" %>
+    </div>
+  <% end %>
+  
+  <%# '거래' 전용 양식 %>
+  <% if @bulletin.info_trade == true %>
+    <div align="center" style="margin-top: 30px;">
+      <span style="color: red">*</span>
+      <%= f.label :agree, "본인 <b>#{current_user.nickname}</b>은(는) <u>정직한 거래</u>를 약속합니다.".html_safe %> <%= f.check_box :agree, id: :post_agree, required: "true" %>
+    </div>
+  <% end %>
+  
+<center>
+<div class="form-actions" style="margin-top: 20px;">
+    <%= f.button :"#{@bulletin.title == "Foreigner Board" ? "Submit" : "글 쓰기"}", class: "btn btn-primary" %>
+<% end %>
+    <%= link_to "#{@bulletin.title == "Foreigner Board" ? "List" : "목록"}", (@bulletin.present? ? bulletin_posts_path(@bulletin) : posts_path), class: "btn btn-secondary" %>
+</div>
+</center>

@@ -1,0 +1,131 @@
+<div id="comment_qna_<%= comment_qna.id %>">
+    <%# PC 크기 기준 댓글 열람 %>
+    <div class="hidden-sm-down">
+        <table width="100%" border="0">
+            <tr>
+                <td colspan="1" rowspan="2" width="5%" align="center">
+                    <% if comment_qna.user != current_user %>
+                        <% if ((current_user.voted_up_on? comment_qna) == true) %>
+                            <%= link_to "", qna_comment_qna_like_path(comment_qna.qna, comment_qna), method: :put, class: "fas fa-angle-up", style: "color: #43d843;" %>
+                        <% else %>
+                            <%= link_to "", qna_comment_qna_like_path(comment_qna.qna, comment_qna), method: :put, class: "fas fa-angle-up"%>
+                        <% end %>
+                    <% end %>
+                    <% if comment_qna.get_upvotes.size - comment_qna.get_downvotes.size < 0 %>
+                        <div><b style="margin-left: 5px; margin-right: 5px; color: red;"><%= comment_qna.get_upvotes.size - comment_qna.get_downvotes.size %></b></div>
+                    <% elsif comment_qna.get_upvotes.size - comment_qna.get_downvotes.size > 0 %>
+                        <div><b style="margin-left: 5px; margin-right: 5px; color: #43d843;"><%= comment_qna.get_upvotes.size - comment_qna.get_downvotes.size %></b></div>
+                    <% else %>
+                        <div><b style="margin-left: 5px; margin-right: 5px;"><%= comment_qna.get_upvotes.size - comment_qna.get_downvotes.size %></b></div>
+                    <% end %>
+                    <% if comment_qna.user != current_user %>
+                        <% if ((current_user.voted_down_on? comment_qna) == true) %>
+                            <%= link_to "", qna_comment_qna_dislike_path(comment_qna.qna, comment_qna), method: :put, class: "fas fa-angle-down", style: "color: red;" %>
+                        <% else %>
+                            <%= link_to "", qna_comment_qna_dislike_path(comment_qna.qna, comment_qna), method: :put, class: "fas fa-angle-down" %>
+                        <% end %>
+                    <% end %>
+                </td>
+                <td>
+                    <div class="row">
+                        <div class="col-md-11 hidden-sm-down">
+                            <%= render 'posts/special/nickname_comment_qna', comment_qna: comment_qna %>
+                        </div>
+                        <div class="col-1 hidden-sm-down">
+                            <% if can? :destroy, comment_qna %>
+                                <% if not comment_qna.deleted? %>
+                                    <%= link_to "", [comment_qna.qna, comment_qna], method: :delete, remote: true, data: { confirm: "정말로 지우시겠습니까?" }, class: "fas fa-times" %>
+                                <% end %>
+                                <% if comment_qna.deleted? && (current_user.has_role? :admin) %>
+                                    <%= link_to "", [comment_qna.qna, comment_qna], method: :delete, remote: true, data: { confirm: "이번에 지우면 로그 기록에서도 영영 사라집니다. 정말 지우시겠습니까?" }, class: "fas fa-times", style: "color: red" %>
+                                <% end %>
+                            <% end %>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <% if comment_qna.deleted? %>
+                        <% if can? :for_admin, comment_qna %>
+                            <font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 삭제된 댓글</font><br/>
+                            <%= comment_qna.body.html_safe %>
+                        <% else %>
+                            <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 삭제된 댓글입니다.</font>
+                        <% end %>
+                    <% else %>
+                        <%= comment_qna.body.html_safe %>
+                    <% end %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td align="right">
+                    <small class="hidden-sm-down" style="margin-right: 50px;"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= time_ago_in_words(comment_qna.created_at) %>전 [ <%= comment_qna.created_at.strftime('%Y-%m-%d %H:%M') %> ]</small>
+                </td>
+            </tr>
+        </table>
+        <hr/>
+    </div>
+    
+    <%# 모바일 크기 기준 댓글 열람 %>
+    <div class="hidden-md-up">
+        <div class="row">
+            <div class="col-3 col-sm-2 col-md-1" align="center">
+                <% if comment_qna.user != current_user %>
+                    <% if ((current_user.voted_up_on? comment_qna) == true) %>
+                        <%= link_to "", qna_comment_qna_like_path(comment_qna.qna, comment_qna), method: :put, class: "fas fa-angle-up", style: "color: #43d843;" %>
+                    <% else %>
+                        <%= link_to "", qna_comment_qna_like_path(comment_qna.qna, comment_qna), method: :put, class: "fas fa-angle-up"%>
+                    <% end %>
+                <% end %>
+                <% if comment_qna.get_upvotes.size - comment_qna.get_downvotes.size < 0 %>
+                    <b style="margin-left: 5px; margin-right: 5px; color: red;"><%= comment_qna.get_upvotes.size - comment_qna.get_downvotes.size %> </b>
+                <% elsif comment_qna.get_upvotes.size - comment_qna.get_downvotes.size > 0 %>
+                    <b style="margin-left: 5px; margin-right: 5px; color: #43d843;"> <%= comment_qna.get_upvotes.size - comment_qna.get_downvotes.size %> </b>
+                <% else %>
+                    <b style="margin-left: 5px; margin-right: 5px;"><%= comment_qna.get_upvotes.size - comment_qna.get_downvotes.size %></b>
+                <% end %>
+                <% if comment_qna.user != current_user %>
+                    <% if ((current_user.voted_down_on? comment_qna) == true) %>
+                        <%= link_to "", qna_comment_qna_dislike_path(comment_qna.qna, comment_qna), method: :put, class: "fas fa-angle-down", style: "color: red;" %>
+                    <% else %>
+                        <%= link_to "", qna_comment_qna_dislike_path(comment_qna.qna, comment_qna), method: :put, class: "fas fa-angle-down" %>
+                    <% end %>
+                <% end %>
+            </div>
+    
+            <div class="col-7 col-sm-8 col-md-0 etc">
+                <%= render 'posts/special/nickname_comment_qna', comment_qna: comment_qna %>
+            </div>
+            
+            <div class="col-1 col-sm-1 col-md-0">
+                <% if can? :destroy, comment_qna %>
+                    <% if not comment_qna.deleted? %>
+                        <%= link_to "", [comment_qna.qna, comment_qna], method: :delete, remote: true, data: { confirm: "정말로 지우시겠습니까?" }, class: "fas fa-times" %>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+        
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-12 col-sm-12 col-md-12">
+                <% if comment_qna.deleted? %>
+                    <% if can? :for_admin, comment_qna %>
+                        <font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 삭제된 댓글</font><br/>
+                        <%= comment_qna.body.html_safe %>
+                    <% else %>
+                        <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 삭제된 댓글입니다.</font>
+                    <% end %>
+                <% else %>
+                    <%= comment_qna.body.html_safe %>
+                <% end %>
+            </div>
+            <div class="col-11 col-sm-11 col-md-11" align="right">
+                <small class="hidden-md-up"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= time_ago_in_words(comment_qna.created_at) %>전</small>
+            </div>
+        </div>
+        <hr/>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+<div class="board hidden-sm-down" style="background: url('/img/title_img2.jpg') no-repeat fixed; background-size: 100% 70%; background-position:0px -180px;">
+  <div class="container" align="left">
+    <span class="post_title"><%= link_to "게시글 검색결과", searches_path, class: "board_title" %></span>
+  </div>
+</div>
+<div class="board_mobile hidden-md-up" style="background: url('/img/title_img2.jpg') no-repeat center center/cover scroll;">
+  <span class="post_title"><%= link_to "게시글 검색결과", searches_path, class: "board_title" %></span>
+</div>
+
+<div class="container">
+  <div align="right">
+    <p class="badge badge-pill badge-success hidden-xs-down" style="margin-top:20px; margin-bottom: 20px;"><i class="fa fa-clock-o" aria-hidden="true"></i> 현재 시간 </span> <span><%= Time.zone.now.strftime('%Y-%m-%d %H:%M:%S') %></p>
+  </div>
+  
+  <%# 검색결과 %>
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-12 table_title" align="center">검색결과</div>
+  </div>
+  
+  <% if @search_post_results.empty? %>
+    <h2 align="center" style="margin-top: 50px;">검색결과가 없습니다.</h2>
+  <% else %>
+    <% @search_post_results.each do |post| %>
+    <div class="row" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+      <%# 게시글 제목 %>
+      <div align="left" class="col-12 col-sm-12 col-md-12 etc", style="margin-top: 10px;">
+      <h5>
+      <b>
+        <% if post.reports.size >= post.num %>
+          <% if can? :for_admin, post %>
+            <%= link_to bulletin_post_path(post.bulletin, post) do %>
+              <%= content_tag(:div, post.title, class: "etc", style: "color: red") %>
+            <% end %>
+          <% else %>
+            <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
+          <% end %>
+        <% else %>
+          <%= link_to bulletin_post_path(post.bulletin, post) do %>
+            <%= content_tag(:div, post.title, class: "etc") %>
+          <% end %>
+        <% end %>
+      </b>
+      </h5>
+      </div>
+      
+      <%# 게시글 내용 %>
+      <div align="left" class="col-12 col-sm-12 col-md-12 etc", style="margin-top: 10px;">
+        <% if post.reports.size >= post.num %>
+          <% if current_user.has_role? :admin %>
+            <%= content_tag(:div, truncate( raw( sanitize(post.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 70, :omission => "..."), class: "etc", style: "color: red") %>
+          <% else %>
+            <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
+          <% end %>
+        <% else %>
+          <%= link_to bulletin_post_path(post.bulletin, post) do %>
+            <%= content_tag(:div, truncate( raw( sanitize(post.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 70, :omission => "..."), class: "etc") %>
+          <% end %>
+        <% end %>
+      </div>
+      
+      <%# 빈 여백으로 남겨둘 것. %>
+      <div class="col-6 col-sm-6 col-md-6 table_separate hidden-sm-down"></div>
+      
+      <%# 익명 게시판 : 가상 닉네임 %>
+      <div align="right" class="col-12 col-sm-12 col-md-6 etc table_separate">
+      <small style="color: gray">
+        <i class="far fa-user"></i>
+        <% if post.bulletin.info_no_named == true %>
+          <% if post.reports.size >= post.num %>
+            <% if can? :for_admin, post %>
+              <%= content_tag(:span, "#{post.nickname}", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}", style: "color: red") %>
+            <% else %>
+              -
+            <% end %>
+          <% else %>
+            <% if can? :for_admin, post %>
+              <%= content_tag(:span, "#{post.nickname}", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+            <% else %>
+              <%= content_tag(:span, "#{post.nickname}") %>
+            <% end %>
+          <% end %>
+          
+        <%# 일반 게시판 : 닉네임 %>
+        <% else %>
+          <%= render 'posts/special/nickname_post_index', post: post %>
+        <% end %>
+        
+        <span>/</span>
+        
+        <% # 시간 %>
+        <span> <i class="far fa-clock"></i> <%= "#{time_ago_in_words(post.created_at)} 전" %></span>
+        
+        <span>/</span>
+        
+        <% # 게시판 작성 위치 %>
+        <span><%= post.bulletin.title %></span>
+      </small>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+  
+  <div class="d-flex flex-column", style="margin-bottom: 10px; margin-top: 30px;">
+    <%= paginate @search_post_results %>
+  </div>
+  
+  <%# 검색엔진 %>
+  <%= form_tag searches_path, :method => :get do %>
+  <div class="row" style="margin-bottom: 100px;">
+    <div class="offset-2 offset-sm-3 offset-md-4 col-6 col-sm-5 col-md-3">
+      <%= text_field_tag :search, params[:search], required: "true", class: "form-control no-border", placeholder: "제목 또는 내용" %>
+    </div>
+    <div class="col-2 col-sm-1 col-md-1">
+      <%= submit_tag "검색", class: "search_button", :name => nil %>
+    </div>
+  </div>
+  <% end %>
+  
+</div>

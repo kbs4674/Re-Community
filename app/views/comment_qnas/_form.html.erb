@@ -1,0 +1,19 @@
+<div class="d-flex flex-column">
+  <nav aria-label="Page navigation" class="align-self-center">
+    <%= paginate @comment_qnas.with_deleted %>
+  </nav>
+</div>
+
+<div id="comment_qnas_form_<%= comment_qna.qna.id %>">
+  <% if (not current_user.has_any_role? :block_yellow, :block_red) || (current_user.has_role? :admin) %>
+    <%= form_with(model: [comment_qna.qna, comment_qna], label: false) do |f| %>
+      <div class='form-inputs'>
+        <%= tinymce %>
+        <%= f.text_area :body, class: "form-control tinymce", rows: "3", placeholder: "'카더라' 등 허위답변 기재는 자제 바랍니다." %>
+      </div>
+      <div class="form-actions" align="right" style="margin-top: 20px;">
+        <%= f.button :답변, class: "btn btn-info" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
