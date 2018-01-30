@@ -9,6 +9,13 @@ Kangwon Univ. Community Prototype, Second Challenger
 1. 해당 프로젝트 파일에 있는 ZIP 압축파일 속에 있는 파일을 /config 디렉토리로 옮겨놓고 시작할 것.<br/>
     1) 암호는 운영진 카카오톡 공지 참고.<br/>
     2) 이 작업을 안하면 이 레일즈 프로젝트가 안돌아감.
+2. 다음 명령어 실행할 것.<br/>
+`rails g sunspot_rails:install`<br/>
+`rake sunspot:solr:start`<br/>
+`rake sunspot:reindex`<br/><br/>
+`whenever --update-crontab`<br/>
+`whenever`<br/>
+
 
 # 알아두면 좋은 지식
 1. **[강추]** 알아두면 좋은 Gem : **[https://www.ruby-toolbox.com/](https://www.ruby-toolbox.com/)**
