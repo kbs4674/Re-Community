@@ -77,8 +77,9 @@
   </div>
   <% end %>
   <% end %>
-<div align="right"><%= link_to '카테고리 생성', new_bulletin_path, class: "btn btn-primary" %></div>
-<div class="d-flex flex-column">
-<%= paginate @bulletins %>
-</div>
+    <div align="right" style="margin-bottom: 30px;"><%= link_to '카테고리 생성', new_bulletin_path, class: "btn btn-primary" %></div>
+    
+    <div class="d-flex flex-column">
+        <%= paginate @bulletins %>
+    </div>
 </div>
