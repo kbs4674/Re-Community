@@ -1,5 +1,58 @@
 RailsAdmin.config do |config|
 
+  ## Model 이름을 한국어로 변경
+  config.model 'Post' do
+	    label '(일반/특수)게시판'
+	    label_plural '(일반/특수)게시판'
+	    #navigation_icon 'icon-list-alt'
+    end
+
+    config.model 'Qna' do
+	    label '질문답변 게시판'
+	    label_plural '질문답변 게시판'
+	end
+
+	config.model 'AllNotice' do
+	    label '공지사항 게시판'
+	    label_plural '공지사항 게시판'
+	end
+	
+	config.model 'Bulletin' do
+	    label '카테고리 목록'
+	    label_plural '카테고리 목록'
+	end
+	
+	config.model 'Comment' do
+	    label '댓글(Post) : Qna 게시판 제외'
+	    label_plural '댓글(Post) : Qna 게시판 제외'
+	end
+	
+	config.model 'CommentQna' do
+	    label '댓글(Qna) :Qna 게시판 Only'
+	    label_plural '댓글(Qna) : Qna 게시판 Only'
+	end
+	
+	config.model 'ReportComment' do
+	    label '댓글 신고 : Qna 게시판 제외'
+	    label_plural '댓글 신고 : Qna 게시판 제외'
+	end
+	
+	config.model 'ReportQna' do
+	    label '게시글(Post) 신고 : Qna 게시판 Only'
+	    label_plural '게시글(Post) : Qna 게시판 Only'
+	end
+	
+	config.model 'Report' do
+	    label '게시글(Qna) 신고 : Qna 게시판 제외'
+	    label_plural '게시글(Qna) : Qna 게시판 제외'
+	end
+	
+	## 특정 링크 삽입
+	config.navigation_static_links = {
+	  '카테고리 설정' => "/bulletins",
+	  'Google Search Consol' => "https://www.google.com/webmasters/tools/home?hl=ko"
+	}
+
   ### Popular gems integration
 
   ## == Devise ==
