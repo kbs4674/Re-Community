@@ -20,6 +20,11 @@
     </div>
 <% end %>
 
+<% if not @bulletin.title == "학교 관계자 공지사항" || @bulletin.title == "사장님 공지사항" %>
+    <%# 메타태그 속성(검색엔진 반영 전용) %>
+    <%= render 'meta/meta_post_index', bulletin: @bulletin %>
+<% end %>
+
 <div class="container" style="margin-bottom: 100px;">
   <% if @bulletin.info_room_trade == true || @bulletin.seeking_room == true || @bulletin.info_trade == true %>
     <%= render 'posts/special/sub_menu_trade' %>

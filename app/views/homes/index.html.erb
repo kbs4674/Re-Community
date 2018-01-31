@@ -39,7 +39,9 @@
       <% @bulletins.each do |bulletin| %>
         <% if not bulletin.main_hidden == true %>
           <div class="offset-md-1 col-12 col-sm-12 col-md-4 home_index">
-            <div class="home_index_title"><b style="margin-left: 10px; margin-bottom: 5px;"><i class="" aria-hidden="true"></i> <%= link_to "#{bulletin.title}", bulletin_posts_path(bulletin.id) %></b></div>
+              <div class="home_index_title">
+                <b style="margin-left: 10px; margin-bottom: 5px;"><i class="" aria-hidden="true"></i> <%= link_to "#{bulletin.title}", bulletin_posts_path(bulletin.id) %></b>
+              </div>
             <%= render "homes/posts", title: bulletin.title, posts: bulletin.posts %>
           </div>
         <% end %>

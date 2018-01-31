@@ -20,6 +20,9 @@
     </div>
 <% end %>
 
+<%# 메타태그 속성(검색엔진 반영 전용) %>
+<%= render 'meta/meta_all_notice_index' %>
+
 <div class="container" style="margin-bottom: 100px;">
   <div align="right">
     <p class="badge badge-pill badge-success hidden-xs-down" style="margin-top:20px; margin-bottom: 20px;"><i class="fa fa-clock-o" aria-hidden="true"></i> 현재 시간 </span> <span><%= Time.zone.now.strftime('%Y-%m-%d %H:%M:%S') %></p>
