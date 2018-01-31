@@ -61,6 +61,13 @@
       }
     }
     
+    /* 구글 검색엔진 : 내용 지우기(X) 아이콘을 검색창 Form 안쪽으로 넣기 */
+    div.gsc-clear-button {
+      position: absolute;
+      left: 200px;
+      top: 15px;
+    }
+    
     /* 이미지 위에 검은 배경화면 & 오버-text */
     .image_overfext {
       position: absolute;
