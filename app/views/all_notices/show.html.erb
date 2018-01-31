@@ -21,7 +21,7 @@
 <% end %>
 
 <%# 메타태그 속성(검색엔진 반영 전용) %>
-<%= render 'meta/meta_show', post: @all_notice %>
+<%= render 'meta/meta_all_notice_show', post: @all_notice %>
 
 <div class="container" style="margin-top:30px; margin-bottom: 100px;">
     <% if @all_notice.title_tag_permission == true %>

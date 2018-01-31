@@ -1,13 +1,13 @@
 <%# 메타태그 속성(검색엔진 반영 전용) %>
 <!-- 일반 웹브라우저 -->
 <meta name="copyright" content=".:: 강원대학교 커뮤니티 ::."/>
-<meta property="title" content="질문답변 게시판"/>
-<meta name="description" content="대학생활에 있어 모르는게 있으시면 여기에 바로 물어보세요!"/>
+<meta property="title" content="<%= post.title.truncate(50, omission: '...') %>"/>
+<meta name="description" content="<%= post.content.html_safe.truncate(90, omission: '...') %>"/>
 <meta name="keywords" content="우리대학교는세계제이이이이일,멋쟁이 사자처럼,강원대,강원대학교,강원대학교커뮤니티,강원대커뮤니티,강원대대나무숲,강원대춘천,강원대춘천캠,강원대춘천캠퍼스,춘천대학교,강대,강대라이크,Kangwon National University Community,Kangwon University Community,Kangwon Community,Kangwon University,Kangwon Univ.,Kangwon Nati. Univ.,Kangwon,강원도,춘천,국립대,국립대 커뮤니티,지거국,지거국 커뮤니티"/>
 
 <!-- 페이스북 / 카카오톡 등 -->
 <meta property="og:site_name" content=".:: 강원대학교 커뮤니티 ::."/>
-<meta property="og:title" content="질문답변 게시판"/>
-<meta property="og:description" content="대학생활에 있어 모르는게 있으시면 여기에 바로 물어보세요!"/>
+<meta property="og:title" content="<%= post.title.truncate(50, omission: '...') %>"/>
+<meta property="og:description" content="<%= post.content.html_safe.truncate(90, omission: '...') %>"/>
 <meta property="og:type" content="website"/>
-<meta property="og:url" content="<%= qnas_path %>"/>
+<meta property="og:url" content="<%= bulletin_post_path %>"/>

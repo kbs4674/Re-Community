@@ -1,6 +1,6 @@
 <% if not @post.bulletin.title == "학교 관계자 공지사항" || @post.bulletin.title == "사장님 공지사항" %>
     <%# 메타태그 속성(검색엔진 반영 전용) %>
-    <%= render 'meta/meta_show', post: @post %>
+    <%= render 'meta/meta_post_show', post: @post %>
 <% end %>
 
 <h4 class="col-12" style="padding: 0px;">

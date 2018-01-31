@@ -21,7 +21,7 @@
 <% end %>
 
 <%# 메타태그 속성(검색엔진 반영 전용) %>
-<%= render 'meta/meta_show', post: @qna %>
+<%= render 'meta/meta_qna_show', post: @qna %>
 
 <div class="container" style="margin-top:30px; margin-bottom: 100px;">
   <% if can? :for_admin, @qna %>
