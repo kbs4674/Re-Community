@@ -1,81 +1,83 @@
 <div style="margin-top: 30px;"></div>
 <%# 운영자가 볼 시 삭제된 게시글도 조회 %>
-<% if (user_signed_in?) && (current_user.has_role? :admin) %>
-<div class="card-deck">
-    <% @posts.with_deleted.each do |post| %>
-        <%= link_to bulletin_post_path(post.bulletin, post) do %>
-            <div style="margin-left: 350px;" class="hidden-sm-down"></div>
-            <div class="card" style="width: 20rem;">
-                <div style="position: relative;">
-                    <% if post.image.present? %>
-                        <% if post.reports.size >= post.num %>
+<% if user_signed_in? %>
+    <% if current_user.has_role? :admin %>
+    <div class="card-deck">
+        <% @posts.with_deleted.each do |post| %>
+            <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                <div style="margin-left: 350px;" class="hidden-sm-down"></div>
+                <div class="card" style="width: 20rem;">
+                    <div style="position: relative;">
+                        <% if post.image.present? %>
+                            <% if post.reports.size >= post.num %>
+                                <%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "318px", height: "179px;" %>
+                            <% else %>
+                                <%= image_tag ("#{post.image}"), class: "card-img-top", width: "318px", height: "179px;" %>
+                            <% end %>
+                        <% else %>
                             <%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "318px", height: "179px;" %>
-                        <% else %>
-                            <%= image_tag ("#{post.image}"), class: "card-img-top", width: "318px", height: "179px;" %>
                         <% end %>
-                    <% else %>
-                        <%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "318px", height: "179px;" %>
-                    <% end %>
-                    <div align="center" class="image_overfext etc">
-                        <% if post.reports.size >= post.num %>
-                            <b>　</b>
-                        <% else %>
-                            <b><%= content_tag(:div, post.short_talk.html_safe, class: "etc") %></b>
-                        <% end %>
-                    </div>
-                </div>
-                <div class="card-block">
-                    <h4 class="card-title">
-                        <% if current_user.has_role? :admin %>
-                            <% if post.deleted? %>
-                                <%= content_tag(:div, post.title.html_safe, class: "etc", style: "color: #8e68e4") %>
-                            <% elsif post.reports.size >= post.num %>
-                                <%= content_tag(:div, post.title.html_safe, class: "etc", style: "color: red") %>
-                            <% else %>
-                                <%= content_tag(:div, post.title.html_safe, class: "etc") %>
-                            <% end %>
-                        <% else %>
+                        <div align="center" class="image_overfext etc">
                             <% if post.reports.size >= post.num %>
-                                <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 신고 처리 된 게시글</font>
+                                <b>　</b>
                             <% else %>
-                                <%= content_tag(:div, post.title.html_safe, class: "etc") %>
-                            <% end %>
-                        <% end %>
-                    </h4>
-                    <div align="left">
-                        <% if current_user.has_role? :admin %>
-                            <% if post.deleted? %>
-                                <%= content_tag(:div, truncate( raw( sanitize(post.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 50, :omission => "..."), style: "color: #8e68e4") %>
-                            <% elsif post.reports.size >= post.num %>
-                                <%= content_tag(:div, truncate( raw( sanitize(post.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 50, :omission => "..."), style: "color: red") %>
-                            <% else %>
-                                <%= content_tag(:div, truncate( raw( sanitize(post.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 50, :omission => "...")) %>
-                            <% end %>
-                        <% else %>
-                            <% if post.reports.size >= post.num %>
-                                <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 신고 처리 된 게시글</font>
-                            <% else %>
-                                <%= content_tag(:div, truncate( raw( sanitize(post.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 50, :omission => "...")) %>
-                            <% end %>
-                        <% end %>
-                    </div>
-                    <hr/>
-                    
-                    <div class="row" align="left">
-                        <div class="offset-5 offset-sm-5 offset-md-5 col-3 col-sm-3 col-md-3">
-                            <i class="fas fa-eye"></i>
-                            <% if post.unique_impression_count >= 10000 %>
-                                <%= "#{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
-                            <% else %>
-                                <%= "#{post.unique_impression_count}" %>
+                                <b><%= content_tag(:div, post.short_talk.html_safe, class: "etc") %></b>
                             <% end %>
                         </div>
-                        <div class="col-3 col-sm-3 col-md-3">
-                            <i class="far fa-comments"></i> <%= post.comment_threads.count %>
+                    </div>
+                    <div class="card-block">
+                        <h4 class="card-title">
+                            <% if current_user.has_role? :admin %>
+                                <% if post.deleted? %>
+                                    <%= content_tag(:div, post.title.html_safe, class: "etc", style: "color: #8e68e4") %>
+                                <% elsif post.reports.size >= post.num %>
+                                    <%= content_tag(:div, post.title.html_safe, class: "etc", style: "color: red") %>
+                                <% else %>
+                                    <%= content_tag(:div, post.title.html_safe, class: "etc") %>
+                                <% end %>
+                            <% else %>
+                                <% if post.reports.size >= post.num %>
+                                    <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 신고 처리 된 게시글</font>
+                                <% else %>
+                                    <%= content_tag(:div, post.title.html_safe, class: "etc") %>
+                                <% end %>
+                            <% end %>
+                        </h4>
+                        <div align="left">
+                            <% if current_user.has_role? :admin %>
+                                <% if post.deleted? %>
+                                    <%= content_tag(:div, truncate( raw( sanitize(post.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 50, :omission => "..."), style: "color: #8e68e4") %>
+                                <% elsif post.reports.size >= post.num %>
+                                    <%= content_tag(:div, truncate( raw( sanitize(post.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 50, :omission => "..."), style: "color: red") %>
+                                <% else %>
+                                    <%= content_tag(:div, truncate( raw( sanitize(post.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 50, :omission => "...")) %>
+                                <% end %>
+                            <% else %>
+                                <% if post.reports.size >= post.num %>
+                                    <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 신고 처리 된 게시글</font>
+                                <% else %>
+                                    <%= content_tag(:div, truncate( raw( sanitize(post.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 50, :omission => "...")) %>
+                                <% end %>
+                            <% end %>
+                        </div>
+                        <hr/>
+                        
+                        <div class="row" align="left">
+                            <div class="offset-5 offset-sm-5 offset-md-5 col-3 col-sm-3 col-md-3">
+                                <i class="fas fa-eye"></i>
+                                <% if post.unique_impression_count >= 10000 %>
+                                    <%= "#{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
+                                <% else %>
+                                    <%= "#{post.unique_impression_count}" %>
+                                <% end %>
+                            </div>
+                            <div class="col-3 col-sm-3 col-md-3">
+                                <i class="far fa-comments"></i> <%= post.comment_threads.count %>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            <% end %>
         <% end %>
     <% end %>
 </div>
