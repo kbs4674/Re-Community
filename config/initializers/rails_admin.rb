@@ -22,31 +22,6 @@ RailsAdmin.config do |config|
 	    label_plural '카테고리 목록'
 	end
 	
-	config.model 'Comment' do
-	    label '댓글(Post) : Qna 게시판 제외'
-	    label_plural '댓글(Post) : Qna 게시판 제외'
-	end
-	
-	config.model 'CommentQna' do
-	    label '댓글(Qna) :Qna 게시판 Only'
-	    label_plural '댓글(Qna) : Qna 게시판 Only'
-	end
-	
-	config.model 'ReportComment' do
-	    label '댓글 신고 : Qna 게시판 제외'
-	    label_plural '댓글 신고 : Qna 게시판 제외'
-	end
-	
-	config.model 'ReportQna' do
-	    label '게시글(Post) 신고 : Qna 게시판 Only'
-	    label_plural '게시글(Post) : Qna 게시판 Only'
-	end
-	
-	config.model 'Report' do
-	    label '게시글(Qna) 신고 : Qna 게시판 제외'
-	    label_plural '게시글(Qna) : Qna 게시판 제외'
-	end
-	
 	## 특정 링크 삽입
 	config.navigation_static_links = {
 	  '카테고리 설정' => "/bulletins",
