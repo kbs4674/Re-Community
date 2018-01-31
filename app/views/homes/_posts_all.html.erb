@@ -1,5 +1,5 @@
 <div style="padding: 5px;">
-    <% @posts_all.first(5).each do |post| %>
+    <% @posts_all.each do |post| %>
       <% if not post.bulletin.main_hidden == true %>
         <% if post.reports.size >= post.num %>
           <% if can? :for_admin, @posts %>
