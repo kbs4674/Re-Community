@@ -1,46 +1,48 @@
 <div style="margin-top: 5px;"></div>
 <% @hot_post_likes.each do |post| %>
-    <%# 현재시간에서 7일 이전 게시글 %>
-    <% if Time.now - post.created_at <= 7.days %>
-        <div class="row">
-            <%# 제목 %>
-            <div class="offset-1 offset-sm-1 offset-md-0"></div>
-            <div align="left" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid white;" class="col-6 col-sm-7 col-md-5 etc">
-                <% if post.reports.size >= post.num %>
-                    <% if can? :for_admin, @posts %>
-                        <%= link_to bulletin_post_path(post.bulletin, post) do %>
-                            <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "color: red; font-weight: normal !important; margin-left: 10px; font-size: 15px;") %>
-                            <%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 25, :omission => "..."), class: "hidden-sm-down etc", style: "color: red; font-weight: normal !important;") %>
-                            <%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 10, :omission => "..."), class: "hidden-md-up etc", style: "color: red; font-weight: normal !important;") %>
-                            <%= content_tag(:span, "<b>#{post.comment_threads.count}</b>".html_safe, class: "etc", style: "color: red; font-weight: normal !important; font-size: 12px;") %><br/>
+    <% if not (post.bulletin.title == "사장님 공지사항") || (post.bulletin.title == "학교 관계자 공지사항") %>
+        <%# 현재시간에서 7일 이전 게시글 %>
+        <% if Time.now - post.created_at <= 7.days %>
+            <div class="row">
+                <%# 제목 %>
+                <div class="offset-1 offset-sm-1 offset-md-0"></div>
+                <div align="left" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid white;" class="col-6 col-sm-7 col-md-5 etc">
+                    <% if post.reports.size >= post.num %>
+                        <% if can? :for_admin, @posts %>
+                            <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                                <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "color: red; font-weight: normal !important; margin-left: 10px; font-size: 15px;") %>
+                                <%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 25, :omission => "..."), class: "hidden-sm-down etc", style: "color: red; font-weight: normal !important;") %>
+                                <%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 10, :omission => "..."), class: "hidden-md-up etc", style: "color: red; font-weight: normal !important;") %>
+                                <%= content_tag(:span, "<b>#{post.comment_threads.count}</b>".html_safe, class: "etc", style: "color: red; font-weight: normal !important; font-size: 12px;") %><br/>
+                            <% end %>
+                        <% else %>
+                            <font color="#6E6E6E" style="font-size: 15px; margin-left: 10px;"><i class="fas fa-caret-right"></i> <i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
                         <% end %>
                     <% else %>
-                        <font color="#6E6E6E" style="font-size: 15px; margin-left: 10px;"><i class="fas fa-caret-right"></i> <i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
+                        <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                            <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "font-weight: normal !important; margin-left: 10px; font-size: 15px;") %>
+                            <%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 25, :omission => "..."), class: "hidden-sm-down etc", style: "font-weight: normal !important;") %>
+                            <%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 10, :omission => "..."), class: "hidden-md-up etc", style: "font-weight: normal !important;") %>
+                            <%= content_tag(:span, "<b>#{post.comment_threads.count}</b>".html_safe, class: "etc", style: "font-weight: normal !important; font-size: 12px;") %><br/>
+                        <% end %>
                     <% end %>
-                <% else %>
-                    <%= link_to bulletin_post_path(post.bulletin, post) do %>
-                        <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "font-weight: normal !important; margin-left: 10px; font-size: 15px;") %>
-                        <%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 25, :omission => "..."), class: "hidden-sm-down etc", style: "font-weight: normal !important;") %>
-                        <%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 10, :omission => "..."), class: "hidden-md-up etc", style: "font-weight: normal !important;") %>
-                        <%= content_tag(:span, "<b>#{post.comment_threads.count}</b>".html_safe, class: "etc", style: "font-weight: normal !important; font-size: 12px;") %><br/>
+                </div>
+                
+                <%# 좋아요 %>
+                <div class="col-2 col-sm-1 col-md-1" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid white;">
+                    <%= content_tag(:span, " #{post.get_upvotes.size}".html_safe, class: "far fa-thumbs-up etc", style: "font-weight: normal !important; margin-bottom: -3px") %>
+                </div>
+                
+                <%# 조회수 %>
+                <div align="left" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid white;" class="col-2 col-sm-1 col-md-1 etc">
+                    <i style: "font-weight: normal !important; margin-left: 10px;" class="fas fa-eye" aria-hidden="true"></i>
+                    <% if post.unique_impression_count >= 10000 %>
+                        <%= " #{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
+                    <% else %>
+                        <%= " #{post.unique_impression_count}" %>
                     <% end %>
-                <% end %>
+                </div>
             </div>
-            
-            <%# 좋아요 %>
-            <div class="col-2 col-sm-1 col-md-1" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid white;">
-                <%= content_tag(:span, " #{post.get_upvotes.size}".html_safe, class: "far fa-thumbs-up etc", style: "font-weight: normal !important; margin-bottom: -3px") %>
-            </div>
-            
-            <%# 조회수 %>
-            <div align="left" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid white;" class="col-2 col-sm-1 col-md-1 etc">
-                <i style: "font-weight: normal !important; margin-left: 10px;" class="fas fa-eye" aria-hidden="true"></i>
-                <% if post.unique_impression_count >= 10000 %>
-                    <%= " #{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
-                <% else %>
-                    <%= " #{post.unique_impression_count}" %>
-                <% end %>
-            </div>
-        </div>
+        <% end %>
     <% end %>
 <% end %>
