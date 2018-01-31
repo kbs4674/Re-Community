@@ -1,4 +1,9 @@
-User-agent:Yeti
-Allow:
-User-agent:*
-Disallow:/
+User-agent: Yeti
+Allow: /
+Disallow: /admin
+
+User-agent: Goolebot
+Allow: /
+
+User-agent: *
+Disallow: /admin
