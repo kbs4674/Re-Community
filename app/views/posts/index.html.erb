@@ -127,7 +127,7 @@
       
     <%# 특수게시물 : 토론장(투표) 게시판 %>
     <% elsif @bulletin.vote == true %>
-      <% if current_user.has_role? :admin %>
+      <% if (user_signed_in?) && (current_user.has_role? :admin) %>
         <% @posts.with_deleted.each do |post| %>
           <%= render 'posts/board/vote_index', post: post %>
         <% end %>
@@ -183,7 +183,7 @@
     
     <%# 특수게시물 : 익명 게시판 %>
     <% elsif @bulletin.info_no_named == true %>
-      <% if current_user.has_role? :admin %>
+      <% if (user_signed_in?) && (current_user.has_role? :admin) %>
         <% @posts.with_deleted.each do |post| %>
           <%= render 'posts/board/no_named_index', post: post %>
         <% end %>
@@ -195,7 +195,7 @@
       
     <%# 특수게시물 : 구인(search) %>
     <% elsif @bulletin.search_job == true || @bulletin.seeking_job == true %>
-      <% if current_user.has_role? :admin %>
+      <% if (user_signed_in?) && (current_user.has_role? :admin) %>
         <% @posts.with_deleted.each do |post| %>
           <%= render 'posts/board/job_index', post: post %>
         <% end %>
@@ -207,7 +207,7 @@
     
     <%# 특수 게시물 : 방 구해요 %>
     <% elsif @bulletin.seeking_room == true %>
-      <% if current_user.has_role? :admin %>
+      <% if (user_signed_in?) && (current_user.has_role? :admin) %>
         <% @posts.with_deleted.each do |post| %>
           <%= render 'posts/board/seeking_room_index', post: post %>
         <% end %>
@@ -219,7 +219,7 @@
     
     <% else %>
       <%# 일반 게시글 %>
-      <% if current_user.has_role? :admin %>
+      <% if (user_signed_in?) && (current_user.has_role? :admin) %>
         <% @posts.with_deleted.each do |post| %>
           <div class="row" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
             <%= render 'posts/board/normal_index', post: post %>
@@ -237,16 +237,18 @@
   <br/>
   <div align="right">
     <% if @bulletin.promote_store == true %>
-      <% if current_user.has_role? :store_boss %>
+      <% if (user_signed_in?) && (current_user.has_role? :store_boss) %>
         <%= link_to "글 쓰기", new_bulletin_post_path(@bulletin), class: "btn btn-primary", style: "margin-top: -10px;" %>
       <% end %>
     <% elsif @bulletin.member_boss == true || @bulletin.member_univ == true || @bulletin.member_real_estate == true %>
-      <% if current_user.has_role? :admin %>
+      <% if (user_signed_in?) && (current_user.has_role? :admin) %>
         <%= link_to "글 쓰기", new_bulletin_post_path(@bulletin), class: "btn btn-primary", style: "margin-top: -10px;" %>
       <% end %>
     <% else %>
-      <% if (not current_user.has_any_role? :block_yellow, :block_red) || (current_user.has_role? :admin) %>
-        <%= link_to "#{@bulletin.title == "Foreigner Board" ? "Write" : "글 쓰기"}", new_bulletin_post_path(@bulletin), class: "btn btn-primary", style: "margin-top: -10px;" %>
+      <% if user_signed_in? %>
+        <% if (not current_user.has_any_role? :block_yellow, :block_red) || (current_user.has_role? :admin) %>
+          <%= link_to "#{@bulletin.title == "Foreigner Board" ? "Write" : "글 쓰기"}", new_bulletin_post_path(@bulletin), class: "btn btn-primary", style: "margin-top: -10px;" %>
+        <% end %>
       <% end %>
     <% end %>
   </div>

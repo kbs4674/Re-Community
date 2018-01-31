@@ -1,7 +1,7 @@
 <div style="margin-top: 30px;"></div>
 <div class="card-deck">
     <%# 운영자가 볼 시 삭제된 게시글도 조회 %>
-    <% if current_user.has_role? :admin %>
+    <% if (user_signed_in?) && (current_user.has_role? :admin) %>
         <% @posts.with_deleted.each do |post| %>
             <%= link_to bulletin_post_path(post.bulletin, post) do %>
                 <div style="margin-left: 350px;" class="hidden-sm-down"></div>
