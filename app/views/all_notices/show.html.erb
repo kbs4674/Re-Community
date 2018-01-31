@@ -145,16 +145,5 @@
         <%= paginate @all_notices %>
     </div>
     
-    <%# 검색엔진 %>
-    <%= form_tag search_all_notices_path, :method => :get do %>
-    <div class="row">
-      <div class="offset-2 offset-sm-3 offset-md-4 col-6 col-sm-5 col-md-2" style="margin-bottom: 100px">
-        <%= text_field_tag :search, params[:search], required: "true", class: "form-control no-border", placeholder: "제목 또는 내용" %>
-      </div>
-      <div class="col-1 col-sm-1 col-md-1">
-        <%= submit_tag "검색", class: "search_button", :name => nil %>
-      </div>
-    </div>
-    <% end %>
-    
+    <%= render 'search-form/google_search' %>
 </div>

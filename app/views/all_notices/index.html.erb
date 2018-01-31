@@ -69,8 +69,20 @@
     <% end %>
 
     <%# 일반 게시글 %>
-    <% @all_notices.each do |post| %>
-      <%= render 'all_notices/list/notice_index', post: post %>
+    <% if user_signed_in? %>
+      <% if current_user.has_role? :admin %>
+        <% @all_notices.with_deleted.each do |post| %>
+          <%= render 'all_notices/list/notice_index', post: post %>
+        <% end %>
+      <% else %>
+        <% @all_notices.each do |post| %>
+          <%= render 'all_notices/list/notice_index', post: post %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <% @all_notices.each do |post| %>
+        <%= render 'all_notices/list/notice_index', post: post %>
+      <% end %>
     <% end %>
   <% end %>
 
@@ -78,20 +90,9 @@
     <div align="right"><%= link_to "글 쓰기", new_all_notice_path, class: "btn btn-primary", style: "margin-top: 30px;" %></div>
   <% end %>
   
-  <div class="d-flex flex-column", style="margin-bottom: 10px; margin-top: 50px">
+  <div class="d-flex flex-column", style="margin-bottom: 10px; margin-top: 20px">
     <%= paginate @all_notices %>
   </div>
   
-  <%# 검색엔진 %>
-  <%= form_tag search_all_notices_path, :method => :get do %>
-  <div class="row">
-    <div class="offset-2 offset-sm-3 offset-md-4 col-6 col-sm-5 col-md-3">
-      <%= text_field_tag :search, params[:search], required: "true", class: "form-control no-border", placeholder: "제목 또는 내용" %>
-    </div>
-    <div class="col-1 col-sm-1 col-md-1">
-      <%= submit_tag "검색", class: "search_button", :name => nil %>
-    </div>
-  </div>
-  <% end %>
-  
+  <%= render 'search-form/google_search' %>
 </div>

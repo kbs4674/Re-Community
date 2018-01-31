@@ -72,7 +72,10 @@ class AllNoticesController < ApplicationController
   # DELETE /all_notices/1
   # DELETE /all_notices/1.json
   def destroy
-    @all_notice.destroy
+    if current_user.has_role? :admin
+      @all_notice.really_destroy!
+    end
+    
     respond_to do |format|
       format.html { redirect_to all_notices_url, notice: '게시글이 성공적으로 삭제되었습니다.' }
       format.json { head :no_content }
