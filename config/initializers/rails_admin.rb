@@ -25,7 +25,8 @@ RailsAdmin.config do |config|
 	## 특정 링크 삽입
 	config.navigation_static_links = {
 	  '카테고리 설정' => "/bulletins",
-	  'Google Search Consol' => "https://www.google.com/webmasters/tools/home?hl=ko"
+	  'Google Search Consol' => "https://www.google.com/webmasters/tools/home?hl=ko",
+	  '사이트맵 생성기(구글 검색엔진 관련)' => "http://www.web-site-map.com/xml_sitemap.php"
 	}
 
   ### Popular gems integration
