@@ -10,4 +10,4 @@
 <meta property="og:title" content="<%= bulletin.title %>"/>
 <meta property="og:description" content="<%= bulletin.content %>"/>
 <meta property="og:type" content="website"/>
-<meta property="og:url" content="<%= bulletin_posts_path %>"/>
+<meta property="og:url" content="<%= request.protocol %><%= request.host %><%= bulletin_posts_path %>"/>
