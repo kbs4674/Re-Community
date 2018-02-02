@@ -7,4 +7,4 @@ Allow: /
 User-agent: *
 Disallow: /admin
 
-Sitemap: /sitemap.xml
+Sitemap: http://ec2-52-78-125-110.ap-northeast-2.compute.amazonaws.com/sitemap.xml
