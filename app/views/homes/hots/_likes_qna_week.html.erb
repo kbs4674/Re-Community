@@ -12,7 +12,7 @@
                             <% if qna.comment_qnas.count == 0 %>
                                 <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
                             <% else %>
-                                <span class="badge badge-success" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
+                                <span class="badge badge-info" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
                             <% end %>
                             <%= content_tag(:span, truncate( raw( sanitize(qna.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 20, :omission => "..."), class: "etc", style: "color: red; font-size: 15px;") %>
                         <% end %>
@@ -24,7 +24,7 @@
                         <% if qna.comment_qnas.count == 0 %>
                             <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
                         <% else %>
-                            <span class="badge badge-success" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
+                            <span class="badge badge-info" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
                         <% end %>
                         <%= content_tag(:span, truncate( raw( sanitize(qna.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 20, :omission => "..."), class: "etc", style: "font-size: 15px;") %>
                     <% end %>
