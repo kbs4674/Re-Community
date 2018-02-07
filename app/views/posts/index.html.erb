@@ -48,7 +48,7 @@
       <div class="row table_notice separate_board">
         <% # 공지 Badge %>
         <div align="center" class="col-0 col-sm-0 col-md-1 hidden-sm-down" style="padding: 10px;">
-          <%= content_tag(:span, '<span class="badge badge-warning">전체공지</span>'.html_safe, class: "etc", align: "center", style: "margin-top: 5px;") %>
+          <%= content_tag(:span, '<span class="badge badge-success">전체공지</span>'.html_safe, class: "etc", align: "center", style: "margin-top: 5px;") %>
         </div>
         <% if @bulletin.vote == true %>
           <%= render "all_notices/list/board_all_notice_post_vote_index", post: post %>

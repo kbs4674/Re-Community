@@ -37,7 +37,7 @@
       <% if qna.comment_qnas.count == 0 %>
         <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
       <% else %>
-        <span class="badge badge-success" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
+        <span class="badge badge-info" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
       <% end %>
     </div>
   
@@ -63,7 +63,7 @@
       <% if qna.comment_qnas.count == 0 %>
         <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
       <% else %>
-        <span class="badge badge-success" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
+        <span class="badge badge-info" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
       <% end %>
     </div>
 
@@ -130,15 +130,6 @@
       </div>
       <div class="offset-1 offset-sm-1 offset-md-1"></div>
     
-      <%# 답변갯수(댓글), PC화면 크기에서만 보임. %>
-      <div align="left" style="padding: 10px 10px 10px 10px;" class="col-0 col-sm-0 col-md-1 hidden-sm-down">
-        <% if qna.comment_qnas.count == 0 %>
-          <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
-        <% else %>
-          <span class="badge badge-success" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
-        <% end %>
-      </div>
-    
       <%# 내용 %>
       <div align="left" style="margin-top: 10px;" class="col-11 col-sm-11 col-md-10 etc">
         <% if qna.report_qnas.size >= qna.num %>
@@ -161,7 +152,7 @@
         <% if qna.comment_qnas.count == 0 %>
           <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
         <% else %>
-          <span class="badge badge-success" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
+          <span class="badge badge-info" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
         <% end %>
       </div>
   

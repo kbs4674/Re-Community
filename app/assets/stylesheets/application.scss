@@ -175,7 +175,7 @@
     
     /* QnA 게시판 테이블 내 다음 글 구분 라인 (답변 있을 시) */
     .qna_table_separate_answered {
-      border: 2px solid #bcd8a5;
+      border: 2px solid #67b8ff;
       padding-left: 0px !important;
       padding-right: 0px !important;
       padding-bottom: 10px;
@@ -187,7 +187,7 @@
     
     /* 답변이 달리면 글 번호에 책갈피 표시가 된다. */
     .qna_answerd {
-      background: #5cb85c;
+      background: #67b8ff;
       padding: 12px;
       color: white;
     }

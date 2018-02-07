@@ -9,14 +9,14 @@
                 <%# 삽니다/팝니다 표시 %>
             <% if @bulletin.info_trade == true %>
                 <% if @post.vender == '팝니다' %>
-                    <span class="badge badge-success">팝니다</span>
+                    <span class="badge badge-warning">팝니다</span>
                 <% elsif @post.vender == '삽니다' %>
-                    <span class="badge badge-primary">삽니다</span>
+                    <span class="badge badge-info">삽니다</span>
                 <% end %>
             <%# 장기/단기 표시 %>
             <% elsif @bulletin.seeking_room == true %>
                 <% if @post.contract_day == '장기' %>
-                    <span class="badge badge-primary">장기</span>
+                    <span class="badge badge-warning">장기</span>
                 <% else %>
                     <span class="badge badge-info">단기</span>
                 <% end %>
@@ -34,14 +34,14 @@
         <%# 삽니다/팝니다 표시 %>
         <% if @bulletin.info_trade == true %>
             <% if @post.vender == '팝니다' %>
-                <span class="badge badge-success">팝니다</span>
+                <span class="badge badge-warning">팝니다</span>
             <% elsif @post.vender == '삽니다' %>
-                <span class="badge badge-primary">삽니다</span>
+                <span class="badge badge-info">삽니다</span>
             <% end %>
         <%# 장기/단기 표시 %>
         <% elsif @bulletin.seeking_room == true %>
             <% if @post.contract_day == '장기' %>
-                <span class="badge badge-primary">장기</span>
+                <span class="badge badge-warning">장기</span>
             <% else %>
                 <span class="badge badge-info">단기</span>
             <% end %>

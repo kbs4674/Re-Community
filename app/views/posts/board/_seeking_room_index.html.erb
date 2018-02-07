@@ -20,7 +20,7 @@
             <%= link_to bulletin_post_path(post.bulletin, post) do %>
                 <div class="row">
                     <% if post.contract_day == '장기' %>
-                        <div class="col-2 col-sm-2 col-md-2"><span class="badge badge-primary">장기</span></div>
+                        <div class="col-2 col-sm-2 col-md-2"><span class="badge badge-warning">장기</span></div>
                     <% elsif post.contract_day == '단기' %>
                         <div class="col-2 col-sm-2 col-md-2"><span class="badge badge-info">단기</span></div>
                     <% end %>
@@ -34,7 +34,7 @@
         <%= link_to bulletin_post_path(post.bulletin, post) do %>
             <div class="row">
                 <% if post.contract_day == '장기' %>
-                    <div class="col-2 col-sm-2 col-md-2"><span class="badge badge-primary">장기</span></div>
+                    <div class="col-2 col-sm-2 col-md-2"><span class="badge badge-warning">장기</span></div>
                 <% elsif post.contract_day == '단기' %>
                     <div class="col-2 col-sm-2 col-md-2"><span class="badge badge-info">단기</span></div>
                 <% end %>
