@@ -27,25 +27,13 @@
   <div align="right">
     <p class="badge badge-pill badge-success hidden-xs-down" style="margin-top:20px; margin-bottom: 20px;"><i class="fa fa-clock-o" aria-hidden="true"></i> 현재 시간 </span> <span><%= Time.zone.now.strftime('%Y-%m-%d %H:%M:%S') %></p>
   </div>
-  <center>
-  <div class="row">
-    <div class="col-0 col-sm-0 col-md-1 table_title hidden-sm-down" align="center">No.</div>
-    <div class="col-0 col-sm-0 col-md-2 table_title hidden-sm-down" align="center">작성자</div>
-    <div class="col-6 col-sm-6 col-md-5 table_title" align="center">제목</div>
-    <div class="col-1 col-sm-1 col-md-1 table_title" align="center"></div>
-    <div class="col-0 col-sm-3 col-md-2 table_title hidden-xs-down" align="center">작성시간</div>
-    <div class="col-0 col-sm-2 col-md-1 table_title hidden-xs-down" align="center">조회수</div>
-    <div class="col-2 col-sm-0 col-md-0 table_title hidden-sm-up" align="center"><small>댓글</small></div>
-    <div class="col-3 col-sm-0 col-md-0 table_title hidden-sm-up" align="center"><small>조회수</small></div>
-    <div class="col-md-1 hidden-sm-down"></div>
-  </div>
   
   <%# 전체 공지사항 %>
   <% @all_notices.each do |post| %>
     <% if post.all_notice == true %>
-      <div class="row table_notice">
+      <div class="row table_notice separate_board">
         <% # 공지 Badge %>
-        <div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down">
+        <div align="center" class="col-0 col-sm-0 col-md-1 hidden-sm-down" style="padding: 10px;">
           <%= content_tag(:span, '<span class="badge badge-warning">전체공지</span>'.html_safe, class: "etc", align: "center", style: "margin-top: 5px;") %>
         </div>
         <%= render "all_notices/list/board_all_notice_index", post: post %>
@@ -58,12 +46,12 @@
     <%# 공지 게시글 %>
     <% @all_notices.each do |post| %>
       <% if post.notice == true %>
-        <div class="row table_sub_notice" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+        <div class="row table_sub_notice separate_board" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
           <% # 공지 Badge %>
-          <div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down">
+          <div align="center" class="col-0 col-sm-0 col-md-1 hidden-sm-down" style="padding: 10px;">
             <%= content_tag(:span, "공지사항", class: "badge badge-primary etc", align: "center", style: "margin-top: 5px;") %>
           </div>
-          <div align="center" class="col-0 col-sm-0 col-md-2 etc table_separate hidden-sm-down">
+          <div align="center" class="col-0 col-sm-0 col-md-2 etc hidden-sm-down" style="padding: 10px;">
             <%= render 'posts/special/nickname_post_index', post: post %>
           </div>
           <%= render "all_notices/list/board_notice_normal_index", post: post %>

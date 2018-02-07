@@ -1,57 +1,49 @@
 <% # 게시글 제목 %>
-<% if post.notice == true || post.all_notice == true %>
-    <div align="left" class="col-7 col-sm-5 col-md-5 table_separate">
-<% else %>
-    <div align="left" class="col-7 col-sm-5 col-md-5 table_separate">
-<% end %>
-<%= link_to post do %>
-    <% if post.title_tag_permission == true %>
-        <% if user_signed_in? && (current_user.has_role? :admin) && post.deleted? %>
-            <%= content_tag(:div, post.title.html_safe, class: "etc", style: "color: #8e68e4") %>
+<div align="left" class="col-6 col-sm-5 col-md-5" style="padding: 10px;">
+    <%= link_to post do %>
+        <% if post.title_tag_permission == true %>
+            <% if user_signed_in? && (current_user.has_role? :admin) && post.deleted? %>
+                <%= content_tag(:div, post.title.html_safe, class: "etc", style: "color: #8e68e4") %>
+            <% else %>
+                <%= content_tag(:div, post.title.html_safe, class: "etc") %>
+            <% end %>
         <% else %>
-            <%= content_tag(:div, post.title.html_safe, class: "etc") %>
-        <% end %>
-    <% else %>
-        <% if user_signed_in? && (current_user.has_role? :admin) && post.deleted? %>
-            <%= content_tag(:div, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc", style: "color: #8e68e4" ) %>
-        <% else %>
-            <%= content_tag(:div, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc" ) %>
+            <% if user_signed_in? && (current_user.has_role? :admin) && post.deleted? %>
+                <%= content_tag(:div, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc", style: "color: #8e68e4" ) %>
+            <% else %>
+                <%= content_tag(:div, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc" ) %>
+            <% end %>
         <% end %>
     <% end %>
-<% end %>
 </div>
 
-<% # 댓글 %>
-<% if post.notice == true || post.all_notice == true %>
-    <div align="center" class="col-2 col-sm-2 col-md-1 table_separate">
-<% else %>
-    <div align="center" class="col-2 col-sm-2 col-md-1 table_separate">
-<% end %>
-    <% if post.comment_permission == true %>
-        <b><%= post.comment_threads.count %></b>
-    <% else %>
-        <b>×</b>
-    <% end %>
-</div>
-          
-<% # 시간 %>
-<% if post.notice == true || post.all_notice == true %>
-    <div align="center" class="col-0 col-sm-3 col-md-2 table_separate hidden-xs-down">
-<% else %>
-    <div align="center" class="col-0 col-sm-3 col-md-2 table_separate hidden-xs-down">
-<% end %>
-    <%= "#{time_ago_in_words(post.created_at)} 전" %>
-</div>
-                        
-<% # 조회수 %>
-<% if post.notice == true || post.all_notice == true %>
-    <div align="center" class="col-3 col-sm-2 col-md-1 table_separate">
-<% else %>
-    <div align="center" class="col-3 col-sm-2 col-md-1 table_separate">
-<% end %>
-    <% if post.impressionist_count >= 10000 %>
-        <%= "#{post.impressionist_count/10000}만#{post.impressionist_count%10000}" %>
-    <% else %>
-        <%= "#{post.impressionist_count}" %>
-    <% end %>
+<div class="row col-6 col-sm-7 col-md-4" style="margin-left: 15px;">
+    <% # 댓글 %>
+    <div align="left" class="col-6 col-sm-3 col-md-4 arrow_left separate_board_inside">
+        <i class="far fa-comments"></i>
+        <% if post.comment_permission == true %>
+            <% if post.comment_threads.count < 1000 %>
+                <%= post.comment_threads.count %>
+            <% else %>
+                <small><b><%= post.comment_threads.count/1000 %> K</b></small>
+            <% end %>
+        <% else %>
+            ×
+        <% end %>
+    </div>
+    
+    <% # 조회수 %>
+    <div align="left" class="col-6 col-sm-3 col-md-4 separate_board_inside">
+        <i class="fas fa-eye"></i>
+        <% if post.impressionist_count < 1000 %>
+            <%= "#{post.impressionist_count}" %>
+        <% else %>
+            <b><%= "#{post.impressionist_count/1000} K" %></b>
+        <% end %>
+    </div>
+    
+    <% # 시간 %>
+    <div align="left" class="col-0 col-sm-6 col-md-4 separate_board_inside hidden-xs-down">
+        <small><%= "#{time_ago_in_words(post.created_at)} 전" %></small>
+    </div>
 </div>

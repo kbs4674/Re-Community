@@ -148,13 +148,6 @@
       padding: 20px;
     }
     
-    /* 게시판 테이블 Title(No, 작성자, 제목, 작성시간 등) 부분 색깔지정 */
-    .table_title {
-      padding: 10px 10px 10px 10px;
-      border-bottom: 3px solid #D5D5D5;
-      background: #EFEFEF;
-    }
-    
     /* 게시판 테이블 내 다음 글 구분 라인 */
     .table_separate {
       padding: 10px 10px 10px 10px;
@@ -206,6 +199,31 @@
       padding: 10px;
     }
     
+    /* 게시판 : 우측 게시글 정보 화살표(왼쪽방향) */
+    .arrow_left:before {
+    	content: "";
+    	float: left;
+    	position: absolute;
+    	left: -12px;
+    	width: 0;
+    	height: 0;
+    	border-color: transparent #e7f6ff transparent transparent;
+    	border-style: solid;
+    	border-width: 10px 12px 12px 0;
+    }
+    
+    /* 게시판 : 우측 게시글 정보 배경 */
+    .separate_board_inside {
+      background-color: #e7f6ff;
+      padding: 10px;
+    }
+    
+    /* 게시판 : 겉 테두리 */
+    .separate_board {
+      border: 2px solid #dadada;
+      margin-top: 10px;
+    }
+    
     /* 테이블 내 전체 공지사항 게시글 강조 */
     .table_notice {
       background-color: #fff;
@@ -215,6 +233,13 @@
     
     /* 테이블 내 게시판 별 공지사항 게시글 강조 */
     .table_sub_notice {
+      background-color: #fff;
+      border-left: 6px solid #2387e8;
+      word-wrap: break-word;
+    }
+    
+    /* 일반 게시글 표시 */
+    .table_board_tag {
       background-color: #fff;
       border-left: 6px solid #2387e8;
       word-wrap: break-word;

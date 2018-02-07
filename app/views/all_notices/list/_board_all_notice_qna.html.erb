@@ -15,23 +15,23 @@
 </div>
 
 <div class="row col-6 col-sm-7 col-md-5" style="margin-left: 15px;">
-    <%# 댓글 %>
-    <div align="left" class="col-6 col-sm-3 col-md-2 arrow_left separate_board_inside" style="padding: 10px;">
-        <i class="far fa-comments"></i>
-        <% if post.comment_permission == true %>
-            <% if post.impressionist_count < 1000 %>
-                <%= "#{post.impressionist_count}" %>
-            <% else %>
-                <b><%= "#{post.impressionist_count/1000} K" %></b>
-            <% end %>
+    <% # 댓글 %>
+    <div align="left" class="col-6 col-sm-3 col-md-3 arrow_left separate_board_inside">
+    <i class="far fa-comments"></i> 
+    <% if post.comment_permission == true %>
+        <% if post.comment_threads.count < 1000 %>
+            <%= post.comment_threads.count %>
         <% else %>
-            ×
+            <small><b><%= post.comment_threads.count/1000 %> K</b></small>
         <% end %>
+    <% else %>
+        <b>×</b>
+    <% end %>
     </div>
     
-    <%# 조회수 %>
-    <div align="left" class="col-6 col-sm-4 col-md-3 separate_board_inside" style="padding: 10px;">
-        <i class="fas fa-eye"></i>
+    <% # 조회수 %>
+    <div align="left" class="col-6 col-sm-3 col-md-3 separate_board_inside">
+        <i class="fas fa-eye" aria-hidden="true"></i>
         <% if post.impressionist_count < 1000 %>
             <%= "#{post.impressionist_count}" %>
         <% else %>
@@ -39,13 +39,8 @@
         <% end %>
     </div>
     
-    <%# 시간 %>
-    <div align="left" class="col-0 col-sm-5 col-md-4 separate_board_inside hidden-xs-down" style="padding: 10px;">
+    <% # 시간 %>
+    <div align="left" class="col-0 col-sm-6 col-md-6 separate_board_inside hidden-xs-down">
         <small><%= "#{time_ago_in_words(post.created_at)} 전" %></small>
-    </div>
-    
-    <% # 비워두는 공간입니다. %>
-    <div align="left" class="col-0 col-sm-0 col-md-3 separate_board_inside hidden-sm-down" style="padding: 10px;">
-        -
     </div>
 </div>

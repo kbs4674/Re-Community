@@ -64,14 +64,19 @@
                     <div class="row" align="left">
                         <div class="offset-5 offset-sm-5 offset-md-5 col-3 col-sm-3 col-md-3">
                             <i class="fas fa-eye"></i>
-                            <% if post.unique_impression_count >= 10000 %>
-                                <%= "#{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
-                            <% else %>
+                            <% if post.unique_impression_count < 1000 %>
                                 <%= "#{post.unique_impression_count}" %>
+                            <% else %>
+                                <small><b><%= "#{post.unique_impression_count/1000} K" %></b></small>
                             <% end %>
                         </div>
                         <div class="col-3 col-sm-3 col-md-3">
-                            <i class="far fa-comments"></i> <%= post.comment_threads.count %>
+                            <i class="far fa-comments"></i> 
+                            <% if post.comment_threads.count < 1000 %>
+                                <%= post.comment_threads.count %>
+                            <% else %>
+                                <small><b><%= post.comment_threads.count/1000 %> K</b></small>
+                            <% end %>
                         </div>
                     </div>
                 </div>
@@ -144,14 +149,19 @@
                     <div class="row" align="left">
                         <div class="offset-5 offset-sm-5 offset-md-5 col-3 col-sm-3 col-md-3">
                             <i class="fas fa-eye"></i>
-                            <% if post.unique_impression_count >= 10000 %>
-                                <%= "#{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
-                            <% else %>
+                            <% if post.unique_impression_count < 1000 %>
                                 <%= "#{post.unique_impression_count}" %>
+                            <% else %>
+                                <%= "#{post.unique_impression_count/1000} K" %>
                             <% end %>
                         </div>
                         <div class="col-3 col-sm-3 col-md-3">
-                            <i class="far fa-comments"></i> <%= post.comment_threads.count %>
+                            <i class="far fa-comments"></i> 
+                            <% if post.comment_threads.count < 1000 %>
+                                <%= post.comment_threads.count %>
+                            <% else %>
+                                <small><b><%= post.comment_threads.count/1000 %> K</b></small>
+                            <% end %>
                         </div>
                     </div>
                 </div>

@@ -1,64 +1,67 @@
-<div class="row" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
-    <% # 글 번호 %>
-    <div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down"><%= post.id %></div>
+<div class="row separate_board" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+    <%# 글 번호 %>
+    <div align="center" class="col-0 col-sm-0 col-md-1 hidden-sm-down" style="padding: 10px;"><%= post.id %></div>
                 
     <%# 닉네임 %>
-    <div align="center" class="col-0 col-sm-0 col-md-2 etc table_separate hidden-sm-down">
+    <div align="center" class="col-0 col-sm-0 col-md-2 etc hidden-sm-down" style="padding: 10px;">
         <%= post.user != nil ? post.user.nickname : post.user_name %>
     </div>
         
-    <% # 게시글 제목 %>
-    <div align="left" class="col-6 col-sm-5 col-md-3 etc table_separate">
-    <% if post.deleted? %>
-        <%= link_to bulletin_post_path(post.bulletin, post) do %>
-            <%= content_tag(:div, post.title, class: "etc", style: "color: #8e68e4") %>
+    <%# 게시글 제목 %>
+    <div align="left" class="col-5 col-sm-5 col-md-4 etc" style="padding: 10px;">
+        <% if post.deleted? %>
+            <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                <%= content_tag(:div, post.title, class: "etc", style: "color: #8e68e4") %>
+            <% end %>
+        <% elsif post.reports.size >= post.num %>
+          <% if can? :for_admin, @post %>
+            <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                <%= content_tag(:div, post.title, class: "etc", style: "color: red") %>
+            <% end %>
+        <% else %>
+            <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
+          <% end %>
+        <% else %>
+            <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                <%= content_tag(:div, post.title, class: "etc") %>
+            <% end %>
         <% end %>
-    <% elsif post.reports.size >= post.num %>
-      <% if can? :for_admin, @post %>
-        <%= link_to bulletin_post_path(post.bulletin, post) do %>
-            <%= content_tag(:div, post.title, class: "etc", style: "color: red") %>
-        <% end %>
-    <% else %>
-        <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
-      <% end %>
-    <% else %>
-        <%= link_to bulletin_post_path(post.bulletin, post) do %>
-            <%= content_tag(:div, post.title, class: "etc") %>
-        <% end %>
-    <% end %>
-    </div>
-            
-    <% # 댓글 %>
-    <div align="center" class="col-2 col-sm-2 col-md-1 table_separate">
-        <div class="hidden-sm-down"><i class="far fa-comments"></i><b style="margin-left: 10px;"><%= post.comment_threads.count %></b></div>
-        <div class="hidden-md-up"><b><%= post.comment_threads.count %></b></div>
     </div>
     
-    <%# 조회수 %>
-    <div align="center" class="col-3 col-sm-2 col-md-1 table_separate hidden-xs-down">
-    <% if post.unique_impression_count >= 10000 %>
-        <%= "#{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
-    <% else %>
-        <%= "#{post.unique_impression_count}" %>
-    <% end %>
-    </div>
+    
+    <div class="row col-7 col-sm-7 col-md-5" style="margin-left: 15px;">
+        <%# 댓글 %>
+        <div align="left" class="col-4 col-sm-3 col-md-3 arrow_left separate_board_inside">
+            <i class="far fa-comments"></i> 
+            <% if post.comment_threads.count < 1000 %>
+                <%= post.comment_threads.count %>
+            <% else %>
+                <small><b><%= post.comment_threads.count/1000 %> K</b></small>
+            <% end %>
+        </div>
+
+        <%# 시간 %>
+        <div align="left" class="col-0 col-sm-0 col-md-3 separate_board_inside hidden-sm-down">
+            <small><%= "#{@bulletin.title == "Foreigner Board" ? "#{time_ago_in_words(post.created_at)} Bef." : "#{time_ago_in_words(post.created_at)} 전"}" %></small>
+        </div>
         
-    <%# 투표 %>
-    <div align="center" class="col-4 col-sm-3 col-md-4 table_separate">
-    <% if post.reports.size >= post.num %>
-        <% if current_user.has_role? :admin %>
+        <%# 투표 %>
+        <div align="left" class="col-8 col-sm-9 col-md-6 separate_board_inside">
+            <% if post.reports.size >= post.num %>
+                <% if current_user.has_role? :admin %>
+                    <div class="progress">
+                        <div class="progress-bar bg-info" role="progressbar" style="width: <%= post.get_upvotes.size.to_f / post.votes_for.size * 100 %>%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: <%= post.get_downvotes.size.to_f / post.votes_for.size * 100 %>%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                <% else %>
+                    <small><font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 게시글</font></small>
+                <% end %>
+            <% else %>
                 <div class="progress">
                     <div class="progress-bar bg-info" role="progressbar" style="width: <%= post.get_upvotes.size.to_f / post.votes_for.size * 100 %>%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                     <div class="progress-bar bg-danger" role="progressbar" style="width: <%= post.get_downvotes.size.to_f / post.votes_for.size * 100 %>%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-        <% else %>
-            <small><font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 게시글</font></small>
-        <% end %>
-    <% else %>
-            <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: <%= post.get_upvotes.size.to_f / post.votes_for.size * 100 %>%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                <div class="progress-bar bg-danger" role="progressbar" style="width: <%= post.get_downvotes.size.to_f / post.votes_for.size * 100 %>%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-    <% end %>
+            <% end %>
+        </div>
     </div>
 </div>

@@ -139,11 +139,6 @@ ActiveRecord::Schema.define(version: 20180128151737) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "homes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "images", force: :cascade do |t|
     t.string "alt"
     t.string "hint"

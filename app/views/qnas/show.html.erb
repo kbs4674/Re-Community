@@ -114,13 +114,7 @@
   <% end %>
 
   <%# 다른 게시물들 %>
-  <div class="row" style="margin-top: 60px;">
-    <div class="col-7 col-sm-10 col-md-12 table_title" align="center">
-      <%= link_to "질문답변 게시판", qnas_path, style: "font-weight: bold" %>
-    </div>
-    <div align="center" class="col-2 col-sm-0 table_title hidden-sm-up"><i class="far fa-comments"></i></div>
-    <div align="center" class="col-3 col-sm-2 table_title hidden-md-up"></div>
-  </div>
+  <div class="row" style="margin-top: 60px;"></div>
   <% if @qnas.empty? %>
     <h2 class="text-center" style="margin-top: 30px;">게시글이 없습니다.</h2>
   <% else %>
@@ -128,30 +122,31 @@
     <%# 전체 공지사항 %>
     <% @all_notices.each do |post| %>
       <% if post.all_notice == true %>
-        <div class="row table_notice">
+        <div class="row table_notice separate_board">
           <% # 공지 Badge %>
-          <div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down">
+          <div align="center" class="col-0 col-sm-0 col-md-1 hidden-sm-down" style="padding: 10px;">
             <%= content_tag(:span, '<span class="badge badge-warning">전체공지</span>'.html_safe, class: "etc", align: "center", style: "margin-top: 5px;") %>
           </div>
-          <%= render "all_notices/list/board_all_notice_qna_show", post: post %>
+          <%= render "all_notices/list/board_all_notice_qna", post: post %>
         </div>
       <% end %>
     <% end %>
   
   <%# 일반 게시물 %>  
   <% @qnas.each do |qna| %>
-    <% if qna.comment_qnas.count == 0 %>
-      <div class="row" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
-    <% else %>
-      <div class="row" style="background-color: #C8EFFF" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#C8EFFF'">
-    <% end %>
-          
-    <div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down">
+    <div class="row separate_board" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+
+    <div align="center" class="col-0 col-sm-0 col-md-1 hidden-sm-down" style="padding: 10px;">
       <%= qna.id %>
+    </div>
+    
+    <%# 닉네임 %>
+    <div align="center" class="col-0 col-sm-0 col-md-2 hidden-sm-down etc" style="padding: 10px;">
+      <%= render 'posts/special/nickname_qna_index', qna: qna %>
     </div>
           
     <% # 게시글 제목 %>
-    <div align="left" class="col-6 col-sm-4 col-md-5 etc table_separate">
+    <div align="left" class="col-6 col-sm-5 col-md-4 etc" style="padding: 10px;">
     <% if qna.report_qnas.size >= qna.num %>
       <% if can? :for_admin, @qnas %>
         <%= link_to qna do %>
@@ -166,31 +161,37 @@
       <% end %>
     <% end %>
     </div>
-    
-    <%# 닉네임 %>
-    <div align="center" class="col-0 col-sm-0 col-md-2 hidden-sm-down etc table_separate">
-      <%= render 'posts/special/nickname_qna_index', qna: qna %>
-    </div>
-          
-    <%# 댓글 %>
-    <div align="right" class="col-3 col-sm-3 col-md-1 table_separate">
-    <% if qna.notice == true %>
-      <span class="badge badge-primary">공지사항</span>
-    <% else %>
-      <% if qna.comment_qnas.count == 0 %>
-        <span class="badge badge-default">답변 대기</span>
-      <% else %>
-        <span class="badge badge-success"><%= qna.comment_qnas.count %> 개의 답변</span>
-      <% end %>
-    <% end %>
-    </div>
-          
-    <% # 시간 %>
-    <div align="center" class="col-0 col-sm-3 col-md-2 table_separate hidden-xs-down"><%= "#{time_ago_in_words(qna.created_at)} 전" %></div>
-                  
-    <%# 궁금해요 %>
-    <div align="center" class="col-3 col-sm-2 col-md-1 table_separate">
-      <i class="fa fa-paw" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="저도 궁금해요! (발도장 꾹)"></i> <%= qna.get_upvotes.size %></div>
+
+      <div class="row col-6 col-sm-7 col-md-5" style="margin-left: 15px;">
+        <%# 댓글 %>
+        <div align="left" class="col-12 col-sm-4 col-md-3 arrow_left separate_board_inside">
+          <% if qna.notice == true %>
+            <span class="badge badge-primary">공지사항</span>
+          <% else %>
+            <% if qna.comment_qnas.count == 0 %>
+              <span class="badge badge-default">답변 대기</span>
+            <% else %>
+              <span class="badge badge-success">
+                <% if qna.comment_qnas.count < 1000 %>
+                  <%= qna.comment_qnas.count %> 개의 답변
+                <% else %>
+                  <%= qna.comment_qnas.count/1000 %> K개의 답변
+                <% end %>
+              </span>
+            <% end %>
+          <% end %>
+        </div>
+        
+        <%# 궁금해요 %>
+        <div align="left" class="col-0 col-sm-3 col-md-3 separate_board_inside hidden-xs-down">
+          <i class="fa fa-paw" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="저도 궁금해요! (발도장 꾹)"></i> <%= qna.get_upvotes.size %>
+        </div>
+        
+        <%# 시간 %>
+        <div align="left" class="col-0 col-sm-5 col-md-6 separate_board_inside hidden-xs-down">
+          <small><%= "#{time_ago_in_words(qna.created_at)} 전" %></small>
+        </div>
+      </div>
     </div>
     <% end %>
   <% end %>

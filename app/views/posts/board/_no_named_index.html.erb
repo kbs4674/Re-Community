@@ -1,9 +1,9 @@
-<div class="row" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+<div class="row separate_board" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
     <% # 글 번호 %>
-    <div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down"><%= post.id %></div>
+    <div align="center" class="col-0 col-sm-0 col-md-1 hidden-sm-down" style="padding: 10px;"><%= post.id %></div>
     
     <%# 가상 닉네임 %>
-    <div align="center" class="col-0 col-sm-0 col-md-2 etc table_separate hidden-sm-down">
+    <div align="center" class="col-0 col-sm-0 col-md-2 etc hidden-sm-down" style="padding: 10px;">
     <% if post.reports.size >= post.num %>
         <% if can? :for_admin, post %>
             <%= content_tag(:div, "#{post.nickname}", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}", style: "color: red") %>
@@ -20,7 +20,7 @@
     </div>
     
     <% # 게시글 제목 %>
-    <div align="left" class="col-7 col-sm-3 col-md-4 etc table_separate">
+    <div align="left" class="col-6 col-sm-5 col-md-4 etc" style="padding: 10px;">
         <% if post.deleted? %>
             <%= link_to bulletin_post_path(post.bulletin, post) do %>
                 <%= content_tag(:div, post.title, class: "etc", style: "color: #8e68e4") %>
@@ -40,25 +40,35 @@
         <% end %>
     </div>
     
-    <% # 댓글 %>
-    <div align="center" class="col-2 col-sm-2 col-md-1 table_separate">
-      <b><%= post.comment_threads.count %></b>
-    </div>
-            
-    <% # 시간 %>
-    <div align="center" class="col-0 col-sm-3 col-md-2 table_separate hidden-xs-down"><%= "#{time_ago_in_words(post.created_at)} 전" %></div>
-                    
-    <%# 조회수 %>
-    <div align="center" class="col-3 col-sm-2 col-md-1 table_separate">
-        <% if post.unique_impression_count >= 10000 %>
-            <%= "#{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
-        <% else %>
-            <%= "#{post.unique_impression_count}" %>
-        <% end %>
-    </div>
-    
-    <%# 좋아요 %>
-    <div align="center" class="col-0 col-sm-2 col-md-1 table_separate hidden-xs-down">
-        <i class="far fa-thumbs-up" aria-hidden="true"></i> <%= post.get_upvotes.size %>
+    <div class="row col-6 col-sm-7 col-md-5" style="margin-left: 15px;">
+        <% # 댓글 %>
+        <div align="left" class="col-6 col-sm-4 col-md-2 arrow_left separate_board_inside">
+          <i class="far fa-comments"></i> 
+            <% if post.comment_threads.count < 1000 %>
+                <%= post.comment_threads.count %>
+            <% else %>
+                <small><b><%= post.comment_threads.count/1000 %> K</b></small>
+            <% end %>
+        </div>
+        
+        <%# 조회수 %>
+        <div align="left" class="col-6 col-sm-4 col-md-3 separate_board_inside">
+            <i class="fas fa-eye"></i>
+            <% if post.unique_impression_count < 1000 %>
+                <%= "#{post.unique_impression_count}" %>
+            <% else %>
+                <small><b><%= "#{post.unique_impression_count/1000} K" %></b></small>
+            <% end %>
+        </div>
+        
+        <% # 시간 %>
+        <div align="left" class="col-0 col-sm-4 col-md-4 separate_board_inside hidden-xs-down">
+            <small><%= "#{time_ago_in_words(post.created_at)} 전" %></small>
+        </div>
+        
+        <%# 좋아요 %>
+        <div align="left" class="col-0 col-sm-0 col-md-3 separate_board_inside hidden-sm-down">
+            <i class="far fa-thumbs-up" aria-hidden="true"></i> <%= post.get_upvotes.size %>
+        </div>
     </div>
 </div>

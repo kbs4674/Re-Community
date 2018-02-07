@@ -27,21 +27,16 @@
   <div align="right">
     <p class="badge badge-pill badge-success hidden-xs-down" style="margin-top:20px; margin-bottom: 20px;"><i class="fa fa-clock-o" aria-hidden="true"></i> 현재 시간 </span> <span><%= Time.zone.now.strftime('%Y-%m-%d %H:%M:%S') %></p>
   </div>
-  <center>
-  <div class="row">
-    <div class="col-12 col-sm-12 col-md-12 table_title" align="center">질문 리스트</div>
-    <div class="col-md-1 hidden-sm-down"></div>
-  </div>
   
   <%# 전체 공지사항 %>
   <% @all_notices.each do |post| %>
     <% if post.all_notice == true %>
-      <div class="row table_notice">
+      <div class="row table_notice separate_board">
         <% # 공지 Badge %>
-        <div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down">
+        <div align="center" class="col-0 col-sm-0 col-md-1 hidden-sm-down" style="padding: 10px;">
           <%= content_tag(:span, '<span class="badge badge-warning">전체공지</span>'.html_safe, class: "etc", align: "center", style: "margin-top: 5px;") %>
         </div>
-        <%= render "all_notices/list/board_all_notice_qna_index", post: post %>
+        <%= render "all_notices/list/board_all_notice_qna", post: post %>
       </div>
     <% end %>
   <% end %>
@@ -51,19 +46,19 @@
     <%# 공지 게시글 %>
     <% @qnas.each do |post| %>
       <% if post.notice == true %>
-        <div class="row table_sub_notice" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+        <div class="row table_sub_notice separate_board" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
           <% # 공지 Badge %>
-          <div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down">
+          <div align="center" class="col-0 col-sm-0 col-md-1 hidden-sm-down" style="padding: 10px;">
             <%= content_tag(:span, "공지", class: "badge badge-primary etc", align: "center", style: "margin-top: 5px;") %>
           </div>
         
           <% # 닉네임 %>
-          <div align="center" class="col-3 col-sm-2 col-md-2 etc table_separate hidden-sm-down">
+          <div align="center" class="col-3 col-sm-2 col-md-2 etc hidden-sm-down" style="padding: 10px;">
             <%= render 'posts/special/nickname_post_index', post: post %>
           </div>
               
           <% # 게시글 제목 %>
-          <div align="left" class="col-7 col-sm-5 col-md-5 etc table_separate">
+          <div align="left" class="col-6 col-sm-5 col-md-4 etc" style="padding: 10px;">
             <% if post.report_qnas.size >= post.num %>
               <% if can? :for_admin, @qnas %>
                 <%= link_to post do %>
@@ -78,22 +73,31 @@
               <% end %>
             <% end %>
           </div>
-                  
-          <% # 댓글 %>
-          <div align="center" class="col-2 col-sm-2 col-md-1 table_separate">
-            <b><%= post.comment_qnas.count %></b>
-          </div>
-        
-          <% # 시간 %>
-          <div align="center" class="col-0 col-sm-3 col-md-2 table_separate hidden-xs-down"><%= "#{time_ago_in_words(post.created_at)} 전" %></div>
-                      
-          <% # 조회수 %>
-          <div align="center" class="col-3 col-sm-2 col-md-1 table_separate"><i class="fas fa-eye" aria-hidden="true"></i>
-            <% if post.unique_impression_count >= 10000 %>
-              <%= "#{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
-            <% else %>
-              <%= "#{post.unique_impression_count}" %>
-            <% end %>
+
+          <div class="row col-6 col-sm-7 col-md-5" style="margin-left: 15px;">
+            <% # 댓글 %>
+            <div align="left" class="col-6 col-sm-3 col-md-3 arrow_left separate_board_inside">
+              <i class="far fa-comments"></i> 
+                <% if post.comment_threads.count < 1000 %>
+                  <%= post.comment_threads.count %>
+                <% else %>
+                  <small><b><%= post.comment_threads.count/1000 %> K</b></small>
+                <% end %>
+            </div>
+            
+            <% # 조회수 %>
+            <div align="left" class="col-6 col-sm-3 col-md-3 separate_board_inside"><i class="fas fa-eye" aria-hidden="true"></i>
+              <% if post.unique_impression_count < 1000 %>
+                <%= "#{post.unique_impression_count}" %>
+              <% else %>
+                <small><b><%= "#{post.unique_impression_count/1000} K" %></b></small>
+              <% end %>
+            </div>
+            
+            <% # 시간 %>
+            <div align="left" class="col-0 col-sm-6 col-md-6 separate_board_inside hidden-xs-down">
+              <small><%= "#{time_ago_in_words(post.created_at)} 전" %></small>
+            </div>
           </div>
         </div>
       <% end %>

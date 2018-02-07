@@ -1,8 +1,8 @@
 <% # 닉네임 %>
-<div align="center" class="col-0 col-sm-0 col-md-2 etc table_separate hidden-sm-down"><%= post.user != nil ? post.user.nickname : post.user_name %></div>
+<div align="center" class="col-0 col-sm-0 col-md-2 etc hidden-sm-down" style="padding: 10px;"><%= post.user != nil ? post.user.nickname : post.user_name %></div>
 
 <% # 게시글 제목 %>
-<div align="left" class="col-6 col-sm-5 col-md-3 etc table_separate">
+<div align="left" class="col-5 col-sm-5 col-md-4 etc" style="padding: 10px;">
 <%= link_to post do %>
     <% if post.title_tag_permission == true %>
         <%= content_tag(:div, post.title.html_safe, class: "etc") %>
@@ -12,29 +12,44 @@
 <% end %>
 </div>
 
-<% # 댓글 %>
-<% if post.comment_permission == true %>
-    <div align="center" class="col-2 col-sm-2 col-md-1 table_separate">
-        <div class="hidden-sm-down"><i class="far fa-comments"></i><b style="margin-left: 10px;"><%= post.comment_threads.count %></b></div>
-        <div class="hidden-md-up"><b><%= post.comment_threads.count %></b></div>
+<div class="row col-7 col-sm-7 col-md-5" style="margin-left: 15px;">  
+    <% # 댓글 %>
+    <div align="left" class="col-4 col-sm-3 col-md-3 arrow_left separate_board_inside" style="padding: 10px;">
+        <% if post.comment_permission == true %>
+            <div class="hidden-sm-down">
+                <i class="far fa-comments"></i> 
+                <% if post.comment_threads.count < 1000 %>
+                    <%= post.comment_threads.count %>
+                <% else %>
+                    <small><b><%= post.comment_threads.count/1000 %> K</b></small>
+                <% end %>
+            </div>
+            <div class="hidden-md-up">
+                <i class="far fa-comments"></i> 
+                <% if post.comment_threads.count < 1000 %>
+                    <%= post.comment_threads.count %>
+                <% else %>
+                    <small><b><%= post.comment_threads.count/1000 %> K</b></small>
+                <% end %>
+            </div>
+        <% else %>
+            <div class="hidden-sm-down"><i class="far fa-comments"></i> ×</div>
+            <div class="hidden-md-up"><i class="far fa-comments"></i> ×</div>
+        <% end %>
     </div>
-<% else %>
-    <div align="center" class="col-2 col-sm-2 col-md-1 table_separate">
-        <div class="hidden-sm-down"><i class="far fa-comments"></i><b style="margin-left: 10px;">×</b></div>
-        <div class="hidden-md-up"><b>×</b></div>
+                        
+    <% # 조회수 %>
+    <div align="left" class="col-0 col-sm-3 col-md-3 separate_board_inside hidden-xs-down" style="padding: 10px;">
+        <i class="fas fa-eye"></i>
+        <% if post.impressionist_count < 1000 %>
+            <%= "#{post.impressionist_count}" %>
+        <% else %>
+            <b><%= "#{post.impressionist_count/1000} K" %></b>
+        <% end %>
     </div>
-<% end %>
-                    
-<% # 조회수 %>
-<div align="center" class="col-0 col-sm-2 col-md-1 table_separate hidden-xs-down">
-    <% if post.impressionist_count >= 10000 %>
-        <%= "#{post.impressionist_count/10000}만#{post.impressionist_count%10000}" %>
-    <% else %>
-        <%= "#{post.impressionist_count}" %>
-    <% end %>
-</div>
-
-<% # 시간 %>
-<div align="center" class="col-4 col-sm-3 col-md-4 table_separate">
-    <small><i class="far fa-clock"></i> <%= "#{time_ago_in_words(post.created_at)} 전" %></small>
+    
+    <% # 시간 %>
+    <div align="left" class="col-8 col-sm-6 col-md-6 separate_board_inside" style="padding: 10px;">
+        <small><%= "#{time_ago_in_words(post.created_at)} 전" %></small>
+    </div>
 </div>

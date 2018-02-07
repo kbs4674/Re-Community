@@ -42,7 +42,17 @@
                     <% end %>
                 <% end %>
                 <div align="left">
-                    <b><%= (post.price_room / 10000).to_f %> 만원 / <%= post.room_select %></b><br/>
+                    <b>
+                    <% if post.price_room < 10000000 %>
+                        <%= post.price_room/10000.to_f %> 만원
+                    <% elsif post.price_room < 100000000 %>
+                        <%= post.price_room/10000000.to_f %> 천만원
+                    <% else %>
+                        <%= post.price_room/100000000.to_f %> 억원
+                    <% end %>
+                     / <%= post.room_select %>
+                     </b>
+                     <br/>
                     <span>보증금 : <%= post.deposit != nil ? "#{post.deposit}" : 0 %>원</span><br/>
                 </div>
                 <hr/>
@@ -50,14 +60,19 @@
                 <div class="row" align="left">
                     <div class="offset-5 offset-sm-5 offset-md-5 col-3 col-sm-3 col-md-3">
                         <i class="fas fa-eye"></i>
-                        <% if post.unique_impression_count >= 10000 %>
-                            <%= "#{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
-                        <% else %>
+                        <% if post.unique_impression_count < 1000 %>
                             <%= "#{post.unique_impression_count}" %>
+                        <% else %>
+                            <small><b><%= "#{post.unique_impression_count/1000} K" %></b></small>
                         <% end %>
                     </div>
                     <div class="col-3 col-sm-3 col-md-3">
-                        <i class="far fa-comments"></i> <%= post.comment_threads.count %>
+                        <i class="far fa-comments"></i> 
+                        <% if post.comment_threads.count < 1000 %>
+                            <%= post.comment_threads.count %>
+                        <% else %>
+                            <small><b><%= post.comment_threads.count/1000 %> K</b></small>
+                        <% end %>
                     </div>
                 </div>
             </div>
@@ -104,7 +119,17 @@
                     <% end %>
                 <% end %>
                 <div align="left">
-                    <b><%= (post.price_room / 10000).to_f %> 만원 / <%= post.room_select %></b><br/>
+                    <b>
+                    <% if post.price_room < 10000000 %>
+                        <%= post.price_room/10000.to_f %> 만원
+                    <% elsif post.price_room < 100000000 %>
+                        <%= post.price_room/10000000.to_f %> 천만원
+                    <% else %>
+                        <%= post.price_room/100000000.to_f %> 억원
+                    <% end %>
+                     / <%= post.room_select %>
+                     </b>
+                     <br/>
                     <span>보증금 : <%= post.deposit != nil ? "#{post.deposit}" : 0 %>원</span><br/>
                 </div>
                 <hr/>
@@ -112,14 +137,19 @@
                 <div class="row" align="left">
                     <div class="offset-5 offset-sm-5 offset-md-5 col-3 col-sm-3 col-md-3">
                         <i class="fas fa-eye"></i>
-                        <% if post.unique_impression_count >= 10000 %>
-                            <%= "#{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
-                        <% else %>
+                        <% if post.unique_impression_count < 1000 %>
                             <%= "#{post.unique_impression_count}" %>
+                        <% else %>
+                            <small><b><%= "#{post.unique_impression_count/1000} K" %></b></small>
                         <% end %>
                     </div>
                     <div class="col-3 col-sm-3 col-md-3">
-                        <i class="far fa-comments"></i> <%= post.comment_threads.count %>
+                        <i class="far fa-comments"></i> 
+                        <% if post.comment_threads.count < 1000 %>
+                            <%= post.comment_threads.count %>
+                        <% else %>
+                            <small><b><%= post.comment_threads.count/1000 %> K</b></small>
+                        <% end %>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 class HomesController < ApplicationController
     def index
         @bulletins = Bulletin.all
-        @posts_all = Post.order("created_at DESC").page(params[:page]).per(6)
+        @posts_all = Post.order("created_at DESC").page(params[:page]).per(5)
         @notices_all = AllNotice.order("created_at DESC").page(params[:page]).per(5)
         @posts = Post.order("created_at DESC").page params[:page]
         @qnas = Qna.order("created_at DESC").page(params[:page]).per(5)

@@ -1,11 +1,11 @@
 <% # 공지 Badge %>
-<div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down">
+<div align="center" class="col-0 col-sm-0 col-md-1 hidden-sm-down" style="padding: 10px;">
     <%= content_tag(:span, "공지", class: "badge badge-primary etc", align: "center", style: "margin-top: 5px;") %>
 </div>
       
 <%# 익명 게시판 : 가상 닉네임 %>
 <% if @bulletin.info_no_named == true %>
-    <div align="center" class="col-md-2 table_separate hidden-sm-down">
+    <div align="center" class="col-md-2 hidden-sm-down" style="padding: 10px;">
         <% if post.reports.size >= post.num %>
             <% if can? :for_admin, post %>
                 <%= content_tag(:div, "#{post.nickname}", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}", style: "color: red") %>
@@ -23,13 +23,13 @@
     
     <%# 일반 게시판 : 닉네임 %>
     <% else %>
-        <div align="center" class="col-0 col-sm-0 col-md-2 etc table_separate hidden-sm-down">
+        <div align="center" class="col-0 col-sm-0 col-md-2 etc hidden-sm-down" style="padding: 10px;">
             <%= render 'posts/special/nickname_post_index', post: post %>
         </div>
 <% end %>
                 
 <%# 게시글 제목 %>
-<div align="left" class="col-7 col-sm-3 col-md-4 etc table_separate">
+<div align="left" class="col-6 col-sm-5 col-md-4 etc" style="padding: 10px;">
     <% if post.reports.size >= post.num %>
         <% if can? :for_admin, post %>
             <%= link_to bulletin_post_path(post.bulletin, post) do %>
@@ -44,63 +44,86 @@
         <% end %>
     <% end %>
 </div>
-                    
-<%# 댓글 %>
-<div align="center" class="col-2 col-sm-2 col-md-1 table_separate">
-    <b><%= post.comment_threads.count %></b>
-</div>
-            
-<%# 시간 %>
-<div align="center" class="col-0 col-sm-3 col-md-2 table_separate hidden-xs-down">
-    <%= "#{time_ago_in_words(post.created_at)} 전" %>
-</div>
-                        
-<%# 조회수 / 페이 %>
-<% if @bulletin.seeking_job == true || @bulletin.search_job == true %>
-    <div align="center" class="col-0 col-sm-2 col-md-1 table_separate hidden-xs-down">
-        <% if post.unique_impression_count >= 10000 %>
-            <%= "#{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
+
+<div class="row col-6 col-sm-7 col-md-5" style="margin-left: 15px;">     
+    <%# 댓글 %>
+    <% if not @bulletin.seeking_job == true || @bulletin.search_job == true %>
+        <div align="left" class="col-6 col-sm-3 col-md-2 arrow_left separate_board_inside" style="padding: 10px;">
+    <% else %>
+        <div align="left" class="col-5 col-sm-3 col-md-2 arrow_left separate_board_inside" style="padding: 10px;">
+    <% end %>
+        <i class="far fa-comments"></i> 
+        <% if post.comment_threads.count < 1000 %>
+            <%= post.comment_threads.count %>
         <% else %>
-            <%= "#{post.unique_impression_count}" %>
+            <small><b><%= post.comment_threads.count/1000 %> K</b></small>
         <% end %>
     </div>
-     
-    <div align="center" class="col-3 col-sm-0 col-md-0 table_separate hidden-sm-up">
-        <small>
-            <% if post.price_job < 10000 %>
-            <%= post.price_job %> 원
+                            
+    <%# 조회수 / 페이 %>
+    <% if not @bulletin.seeking_job == true || @bulletin.search_job == true %>
+        <div align="left" class="col-6 col-sm-4 col-md-3 separate_board_inside" style="padding: 10px;">
+            <i class="fas fa-eye"></i>
+            <% if post.unique_impression_count < 1000 %>
+                <%= "#{post.unique_impression_count}" %>
             <% else %>
-            <%= post.price_job/10000.to_f %> 만원
+                <small><b><%= "#{post.unique_impression_count/1000} K" %></b></small>
             <% end %>
-        </small>
-    </div>
-<% else %>
-    <div align="center" class="col-3 col-sm-2 col-md-1 table_separate">
-        <% if post.unique_impression_count >= 10000 %>
-            <%= "#{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
-        <% else %>
-            <%= "#{post.unique_impression_count}" %>
-        <% end %>
-    </div>
-<% end %>
-                
-<%# 좋아요 / 희망금액 %>
-<% if @bulletin.seeking_job == true || @bulletin.search_job == true %>
-    <div align="center" class="col-0 col-sm-2 col-md-1 table_separate hidden-xs-down">
+        </div>
+    <% else %>
+        <div align="left" class="col-0 col-sm-4 col-md-3 separate_board_inside hidden-xs-down" style="padding: 10px;">
+            <i class="fas fa-eye"></i>
+            <% if post.unique_impression_count < 1000 %>
+                <%= "#{post.unique_impression_count}" %>
+            <% else %>
+                <small><b><%= "#{post.unique_impression_count/1000} K" %></b></small>
+            <% end %>
+        </div>
+        
+        <div align="left" class="col-0 col-sm-0 col-md-4 separate_board_inside hidden-sm-down" style="padding: 10px;">
+            <small><%= "#{time_ago_in_words(post.created_at)} 전" %></small>
+        </div>
+        
+        <div align="left" class="col-7 col-sm-5 col-md-3 separate_board_inside hidden-md-up" style="padding: 10px;">
         <small>
             <% if post.price_job < 10000 %>
                 <%= post.price_job %> 원
-            <% else %>
+            <% elsif post.price_job < 10000000 %>
                 <%= post.price_job/10000.to_f %> 만원
+            <% else %>
+                <b><%= post.price_job/10000000.to_f %> 천만원</b>
             <% end %>
         </small>
-    </div>
-<% else %>
-    <div align="center" class="col-0 col-sm-2 col-md-1 table_separate hidden-xs-down">
-        <% if not @bulletin.info_room_trade == true || @bulletin.seeking_room == true || @bulletin.info_trade == true %>
-            <i class="far fa-thumbs-up" aria-hidden="true"></i> <%= post.get_upvotes.size %>
-        <% else %>
-            -
-        <% end %>
-    </div>
-<% end %>
+        </div>
+    <% end %>
+    
+    <%# 시간 %>
+    <% if not @bulletin.seeking_job == true || @bulletin.search_job == true %>
+        <div align="left" class="col-0 col-sm-5 col-md-4 separate_board_inside hidden-xs-down" style="padding: 10px;">
+            <small><%= "#{time_ago_in_words(post.created_at)} 전" %></small>
+        </div>
+    <% end %>
+                    
+    <%# 좋아요 / 희망금액 %>
+    <% if @bulletin.seeking_job == true || @bulletin.search_job == true %>
+        <div align="left" class="col-0 col-sm-3 col-md-3 separate_board_inside hidden-sm-down" style="padding: 10px;">
+            <small>
+                <% if post.price_job < 10000 %>
+                    <%= post.price_job %> 원
+                <% elsif post.price_job < 10000000 %>
+                    <%= post.price_job/10000.to_f %> 만원
+                <% else %>
+                    <b><%= post.price_job/10000000.to_f %> 천만원</b>
+                <% end %>
+            </small>
+        </div>
+    <% else %>
+        <div align="left" class="col-0 col-sm-0 col-md-3 separate_board_inside hidden-sm-down" style="padding: 10px;">
+            <% if not @bulletin.info_room_trade == true || @bulletin.seeking_room == true || @bulletin.info_trade == true %>
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> <%= post.get_upvotes.size %>
+            <% else %>
+                -
+            <% end %>
+        </div>
+    <% end %>
+</div>

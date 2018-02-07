@@ -44,75 +44,17 @@
   <%= render 'posts/board/board_show' %>
   
   <%# 다른 게시물들 %>
-  <div class="row" style="margin-top: 50px;">
-    <% if @bulletin.vote == true %>
-      <div class="col-0 col-sm-0 col-md-1 table_title hidden-sm-down" align="center">No</div>
-      <div class="col-0 col-sm-0 col-md-2 table_title hidden-sm-down" align="center">작성자</div>
-      <div class="col-6 col-sm-5 col-md-4 table_title" align="center">제목</div>
-      <div class="col-2 col-sm-2 col-md-1 table_title hidden-md-up" align="center">댓글</div>
-      <div class="col-0 col-sm-2 col-md-1 table_title hidden-xs-down" align="center">조회수</div>
-      <div class="col-4 col-sm-3 col-md-4 table_title" align="center">투표</div>
-    <% else %>
-      <div class="col-0 col-sm-0 col-md-1 table_title hidden-sm-down" align="center">No.</div>
-      
-      <% if @bulletin.info_no_named == true %>
-        <div class="col-0 col-sm-0 col-md-2 table_title hidden-sm-down" align="center">가상 닉네임</div>
-      <% else %>
-        <div class="col-0 col-sm-0 col-md-2 table_title hidden-sm-down" align="center"><%= @bulletin.title == "Foreigner Board" ? "Writer" : "작성자" %></div>
-      <% end %>
-      
-      <% if @bulletin.info_room_trade == true || @bulletin.info_trade == true %>
-        <div class="col-7 col-sm-6 col-md-4 table_title" align="center">제목</div>
-      <% else %>
-        <div class="col-7 col-sm-5 col-md-5 table_title" align="center"><%= @bulletin.title == "Foreigner Board" ? "Title" : "제목" %></div>
-      <% end %>
-      
-      <div class="col-0 col-sm-3 col-md-2 table_title hidden-xs-down" align="center"><%= @bulletin.title == "Foreigner Board" ? "Time" : "작성시간" %></div>
-      
-      <% if @bulletin.info_room_trade == true || @bulletin.info_trade == true %>
-        <div class="col-0 col-sm-0 col-md-1 table_title hidden-sm-down" align="center">조회수</div>
-      <% else %>
-        <div class="col-0 col-sm-2 col-md-1 table_title hidden-xs-down" align="center"><%= @bulletin.title == "Foreigner Board" ? "Hit" : "조회수" %></div>
-      <% end %>
-      
-      <% if not @bulletin.info_room_trade == true || @bulletin.info_trade == true %>
-        <div class="col-2 col-sm-0 col-md-0 table_title hidden-sm-up" align="center">
-          <small><%= @bulletin.title == "Foreigner Board" ? '<i class="far fa-comments"></i>'.html_safe : "댓글" %></small>
-        </div>
-      <% end %>
-      
-      <% if @bulletin.seeking_job == true || @bulletin.search_job == true %>
-        <div class="col-3 col-sm-0 col-md-0 table_title hidden-sm-up" align="center">페이</div>
-      <% else %>
-        <% if not @bulletin.info_room_trade == true || @bulletin.info_trade == true %>
-          <div class="col-3 col-sm-0 col-md-0 table_title hidden-sm-up" align="center"><small><%= @bulletin.title == "Foreigner Boad" ? "Hit" : "조회수" %></small></div>
-        <% end %>
-      <% end %>
-      
-      <% if @bulletin.seeking_job == true || @bulletin.search_job == true %>
-        <div class="col-0 col-sm-2 col-md-1 table_title hidden-xs-down" align="center">페이</div>
-      <% elsif @bulletin.info_room_trade == true || @bulletin.info_trade == true %>
-        <div class="col-5 col-sm-3 col-md-2 table_title" align="center">가격</div>
-      <% elsif @bulletin.title == "Foreigner Board" %>
-        <div class="col-0 col-sm-2 col-md-1 table_title hidden-xs-down" align="center"><i class="far fa-thumbs-up" aria-hidden="true"></i></div>
-      <% else %>
-        <div class="col-0 col-sm-2 col-md-1 table_title hidden-xs-down" align="center">따봉</div>
-      <% end %>
-    <% end %>
-  </div>
-  
+  <div style="margin-top: 60px;">
   <%# 전체 공지사항 %>
   <% @all_notices.each do |post| %>
     <% if post.all_notice == true %>
-      <div class="row table_notice">
+      <div class="row table_notice separate_board">
         <% # 공지 Badge %>
-        <div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down">
-          <%= content_tag(:span, '<span class="badge badge-warning">전체공지</span>'.html_safe, class: "etc", align: "center", style: "margin-top: 5px;") %>
+        <div align="center" class="col-0 col-sm-0 col-md-1 hidden-sm-down" style="padding: 10px;">
+          <%= content_tag(:span, '<span class="badge badge-warning">전체공지</span>'.html_safe, class: "etc", align: "center", style: "margin-top: 5px") %>
         </div>
         <% if @bulletin.vote == true %>
           <%= render "all_notices/list/board_all_notice_post_vote_index", post: post %>
-        <% elsif @bulletin.info_room_trade == true || @bulletin.info_trade == true %>
-          <%= render "all_notices/list/board_all_notice_post_room_trade_show", post: post %>
         <% else %>
           <%= render "all_notices/list/board_all_notice_post_index", post: post %>
         <% end %>
@@ -140,7 +82,7 @@
       <% end %>
     <% else %>
       <% @posts.each do |post| %>
-        <%= render 'posts/board/info_trade_showw', post: post %>
+        <%= render 'posts/board/info_trade_show', post: post %>
       <% end %>
     <% end %>
     
@@ -172,11 +114,15 @@
   <% elsif @bulletin.member_boss == true %>
     <% if current_user.has_role? :admin %>
       <% @posts.with_deleted.each do |post| %>
-        <%= render 'posts/board/special_member_index', post: post %>
+        <div class="row separate_board" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+          <%= render 'posts/board/normal_index', post: post %>
+        </div>
       <% end %>
     <% elsif current_user.has_role? :store_boss %>
       <% @posts.each do |post| %>
-        <%= render 'posts/board/special_member_index', post: post %>
+        <div class="row separate_board" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+          <%= render 'posts/board/normal_index', post: post %>
+        </div>
       <% end %>
     <% else %>
       <div class="alert alert-danger" role="alert" style="margin-top: 30px;">
@@ -194,11 +140,15 @@
   <% elsif @bulletin.member_univ == true %>
     <% if current_user.has_role? :admin %>
       <% @posts.with_deleted.each do |post| %>
-        <%= render 'posts/board/special_member_index', post: post %>
+        <div class="row separate_board" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+          <%= render 'posts/board/normal_index', post: post %>
+        </div>
       <% end %>
     <% elsif current_user.has_any_role? :univ_professor, :univ_official %>
       <% @posts.each do |post| %>
-        <%= render 'posts/board/special_member_index', post: post %>
+        <div class="row separate_board" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+          <%= render 'posts/board/normal_index', post: post %>
+        </div>
       <% end %>
     <% else %>
       <div class="alert alert-danger" role="alert" style="margin-top: 30px;">
@@ -252,13 +202,13 @@
     <%# 일반 게시글 %>
     <% if current_user.has_role? :admin %>
       <% @posts.with_deleted.each do |post| %>
-        <div class="row" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+        <div class="row separate_board" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
           <%= render 'posts/board/normal_index', post: post %>
         </div>
       <% end %>
     <% else %>
       <% @posts.each do |post| %>
-        <div class="row" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+        <div class="row separate_board" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
           <%= render 'posts/board/normal_index', post: post %>
         </div>
       <% end %>

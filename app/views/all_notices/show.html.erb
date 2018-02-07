@@ -78,19 +78,9 @@
         </div>
     <% end %>
     
+    <div style="margin-top: 60px;"></div>
+    
     <%# 다른 게시물들 %>
-    <div class="row" style="margin-top: 60px;">
-        <div class="col-0 col-sm-0 col-md-1 table_title hidden-sm-down" align="center">No.</div>
-        <div class="col-0 col-sm-6 col-md-7 table_title hidden-xs-down" align="center">제목</div>
-        <div class="col-0 col-sm-1 col-md-1 table_title hidden-xs-down" align="center"></div>
-        <div class="col-0 col-sm-3 col-md-2 table_title hidden-xs-down" align="center">작성시간</div>
-        <div class="col-0 col-sm-2 col-md-1 table_title hidden-xs-down" align="center">조회수</div>
-        <div class="col-7 col-sm-0 col-md-0 table_title hidden-sm-up" align="center"><%= link_to "공지사항", all_notices_path, style: "font-weight: bold" %></div>
-        <div class="col-2 col-sm-0 col-md-0 table_title hidden-sm-up" align="center"><small>댓글</small></div>
-        <div class="col-3 col-sm-0 col-md-0 table_title hidden-sm-up" align="center"><small>조회수</small></div>
-        <div class="col-md-1 hidden-sm-down"></div>
-    </div>
-
     <% if @all_notices.empty? %>
         <h2 class="text-center" style="margin-top: 30px;">게시글이 없습니다.</h2>
     <% else %>
@@ -98,9 +88,9 @@
         <%# 전체 공지사항 %>
         <% @all_notices.each do |post| %>
           <% if post.all_notice == true %>
-            <div class="row table_notice">
+            <div class="row table_notice separate_board">
               <% # 공지 Badge %>
-              <div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down">
+              <div align="center" class="col-0 col-sm-0 col-md-1 hidden-sm-down" style="padding: 10px;">
                 <%= content_tag(:span, '<span class="badge badge-warning">전체공지</span>'.html_safe, class: "etc", align: "center", style: "margin-top: 5px;") %>
               </div>
               <%= render "all_notices/list/board_all_notice_show", post: post %>
@@ -110,12 +100,14 @@
         
         <%# 일반 게시글 %>
         <% @all_notices.each do |post| %>
-            <div class="row" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+            <div class="row separate_board" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
                 <% # 글 번호 %>
-                <div align="center" class="col-0 col-sm-0 col-md-1 table_separate hidden-sm-down"><%= post.id %></div>
+                <div align="center" class="col-0 col-sm-0 col-md-1 hidden-sm-down" style="padding: 10px;">
+                    <%= post.id %>
+                </div>
                 
                 <% # 게시글 제목 %>
-                <div align="left" class="col-7 col-sm-5 col-md-7 etc table_separate">
+                <div align="left" class="col-6 col-sm-5 col-md-7 etc" style="padding: 10px;">
                     <%= link_to post do %>
                         <% if post.title_tag_permission == true %>
                             <%= content_tag(:div, post.title.html_safe, class: "etc") %>
@@ -124,23 +116,38 @@
                         <% end %>
                     <% end %>
                 </div>
-                      
-                <% # 댓글 %>
-                <div align="center" class="col-2 col-sm2 col-md-1 table_separate">
-                    <% if post.comment_permission == true %>
-                        <b><%= post.comment_threads.count %></b>
-                    <% else %>
-                        <b>×</b>
-                    <% end %>
-                </div>
                 
-                <% # 시간 %>
-                <div align="center" class="col-0 col-sm-3 col-md-2 table_separate hidden-xs-down"><%= "#{time_ago_in_words(post.created_at)} 전" %></div>
-                          
-                <% # 조회수 %>
-                <div align="center" class="col-3 col-sm-2 col-md-1 table_separate"><%= "#{post.impressionist_count}" %></div>
+                <div class="row col-6 col-sm-7 col-md-4" style="margin-left: 15px;">
+                    <% # 댓글 %>
+                    <div align="left" class="col-6 col-sm-3 col-md-4 arrow_left separate_board_inside">
+                        <i class="far fa-comments"></i>
+                        <% if post.comment_permission == true %>
+                            <% if post.comment_threads.count < 1000 %>
+                                <%= post.comment_threads.count %>
+                            <% else %>
+                                <small><b><%= post.comment_threads.count/1000 %> K</b></small>
+                            <% end %>
+                        <% else %>
+                            ×
+                        <% end %>
+                    </div>
+                    
+                    <% # 조회수 %>
+                    <div align="left" class="col-6 col-sm-3 col-md-4 separate_board_inside">
+                        <i class="fas fa-eye"></i>
+                        <% if post.impressionist_count < 1000 %>
+                            <%= "#{post.impressionist_count}" %>
+                        <% else %>
+                            <b><%= "#{post.impressionist_count/1000} K" %></b>
+                        <% end %>
+                    </div>
+                    
+                    <% # 시간 %>
+                    <div align="left" class="col-0 col-sm-6 col-md-4 separate_board_inside hidden-xs-down">
+                        <small><%= "#{time_ago_in_words(post.created_at)} 전" %></small>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-1 hidden-sm-down"></div>
         <% end %>
     <% end %>
     

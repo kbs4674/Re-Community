@@ -36,17 +36,26 @@
                     </div>
                     <div class="card-block">
                         <div align="left">
-                            <b><%= post.price != nil ? "#{post.price}" : "0" %> 원</b>
+                            <b>
+                            <% if post.price < 10000 %>
+                                <%= post.price != nil ? "#{post.price}" : "0" %> 원
+                            <% elsif post.price < 10000000 %>
+                                <%= post.price != nil ? "#{post.price/10000.to_f}" : "0" %> 만원
+                            <% elsif post.price < 100000000 %>
+                                <%= post.price != nil ? "#{post.price/10000000.to_f}" : "0" %> 천만원
+                            <% else %>
+                                <%= post.price != nil ? "#{post.price/10000000.to_f}" : "0" %> 억원
+                            <% end %>
+                            </b>
                         </div>
                         <hr/>
-                        
                         <div class="row" align="left">
                             <div class="offset-3 offset-sm-3 offset-md-3 col-3 col-sm-3 col-md-3">
                                 <i class="fas fa-eye"></i>
-                                <% if post.unique_impression_count >= 10000 %>
-                                    <%= "#{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
-                                <% else %>
+                                <% if post.unique_impression_count < 1000 %>
                                     <%= "#{post.unique_impression_count}" %>
+                                <% else %>
+                                    <small><b><%= "#{post.unique_impression_count/1000} K" %></b></small>
                                 <% end %>
                             </div>
                             <div class="col-3 col-sm-3 col-md-3">
@@ -100,21 +109,36 @@
                     </div>
                     <div class="card-block">
                         <div align="left">
-                            <b><%= post.price != nil ? "#{post.price}" : "0" %> 원</b>
+                            <b>
+                            <% if post.price < 10000 %>
+                                <%= post.price != nil ? "#{post.price}" : "0" %> 원
+                            <% elsif post.price < 10000000 %>
+                                <%= post.price != nil ? "#{post.price/10000.to_f}" : "0" %> 만원
+                            <% elsif post.price < 100000000 %>
+                                <%= post.price != nil ? "#{post.price/10000000.to_f}" : "0" %> 천만원
+                            <% else %>
+                                <%= post.price != nil ? "#{post.price/10000000.to_f}" : "0" %> 억원
+                            <% end %>
+                            </b>
                         </div>
                         <hr/>
                         
                         <div class="row" align="left">
                             <div class="offset-3 offset-sm-3 offset-md-3 col-3 col-sm-3 col-md-3">
                                 <i class="fas fa-eye"></i>
-                                <% if post.unique_impression_count >= 10000 %>
-                                    <%= "#{post.unique_impression_count/10000}만#{post.unique_impression_count%10000}" %>
-                                <% else %>
+                                <% if post.unique_impression_count < 1000 %>
                                     <%= "#{post.unique_impression_count}" %>
+                                <% else %>
+                                    <small><b><%= "#{post.unique_impression_count/1000} K" %></b></small>
                                 <% end %>
                             </div>
                             <div class="col-3 col-sm-3 col-md-3">
-                                <i class="far fa-comments"></i> <%= post.comment_threads.count %>
+                                <i class="far fa-comments"></i> 
+                                <% if post.comment_threads.count < 1000 %>
+                                    <%= post.comment_threads.count %>
+                                <% else %>
+                                    <small><b><%= post.comment_threads.count/1000 %> K</b></small>
+                                <% end %>
                             </div>
                             <div class="col-3 col-sm-3 col-md-3">
                                 <% if post.vender == '팝니다' %>

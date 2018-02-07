@@ -43,7 +43,7 @@
                 <td align="right">
                     IP주소
                     <% if can? :ip, @post %>
-                        <%= link_to "", "https://whois.kisa.or.kr/kor/whois/whois_.jsp?query=#{@post.remote_ip}", target: "_blank", class: "fas fa-check", style: "color: white; background-color: #949494; border-radius: 100%; padding: 3px; font-size: 10px;"%>
+                        <%= link_to "", "https://whois.kisa.or.kr/kor/whois/whois_.jsp?query=#{@post.remote_ip}", target: "_blank", class: "fas fa-check", style: "color: white; background-color: #949494; border-radius: 100%; padding: 3px; font-size: 10px;" %>
                     <% end %>
                 </td>
                 <td>
@@ -101,7 +101,7 @@
             <div class="col-6 col-sm-5">
                 IP주소
                 <% if can? :ip, @post %>
-                    <span class="badge badge-pill badge-default"><%= link_to "", "https://whois.kisa.or.kr/kor/whois/whois_.jsp?query=#{@post.remote_ip}", target: "_blank", class: "fas fa-check", style: "color: white"%></span>
+                    <%= link_to "", "https://whois.kisa.or.kr/kor/whois/whois_.jsp?query=#{@post.remote_ip}", target: "_blank", class: "fas fa-check", style: "color: white; background-color: #949494; border-radius: 100%; padding: 3px; font-size: 10px;" %>
                 <% end %>
             </div>
             <div class="col-6 col-sm-7">
