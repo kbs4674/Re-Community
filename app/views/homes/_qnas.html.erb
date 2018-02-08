@@ -4,30 +4,26 @@
         <% if qna.report_qnas.size >= qna.num %>
             <% if can? :for_admin, @qna %>
                 <%= link_to qna do %>
-                    <div class="row">
-                        <div class="col-1 col-sm-1 col-md-1"><%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "color: red; margin-left: 10px;") %></div>
-                        <% if qna.comment_qnas.count == 0 %>
-                            <div class="col-3 col-sm-3 col-md-3" style="margin-left: -10px;"><span class="badge badge-default">답변 대기</span></div>
-                        <% else %>
-                            <div class="col-3 col-sm-3 col-md-3" style="margin-left: -10px;"><span class="badge badge-success"><%= qna.comment_qnas.count %> 개의 답변</span></div>
-                        <% end %>
-                        <div class="col-7 col-sm-7 col-md-7"><%= content_tag(:span, " #{qna.title}", class: "etc", style: "color: red; font-weight: normal !important;") %></div>
-                    </div>
+                    <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "color: red; margin-left: 10px;") %>
+                    <% if qna.comment_qnas.count == 0 %>
+                        <span class="badge badge-default">답변 대기</span>
+                    <% else %>
+                        <span class="badge badge-success"><%= qna.comment_qnas.count %> 개의 답변</span>
+                    <% end %>
+                    <%= content_tag(:span, " #{qna.title}", class: "etc", style: "color: red; font-weight: normal !important;") %><br/>
                 <% end %>
             <% else %>
                 <font color="#6E6E6E" style="margin-left: 10px;"><i class="fas fa-caret-right"></i> <i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font><br/>
             <% end %>
         <% else %>
             <%= link_to qna do %>
-                <div class="row">
-                    <div class="col-1 col-sm-1 col-md-1"><%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "fetc", style: "font-weight: normal !important; margin-left: 10px;") %></div>
-                    <% if qna.comment_qnas.count == 0 %>
-                        <div class="col-3 col-sm-3 col-md-3" style="margin-left: -10px;"><span class="badge badge-default" style="padding-top: 5px;">답변 대기</span></div>
-                    <% else %>
-                        <div class="col-3 col-sm-3 col-md-3" style="margin-left: -10px;"><span class="badge badge-success" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span></div>
-                    <% end %>
-                    <div class="col-7 col-sm-7 col-md-7"><%= content_tag(:span, truncate( raw( sanitize(qna.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 20, :omission => "..."), class: "etc") %></div>
-                </div>
+                <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "font-weight: normal !important; margin-left: 10px;") %>
+                <% if qna.comment_qnas.count == 0 %>
+                    <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
+                <% else %>
+                    <span class="badge badge-success" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
+                <% end %>
+                <%= content_tag(:span, truncate( raw( sanitize(qna.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 20, :omission => "..."), class: "etc") %><br/>
             <% end %>
         <% end %>
     <% end %>
