@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   # 로그인 된 사용자만 접근 가능
-  before_action :authenticate_user!, only: [:new, :show, :edit]
-  skip_before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_user!, only: [:index, :new, :show, :edit]
+  #skip_before_action :authenticate_user!, only: [:index]
   
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :log_impression, :only=> [:show]
