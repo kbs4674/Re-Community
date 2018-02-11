@@ -1,5 +1,6 @@
 <% comments.order("created_at ASC").order(:cached_votes_up => :desc).each do |comment| %>  
 <div class="comments-show">
+  <div id="comment<%= comment.id %>"></div>
   <div class="comment">
     <%# PC에서만 보여지는 댓글 %>
     <div class="hidden-sm-down">
@@ -35,9 +36,11 @@
                       </div>
                 
                       <div class="col-md-10" align="right">
-                        <% if not (comment.report_comments.size >= comment.num) || (comment.comment_destroys.size >= 1) %>
-                          <span style="margin-right: 10px;"><%= link_to '<i class="fas fa-cut" aria-hidden="true"></i>'.html_safe, comment_report_comment_path(comment), :method => :post, data: { confirm: '한번 신고 요청 하시면 취소가 안됩니다. 정말 하시겠습니까??' }, class: "badge badge-pill badge-danger" %></span>
-                          <span style="margin-right: 10px;">|</span>
+                        <% if not current_user.is_report_comment?(comment) %>
+                          <% if not (comment.report_comments.size >= comment.num) || (comment.comment_destroys.size >= 1) %>
+                            <span style="margin-right: 10px;"><%= link_to '<i class="fas fa-cut" aria-hidden="true"></i>'.html_safe, comment_report_comment_path(comment), :method => :post, data: { confirm: '한번 신고 요청 하시면 취소가 안됩니다. 정말 하시겠습니까??' }, class: "badge badge-pill badge-danger" %></span>
+                            <span style="margin-right: 10px;">|</span>
+                          <% end %>
                         <% end %>
                         <span style="margin-right: 10px;"><a onclick="showHide('comment_<%= comment.id %>')" onfocus="this.blur()">답글</a></span>
                         <% if can? :destroy, comment %>
@@ -127,9 +130,11 @@
         </div>
   
         <div class="col-6 col-sm-6" align="right">
-        <% if not (comment.report_comments.size >= comment.num) || (comment.comment_destroys.size >= 1) %>
-          <span style="margin-right: 10px;"><%= link_to '<i class="fas fa-cut" aria-hidden="true"></i>'.html_safe, comment_report_comment_path(comment), :method => :post, data: { confirm: '한번 신고 요청 하시면 취소가 안됩니다. 정말 하시겠습니까??' }, class: "badge badge-pill badge-danger" %></span>
-          <span style="margin-right: 10px;">|</span>
+        <% if not current_user.is_report_comment?(comment) %>
+          <% if not (comment.report_comments.size >= comment.num) || (comment.comment_destroys.size >= 1) %>
+            <span style="margin-right: 10px;"><%= link_to '<i class="fas fa-cut" aria-hidden="true"></i>'.html_safe, comment_report_comment_path(comment), :method => :post, data: { confirm: '한번 신고 요청 하시면 취소가 안됩니다. 정말 하시겠습니까??' }, class: "badge badge-pill badge-danger" %></span>
+            <span style="margin-right: 10px;">|</span>
+          <% end %>
         <% end %>
         <span style="margin-right: 10px;"><a onclick="showHide('comment_<%= comment.id %>')" onfocus="this.blur()">답글</a></span>
         <% if can? :destroy, comment %>

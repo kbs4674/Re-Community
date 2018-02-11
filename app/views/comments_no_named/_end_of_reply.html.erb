@@ -1,6 +1,7 @@
 <% comments.order("created_at ASC").each do |comment| %>  
 <hr/>
 <div class="comments-show">
+  <div id="comment<%= comment.id %>"></div>
   <div class="comment">
     <div class="row" style="margin-top: 15px; margin-bottom: 15px;">
       <div class="col-6 col-sm-4 col-md-4 etc">
@@ -12,13 +13,15 @@
       </div>
 
       <div class="col-6 col-sm-8 col-md-8" align="right">
-        <% if not (comment.report_comments.size >= comment.num) || (comment.comment_destroys.size >= 1) %>
-          <span style="margin-right: 10px;"><%= link_to '<i class="fas fa-cut" aria-hidden="true"></i>'.html_safe, comment_report_comment_path(comment), :method => :post, data: { confirm: '한번 신고 요청 하시면 취소가 안됩니다. 정말 하시겠습니까??' }, class: "badge badge-pill badge-danger" %></span>
+        <% if not current_user.is_report_comment?(comment) %>
+          <% if not (comment.report_comments.size >= comment.num) || (comment.comment_destroys.size >= 1) %>
+            <span style="margin-right: 10px;"><%= link_to '<i class="fas fa-cut" aria-hidden="true"></i>'.html_safe, comment_report_comment_path(comment), :method => :post, data: { confirm: '한번 신고 요청 하시면 취소가 안됩니다. 정말 하시겠습니까??' }, class: "badge badge-pill badge-danger" %></span>
+            <span style="margin-right: 10px;">|</span>
+          <% end %>
         <% end %>
         <% if can? :destroy, comment %>
           <% if not comment.comment_destroys.size >= 1 %>
             <% if not comment.report_comments.size >= comment.num %>
-              <span style="margin-right: 10px;">|</span>
               <span><%= link_to "", comment_comment_destroys_path(comment), class: "fas fa-times", :method => :post, data: { confirm: "정말로 지우시겠습니까?" } %></span>
               <%#= link_to "", comment_path(comment), method: :delete, remote: false, data: { confirm: "정말로 지우시겠습니까?" }, class: "fas fa-times" %>
             <% elsif (comment.report_comments.size >= comment.num) && (current_user.has_role? :admin) %>

@@ -17,10 +17,10 @@ class CommentsController < ApplicationController
                                            link: request.referrer
     end
 
-    respond_to do |format|
+  respond_to do |format|
     if @comment.save
       make_child_comment
-      format.html  { redirect_to(request.referrer, :notice => '댓글이 작성되었습니다.') }
+      format.html  { redirect_to("#{request.referrer}#comment#{@comment.id}", :notice => '댓글이 작성되었습니다.') }
     else
       format.html  { redirect_to(request.referrer, :alert => '댓글 내용을 작성해주세요.') }
     end

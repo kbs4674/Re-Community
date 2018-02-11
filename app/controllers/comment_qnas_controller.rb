@@ -5,10 +5,17 @@ class CommentQnasController < ApplicationController
   def create
     @comment_qna = @qna.comment_qnas.new(comment_qna_params)
     @comment_qna.user_name = current_user.nickname
-    @comment_qna.save
     @new_notification = NewNotification.create! user: @comment_qna.user,
                                          content: "#{current_user.nickname} 님이 질문글에 답변하셨습니다.",
                                          link: qna_path(@qna)
+  
+    respond_to do |format|
+      if @comment_qna.save
+        format.html  { redirect_to("#{request.referrer}#comment#{@comment_qna.id}", :notice => '댓글이 작성되었습니다.') }
+      else
+        format.html  { redirect_to(request.referrer, :alert => '댓글 내용을 작성해주세요.') }
+      end
+    end
   end
 
   def destroy
