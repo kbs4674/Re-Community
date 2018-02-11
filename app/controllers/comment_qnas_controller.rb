@@ -8,7 +8,7 @@ class CommentQnasController < ApplicationController
     @comment_qna.save
     @new_notification = NewNotification.create! user: @comment_qna.user,
                                          content: "#{current_user.nickname} 님이 질문글에 답변하셨습니다.",
-                                         link: qna_path(@qna)
+                                         link: "#{qna_path(@qna)}#comment_qna_#{@comment_qna.id}"
   end
 
   def destroy
