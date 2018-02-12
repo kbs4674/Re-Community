@@ -28,6 +28,17 @@
     <p class="badge badge-pill badge-success hidden-xs-down" style="margin-top:20px; margin-bottom: 20px;"><i class="fa fa-clock-o" aria-hidden="true"></i> 현재 시간 </span> <span><%= Time.zone.now.strftime('%Y-%m-%d %H:%M:%S') %></p>
   </div>
   
+  <%# 최다 좋아요 %>
+  <div class="row notice" style="box-shadow: 2px 2px 2px 0 #dadada; background: #ffffc4;">
+    <ul class="rolling">
+      <% @qna_likes.each do |post| %>
+        <% if (post.get_upvotes.size >= 1) && (Time.now - post.created_at <= 20.days) %>
+          <li class="row"><%= render "qnas/board/like_index", post: post %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+  
   <%# 전체 공지사항 %>
   <% @all_notices.each do |post| %>
     <% if post.all_notice == true %>

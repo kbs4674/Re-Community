@@ -60,6 +60,8 @@ class PostsController < ApplicationController
     else
       @posts = Post.where(bulletin_id: @bulletin).order("created_at DESC").page(params[:page]).per(10)
     end
+    
+    @post_likes = Post.where(bulletin_id: @bulletin).order(:cached_votes_up => :desc)
   end
 
   def show

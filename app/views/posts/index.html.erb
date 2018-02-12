@@ -42,6 +42,19 @@
     </div>
   <% end %>
   
+  <%# 최다 좋아요 %>
+  <% if not @bulletin.info_trade == true || @bulletin.info_room_trade == true || @bulletin.seeking_job == true || @bulletin.search_job == true || @bulletin.vote == true || @bulletin.seeking_room == true %>
+    <div class="row notice" style="box-shadow: 2px 2px 2px 0 #dadada; background: #ffffc4;">
+      <ul class="rolling">
+        <% @post_likes.each do |post| %>
+          <% if (post.get_upvotes.size >= 10) && (Time.now - post.created_at <= 20.days) %>
+            <li class="row"><%= render "posts/board/like_index", post: post %></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
   <%# 전체 공지사항 %>
   <% @all_notices.each do |post| %>
     <% if post.all_notice == true %>

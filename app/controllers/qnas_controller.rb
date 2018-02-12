@@ -48,6 +48,7 @@ class QnasController < ApplicationController
   def index
     @all_notices = AllNotice.all
     @qnas = Qna.order("created_at DESC").page(params[:page]).per(10)
+    @qna_likes = Qna.order(:cached_votes_up => :desc)
   end
 
   # GET /qnas/1

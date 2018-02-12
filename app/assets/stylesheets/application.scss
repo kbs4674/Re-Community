@@ -224,6 +224,13 @@
       margin-top: 10px;
     }
     
+    /* 테이블 내 좋아요 게시글 강조 */
+    .table_like {
+      background-color: #fff;
+      border-left: 6px solid #f0ad4e;
+      word-wrap: break-word;
+    }
+    
     /* 테이블 내 전체 공지사항 게시글 강조 */
     .table_notice {
       background-color: #fff;
