@@ -43,7 +43,7 @@
   <% end %>
   
   <%# 최다 좋아요 %>
-  <% if not @bulletin.info_trade == true || @bulletin.info_room_trade == true || @bulletin.seeking_job == true || @bulletin.search_job == true || @bulletin.vote == true || @bulletin.seeking_room == true %>
+  <% if not @bulletin.info_trade == true || @bulletin.info_room_trade == true || @bulletin.seeking_job == true || @bulletin.search_job == true || @bulletin.vote == true || @bulletin.seeking_room == true || @bulletin.member_boss == true || @bulletin.member_univ == true || @bulletin.member_real_estate == true %>
     <div class="row notice" style="box-shadow: 2px 2px 2px 0 #dadada; background: #ffffc4;">
       <ul class="rolling">
         <% @post_likes.each do |post| %>

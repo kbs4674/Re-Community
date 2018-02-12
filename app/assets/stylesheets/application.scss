@@ -120,6 +120,13 @@
       text-align: center;
     }
     
+    /* 테이블 제목 구분 */
+    .table_title {
+    padding: 10px 10px 10px 10px;
+    border-bottom: 3px solid #D5D5D5;
+    background: #EFEFEF;
+    }
+    
     /* 내 정보 박스 디자인 */
     .main_board {
       background: #fff;
