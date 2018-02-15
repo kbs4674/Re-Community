@@ -14,7 +14,7 @@
     rake "posts:delete_all_post_1year"
  end
  
- every 1.minutes do
+ every 7.weeks, :at => '4:30 am' do
 #   command "/usr/bin/some_great_command"
 #   runner "MyModel.some_method"
     rake "naver_login_delete:delete_naver_login_1weeks"
