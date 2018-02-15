@@ -252,6 +252,9 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  # config.omniauth :kakao, ENV["KAKAO_CLIENT_ID"], :redirect_path => "/users/auth/kakao/callback"
+  # 카카오는 현재 버그가 있어서 사용 안함. (두번 째 로그인 때 이미 있는 아이디라면서 로그인이 안됨.)
+  config.omniauth :naver, ENV["NAVER_CLIENT_ID"], ENV["NAVER_ClIENT_SECRET"]
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

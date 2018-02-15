@@ -6,6 +6,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       # 닉네임 (http://itchipmunk.tistory.com/87)
       t.string :nickname,           null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
+      # SNS 연동로그인 애트리뷰트
+      t.string :name
       
       # 홈페이지 운영방침
       t.boolean :manage_agree, default: false

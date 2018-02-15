@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180128151737) do
+ActiveRecord::Schema.define(version: 20180215142817) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -139,6 +139,15 @@ ActiveRecord::Schema.define(version: 20180128151737) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "identities", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "provider"
+    t.string "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_identities_on_user_id"
+  end
+
   create_table "images", force: :cascade do |t|
     t.string "alt"
     t.string "hint"
@@ -262,9 +271,9 @@ ActiveRecord::Schema.define(version: 20180128151737) do
   end
 
   create_table "read_marks", force: :cascade do |t|
-    t.string "readable_type"
+    t.string "readable_type", null: false
     t.integer "readable_id"
-    t.string "reader_type"
+    t.string "reader_type", null: false
     t.integer "reader_id"
     t.datetime "timestamp"
     t.index ["readable_type", "readable_id"], name: "index_read_marks_on_readable_type_and_readable_id"
@@ -314,6 +323,7 @@ ActiveRecord::Schema.define(version: 20180128151737) do
     t.string "email", default: "", null: false
     t.string "nickname", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.string "name"
     t.boolean "manage_agree", default: false
     t.string "do_say", default: "", null: false
     t.string "profile_select", default: "profile_normal"

@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     post "/posts/:post_id/report", to: "reports#report_toggle"
   end
   
-  devise_for :users
+  devise_for :users, :controllers => { omniauth_callbacks: 'users/omniauth_callbacks' }
   
   #devise_for :users로 인해 별도의 라우터 설정 필요 171012 상열
   resources :users, :only => [:show]
