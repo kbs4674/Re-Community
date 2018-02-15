@@ -2,6 +2,8 @@
   <%= link_to t(".sign_up"), new_registration_path(resource_name), class: "btn btn-secondary" %>
 <% end -%>
 
+<a href="/users/auth/naver" onclick="window.open('http: //ooppa.tistory.com', '_blank', 'width=550 height=500')">테스트</a>
+
 <%- if devise_mapping.omniauthable? %>
   <hr/>
   <div class="row" style="margin-top: 10px;">
@@ -11,7 +13,7 @@
     </div>
     <div class="col-5 col-sm-5 col-md-5">
     <%- resource_class.omniauth_providers.each do |provider| %>
-      <%= link_to omniauth_authorize_path(resource_name, provider) do %>
+      <%= link_to omniauth_authorize_path(resource_name, provider), target: "_blank" do %>
         <%= content_tag(:div, "#{t('.sign_in_with_provider', provider: provider.to_s.titleize)}", style: "border: 1px solid #00c73c; padding: 10px; font-weight: bold; color: white; background: #00c73c;") %>
       <% end %>
     <% end -%>
