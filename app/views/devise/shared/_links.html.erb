@@ -3,7 +3,18 @@
 <% end -%>
 
 <%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to t('.sign_in_with_provider', provider: provider.to_s.titleize), omniauth_authorize_path(resource_name, provider) %><br />
-  <% end -%>
+  <hr/>
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-7 col-sm-7 col-md-7" align="left" style="border-right: 2px solid #F2F2F2">
+    Beta 운영 기간에만 제공됩니다!<br/>
+    쉽고 빠르게 로그인하세요!
+    </div>
+    <div class="col-5 col-sm-5 col-md-5">
+    <%- resource_class.omniauth_providers.each do |provider| %>
+      <%= link_to omniauth_authorize_path(resource_name, provider) do %>
+        <%= content_tag(:div, "#{t('.sign_in_with_provider', provider: provider.to_s.titleize)}", style: "border: 1px solid #00c73c; padding: 10px; font-weight: bold; color: white; background: #00c73c;") %>
+      <% end %>
+    <% end -%>
+    </div>
+  </div>
 <% end -%>
