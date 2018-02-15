@@ -10,13 +10,18 @@ Kangwon Univ. Community Prototype, Second Challenger
     1) 암호는 운영진 카카오톡 공지 참고.<br/>
     2) 이 작업을 안하면 이 레일즈 프로젝트가 안돌아감.
 2. 다음 명령어 실행할 것.<br/>
+1)Sunspot<br/>
 `rails g sunspot_rails:install`<br/>
 `rake sunspot:solr:start`<br/>
 `rake sunspot:reindex`<br/><br/>
+2)Whenever<br/>
 `whenever --update-crontab`<br/>
 `whenever`<br/>
 3. [Furthermore : 서버셋팅 전용]<br/>
-`rake db:migrate RAILS_ENV=production`
+1)Postgre DB 업데이트<br/>
+`sudo service postgresql95 restart`
+2)scss 최신화<br/>
+`rake assets:precompile RAILS_ENV=production`
 
 
 # 알아두면 좋은 지식
