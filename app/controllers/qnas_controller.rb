@@ -76,7 +76,7 @@ class QnasController < ApplicationController
   # POST /qnas.json
   def create
     @qna = Qna.new(qna_params)
-    @qna.num = 3 # 게시글 블라인드 경고 limit
+    #@qna.num = 3 # 게시글 블라인드 경고 limit
     @qna.user_name = current_user.nickname
 
     respond_to do |format|
