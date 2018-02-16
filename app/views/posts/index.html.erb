@@ -47,7 +47,7 @@
     <div class="row notice" style="box-shadow: 2px 2px 2px 0 #dadada; background: #ffffc4;">
       <ul class="rolling">
         <% @post_likes.each do |post| %>
-          <% if (post.get_upvotes.size >= 10) && (Time.now - post.created_at <= 20.days) %>
+          <% if (post.get_upvotes.size >= 1) && (Time.now - post.created_at <= 20.days) %>
             <li class="row"><%= render "posts/board/like_index", post: post %></li>
           <% end %>
         <% end %>

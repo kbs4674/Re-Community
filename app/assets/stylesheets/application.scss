@@ -61,6 +61,51 @@
       }
     }
     
+    /* 폰트 */
+    /* 나눔고딕 */
+    @font-face {
+    	font-family: 'NanumGothic', '나눔고딕', sas-serif !important;
+    	src: url('/font/NanumGothic.eot');
+    	src: local('※'), 
+    	url('/font/NanumGothic.woff') format('woff'), 
+    	url('/font/NanumGothic.ttf') format('truetype')
+  	}
+  	
+  	/* 나눔 손글씨 */
+  	@font-face {
+      font-family:'Nanum Pen Script';
+      font-style:normal;
+      font-weight:400;
+      src: url(//cdn.jsdelivr.net/font-nanum/1.0/nanumpenscript/v2/NanumPenScript-Regular.eot);
+      src: url(//cdn.jsdelivr.net/font-nanum/1.0/nanumpenscript/v2/NanumPenScript-Regular.eot?#iefix) format('embedded-opentype'),
+      url(//cdn.jsdelivr.net/font-nanum/1.0/nanumpenscript/v2/NanumPenScript-Regular.woff) format('woff'),
+      url(//cdn.jsdelivr.net/font-nanum/1.0/nanumpenscript/v2/NanumPenScript-Regular.ttf) format('truetype')
+    }
+  	
+  	/* 웹 페이지 기본 글씨체 */
+  	body{
+      font-family: 'NanumGothic', '나눔고딕', sas-serif;
+      font-size: 15px;
+  	}
+    
+    /* 초과된 댓글 숨김 */
+    .more_comment_list {
+      display:none;
+    }
+    
+    /* 댓글 더보기 버튼 */
+    .more_comment_button {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #67b8ff;
+    }
+    
+    /* 롤링 스크롤링 (최다 좋아요 기능 관련) */
+    .notice{ height:50px; overflow:hidden; }
+    .rolling{ position:relative; width:100%; height:auto; }
+    .rolling li{ width:100%; height:50px; line-height:50px; }
+    
     /* 구글 검색엔진 : 내용 지우기(X) 아이콘을 검색창 Form 안쪽으로 넣기 */
     div.gsc-clear-button {
       position: absolute;

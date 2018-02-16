@@ -102,6 +102,6 @@
 
 <% if comments.count > 10 %>
   <%= link_to "#", id: "load" do %>
-    <%= content_tag(:div, "댓글 더 보기 (+5)", align: "center", style: "padding: 10px; font-weight: bold; color: white; background: #67b8ff; margin-bottom: 30px;") %>
+    <%= content_tag(:div, "댓글 더 보기 (+5)", align: "center", class: "more_comment_button", style: "margin-bottom: 30px;") %>
   <% end %>
 <% end %>
