@@ -67,12 +67,12 @@
         <i class="far fa-user"></i>
           <%= render 'posts/special/nickname_post_index', post: post %>
         
-        <span>/</span>
+        <span style="margin-left: 10px; margin-right: 10px;">|</span>
         
         <% # 시간 %>
         <span> <i class="far fa-clock"></i> <%= "#{time_ago_in_words(post.created_at)} 전" %></span>
         
-        <span>/</span>
+        <span style="margin-left: 10px; margin-right: 10px;">|</span>
         
         <% # 게시판 작성 위치 %>
         <span>QnA 게시판</span>

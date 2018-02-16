@@ -61,13 +61,13 @@
   </div>
       
   <div style="float: left">
-  <% if current_user.is_report_qna?(@qna) %>
-    <i class="fas fa-exclamation" aria-hidden="true"></i> 신고 요청 완료
-  <% elsif @qna.report_qnas.size >= @qna.num %>
-    <i class="fas fa-exclamation" aria-hidden="true"></i> 블라인드 처리된 글임.
-  <% else %>
-    <%= link_to " 신고 요청", "/qnas/#{@qna.id}/report_qna", class: "badge badge-pill badge-danger fas fa-cut", :method => :qna, data: { confirm: '한번 신고 요청 하시면 취소가 안됩니다. 정말 하시겠습니까??' } %></span>
-  <% end %>
+    <% if current_user.is_report_qna?(@qna) %>
+      <i class="fas fa-exclamation" aria-hidden="true"></i> 신고 요청 완료
+    <% elsif @qna.report_qnas.size >= @qna.num %>
+      <i class="fas fa-exclamation" aria-hidden="true"></i> 블라인드 처리된 글임.
+    <% else %>
+      <%= link_to " 신고 요청", "/qnas/#{@qna.id}/report_qna", class: "badge badge-pill badge-danger fas fa-cut", :method => :qna, data: { confirm: '한번 신고 요청 하시면 취소가 안됩니다. 정말 하시겠습니까??' } %></span>
+    <% end %>
   </div>
   
   <br/><br/><br/>
@@ -114,11 +114,10 @@
   <% end %>
 
   <%# 다른 게시물들 %>
-  <div class="row" style="margin-top: 60px;"></div>
+  <div style="margin-top: 60px;"></div>
   <% if @qnas.empty? %>
     <h2 class="text-center" style="margin-top: 30px;">게시글이 없습니다.</h2>
   <% else %>
-    <div style="margin-top: 5px;"></div>
     <%# 전체 공지사항 %>
     <% @all_notices.each do |post| %>
       <% if post.all_notice == true %>
@@ -135,33 +134,32 @@
   <%# 일반 게시물 %>  
   <% @qnas.each do |qna| %>
     <div class="row separate_board" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
-
-    <div align="center" class="col-0 col-sm-0 col-md-1 hidden-sm-down" style="padding: 10px;">
-      <%= qna.id %>
-    </div>
-    
-    <%# 닉네임 %>
-    <div align="center" class="col-0 col-sm-0 col-md-2 hidden-sm-down etc" style="padding: 10px;">
-      <%= render 'posts/special/nickname_qna_index', qna: qna %>
-    </div>
-          
-    <% # 게시글 제목 %>
-    <div align="left" class="col-6 col-sm-5 col-md-4 etc" style="padding: 10px;">
-    <% if qna.report_qnas.size >= qna.num %>
-      <% if can? :for_admin, @qnas %>
-        <%= link_to qna do %>
-          <%= content_tag(:div, qna.title, class: "etc", style: "color: red") %>
+      <div align="center" class="col-0 col-sm-0 col-md-1 hidden-sm-down" style="padding: 10px;">
+        <%= qna.id %>
+      </div>
+      
+      <%# 닉네임 %>
+      <div align="center" class="col-0 col-sm-0 col-md-2 hidden-sm-down etc" style="padding: 10px;">
+        <%= render 'posts/special/nickname_qna_index', qna: qna %>
+      </div>
+            
+      <% # 게시글 제목 %>
+      <div align="left" class="col-6 col-sm-5 col-md-4 etc" style="padding: 10px;">
+      <% if qna.report_qnas.size >= qna.num %>
+        <% if can? :for_admin, @qnas %>
+          <%= link_to qna do %>
+            <%= content_tag(:div, qna.title, class: "etc", style: "color: red") %>
+          <% end %>
+        <% else %>
+          <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
         <% end %>
       <% else %>
-        <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
+        <%= link_to qna do %>
+          <%= content_tag(:div, qna.title, class: "etc") %>
+        <% end %>
       <% end %>
-    <% else %>
-      <%= link_to qna do %>
-        <%= content_tag(:div, qna.title, class: "etc") %>
-      <% end %>
-    <% end %>
-    </div>
-
+      </div>
+  
       <div class="row col-6 col-sm-7 col-md-5" style="margin-left: 15px;">
         <%# 댓글 %>
         <div align="left" class="col-12 col-sm-4 col-md-3 arrow_left separate_board_inside">
@@ -201,11 +199,12 @@
       <%= link_to "글 쓰기", new_qna_path, class: "btn btn-primary", style: "margin-top: 10px;" %>
     <% end %>
   </div>
-</div>
 
-<div class="d-flex flex-column", style="margin-bottom: 10px; margin-top: -50px;">
-    <%= paginate @qnas %>
-</div>
-
-<%= render 'search-form/qna_search' %>
+  <div class="d-flex flex-column", style="margin-bottom: 10px; margin-top: -50px;">
+      <%= paginate @qnas %>
+  </div>
+  
+  <div style="margin-top: 100px; margin-bottom: 100px;">
+    <%= render 'search-form/qna_search' %>
+  </div>
 </div>
