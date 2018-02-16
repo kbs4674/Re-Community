@@ -55,8 +55,6 @@ class PostsController < ApplicationController
 
     if (@bulletin.info_room_trade == true || @bulletin.info_trade == true)
       @posts = Post.where(bulletin_id: @bulletin).order("created_at DESC").page(params[:page]).per(6)
-    elsif (@bulletin.main_hidden == true)
-      @posts = Post.where(bulletin_id: @bulletin).order("created_at DESC").page(params[:page]).per(5)
     else
       @posts = Post.where(bulletin_id: @bulletin).order("created_at DESC").page(params[:page]).per(10)
     end
@@ -67,7 +65,7 @@ class PostsController < ApplicationController
   def show
     @bulletin = Bulletin.find(params[:bulletin_id])
     @all_notices = AllNotice.all
-    @posts = Post.where(bulletin_id: @bulletin).order("created_at DESC").page(params[:page]).per(10)
+    @posts = Post.where(bulletin_id: @bulletin).order("created_at DESC").page(params[:page]).per(5)
     
     # 대댓글
     if current_user.has_role? :admin

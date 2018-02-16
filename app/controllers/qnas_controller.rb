@@ -47,14 +47,14 @@ class QnasController < ApplicationController
   # GET /qnas.json
   def index
     @all_notices = AllNotice.all
-    @qnas = Qna.order("created_at DESC").page(params[:page]).per(10)
+    @qnas = Qna.order("created_at DESC").page(params[:page]).per(5)
     @qna_likes = Qna.order(:cached_votes_up => :desc)
   end
 
   # GET /qnas/1
   # GET /qnas/1.json
   def show
-    @qnas = Qna.order("created_at DESC").page params[:page]
+    @qnas = Qna.order("created_at DESC").page(params[:page]).per(5)
     @all_notices = AllNotice.all
     
     #댓글

@@ -37,7 +37,13 @@
       <% if qna.comment_qnas.count == 0 %>
         <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
       <% else %>
-        <span class="badge badge-info" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
+        <span class="badge badge-info" style="padding-top: 5px;">
+          <% if qna.comment_qnas.count < 1000 %>
+            <%= qna.comment_qnas.count %> 개의 답변
+          <% else %>
+            <%= qna.comment_qnas.count/1000 %> K개의 답변
+          <% end %>  
+        </span>
       <% end %>
     </div>
   
@@ -57,16 +63,7 @@
         <% end %>
       <% end %>
     </div>
-  
-    <%# 답변갯수(댓글), 태블릿 이하 화면 크기에서만 보임. %>
-    <div align="left" class="col-5 col-sm-2 col-md-0 hidden-md-up">
-      <% if qna.comment_qnas.count == 0 %>
-        <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
-      <% else %>
-        <span class="badge badge-info" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
-      <% end %>
-    </div>
-
+    
     <%# 닉네임 %>
     <div class="col-md-6 hidden-sm-down"></div>
     <div align="left" class="col-4 col-sm-3 col-md-2 etc">
@@ -142,7 +139,7 @@
           <% end %>
         <% else %>
           <%= link_to qna do %>
-            <%= content_tag(:div, truncate( raw( sanitize(qna.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 110, :omission => "..."), class: "etc") %>
+            <%= content_tag(:div, truncate( raw( sanitize(qna.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 110, :omission => "..."), class: "etc") %><br/>
           <% end %>
         <% end %>
       </div>
@@ -152,7 +149,13 @@
         <% if qna.comment_qnas.count == 0 %>
           <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
         <% else %>
-          <span class="badge badge-info" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
+          <span class="badge badge-info" style="padding-top: 5px;">
+            <% if qna.comment_qnas.count < 1000 %>
+              <%= qna.comment_qnas.count %> 개의 답변
+            <% else %>
+              <%= qna.comment_qnas.count/1000 %> K개의 답변
+            <% end %>
+          </span>
         <% end %>
       </div>
   

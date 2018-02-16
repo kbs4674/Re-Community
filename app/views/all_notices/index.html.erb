@@ -78,12 +78,16 @@
   <% end %>
 
   <% if can? :new, @all_notices %>
-    <div align="right"><%= link_to "글 쓰기", new_all_notice_path, class: "btn btn-primary", style: "margin-top: 30px;" %></div>
+    <div align="right" style="margin-top: 10px;">
+      <%= link_to "글 쓰기", new_all_notice_path, class: "btn btn-primary" %>
+    </div>
   <% end %>
   
-  <div class="d-flex flex-column", style="margin-bottom: 10px; margin-top: 20px">
+  <div class="d-flex flex-column", style="margin-bottom: 10px; margin-top: 30px">
     <%= paginate @all_notices %>
   </div>
   
-  <%= render 'search-form/all_notice_search' %>
+  <div style="margin-top: 20px; margin-bottom: 100px;">
+    <%= render 'search-form/all_notice_search' %>
+  </div>
 </div>

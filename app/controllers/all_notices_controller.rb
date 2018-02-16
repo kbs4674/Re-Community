@@ -20,7 +20,7 @@ class AllNoticesController < ApplicationController
   # GET /all_notices/1
   # GET /all_notices/1.json
   def show
-    @all_notices = AllNotice.order("created_at DESC").page(params[:page]).per(10)
+    @all_notices = AllNotice.order("created_at DESC").page(params[:page]).per(5)
     
     # 댓글
     @all_notice = AllNotice.find(params[:id])

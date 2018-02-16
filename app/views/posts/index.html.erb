@@ -220,16 +220,16 @@
   <div align="right">
     <% if @bulletin.promote_store == true %>
       <% if (user_signed_in?) && (current_user.has_role? :store_boss) %>
-        <%= link_to "글 쓰기", new_bulletin_post_path(@bulletin), class: "btn btn-primary", style: "margin-top: -10px;" %>
+        <%= link_to "글 쓰기", new_bulletin_post_path(@bulletin), class: "btn btn-primary" %>
       <% end %>
     <% elsif @bulletin.member_boss == true || @bulletin.member_univ == true || @bulletin.member_real_estate == true %>
       <% if (user_signed_in?) && (current_user.has_role? :admin) %>
-        <%= link_to "글 쓰기", new_bulletin_post_path(@bulletin), class: "btn btn-primary", style: "margin-top: -10px;" %>
+        <%= link_to "글 쓰기", new_bulletin_post_path(@bulletin), class: "btn btn-primary" %>
       <% end %>
     <% else %>
       <% if user_signed_in? %>
         <% if (not current_user.has_any_role? :block_yellow, :block_red) || (current_user.has_role? :admin) %>
-          <%= link_to "#{@bulletin.title == "Foreigner Board" ? "Write" : "글 쓰기"}", new_bulletin_post_path(@bulletin), class: "btn btn-primary", style: "margin-top: -10px;" %>
+          <%= link_to "#{@bulletin.title == "Foreigner Board" ? "Write" : "글 쓰기"}", new_bulletin_post_path(@bulletin), class: "btn btn-primary" %>
         <% end %>
       <% end %>
     <% end %>
@@ -239,5 +239,7 @@
     <%= paginate @posts %>
   </div>
   
-  <%= render 'search-form/post_search' %>
+  <div style="margin-top: 20px; margin-bottom: 100px;">
+    <%= render 'search-form/post_search' %>
+  </div>
 </div>
