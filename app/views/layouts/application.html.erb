@@ -74,6 +74,7 @@
       .rolling li{width:100%; height:50px; line-height:50px;}
     </style>
     
+    <%# 롤링 스크롤링(최다 좋아요 전용) %>
     <script>
       $(document).ready(function(){
       	var height =  $(".notice").height(); //공지사항의 높이값을 구해주고~~
@@ -101,6 +102,21 @@
       });		
     </script>
     
+    <script>
+    $(function(){
+      $(".more_comment_list").slice(0, 10).show(); // select the first ten
+      $("#load").click(function(e){ // click event for load more
+        e.preventDefault();
+        $(".more_comment_list:hidden").slice(0, 5).show(); // select next 10 hidden divs and show them           
+      });
+    });
+    </script>
+    
+    <style>
+    .more_comment_list {
+      display:none;
+    }
+    </style>
   </head>
 
   <body style="margin: 0px 0px 0px 0px">
