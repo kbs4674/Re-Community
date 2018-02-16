@@ -38,7 +38,7 @@ vote = Bulletin.create( title: "토론장", content: "어떤 한 주제에 대�
 request = Bulletin.create( title: "홈페이지 피드백 게시판", content: "홈페이지 피드백에 대해 남길 수 있는 게시판", main_hidden: "true", user_id: "1" ) #post id : 6
 
 #익명
-nonamed = Bulletin.create( title: "익명 게시판", content: "익명 게시판", user_id: "1", info_no_named: "true", main_hidden: "true" ) #post id : 7
+nonamed = Bulletin.create( title: "익명 자유게시판", content: "익명 자유게시판", user_id: "1", info_no_named: "true", main_hidden: "true" ) #post id : 7
 love = Bulletin.create( title: "연애상담 게시판", content: "연애상담 게시판 입니다.", user_id: "1", main_hidden: "true", info_no_named: "true" ) #post id : 8
 get_it_out = Bulletin.create( title: "고민고백 게시판", content: "고민고백 게시판 입니다.", user_id: "1", main_hidden: "true", info_no_named: "true" ) #post id : 9
 
