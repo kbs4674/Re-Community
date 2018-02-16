@@ -19,7 +19,7 @@ Kangwon Univ. Community Prototype, Second Challenger
 `whenever`<br/>
 3. [Furthermore : 서버셋팅 전용]<br/>
 1)Postgre DB 업데이트<br/>
-`sudo service postgresql95 restart`
+`sudo service postgresql95 restart`<br/><br/>
 2)scss 최신화<br/>
 `rake assets:precompile RAILS_ENV=production`
 
