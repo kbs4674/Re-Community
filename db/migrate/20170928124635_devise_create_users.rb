@@ -10,7 +10,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.string :name
       
       # 댓글 자동 펼침 허용 여부
-      t.boolean :comment_auto_open, default: false
+      t.boolean :comment_auto_open, default: true
       
       # 홈페이지 운영방침
       t.boolean :manage_agree, default: false
