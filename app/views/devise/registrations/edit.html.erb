@@ -1,13 +1,13 @@
 <body class="home_gray">
   <% #경고메세지 출력 (아이디, 비밀번호 잘못 칠 시 등등...) %>
   <% if alert %>
-    <div style="margin-top: 5px;">&nbsp</div>
+    <div style="margin-top: 30px;">&nbsp</div>
     <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #FF4B5C; color: white; border-radius: 0; margin-bottom: 0; border: 0">
     <%= alert %>
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     </div>
     <% elsif notice %>
-    <div style="margin-top: 5px;">&nbsp</div>
+    <div style="margin-top: 30px;">&nbsp</div>
     <div class="alert alert-danger tlert-dismissible fade show text-center" style="padding: 10px; background-color: #43AC6A; color: white; border-radius: 0; margin-bottom: 0; border: 0">
     <%= notice %>
     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -113,9 +113,16 @@
       <%= f.submit t('.update'), class: "btn btn-primary" %> <%= link_to "돌아가기", :back, class: "btn btn-secondary" %>
       <br/><br/>
     </div>
-    <% end %>
-  
+    
+    <hr class="col-5 col-sm-5 col-md-5" style="margin-bottom: 30px;">
+    <div class="field col-12 col-sm-11 col-md-10" align="left">
+      <h3><i class="fas fa-cog" aria-hidden="true"></i> 계정 편의 설정</h3>
+      <ul>
+        <li style="margin-left: 30px; list-style-type: square"><%= f.label :comment_auto_open, "게시글 댓글 자동 펼침" %> <%= f.check_box :comment_auto_open %></li>
+      </ul>
+    </div>
     <hr class="col-5 col-sm-5 col-md-5"><br/>
+    <% end %>
     
     <div class="field col-12 col-sm-11 col-md-10" align="left" style="margin-bottom: 60px;">
       <h3><i class="fas fa-sign-out-alt" aria-hidden="true"></i> 계정 삭제하기</h3>

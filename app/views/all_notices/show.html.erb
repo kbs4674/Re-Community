@@ -64,7 +64,7 @@
     
     <% if @all_notice.comment_permission == true %>
         <% if user_signed_in? %>
-            <%= render partial: "comments_votable/template", locals: {commentable: @all_notice, new_comment: @comment} %>
+            <%= render partial: "all_notices/list/comment_vote_list" %>
         <% else %>
             <div align="center" style="margin-top: 30px;">
         <hr/>

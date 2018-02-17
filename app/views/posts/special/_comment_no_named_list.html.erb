@@ -1,0 +1,16 @@
+<hr/>
+<h6>
+    <%= link_to "javascript:function()", :onclick => "showHide('comment_list')", :onfocus => "this.blur()" do %>
+        <div class="row">
+            <%= content_tag(:div, "#{@bulletin.title == "Foreigner Board" ? " Reply (#{ @post.comment_threads.count })" : " 댓글 (#{ @post.comment_threads.count })"}", class: "far fa-comments col-8 col-sm-8 col-md-8", align: "left" ) %>
+            <%= content_tag(:div, "", align: "right", class: "fas fa-sort-down col-4 col-sm-4 col-md-4" ) %>
+        </div>
+    <% end %>
+</h6>
+<% if current_user.comment_auto_open == true %>
+<div id="comment_list" style="display:display;">
+<% else %>
+<div id="comment_list" style="display:none;">
+<% end %>
+    <%= render partial: "comments_no_named/template", locals: {commentable: @post, new_comment: @comment} %>
+</div>

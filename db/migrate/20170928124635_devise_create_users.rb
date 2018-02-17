@@ -9,6 +9,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       # SNS 연동로그인 애트리뷰트
       t.string :name
       
+      # 댓글 자동 펼침 허용 여부
+      t.boolean :comment_auto_open, default: false
+      
       # 홈페이지 운영방침
       t.boolean :manage_agree, default: false
 

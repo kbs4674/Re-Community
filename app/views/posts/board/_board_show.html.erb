@@ -305,45 +305,45 @@
 
 <% if can? :for_admin, @post %>
     <% if @bulletin.info_no_named == true %>
-        <%= render partial: "comments_no_named/template", locals: {commentable: @post, new_comment: @comment} %>
+        <%= render partial: "posts/special/comment_no_named_list" %>
     <% elsif @bulletin.member_boss == true %>
         <% if current_user.has_any_role? :store_boss, :admin %>
-            <%= render partial: "comments/template", locals: {commentable: @post, new_comment: @comment} %>
+            <%= render partial: "posts/special/comment_list" %>
         <% else %>
             <hr/>
             <center><font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true" style="margin-top: 20px;"></i> 허가받지 않은 유저는 댓글 확인이 불가합니다.</font></center>
         <% end %>
     <% elsif @bulletin.member_univ == true %>
         <% if current_user.has_any_role? :univ_official, :univ_professor, :admin %>
-            <%= render partial: "comments/template", locals: {commentable: @post, new_comment: @comment} %>
+            <%= render partial: "posts/special/comment_list" %>
         <% else %>
             <hr/>
             <center><font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true" style="margin-top: 20px;"></i> 허가받지 않은 유저는 댓글 확인이 불가합니다.</font></center>
         <% end %>
     <% else %>
-        <%= render partial: "comments/template", locals: {commentable: @post, new_comment: @comment} %>
+        <%= render partial: "posts/special/comment_list" %>
     <% end %>
     <% elsif @post.reports.size >= @post.num %>
         <hr/>
         <center><font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true" style="margin-top: 20px;"></i> 블라인드 처리된 게시글에서는 댓글 확인이 불가합니다.</font></center>
     <% else %>
         <% if @bulletin.info_no_named == true %>
-            <%= render partial: "comments_no_named/template", locals: {commentable: @post, new_comment: @comment} %>
+            <%= render partial: "posts/special/comment_no_named_list" %>
         <% elsif @bulletin.member_boss == true %>
             <% if current_user.has_any_role? :store_boss, :admin %>
-            <%= render partial: "comments/template", locals: {commentable: @post, new_comment: @comment} %>
+            <%= render partial: "posts/special/comment_list" %>
         <% else %>
             <hr/>
             <center><font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true" style="margin-top: 20px;"></i> 허가받지 않은 유저는 댓글 확인이 불가합니다.</font></center>
         <% end %>
     <% elsif @bulletin.member_univ == true %>
         <% if current_user.has_any_role? :univ_official, :univ_professor, :admin %>
-            <%= render partial: "comments/template", locals: {commentable: @post, new_comment: @comment} %>
+            <%= render partial: "posts/special/comment_list" %>
         <% else %>
             <hr/>
             <center><font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true" style="margin-top: 20px;"></i> 허가받지 않은 유저는 댓글 확인이 불가합니다.</font></center>
         <% end %>
     <% else %>
-        <%= render partial: "comments/template", locals: {commentable: @post, new_comment: @comment} %>
+        <%= render partial: "posts/special/comment_list" %>
     <% end %>
 <% end %>
