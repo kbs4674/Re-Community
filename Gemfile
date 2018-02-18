@@ -110,6 +110,9 @@ gem 'sunspot_rails'
 # Gem : 자동기능 수행(자동삭제 관련 때문에 필요.)
 gem 'whenever', require: false
 
+# Gem : PostgreSQL DB 백업
+gem 'backup'
+
 # Gem : 외부 로그인(네이버)
 gem 'omniauth'
 gem 'omniauth-naver'
