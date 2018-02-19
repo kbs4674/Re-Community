@@ -324,7 +324,7 @@ ActiveRecord::Schema.define(version: 20180215142817) do
     t.string "nickname", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "name"
-    t.boolean "comment_auto_open", default: false
+    t.boolean "comment_auto_open", default: true
     t.boolean "manage_agree", default: false
     t.string "do_say", default: "", null: false
     t.string "profile_select", default: "profile_normal"

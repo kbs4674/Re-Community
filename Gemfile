@@ -111,7 +111,7 @@ gem 'sunspot_rails'
 gem 'whenever', require: false
 
 # Gem : PostgreSQL DB 백업
-gem 'backup'
+gem 'backup', '~> 5.0.0.beta.2'
 
 # Gem : 외부 로그인(네이버)
 gem 'omniauth'
