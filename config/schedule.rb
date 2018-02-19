@@ -9,7 +9,7 @@
 #
 
 # [1년 단위] 이미 삭제된 게시글 완전히 삭제
-every 30.day, :at => '4:30 am' do
+every 30.days, :at => '4:30 am' do
 #   command "/usr/bin/some_great_command"
 #   runner "MyModel.some_method"
     rake "posts:delete_all_post_1year"
@@ -23,7 +23,8 @@ every 7.weeks, :at => '4:30 am' do
 end
  
 # [1주일 단위] 자료 백업
-every 7.weeks, :at => '4:50 am' do
+every 1.minutes do
+#every 7.weeks, :at => '4:50 am' do
     command "backup perform --trigger knu_backup"
 end
 
