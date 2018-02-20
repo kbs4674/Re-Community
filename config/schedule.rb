@@ -24,8 +24,8 @@ end
  
 # [1주일 단위] 자료 백업
 every 7.weeks, :at => '4:50 am' do
-#every 7.weeks, :at => '4:50 am' do
-    command "cd /home/ec2-user/knu;backup perform --trigger knu_backup"
+#every 1.minutues do
+    command "cd /home/ec2-user/knu;backup perform --trigger weekly_db_backup"
 end
 
 # every 4.days do
