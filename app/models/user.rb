@@ -69,7 +69,7 @@ class User < ApplicationRecord
           user = User.new(
             name: auth.info.name,
             email: email ? auth.info.email : "#{auth.uid}@#{auth.provider}.com",
-            nickname: "#{auth.uid}@#{auth.provider}",
+            nickname: "#{(0...8).map { (65 + rand(26)).chr }.join}@#{auth.provider}",
             password: Devise.friendly_token[0,20]
           )            
           user.save!
