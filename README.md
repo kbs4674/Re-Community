@@ -13,15 +13,23 @@ Kangwon Univ. Community Prototype, Second Challenger
 1)Sunspot<br/>
 `rails g sunspot_rails:install`<br/>
 `rake sunspot:solr:start`<br/>
-`rake sunspot:reindex`<br/><br/>
+`rake sunspot:reindex`<br/>
 2)Whenever<br/>
 `whenever --update-crontab`<br/>
 `whenever`<br/>
 3. [Furthermore : 서버셋팅 전용]<br/>
 1)Postgre DB 업데이트<br/>
-`sudo service postgresql95 restart`<br/><br/>
-2)scss 최신화<br/>
-`rake assets:precompile RAILS_ENV=production`
+`sudo service postgresql95 restart`<br/>
+2)Sunspot 최신화<br/>
+`RAILS_ENV=production rails g sunspot_rails:install`<br/>
+`RAILS_ENV=production rake sunspot:solr:start`<br/>
+`RAILS_ENV=production rake sunspot:reindex`<br/>
+3)scss 최신화<br/>
+`rake assets:precompile RAILS_ENV=production`<br/>
+4)자료백업 셋팅<br/>
+<a href="https://blog.naver.com/kbs4674/221212397227" target="_blank">https://blog.naver.com/kbs4674/221212397227</a><br/>
+`backup generate:model --trigger weekly_db_backup --databases="postgresql" --storages="s3" --compressor="gzip" --notifiers="mail"`
+<br/><br/>
 
 
 # 알아두면 좋은 지식
