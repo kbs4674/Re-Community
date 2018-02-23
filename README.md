@@ -28,7 +28,12 @@ Kangwon Univ. Community Prototype, Second Challenger
 `rake assets:precompile RAILS_ENV=production`<br/>
 4)자료백업 셋팅<br/>
 <a href="https://blog.naver.com/kbs4674/221212397227" target="_blank">https://blog.naver.com/kbs4674/221212397227</a><br/>
-`backup generate:model --trigger weekly_db_backup --databases="postgresql" --storages="s3" --compressor="gzip" --notifiers="mail"`
+`backup generate:model --trigger weekly_db_backup --databases="postgresql" --storages="s3" --compressor="gzip" --notifiers="mail"`<br/>
+`backup check`<br/>
+`backup perform --trigger weekly_db_backup`<br/>
+5)whenever 셋팅<br/>
+`whenever --update-crontab`<br/>
+`whenever`<br/>
 <br/><br/>
 
 
