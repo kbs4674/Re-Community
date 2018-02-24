@@ -168,11 +168,12 @@
         <%= f.label :"거래 방법" %><br/>
         <%= f.text_field :trade_way, id: :post_trade_way, class: "form-control no-border job_inform", required: "true", style: "background: #d9f6fd", placeholder: "후불택배 거래" %>
       </div>
-      <div class="col-12 col-sm-12 col-md-3">
+      <div class="col-12 col-sm-12 col-md-4">
         <span style="color: red">*</span>
         <%= f.label :"연락처 혹은 SNS계정", class:"hidden-sm-down" %>
         <%= f.label :"연락처 혹은 SNS계정", class:"hidden-md-up", style: "margin-top: 15px;" %>
         <%= f.text_field :sns, id: :post_sns, class: "form-control no-border job_inform", style: "background: #d9f6fd", required: "true", value: "#{@post.sns != nil ? "#{@post.sns}" : nil}" , placeholder: "ex. (카톡) kangwon4674" %>
+        <small>정보 보호를 위해 1주일이 지나면 자동으로 비공개 처리.</small>
       </div>
       <div class="col-12 col-sm-12 col-md-6">
         <%= f.label :"상품 사진 썸네일 업로드", style: "margin-top: 15px;" %><br/>
