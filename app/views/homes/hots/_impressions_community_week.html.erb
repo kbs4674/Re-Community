@@ -31,10 +31,10 @@
                 <%# 조회수 %>
                 <div align="left" style="padding: 10px 10px 10px 10px; border-bottom: 1px solid white;" class="col-2 col-sm-1 col-md-1 etc">
                     <i style: "font-weight: normal !important; margin-left: 10px;" class="fas fa-eye" aria-hidden="true"></i>
-                    <% if post.comment_threads.count < 1000 %>
-                        <%= post.comment_threads.count %>
+                    <% if post.unique_impression_count < 1000 %>
+                        <%= "#{post.unique_impression_count}" %>
                     <% else %>
-                        <small><b><%= post.comment_threads.count/1000 %> K</b></small>
+                        <small><b><%= "#{post.unique_impression_count/1000} K" %></b></small>
                     <% end %>
                 </div>
             </div>
