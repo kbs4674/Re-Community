@@ -35,7 +35,14 @@
                 </td>
                 <td>
                     <div style="margin-left: 30px;">
-                        <%= @post.sns %>
+                        <% if Time.now - @post.created_at <= 30.seconds %>
+                            <small>1주일 넘은 게시글에는 연락처가 비공개 됩니다.</small>
+                        <% elsif (Time.now - @post.created_at <= 30.seconds) && (current_user.has_role? :admin) %>
+                            <%= @post.sns %>
+                            <br/><small style="color: gray">* 다른 열람자들 한테는 해당 연락처 정보가 보이지 않습니다.</small>
+                        <% else %>
+                            <%= @post.sns %>
+                        <% end %>
                     </div>
                 </td>
             </tr>
