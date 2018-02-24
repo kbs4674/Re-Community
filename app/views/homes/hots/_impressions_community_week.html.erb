@@ -2,7 +2,8 @@
 <% @hot_posts.each do |post| %>
     <% if not (post.bulletin.title == "사장님 공지사항") || (post.bulletin.title == "학교 관계자 공지사항") || (post.bulletin.title == "우리가게 홍보") %>
         <%# 현재시간에서 1주일 이전 게시글 %>
-        <% if Time.now - post.created_at <= 7.days %>
+        <%# if Time.now - post.created_at <= 7.days %>
+        <% if Time.now - post.created_at <= 10.seconds %>
             <div class="row">
                 <%# 제목 %>
                 <div class="offset-1 offset-sm-1 offset-md-0"></div>
