@@ -35,7 +35,7 @@
                     <% end %>
                 </div>
                 <%# 천지관(백반) 식단 %>
-                <div class="tab-pane fade show active" id="chun" role="tabpanel">
+                <div class="tab-pane fade" id="chun" role="tabpanel">
                     <% @chun_meal.first(1).each_with_index do |meal, index| %> 
                         <div class="col-1 col-sm-1 col-md-12">
                             <%= meal %>
@@ -43,7 +43,7 @@
                     <% end %>
                 </div>
                 <%# 기숙사 재정생활관 식단 %>
-                <div class="tab-pane fade show active" id="normal" role="tabpanel">
+                <div class="tab-pane fade" id="normal" role="tabpanel">
                     <% @dormitory_meal_normal.first(1).each_with_index do |meal, index| %> 
                         <div class="col-1 col-sm-1 col-md-12">
                             <%= meal %>
