@@ -153,7 +153,7 @@ class HomesController < ApplicationController
         if Time.now.strftime("%A") == "Monday"
             if (Time.now.strftime("%H").to_i >= 0 && Time.now.strftime("%H").to_i <= 9 )
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(2) > td:nth-child(2)')
-            elsif (Time.now.strftime("%H").to_i >= 10 && Time.now.strftime("%H").to_i <= 14 )
+            elsif (Time.now.strftime("%H").to_i > 9 && Time.now.strftime("%H").to_i <= 14 )
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(2) > td:nth-child(3)')
             else
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(2) > td:nth-child(4)')
@@ -163,7 +163,7 @@ class HomesController < ApplicationController
         if Time.now.strftime("%A") == "Tuesday"
             if (Time.now.strftime("%H").to_i >= 0 && Time.now.strftime("%H").to_i <= 9 )
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(3) > td:nth-child(2)')
-            elsif (Time.now.strftime("%H").to_i >= 10 && Time.now.strftime("%H").to_i <= 14 )
+            elsif (Time.now.strftime("%H").to_i > 9 && Time.now.strftime("%H").to_i <= 14 )
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(3) > td:nth-child(3)')
             else
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(3) > td:nth-child(4)')
@@ -173,7 +173,7 @@ class HomesController < ApplicationController
         if Time.now.strftime("%A") == "Wednesday"
             if (Time.now.strftime("%H").to_i >= 0 && Time.now.strftime("%H").to_i <= 9 )
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(4) > td:nth-child(2)')
-            elsif (Time.now.strftime("%H").to_i >= 10 && Time.now.strftime("%H").to_i <= 14 )
+            elsif (Time.now.strftime("%H").to_i > 9 && Time.now.strftime("%H").to_i <= 14 )
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(4) > td:nth-child(3)')
             else
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(4) > td:nth-child(4)')
@@ -183,7 +183,7 @@ class HomesController < ApplicationController
         if Time.now.strftime("%A") == "Thursday"
             if (Time.now.strftime("%H").to_i >= 0 && Time.now.strftime("%H").to_i <= 9 )
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(5) > td:nth-child(2)')
-            elsif (Time.now.strftime("%H").to_i >= 10 && Time.now.strftime("%H").to_i <= 14 )
+            elsif (Time.now.strftime("%H").to_i > 9 && Time.now.strftime("%H").to_i <= 14 )
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(5) > td:nth-child(3)')
             else
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(5) > td:nth-child(4)')
@@ -193,7 +193,7 @@ class HomesController < ApplicationController
         if Time.now.strftime("%A") == "Friday"
             if (Time.now.strftime("%H").to_i >= 0 && Time.now.strftime("%H").to_i <= 9 )
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(6) > td:nth-child(2)')
-            elsif (Time.now.strftime("%H").to_i >= 10 && Time.now.strftime("%H").to_i <= 14 )
+            elsif (Time.now.strftime("%H").to_i > 9 && Time.now.strftime("%H").to_i <= 14 )
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(6) > td:nth-child(3)')
             else
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(6) > td:nth-child(4)')
@@ -203,7 +203,7 @@ class HomesController < ApplicationController
         if Time.now.strftime("%A") == "Saturday"
             if (Time.now.strftime("%H").to_i >= 0 && Time.now.strftime("%H").to_i <= 9 )
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(7) > td:nth-child(2)')
-            elsif (Time.now.strftime("%H").to_i >= 10 && Time.now.strftime("%H").to_i <= 14 )
+            elsif (Time.now.strftime("%H").to_i > 9 && Time.now.strftime("%H").to_i <= 14 )
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(7) > td:nth-child(3)')
             else
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(7) > td:nth-child(4)')
@@ -213,7 +213,7 @@ class HomesController < ApplicationController
         if Time.now.strftime("%A") == "Sunday"
             if (Time.now.strftime("%H").to_i >= 0 && Time.now.strftime("%H").to_i <= 9 )
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(8) > td:nth-child(2)')
-            elsif (Time.now.strftime("%H").to_i >= 10 && Time.now.strftime("%H").to_i <= 14 )
+            elsif (Time.now.strftime("%H").to_i > 9 && Time.now.strftime("%H").to_i <= 14 )
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(8) > td:nth-child(3)')
             else
                 dormitory_meal_normal = doc4.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(8) > td:nth-child(4)')
@@ -221,12 +221,12 @@ class HomesController < ApplicationController
         end
         @dormitory_meal_normal = dormitory_meal_normal.map { |cur| cur.text }
         
-        #크롤링(nokogiri) : 강원대학교(춘천)캠퍼스 재정생활관 학식
+        #크롤링(nokogiri) : 강원대학교(춘천)캠퍼스 BTL생활관 학식
         # 월요일 식단
         if Time.now.strftime("%A") == "Saturday"
             if (Time.now.strftime("%H").to_i >= 0 && Time.now.strftime("%H").to_i <= 9 )
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(2) > td:nth-child(2)')
-            elsif (Time.now.strftime("%H").to_i >= 10 && Time.now.strftime("%H").to_i <= 14 )
+            elsif (Time.now.strftime("%H").to_i > 9 && Time.now.strftime("%H").to_i <= 14 )
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(2) > td:nth-child(3)')
             else
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(2) > td:nth-child(4)')
@@ -236,7 +236,7 @@ class HomesController < ApplicationController
         if Time.now.strftime("%A") == "Tuesday"
             if (Time.now.strftime("%H").to_i >= 0 && Time.now.strftime("%H").to_i <= 9 )
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(3) > td:nth-child(2)')
-            elsif (Time.now.strftime("%H").to_i >= 10 && Time.now.strftime("%H").to_i <= 14 )
+            elsif (Time.now.strftime("%H").to_i > 9 && Time.now.strftime("%H").to_i <= 14 )
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(3) > td:nth-child(3)')
             else
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(3) > td:nth-child(4)')
@@ -246,7 +246,7 @@ class HomesController < ApplicationController
         if Time.now.strftime("%A") == "Wednesday"
             if (Time.now.strftime("%H").to_i >= 0 && Time.now.strftime("%H").to_i <= 9 )
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(4) > td:nth-child(2)')
-            elsif (Time.now.strftime("%H").to_i >= 10 && Time.now.strftime("%H").to_i <= 14 )
+            elsif (Time.now.strftime("%H").to_i > 9 && Time.now.strftime("%H").to_i <= 14 )
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(4) > td:nth-child(3)')
             else
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(4) > td:nth-child(4)')
@@ -256,7 +256,7 @@ class HomesController < ApplicationController
         if Time.now.strftime("%A") == "Thursday"
             if (Time.now.strftime("%H").to_i >= 0 && Time.now.strftime("%H").to_i <= 9 )
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(5) > td:nth-child(2)')
-            elsif (Time.now.strftime("%H").to_i >= 10 && Time.now.strftime("%H").to_i <= 14 )
+            elsif (Time.now.strftime("%H").to_i > 9 && Time.now.strftime("%H").to_i <= 14 )
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(5) > td:nth-child(3)')
             else
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(5) > td:nth-child(4)')
@@ -266,7 +266,7 @@ class HomesController < ApplicationController
         if Time.now.strftime("%A") == "Friday"
             if (Time.now.strftime("%H").to_i >= 0 && Time.now.strftime("%H").to_i <= 9 )
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(6) > td:nth-child(2)')
-            elsif (Time.now.strftime("%H").to_i >= 10 && Time.now.strftime("%H").to_i <= 14 )
+            elsif (Time.now.strftime("%H").to_i > 9 && Time.now.strftime("%H").to_i <= 14 )
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(6) > td:nth-child(3)')
             else
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(6) > td:nth-child(4)')
@@ -276,7 +276,7 @@ class HomesController < ApplicationController
         if Time.now.strftime("%A") == "Saturday"
             if (Time.now.strftime("%H").to_i >= 0 && Time.now.strftime("%H").to_i <= 9 )
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(7) > td:nth-child(2)')
-            elsif (Time.now.strftime("%H").to_i >= 10 && Time.now.strftime("%H").to_i <= 14 )
+            elsif (Time.now.strftime("%H").to_i > 9 && Time.now.strftime("%H").to_i <= 14 )
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(7) > td:nth-child(3)')
             else
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(7) > td:nth-child(4)')
@@ -284,11 +284,11 @@ class HomesController < ApplicationController
         end
         # 일요일 식단
         if Time.now.strftime("%A") == "Sunday"
-            if (Time.now.strftime("%H").to_i >= 0 && Time.now.strftime("%H").to_i <= 9 )
+            if (Time.now.strftime("%H").to_i > 0 && Time.now.strftime("%H").to_i <= 9 )
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(8) > td:nth-child(2)')
-            elsif (Time.now.strftime("%H").to_i >= 10 && Time.now.strftime("%H").to_i <= 14 )
+            elsif (Time.now.strftime("%H").to_i > 9 && Time.now.strftime("%H").to_i <= 14 )
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(8) > td:nth-child(3)')
-            else
+            elsif (Time.now.strftime("%H").to_i > 14 && Time.now.strftime("%H").to_i <= 0 )
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(8) > td:nth-child(4)')
             end
         end

@@ -55,7 +55,7 @@
                 <div class="col-1 col-sm-1 col-md-12">
                   <a href="<%= @kangwon_notice_link[index] %>" target="_blank">
                     <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "font-weight: normal !important;") %>
-                    <%= content_tag(:span, truncate( raw( sanitize(notice, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 40, :omission => "..."), class: "etc") %>
+                    <%= content_tag(:span, truncate( raw( sanitize(notice, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 35, :omission => "..."), class: "etc") %>
                   </a>
                 </div>
               <% end %>
