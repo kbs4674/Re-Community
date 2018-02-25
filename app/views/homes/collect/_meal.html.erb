@@ -28,7 +28,7 @@
             <div class="tab-content" style="margin-top: -40px;">
                 <%# 백록관(백반) 식단 %>
                 <div class="tab-pane fade show active" id="back" role="tabpanel">
-                    <% @dormitory_meal_normal.first(1).each_with_index do |meal, index| %> 
+                    <% @back_meal.first(1).each_with_index do |meal, index| %> 
                         <div class="col-1 col-sm-1 col-md-12">
                             <%= meal %>
                         </div>
@@ -36,7 +36,7 @@
                 </div>
                 <%# 천지관(백반) 식단 %>
                 <div class="tab-pane fade show active" id="chun" role="tabpanel">
-                    <% @dormitory_meal_normal.first(1).each_with_index do |meal, index| %> 
+                    <% @chun_meal.first(1).each_with_index do |meal, index| %> 
                         <div class="col-1 col-sm-1 col-md-12">
                             <%= meal %>
                         </div>
