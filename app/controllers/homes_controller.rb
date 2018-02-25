@@ -288,7 +288,7 @@ class HomesController < ApplicationController
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(8) > td:nth-child(2)')
             elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(8) > td:nth-child(3)')
-            elsif (Time.zone.now.strftime("%H").to_i > 14 && Time.zone.now.strftime("%H").to_i <= 0 )
+            else
                 dormitory_meal_BTL = doc4.css('#foodtab2 > table.table_type01 > tr:nth-child(8) > td:nth-child(4)')
             end
         end
