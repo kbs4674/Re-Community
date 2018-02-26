@@ -111,14 +111,15 @@
     <nav class="navbar navbar-toggleable-md fixed-top" color-on-scroll="-1">
     <% #원본 <nav class="navbar navbar-toggleable-md fixed-top navbar-transparent" color-on-scroll="50"> %>
       <div class="container">
-        <div class="navbar-translate">
+        <div class="navbar-translate" style="width: 300px;">
         <button class="navbar-toggler navbar-toggler-right navbar-burger" style="margin-top: 15px;" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-bar"></span>
           <span class="navbar-toggler-bar"></span>
           <span class="navbar-toggler-bar"></span>
         </button>
-        <%= link_to(image_tag("/img/logo(temp).png", style: "width: 150px; margin-top: -20px;"), "/", class: "navbar-brand hidden-lg-up") %>
-        <%= link_to(image_tag("/img/logo(temp).png", style: "width: 170px; margin-top: 0px;"), "/", class: "hidden-md-down") %>
+        <b><%= link_to "강원대 커뮤니티", "/", style: "font-weight: bold" %></b>
+        <%#= link_to(image_tag("/img/logo(temp).png", style: "width: 150px; margin-top: -20px;"), "/", class: "navbar-brand hidden-lg-up") %>
+        <%#= link_to(image_tag("/img/logo(temp).png", style: "width: 170px; margin-top: 0px;"), "/", class: "hidden-md-down") %>
         </div>
         <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav ml-auto">

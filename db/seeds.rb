@@ -59,7 +59,3 @@ for_boss = Bulletin.create( title: "사장님 공지사항", content: "사장님
 for_boss = Bulletin.create( title: "학교 관계자 공지사항", content: "학교 관계자 분들께 소식을 전해드리는 게시판.", user_id: "1", main_hidden: "true", member_univ: "true" ) #post id : 17
 
 request = Bulletin.create( title: "홈페이지 피드백 게시판", content: "홈페이지 피드백에 대해 남길 수 있는 게시판", main_hidden: "true", user_id: "1" ) #post id : 18
-
-#게시글 작성
-notice1 = AllNotice.create( title: "안녕하세요, 관리자 입니다.", content: "현재 이 홈페이지는..<br/>아직 개발중인 홈페이지다보니 홈페이지 내 버그가 있거나, 매번 데이터가 예고없이 삭제가 될 수 있습니다.<br/><br/>이 점 양해 부탁드립니다.", user_id: "1", notice: "false", all_notice: "true", comment_permission: "true", title_tag_permission: "true")
-notice1 = AllNotice.create( title: "모든 피드백은 환영입니다..", content: "피드백을 주시면 언제든지 저어어엉말 긍정적으로 검토할게요 ㅠ_ㅠ", user_id: "1", notice: "false", all_notice: "true", comment_permission: "true", title_tag_permission: "true")
