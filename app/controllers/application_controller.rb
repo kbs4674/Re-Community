@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
  
   # Devise 설정
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :email, :password, :do_say, :manage_agree, :profile_select, :profile_icon, :profile_banner, :comment_auto_open])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:nickname, :email, :password, :current_password, :do_say, :manage_agree, :profile_select, :profile_icon, :profile_banner, :comment_auto_open])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :email, :password, :do_say, :manage_agree, :profile_select, :profile_icon, :profile_banner, :comment_auto_open, :transfer])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:nickname, :email, :password, :current_password, :do_say, :manage_agree, :profile_select, :profile_icon, :profile_banner, :comment_auto_open, :transfer])
   end
   
   # 게시판 IP 알아내기

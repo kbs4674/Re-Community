@@ -25,6 +25,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       # 닉네임 배너 이미지
       t.string :profile_banner
       
+      # 교통수단 설정
+      t.string :transfer
+      
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
