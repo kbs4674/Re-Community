@@ -1,0 +1,37 @@
+<div class="row" style="padding: 5px; margin-left: 0px;">
+  <% posts.order("created_at DESC").first(2).each do |post| %>
+  <div style="margin-left: 10px;"></div>
+    <% if post.reports.size >= post.num %>
+      <% if can? :for_admin, post %>
+        <%= link_to bulletin_post_path(post.bulletin, post) do %>
+          <div style="position: relative;">
+            <div class="panel-body"><%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "180px", height: "120px;" %></div>
+              <div align="center" class="image_overfext etc">
+                <b><%= content_tag(:div, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 50, :omission => "..."), class: "etc", style: "color: red") %></b>
+              </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div style="position: relative;">
+          <div class="panel-body"><%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "180px", height: "120px;" %></div>
+            <div align="center" class="image_overfext etc">
+              <b style="color: yellow">열람 제한(블라인드)</b>
+            </div>
+        </div>
+      <% end %>
+    <% else %>
+      <%= link_to bulletin_post_path(post.bulletin, post) do %>
+        <div style="position: relative;">
+          <% if post.image.present? %>
+            <div class="panel-body"><%= image_tag ("#{post.image}"), class: "card-img-top", width: "180px", height: "120px;" %></div>
+          <% else %>
+            <div class="panel-body"><%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "180px", height: "120px;" %></div>
+          <% end %>
+          <div align="center" class="image_overfext etc">
+            <b><%= content_tag(:div, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 50, :omission => "...", style: "color: red"), class: "etc") %></b>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

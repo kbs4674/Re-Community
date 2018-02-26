@@ -27,7 +27,7 @@
                 <div class="tab-pane fade show active" id="no_named_free" role="tabpanel">
                     <% @bulletins.each do |bulletin| %>
                       <% if bulletin.title == "익명 자유게시판" %>
-                        <%= render "homes/posts_no_named", title: bulletin.title, posts: bulletin.posts %>
+                        <%= render "homes/collect/posts_no_named", title: bulletin.title, posts: bulletin.posts %>
                       <% end %>
                     <% end %>
                 </div>
@@ -35,7 +35,7 @@
                 <div class="tab-pane" id="no_named_love_song" role="tabpanel">
                   <% @bulletins.each do |bulletin| %>
                     <% if bulletin.title == "연애상담 게시판" %>
-                      <%= render "homes/posts_no_named", title: bulletin.title, posts: bulletin.posts %>
+                      <%= render "homes/collect/posts_no_named", title: bulletin.title, posts: bulletin.posts %>
                     <% end %>
                   <% end %>
                 </div>
@@ -43,7 +43,7 @@
                 <div class="tab-pane" id="no_named_get_it_out" role="tabpanel">
                   <% @bulletins.each do |bulletin| %>
                     <% if bulletin.title == "고민고백 게시판" %>
-                      <%= render "homes/posts_no_named", title: bulletin.title, posts: bulletin.posts %>
+                      <%= render "homes/collect/posts_no_named", title: bulletin.title, posts: bulletin.posts %>
                     <% end %>
                   <% end %>
                 </div>

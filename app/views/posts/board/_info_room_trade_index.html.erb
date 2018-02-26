@@ -99,7 +99,11 @@
                     <%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "318px", height: "179px;" %>
                 <% end %>
                 <div align="center" class="image_overfext etc">
-                    <b><%= content_tag(:div, post.location, class: "etc") %></b>
+                    <% if post.reports.size >= post.num %>
+                        <b style="color: yellow">열람 제한(블라인드)</b>
+                    <% else %>
+                        <b><%= content_tag(:div, post.location, class: "etc") %></b>
+                    <% end %>
                 </div>
             </div>
             <div class="card-block">

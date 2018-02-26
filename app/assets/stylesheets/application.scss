@@ -315,6 +315,22 @@
       padding: 5px;
     }
     
+    /* 메인 : 타이틀 영역(학사일정) */
+    .home_index_title_univ_schedule {
+      margin-top: 10px;
+      background-color: #ddffe4;
+      width: 100%;
+      padding: 5px;
+    }
+    
+    /* 메인 : 타이틀 영역(주간 핫 이슈) */
+    .home_index_title_issue {
+      margin-top: 10px;
+      background-color: #ffbfbf;
+      width: 100%;
+      padding: 5px;
+    }
+    
     /* 메인화면 로그인정보 : 알림 */
     .main_account_ring_button{ 
     background-color: #ff6f6f;
@@ -330,14 +346,14 @@
     
     /* 메인화면 로그인정보 : Non알림/기본 */
     .main_account_non_button{ 
-    background-color: #72caad;
-    color:white;
+    background-color: #37b58b;
+    color: white;
     padding: 10px 30px 10px 30px;
     }
     
     .main_account_non_button:hover{ 
-    background-color: #37b58b;
-    color:white;
+    background-color: #72caad;
+    color: white;
     padding: 10px 30px 10px 30px;
     }
     
