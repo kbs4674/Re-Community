@@ -1,0 +1,42 @@
+<table width="100%">
+    <tr>
+        <td>
+            <div class="nav-tabs-navigation">
+                <div class="nav-tabs-wrapper">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#store" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">우리가게 홍보</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#real_estate" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">복덕방</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <br/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <!-- Tab panes -->
+            <div class="tab-content" style="margin-top: -40px;">
+                <%# 우리가게 홍보%>
+                <div class="tab-pane fade show active" id="store" role="tabpanel">
+                    <% @bulletins.each do |bulletin| %>
+                      <% if bulletin.title == "우리가게 홍보" %>
+                        <%= render "homes/collect/homes_store", title: bulletin.title, posts: bulletin.posts %>
+                      <% end %>
+                    <% end %>
+                </div>
+                <%# 복덕방 %>
+                <div class="tab-pane fade" id="real_estate" role="tabpanel">
+                  <% @bulletins.each do |bulletin| %>
+                    <% if bulletin.title == "복덕방" %>
+                      <%= render "homes/collect/homes_room_trade", title: bulletin.title, posts: bulletin.posts %>
+                    <% end %>
+                  <% end %>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>

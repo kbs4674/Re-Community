@@ -1,4 +1,5 @@
 <div class="row" style="padding: 5px; margin-left: 0px;">
+  <div class="hidden-md-up" style="margin-left: 10px;"></div>
   <% posts.order("created_at DESC").first(2).each do |post| %>
   <div style="margin-left: 10px;"></div>
     <% if post.reports.size >= post.num %>

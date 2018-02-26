@@ -97,7 +97,9 @@ class HomesController < ApplicationController
         doc3 = Nokogiri::HTML(open("http://knucoop.kangwon.ac.kr/weekly_menu_01.asp"))
         #월요일 식단
         if Time.zone.now.strftime("%A") == "Monday"
-            if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 14 )
+            if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+                chun_meal = doc3.css('table > tbody > tr:nth-child(2) > td:nth-child(3)')
+            elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
                 chun_meal = doc3.css('table > tbody > tr:nth-child(5) > td:nth-child(2)')
             else
                 chun_meal = doc3.css('table > tbody > tr:nth-child(8) > td:nth-child(2)')
@@ -105,7 +107,9 @@ class HomesController < ApplicationController
         end
         #화요일 식단
         if Time.zone.now.strftime("%A") == "Tuesday"
-            if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 14 )
+            if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+                chun_meal = doc3.css('table > tbody > tr:nth-child(2) > td:nth-child(4)')
+            elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
                 chun_meal = doc3.css('table > tbody > tr:nth-child(5) > td:nth-child(3)')
             else
                 chun_meal = doc3.css('table > tbody > tr:nth-child(8) > td:nth-child(3)')
@@ -113,7 +117,9 @@ class HomesController < ApplicationController
         end
         #수요일 식단
         if Time.zone.now.strftime("%A") == "Wednesday"
-            if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 14 )
+            if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+                chun_meal = doc3.css('table > tbody > tr:nth-child(2) > td:nth-child(5)')
+            elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
                 chun_meal = doc3.css('table > tbody > tr:nth-child(5) > td:nth-child(4)')
             else
                 chun_meal = doc3.css('table > tbody > tr:nth-child(8) > td:nth-child(4)')
@@ -121,7 +127,9 @@ class HomesController < ApplicationController
         end
         #목요일 식단
         if Time.zone.now.strftime("%A") == "Thursday"
-            if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 14 )
+            if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+                chun_meal = doc3.css('table > tbody > tr:nth-child(2) > td:nth-child(6)')
+            elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
                 chun_meal = doc3.css('table > tbody > tr:nth-child(5) > td:nth-child(5)')
             else
                 chun_meal = doc3.css('table > tbody > tr:nth-child(8) > td:nth-child(5)')
@@ -129,7 +137,9 @@ class HomesController < ApplicationController
         end
         #금요일 식단
         if Time.zone.now.strftime("%A") == "Friday"
-            if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 14 )
+            if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+                chun_meal = doc3.css('table > tbody > tr:nth-child(2) > td:nth-child(7)')
+            elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
                 chun_meal = doc3.css('table > tbody > tr:nth-child(5) > td:nth-child(6)')
             else
                 chun_meal = doc3.css('table > tbody > tr:nth-child(8) > td:nth-child(6)')
@@ -137,10 +147,12 @@ class HomesController < ApplicationController
         end
         #토요일 식단
         if Time.zone.now.strftime("%A") == "Saturday"
-            if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 14 )
+            if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+                chun_meal = doc3.css('table > tbody > tr:nth-child(2) > td:nth-child(8)')
+            elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
                 chun_meal = doc3.css('table > tbody > tr:nth-child(5) > td:nth-child(7)')
             else
-                chun_meal = doc3.css('table > tbody > tr:nth-child(8) > td:nth-child(8)')
+                chun_meal = doc3.css('table > tbody > tr:nth-child(8) > td:nth-child(7)')
             end
         end
         @chun_meal = chun_meal.map { |cur| cur.text }

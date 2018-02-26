@@ -1,0 +1,58 @@
+<%# 전체 공지사항 %>
+<div class="col-12 col-sm-12 home_notice">
+  <div class="home_index_title table_notice">
+    <%= link_to '<b style="margin-left: 10px; margin-bottom: 5px;"><i class="fas fa-bullhorn"></i> 공지사항</b>'.html_safe, all_notices_path %>
+  </div>
+    <%= render "homes/notices" %>
+</div>
+
+<%# QNA 게시판 목록 (render 처리) %>
+<div class="col-12 col-sm-12 home_index" style="height: 165px;">
+  <%= render "homes/qnas" %>
+</div>
+
+<%# 답변(좋아요 순) %>
+<div class="col-12 col-sm-12 home_index notice" style="height: 50px; margin-top: 20px; line-height: 50px;">
+  <ul class="rolling">
+    <% @hot_qna_replys.each do |qna| %>
+      <li class="row"><%= render "homes/hots/likes_qna_comment", qna: qna %></li>
+    <% end %>
+  </ul>
+</div>
+
+<%# 경춘천 출발 전철 정보 %>
+<div align="right" style="background: url('/img/station_logo.png') no-repeat; background-position: -280px 12px; background-color: white; border-radius: 30px; padding: 10px; margin-top: 20px;">
+  <span style="margin-right: 30px;">남춘천 발 <b style="color: #42b9ff">경춘선 전철</b> | </span><br/>
+  <% @subway_time.first(1).each_with_index do |info, index| %>
+    <small><%= content_tag(:span, truncate( raw( sanitize(info, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc", style: "margin-right: 30px;") %></small>
+  <% end %>
+</div>
+
+<%# 자유게시판 %>
+<% @bulletins.each do |bulletin| %>
+  <% if bulletin.title == "자유게시판" %>
+    <div class="col-12 col-sm-12 home_index" style="height: 165px;">
+      <div class="home_index_title">
+        <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> <%= link_to "#{bulletin.title}", bulletin_posts_path(bulletin.id) %></b>
+      </div>
+    <%= render "homes/posts", title: bulletin.title, posts: bulletin.posts %>
+    </div>
+  <% end %>
+<% end %>
+
+<%# 익명 게시판 %>
+<div class="col-12 col-sm-12 home_index" style="height: 165px;">
+  <%= render "homes/collect/mobile_no_named_list" %>
+</div>
+
+<%# 가게 홍보 및 방 정보 게시판 %>
+<div class="col-12 col-sm-12 home_index" style="height: 200px;">
+  <%= render "homes/collect/store&room_trade" %>
+</div>
+<%# 오늘의 기숙사 식단 메뉴 %>
+<div class="col-12 col-sm-12 home_index" style="height: 190px;">
+  <div class="home_index_title">
+    <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> 오늘의 실시간 백반 메뉴</b>
+  </div>
+  <%= render "homes/collect/mobile_meal" %>
+</div>

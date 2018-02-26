@@ -5,16 +5,16 @@
                 <div class="nav-tabs-wrapper">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#back" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">백록관(백반)</a>
+                            <a class="nav-link active" data-toggle="tab" href="#m_back" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">백록관</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#chun" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">천지관(백반)</a>
+                            <a class="nav-link" data-toggle="tab" href="#m_chun" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">천지관</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#normal" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">재정(퇴계관 등)</a>
+                            <a class="nav-link" data-toggle="tab" href="#m_normal" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">재정(퇴계관 등)</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#BTL" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">BTL</a>
+                            <a class="nav-link" data-toggle="tab" href="#m_BTL" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">BTL</a>
                         </li>
                     </ul>
                 </div>
@@ -27,9 +27,9 @@
             <!-- Tab panes -->
             <div class="tab-content" style="margin-top: -40px;">
                 <%# 백록관(백반) 식단 %>
-                <div class="tab-pane fade show active" id="back" role="tabpanel">
+                <div class="tab-pane fade show active" id="m_back" role="tabpanel">
                     <% @back_meal.first(1).each_with_index do |meal, index| %> 
-                        <div class="col-md-12">
+                        <div class="col-12 col-sm-12">
                             <%= meal %>
                             <div align="right">
                                 <% if Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 %>
@@ -42,9 +42,9 @@
                     <% end %>
                 </div>
                 <%# 천지관(백반) 식단 %>
-                <div class="tab-pane fade" id="chun" role="tabpanel">
+                <div class="tab-pane fade" id="m_chun" role="tabpanel">
                     <% @chun_meal.first(1).each_with_index do |meal, index| %> 
-                        <div class="col-md-12">
+                        <div class="col-12 col-sm-12">
                             <%= meal %>
                             <div align="right">
                                 <% if Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 %>
@@ -59,9 +59,9 @@
                     <% end %>
                 </div>
                 <%# 기숙사 재정생활관 식단 %>
-                <div class="tab-pane fade" id="normal" role="tabpanel">
+                <div class="tab-pane fade" id="m_normal" role="tabpanel">
                     <% @dormitory_meal_normal.first(1).each_with_index do |meal, index| %> 
-                        <div class="col-md-12">
+                        <div class="col-12 col-sm-12">
                             <%= meal %>
                             <div align="right">
                                 <% if Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 %>
@@ -76,9 +76,9 @@
                     <% end %>
                 </div>
                 <%# 기숙사 BTL 식단 %>
-                <div class="tab-pane fade" id="BTL" role="tabpanel">
+                <div class="tab-pane fade" id="m_BTL" role="tabpanel">
                     <% @dormitory_meal_BTL.first(1).each_with_index do |meal, index| %> 
-                        <div class="col-md-12">
+                        <div class="col-12 col-sm-12">
                             <%= meal %>
                             <div align="right">
                                 <% if Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 %>
