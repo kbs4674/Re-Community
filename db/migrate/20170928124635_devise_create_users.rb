@@ -26,7 +26,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.string :profile_banner
       
       # 교통수단 설정
-      t.string :transfer
+      t.string :transfer, default: "경춘선"
       
       ## Recoverable
       t.string   :reset_password_token

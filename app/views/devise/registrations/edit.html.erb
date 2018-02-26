@@ -119,6 +119,7 @@
       <h3><i class="fas fa-cog" aria-hidden="true"></i> 계정 편의 설정</h3>
       <ul>
         <li style="margin-left: 30px; list-style-type: square"><%= f.label :comment_auto_open, "게시글 댓글 자동 펼침" %> <%= f.check_box :comment_auto_open %></li>
+        <li style="margin-left: 30px; list-style-type: square"><%= f.label :"메인화면 : 대중교통 정보 업데이트" %> <%= f.select :transfer, ['경춘선', '경춘선(급행)', 'ITX']%></li>
       </ul>
     </div>
     <hr class="col-5 col-sm-5 col-md-5"><br/>
