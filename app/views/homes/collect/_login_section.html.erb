@@ -1,0 +1,42 @@
+<div align="center" style="background: #abe0ff; padding: 9px 0px 3px 0px;">
+    <% if user_signed_in? %>
+        <small>
+            <% if current_user.profile_icon.present? || current_user.profile_banner.present? %>
+                <% if current_user.profile_select == "profile_icon" %>
+                    <%= image_tag ("#{current_user.profile_icon}"), width: "20px", height: "20px;" %> <%= current_user.nickname %>
+                <% elsif current_user.profile_select == "profile_banner" %>
+                    <%= image_tag ("#{current_user.profile_banner}"), width: "70px", height: "20px;" %>
+                <% else %>
+                    <b><%= current_user.nickname %></b>
+                <% end %>
+            <% else %>
+                <b><%= current_user.nickname %></b>
+            <% end %>
+            님, 안녕하세요!
+            <hr style="margin-top: 5px; margin-bottom: 5px; border: 1px solid white;">
+            <table border="0" width="100%">
+                <tr>
+                    <td rowspan="2" align="center" style="width: 40%;">
+                        <% if current_user.new_notifications.unread_by(current_user).count > 0 %>
+                          <div class="main_account_ring_button fas fa-bell">
+                        <% else %>
+                          <div class="main_account_non_button fas fa-bell">
+                        <% end %>
+                          <%= current_user.new_notifications.unread_by(current_user).count %>
+                        </div>
+                    </td>
+                    <td colspan="2">현재 IP : <%= current_user.current_sign_in_ip %></td>
+                </tr>
+                <tr>
+                    <td ><%= link_to "정보수정", edit_user_registration_path %></td>
+                    <td ><%= link_to "내 활동정보", user_path(current_user.id) %></td>
+                </tr>
+            </table>
+        </small>
+        <% else %>
+            <%= link_to user_session_path do %>
+            <b><%= content_tag(:div, "로그인 하기", class: "etc", style: "background: #67b8ff; padding: 10px; width: 70%; color: white;") %></b>
+        <% end %>
+        <div style="margin-top: 5px;"><small>해당 서비스를 이용하시려면 로그인 해주세요.</small></div>
+    <% end %>
+</div>

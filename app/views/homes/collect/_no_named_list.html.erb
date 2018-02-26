@@ -1,0 +1,53 @@
+<table width="100%">
+    <tr>
+        <td>
+            <div class="nav-tabs-navigation">
+                <div class="nav-tabs-wrapper">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#no_named_free" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">익명 자유</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#no_named_love_song" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">연애고민</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#no_named_get_it_out" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">고민고백</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <br/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <!-- Tab panes -->
+            <div class="tab-content" style="margin-top: -40px;">
+                <%# 익명 자유게시판 %>
+                <div class="tab-pane fade show active" id="no_named_free" role="tabpanel">
+                    <% @bulletins.each do |bulletin| %>
+                      <% if bulletin.title == "익명 자유게시판" %>
+                        <%= render "homes/posts_no_named", title: bulletin.title, posts: bulletin.posts %>
+                      <% end %>
+                    <% end %>
+                </div>
+                <%# 익명 연애상담 %>
+                <div class="tab-pane" id="no_named_love_song" role="tabpanel">
+                  <% @bulletins.each do |bulletin| %>
+                    <% if bulletin.title == "연애상담 게시판" %>
+                      <%= render "homes/posts_no_named", title: bulletin.title, posts: bulletin.posts %>
+                    <% end %>
+                  <% end %>
+                </div>
+                <%# 익명 고민고백 %>
+                <div class="tab-pane" id="no_named_get_it_out" role="tabpanel">
+                  <% @bulletins.each do |bulletin| %>
+                    <% if bulletin.title == "고민고백 게시판" %>
+                      <%= render "homes/posts_no_named", title: bulletin.title, posts: bulletin.posts %>
+                    <% end %>
+                  <% end %>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>

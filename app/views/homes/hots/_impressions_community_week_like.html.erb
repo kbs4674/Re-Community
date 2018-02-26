@@ -6,7 +6,7 @@
             <div class="row">
                 <%# 제목 %>
                 <div class="offset-1 offset-sm-1 offset-md-0"></div>
-                <div align="left" class="col-6 col-sm-7 col-md-7 etc" style="padding: 2px 2px 2px 2px; border-bottom: 1px solid white; margin-left: 20px;">
+                <div align="left" class="col-6 col-sm-7 col-md-6 etc" style="padding: 2px 2px 2px 2px; border-bottom: 0px solid white; margin-left: 20px;">
                     <% if post.reports.size >= post.num %>
                         <% if can? :for_admin, @posts %>
                             <%= link_to bulletin_post_path(post.bulletin, post) do %>
@@ -29,12 +29,12 @@
                 </div>
                 
                 <%# 좋아요 %>
-                <div class="col-2 col-sm-1 col-md-2" style="padding: 2px 2px 2px 2px; border-bottom: 1px solid white;">
+                <div class="col-2 col-sm-1 col-md-2" style="padding: 2px 2px 2px 2px; border-bottom: 0px solid white;">
                     <%= content_tag(:span, " #{post.get_upvotes.size}".html_safe, class: "far fa-thumbs-up etc", style: "font-weight: normal !important; margin-bottom: -3px") %>
                 </div>
                 
                 <%# 조회수 %>
-                <div align="left" class="col-2 col-sm-1 col-md-2 etc" style="padding: 2px 2px 2px 2px; border-bottom: 1px solid white;">
+                <div align="left" class="col-2 col-sm-1 col-md-2 etc" style="padding: 2px 2px 2px 2px; border-bottom: 0px solid white;">
                     <i style: "font-weight: normal !important; margin-left: 10px;" class="fas fa-eye" aria-hidden="true"></i>
                     <% if post.unique_impression_count < 1000 %>
                         <%= "#{post.unique_impression_count}" %>

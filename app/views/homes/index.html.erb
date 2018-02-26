@@ -16,91 +16,88 @@
     <div style="margin-top: 30px;">&nbsp</div>
   <% end %>
   
-  <div class="row">
-    <%# 전체 공지사항 %>
-    <div class="offset-md-1 col-12 col-sm-12 col-md-3 home_notice">
-      <div class="home_index_title table_notice"><%= link_to '<b style="margin-left: 10px; margin-bottom: 5px;"><i class="fas fa-bullhorn"></i> 공지사항</b>'.html_safe, all_notices_path %></div>
-      <%= render "homes/notices" %>
-    </div>
-    <div class="hidden-sm-down" style="margin-left: 20px;"></div>
-    
-    <%# 전체 posts(커뮤니티) 게시글 목록 %>
-    <div class="col-12 col-sm-12 col-md-3 home_index">
-      <div class="home_index_title"><b style="margin-left: 10px; margin-bottom: 5px;"><i class="fa fa-check" aria-hidden="true"></i> 전체 커뮤니티 게시판</b></div>
-      <%= render "homes/posts_all" %>
-    </div>
-    <div class="hidden-sm-down" style="margin-left: 20px;"></div>
-    
-    <%# QNA 게시판 목록 (render 처리) %>
-    <div class="col-12 col-sm-12 col-md-3 home_index">
-      <%= render "homes/qnas" %>
-    </div>
-  </div>
-  
-  <div style="margin-top: 20px;"></div>
- 
-  <div class="row">
-    <table border="0" class="offset-md-1" width="77%;">
-      <tr>
-        <td width="65%;" height="120px;">
-          <%= link_to(image_tag("/img/main_banner.png", width: "100%;"), "https://kangwon.ac.kr", target: "_blank") %>
-          <div class="row" style="margin-left: 0px;">
-            <%# 대학교 공지사항 크롤링 %>
-            <div class="col-12 col-sm-12 col-md-4 home_index" style="padding-bottom: 5px;">
-              <div class="home_index_title">
-                <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> 강원대학교(춘천) 실시간 공지사항</b>
+  <div class="container" style="margin-top: 30px; width: 1024px;">
+    <table border="0" width="100%">
+      <tbody>
+        <tr>
+          <td colspan="3">
+            <div class="row" style="margin-left: 0px;">
+              <%# 전체 공지사항 %>
+              <div class="home_notice" style="width: 320px; height: 165px;">
+                <div class="home_index_title table_notice"><%= link_to '<b style="margin-left: 10px; margin-bottom: 5px;"><i class="fas fa-bullhorn"></i> 공지사항</b>'.html_safe, all_notices_path %></div>
+                <%= render "homes/notices" %>
               </div>
-              <div style="margin-top: 5px;"></div>
-              <% @kangwon_notice.first(4).each_with_index do |notice, index| %> 
-                <div class="col-1 col-sm-1 col-md-12">
-                  <a href="<%= @kangwon_notice_link[index] %>" target="_blank">
-                    <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "font-weight: normal !important;") %>
-                    <%= content_tag(:span, truncate( raw( sanitize(notice, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 33, :omission => "..."), class: "etc") %>
-                  </a>
-                </div>
-              <% end %>
+              <div class="hidden-sm-down" style="margin-left: 15px;"></div>
+              
+              <%# 전체 posts(커뮤니티) 게시글 목록 %>
+              <div class="home_index" style="width: 320px; height: 165px;">
+                <div class="home_index_title"><b style="margin-left: 10px; margin-bottom: 5px;"><i class="fa fa-check" aria-hidden="true"></i> 전체 커뮤니티 게시판</b></div>
+                <%= render "homes/posts_all" %>
+              </div>
+              <div class="hidden-sm-down" style="margin-left: 15px;"></div>
+              
+              <%# QNA 게시판 목록 (render 처리) %>
+              <div class="home_index" style="width: 320px; height: 165px;">
+                <%= render "homes/qnas" %>
+              </div>
+            </div>
+          </td>      
+        </tr>
+        <tr>
+          <%# 홈페이지 배너 %>
+          <td colspan="2" style="width: 68%; padding-top: 10px;">
+            <%= link_to(image_tag("/img/main_banner.png", width: "98%"), "https://kangwon.ac.kr", target: "_blank") %>
+          </td>
+          <%# Side(우측) Section %>
+          <td>
+            <%# 우측 로그인정보 %>
+            <div style="margin-top: 11px;">
+              <%= render "homes/collect/login_section" %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td td colspan="2">
+            <%# 답변(좋아요 순) %>
+            <div class="home_index notice" style="width: 97%; height: 50px; margin-top: 0px; margin-bottom: 10px;">
+              <ul class="rolling">
+                <% @hot_qna_replys.each do |qna| %>
+                  <li class="row"><%= render "homes/hots/likes_qna_comment", qna: qna %></li>
+                <% end %>
+              </ul>
             </div>
             
-            <%# 오늘의 기숙사 식단 메뉴 %>
-            <div class="col-12 col-sm-12 col-md-7 home_index" style="padding-bottom: 5px; margin-left: 20px;">
-              <div class="home_index_title">
-                <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> 오늘의 실시간 식단 메뉴</b>
-              </div>
-              <div class="col-1 col-sm-1 col-md-12">
-                <%= render "homes/collect/meal" %>
+            <div class="row" style="margin-left: 0px; margin-bottom: 0px;">
+              <% @bulletins.first(1).each do |bulletin| %>
+                <% if not bulletin.main_hidden == true %>
+                  <% if (bulletin.id % 3) == 1 %>
+                    <div class="home_index" style="width: 320px; height: 165px;">
+                  <% else %>
+                    <div class="home_index" style="margin-left: 20px; width: 320px; height: 165px;">
+                  <% end %>
+                    <div class="home_index_title">
+                      <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> <%= link_to "#{bulletin.title}", bulletin_posts_path(bulletin.id) %></b>
+                    </div>
+                  <%= render "homes/posts", title: bulletin.title, posts: bulletin.posts %>
+                  </div>
+                <% end %>
+              <% end %>
+              
+              <%# 익명 게시판 %>
+              <div class="home_index" style="margin-left: 10px; width: 280px; height: 165px;">
+                <%= render "homes/collect/no_named_list" %>
               </div>
             </div>
-          </div>
-        </td>
-        <td>
-          <%# 오늘의 이슈 %>
-          <div class="home_index" style="margin-left: 15px; margin-top: 0px; margin-bottom: 40px;">
-            <div class="home_index_title"><b style="margin-left: 10px; margin-bottom: 5px;">오늘의 이슈</b></div>
-            <%= render "homes/hot_pc" %>
-          </div>
-        </td>
-      </tr>
+          </td>
+          <td>
+            <%# 오늘의 이슈 %>
+            <div class="home_index" style="margin-top: 5px; width: 360px; height: 250px;">
+              <div class="home_index_title"><b style="margin-left: 10px; margin-bottom: 5px;">오늘의 이슈</b></div>
+              <%= render "homes/hot_pc" %>
+            </div>
+          </td>
+        </tr>    
+      </tbody>
     </table>
   </div>
-  
-  <div class="row">
-    <%# 전체 카테고리 %>
-    <% @bulletins.first(3).each do |bulletin| %>
-      <% if not bulletin.main_hidden == true %>
-        <% if (bulletin.id % 3) == 1 %>
-          <div class="offset-md-1 col-12 col-sm-12 col-md-3 home_index">
-        <% else %>
-          <div class="col-12 col-sm-12 col-md-3 home_index" style="margin-left: 20px;">
-        <% end %>
-          <div class="home_index_title">
-            <b style="margin-left: 10px; margin-bottom: 5px;"><i class="" aria-hidden="true"></i> <%= link_to "#{bulletin.title}", bulletin_posts_path(bulletin.id) %></b>
-          </div>
-        <%= render "homes/posts", title: bulletin.title, posts: bulletin.posts %>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-  
-  <%# 광고 영역 %>
-  <%= render "homes/ad" %>
 </body>

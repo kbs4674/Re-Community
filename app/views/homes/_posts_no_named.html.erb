@@ -1,11 +1,11 @@
 <div style="padding: 5px;">
-  <% posts.order("created_at DESC").first(5).each do |post| %>
+  <% posts.order("created_at DESC").first(4).each do |post| %>
     <% if post.reports.size >= post.num %>
       <% if can? :for_admin, @post %>
         <%= link_to bulletin_post_path(post.bulletin, post) do %>
           <div class="row">
             <div class="col-1 col-sm-1 col-md-1"><%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "color: red; margin-left: 10px;") %></div>
-            <div class="col-11 col-sm-11 col-md-11" style="margin-left: -5px;"> <%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 15, :omission => "..."), class: "etc", style: "color: red; font-weight: normal !important;") %></div>
+            <div class="col-11 col-sm-11 col-md-10" style="margin-left: -5px;"> <%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 17, :omission => "..."), class: "etc", style: "color: red; font-weight: normal !important;") %></div>
           </div>
         <% end %>
       <% else %>
@@ -15,7 +15,7 @@
       <%= link_to bulletin_post_path(post.bulletin, post) do %>
         <div class="row">
           <div class="col-1 col-sm-1 col-md-1"><%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "margin-left: 10px;") %></div>
-          <div class="col-11 col-sm-11 col-md-11" style="margin-left: -5px;"><%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 20, :omission => "..."), class: "etc") %></div>
+          <div class="col-11 col-sm-11 col-md-10" style="margin-left: -5px;"><%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 17, :omission => "..."), class: "etc") %></div>
         </div>
       <% end %>
     <% end %>

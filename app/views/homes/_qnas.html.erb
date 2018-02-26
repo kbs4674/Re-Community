@@ -23,7 +23,7 @@
                 <% else %>
                     <span class="badge badge-info" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
                 <% end %>
-                <%= content_tag(:span, truncate( raw( sanitize(qna.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 20, :omission => "..."), class: "etc") %><br/>
+                <%= content_tag(:span, truncate( raw( sanitize(qna.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 15, :omission => "..."), class: "etc") %><br/>
             <% end %>
         <% end %>
     <% end %>
