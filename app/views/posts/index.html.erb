@@ -218,12 +218,8 @@
   
   <br/>
   <div align="right">
-    <% if @bulletin.promote_store == true %>
+    <% if @bulletin.promote_store == true || @bulletin.member_boss == true || @bulletin.member_univ == true || @bulletin.member_real_estate == true || @bulletin.admin_only == true %>
       <% if (user_signed_in?) && (current_user.has_role? :store_boss) %>
-        <%= link_to "글 쓰기", new_bulletin_post_path(@bulletin), class: "btn btn-primary" %>
-      <% end %>
-    <% elsif @bulletin.member_boss == true || @bulletin.member_univ == true || @bulletin.member_real_estate == true %>
-      <% if (user_signed_in?) && (current_user.has_role? :admin) %>
         <%= link_to "글 쓰기", new_bulletin_post_path(@bulletin), class: "btn btn-primary" %>
       <% end %>
     <% else %>

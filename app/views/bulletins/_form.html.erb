@@ -13,9 +13,10 @@
     <div class="col-12 col-sm-8 col-md-5" style="background-color: #ffd4d4; margin-top: 30px; padding: 10px;"><font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 어드민 전용 : 게시판 특수기능 설정</font></div>
     <div align="left" style="margin-top: 10px;">
       <%= f.label :main_hidden, "메인 숨김 여부" %> <%= f.check_box :main_hidden, id: :bulletin_main_hidden %><br/>
-      <%= f.label :member_boss, "사장님만" %> <%= f.check_box :member_boss, id: :bulletin_member_boss %><br/>
-      <%= f.label :member_univ, "학교 관계자만" %> <%= f.check_box :member_univ, id: :bulletin_member_univ %><br/>
-      <%= f.label :member_real_estate, "부동산 중개업자 관계자만" %> <%= f.check_box :member_real_estate, id: :bulletin_member_real_estate %><br/><br/>
+      <%= f.label :admin_only, "관리자만 글쓰기" %> <%= f.check_box :admin_only, id: :bulletin_admin_only %><br/>
+      <%= f.label :member_boss, "사장님만 열람" %> <%= f.check_box :member_boss, id: :bulletin_member_boss %><br/>
+      <%= f.label :member_univ, "학교 관계자만 열람" %> <%= f.check_box :member_univ, id: :bulletin_member_univ %><br/>
+      <%= f.label :member_real_estate, "부동산 중개업자 관계자만 열람" %> <%= f.check_box :member_real_estate, id: :bulletin_member_real_estate %><br/><br/>
       
       <%= f.label :search_job, "1) 구인 양식" %> <%= f.check_box :search_job, id: :bulletin_search_job %><br/>
       <%= f.label :seeking_job, "2) 구직 양식" %> <%= f.check_box :seeking_job, id: :bulletin_seeking_job %><br/>

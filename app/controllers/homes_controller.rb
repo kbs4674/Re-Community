@@ -320,7 +320,7 @@ class HomesController < ApplicationController
         end
         @subway_rapid_time = subway_rapid.map { |cur| cur.text }
         
-        #ITX 청춘
+        #ITX 청춘 (개발하다 그만둠.)
         doc7 = Nokogiri::HTML(open("https://map.naver.com/local/siteview.nhn?code=21598378&_ts=1519710537096#infoTab=timeTable&eStationID=3300324"), nil, 'utf-8')
         itx = doc7.css('div.article#_mainTabContents > div#_stationTimetable > div._timetableWrap > table.tbs5 > tr:nth-child(1)')
         @itx_time = itx.map { |cur| cur.text }

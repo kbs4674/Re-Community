@@ -79,6 +79,9 @@
         <% if @bulletin.main_hidden == true %>
             <span class="badge badge-pill badge-danger">메인 노출 금지</span>
         <% end %>
+        <% if @bulletin.admin_only == true %>
+            <span class="badge badge-pill badge-warning">관리자만 글 작성 허용</span>
+        <% end %>
         <% if @bulletin.member_boss == true %>
             <span class="badge badge-pill badge-info">사장님만 열람 허용</span>
         <% end %>

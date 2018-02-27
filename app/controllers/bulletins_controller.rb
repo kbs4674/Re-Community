@@ -74,6 +74,6 @@ class BulletinsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def bulletin_params
       params[:bulletin][:user_id] = current_user.id
-      params.require(:bulletin).permit(:title, :content, :user_id, :info_part_time_job, :info_no_named, :info_room_trade, :info_trade, :promote_store, :vote, :seeking_room, :main_hidden, :member_boss, :member_univ, :member_real_estate)
+      params.require(:bulletin).permit(:title, :content, :user_id, :info_part_time_job, :info_no_named, :info_room_trade, :info_trade, :promote_store, :vote, :seeking_room, :main_hidden, :member_boss, :member_univ, :member_real_estate, :admin_only)
     end
 end

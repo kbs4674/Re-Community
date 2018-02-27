@@ -28,22 +28,8 @@
 <% end %>
 
 <div class="container" style="margin-top:30px; margin-bottom: 100px;">
-<% if @bulletin.promote_store == true %>
+<% if @bulletin.promote_store == true || @bulletin.member_boss == true || @bulletin.member_univ == true || @bulletin.admin_only %>
     <% if current_user.has_any_role? :store_boss, :admin %>
-        <%= render 'form' %>
-    <% else %>
-        <div class="alert alert-danger" role="alert">
-            <div align="center">
-                <i class="fas fa-exclamation-triangle" aria-hidden="true" style="color: red"></i> <b style="color: red">권한경고</b> : 허가받지 않은 유저
-                <hr/>
-                <div align="left">
-                    <b><%= current_user.nickname %></b> 님은 해당 게시판 글 작성 권한이 없습니다.
-                </div>
-            </div>
-        </div>
-    <% end %>
-<% elsif @bulletin.member_boss == true || @bulletin.member_univ == true %>
-    <% if current_user.has_any_role? :admin %>
         <%= render 'form' %>
     <% else %>
         <div class="alert alert-danger" role="alert">
