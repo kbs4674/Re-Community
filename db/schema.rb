@@ -330,7 +330,7 @@ ActiveRecord::Schema.define(version: 20180215142817) do
     t.string "profile_select", default: "profile_normal"
     t.string "profile_icon"
     t.string "profile_banner"
-    t.string "transfer"
+    t.string "transfer", default: "경춘선"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

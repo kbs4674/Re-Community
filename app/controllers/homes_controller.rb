@@ -309,12 +309,15 @@ class HomesController < ApplicationController
         doc5 = Nokogiri::HTML(open("http://m.seoul.go.kr/traffic/SubInfoNearDetail.do?subSearch=G&station=P139&upage=2&flag=3&sflag=1"), nil, 'euc-kr')
         subway = doc5.css('div#subArrInfo > ul.lst > li:nth-child(1) > a > div')
         @subway_time = subway.map { |cur| cur.text }
+        doc6 = Nokogiri::HTML(open("https://zermoth.net/railroad/logis/metrotimetable.aspx?afc=1328#!"))
+        subway_rapid = doc6.css('table#tblResult > tbody > tr:nth-child(7) > td.mttU > div:nth-child(1) > span.tdOpStop.mttTime')
+        @subway_rapid_time = subway_rapid.map { |cur| cur.text }
         
         #크롤링(nokogiri) : 강원대(춘천) 학사일정
-        doc6 = Nokogiri::HTML(open("http://portal.kangwon.ac.kr/web/269807/1?p_p_id=58&p_p_action=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=3&_58_struts_action=%2Flogin%2Fview&_58_cmd=update"))
-        schedule_time = doc6.css('table.taglib-search-iterator > tr > td:nth-child(1)')
+        doc8 = Nokogiri::HTML(open("http://portal.kangwon.ac.kr/web/269807/1?p_p_id=58&p_p_action=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=3&_58_struts_action=%2Flogin%2Fview&_58_cmd=update"))
+        schedule_time = doc8.css('table.taglib-search-iterator > tr > td:nth-child(1)')
         @kangwon_schedule = schedule_time.map { |cur| cur.text }
-        schedule = doc6.css('table.taglib-search-iterator > tr > td:nth-child(2)')
+        schedule = doc8.css('table.taglib-search-iterator > tr > td:nth-child(2)')
         @schedule = schedule.map { |cur| cur.text }
     end
 end
