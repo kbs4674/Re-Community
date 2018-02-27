@@ -58,4 +58,5 @@ trade = Bulletin.create( title: "아나바다", content: "중고거래 게시판
 for_boss = Bulletin.create( title: "사장님 공지사항", content: "사장님들께 소식을 전해드리는 게시판.", user_id: "1",  main_hidden: "true", member_boss: "true" ) #post id : 16
 for_boss = Bulletin.create( title: "학교 관계자 공지사항", content: "학교 관계자 분들께 소식을 전해드리는 게시판.", user_id: "1", main_hidden: "true", member_univ: "true" ) #post id : 17
 
-request = Bulletin.create( title: "홈페이지 피드백 게시판", content: "홈페이지 피드백에 대해 남길 수 있는 게시판", main_hidden: "true", user_id: "1" ) #post id : 18
+helper = Bulletin.create( title: "새내기 도움말", content: "새내기들에게 도움이 될 수 있는 정보를 모아놨습니다.", admin_only: "true", user_id: "1" ) #post id : 18
+request = Bulletin.create( title: "홈페이지 피드백 게시판", content: "홈페이지 피드백에 대해 남길 수 있는 게시판", main_hidden: "true", user_id: "1" ) #post id : 19

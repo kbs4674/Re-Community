@@ -331,5 +331,25 @@ class HomesController < ApplicationController
         @kangwon_schedule = schedule_time.map { |cur| cur.text }
         schedule = doc8.css('table.taglib-search-iterator > tr > td:nth-child(2)')
         @schedule = schedule.map { |cur| cur.text }
+        
+        #크롤링 : 춘천시 날씨
+        doc9 = Nokogiri::HTML(open("http://www.weather.go.kr/weather/observation/currentweather.jsp"))
+        #도시 이름 (제대로 크롤링을 짚었는지 체크하기 위해)
+        name = doc9.css('table.table_develop3 > tbody > tr:nth-child(17) > td:nth-child(1)')
+        @chuncheon_name = name.map { |cur| cur.text }
+        #날씨정보
+        weather = doc9.css('table.table_develop3 > tbody > tr:nth-child(17) > td:nth-child(6)')
+        @chuncheon_weather = weather.map { |cur| cur.text }
+        #날씨 체크(업데이트)시간
+        weather_check_time = doc9.css('.table_topinfo')
+        @weather_check_time = weather_check_time.map { |cur| cur.text }
+        #날씨 이미지
+        doc10 = Nokogiri::HTML(open("https://www.accuweather.com/ko/kr/chuncheon/223554/weather-forecast/223554"), nil, 'utf-8')
+        weather_icon = doc10.css('#feed-tabs > ul > li.night.current.first.cl > div.bg.bg-s.s > div.info > span')
+        @weather_icon = weather_icon.map { |cur| cur.text }
+        #미세먼지
+        doc11 = Nokogiri::HTML(open("http://www.airkorea.or.kr/dustForecast/"))
+        dust = doc11.css('#cont_body > div.graph_s2 > div:nth-child(8) > table > thead > tr:nth-child(3) > td:nth-child(6)')
+        @chuncheon_dust = dust.map { |cur| cur.text }
     end
 end

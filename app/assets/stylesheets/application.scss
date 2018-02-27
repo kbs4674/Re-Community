@@ -310,7 +310,15 @@
     /* 메인 : 타이틀 영역 */
     .home_index_title {
       margin-top: 10px;
-      background-color: #eaeaea;
+      background-color: #f5f5f5;
+      width: 100%;
+      padding: 5px;
+    }
+    
+    /* 메인 : 타이틀 영역(새내기 도움말) */
+    .home_index_title_helper {
+      margin-top: 10px;
+      background-color: #dcdaff;
       width: 100%;
       padding: 5px;
     }
