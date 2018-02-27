@@ -1,7 +1,16 @@
 <%# 경춘천 출발 전철 정보 %>
-<div align="right" style="background: url('/img/station_logo.png') no-repeat; background-color: white; border-radius: 60px; padding: 10px; margin-top: 10px;">
+<%# PC %>
+<div class="hidden-sm-down" align="right" style="background: url('/img/station_logo.png') no-repeat; background-color: white; border-radius: 60px; padding: 10px; margin-top: 10px;">
     <span style="margin-right: 60px;">남춘천 발 <b style="color: #42b9ff">경춘선 전철</b> | </span>
     <% @subway_time.first(1).each_with_index do |info, index| %>
         <%= content_tag(:span, truncate( raw( sanitize(info, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc", style: "margin-right: 30px;") %>
     <% end %>
+</div>
+
+<%# 모바일 %>
+<div class="hidden-md-up" align="right" style="background: url('/img/station_logo.png') no-repeat; background-position: -280px 12px; background-color: white; border-radius: 30px; padding: 10px; margin-top: 20px;">
+  <span style="margin-right: 30px;">남춘천 발 <b style="color: #42b9ff">경춘선 전철</b> | </span><br/>
+  <% @subway_time.first(1).each_with_index do |info, index| %>
+    <small><%= content_tag(:span, truncate( raw( sanitize(info, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc", style: "margin-right: 30px;") %></small>
+  <% end %>
 </div>

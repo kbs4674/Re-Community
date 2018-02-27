@@ -104,12 +104,14 @@
     <tr>
         <td colspan="3">
           <%# 경춘천 출발 전철 정보 %>
-          <% if current_user.transfer == '경춘선' %>
+          <% if (user_signed_in?) && (current_user.transfer == '경춘선') %>
             <%= render "homes/collect/transfer_subway" %>
-          <% elsif current_user.transfer == '경춘선(급행)' %>
+          <% elsif (user_signed_in?) && (current_user.transfer == '경춘선(급행)') %>
             <%= render "homes/collect/transfer_subway_rapid" %>
-          <% elsif current_user.transfer == 'ITX' %>
+          <% elsif (user_signed_in?) && (current_user.transfer == 'ITX') %>
             <%= render "homes/collect/transfer_itx" %>
+          <% elsif (not user_signed_in?) %>
+            <%= render "homes/collect/transfer_subway" %>
           <% end %>
         </td>
     </tr>
@@ -143,11 +145,11 @@
           <%# 대학 공지사항 및 오늘의 학식 메뉴 %>
           <div class="row" style="margin-left: 0px; margin-bottom: 0px;">
             <%# 대학교 공지사항 크롤링 %>
-            <div class="home_index" style="padding-bottom: 5px; width: 485px; height: 170px;">
+            <div class="home_index" style="padding-bottom: 5px; width: 485px; height: 190px;">
               <div class="home_index_title">
                 <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> 강원대학교(춘천) 실시간 공지사항</b>
               </div>
-              <div style="margin-top: 5px;"></div>
+              <div style="margin-top: 15px;"></div>
               <% @kangwon_notice.first(5).each_with_index do |notice, index| %> 
                 <div class="col-md-12">
                   <a href="<%= @kangwon_notice_link[index] %>" target="_blank">
@@ -159,7 +161,7 @@
             </div>
             
             <%# 오늘의 기숙사 식단 메뉴 %>
-            <div class="home_index" style="padding-bottom: 5px; margin-left: 20px; width: 485px; height: 170px;">
+            <div class="home_index" style="padding-bottom: 5px; margin-left: 20px; width: 485px; height: 190px;">
               <div class="home_index_title">
                 <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> 오늘의 실시간 식단 메뉴</b>
               </div>

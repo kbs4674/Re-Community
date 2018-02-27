@@ -306,12 +306,24 @@ class HomesController < ApplicationController
         @dormitory_meal_BTL = dormitory_meal_BTL.map { |cur| cur.text }
         
         #크롤링(nokogiri) : 열차 시간 조회(남춘천 출발)
+        #일반 경춘선
         doc5 = Nokogiri::HTML(open("http://m.seoul.go.kr/traffic/SubInfoNearDetail.do?subSearch=G&station=P139&upage=2&flag=3&sflag=1"), nil, 'euc-kr')
         subway = doc5.css('div#subArrInfo > ul.lst > li:nth-child(1) > a > div')
         @subway_time = subway.map { |cur| cur.text }
-        doc6 = Nokogiri::HTML(open("https://zermoth.net/railroad/logis/metrotimetable.aspx?afc=1328#!"))
-        subway_rapid = doc6.css('table#tblResult > tbody > tr:nth-child(7) > td.mttU > div:nth-child(1) > span.tdOpStop.mttTime')
+        #급행 경춘선
+        if (Time.zone.now.strftime("%H").to_i > 0 && Time.zone.now.strftime("%H").to_i <= 9)
+            doc6 = Nokogiri::HTML(open("http://k-subway.korail.com/station.do?op=timeTableDetail&stTrainNo=K8402&mainLine=G&inoutTag=1&weekTag=1&stationId=1328"), nil, 'utf-8')
+            subway_rapid = doc6.css('body > div > table > tr:nth-child(3) > td:nth-child(2)')
+        else
+            doc6 = Nokogiri::HTML(open("http://k-subway.korail.com/station.do?op=timeTableDetail&stTrainNo=K8404&mainLine=G&inoutTag=1&weekTag=1&stationId=1328"), nil, 'utf-8')
+            subway_rapid = doc6.css('body > div > table > tr:nth-child(3) > td:nth-child(2)')
+        end
         @subway_rapid_time = subway_rapid.map { |cur| cur.text }
+        
+        #ITX 청춘
+        doc7 = Nokogiri::HTML(open("https://map.naver.com/local/siteview.nhn?code=21598378&_ts=1519710537096#infoTab=timeTable&eStationID=3300324"), nil, 'utf-8')
+        itx = doc7.css('div.article#_mainTabContents > div#_stationTimetable > div._timetableWrap > table.tbs5 > tr:nth-child(1)')
+        @itx_time = itx.map { |cur| cur.text }
         
         #크롤링(nokogiri) : 강원대(춘천) 학사일정
         doc8 = Nokogiri::HTML(open("http://portal.kangwon.ac.kr/web/269807/1?p_p_id=58&p_p_action=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=3&_58_struts_action=%2Flogin%2Fview&_58_cmd=update"))

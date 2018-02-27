@@ -21,12 +21,15 @@
 </div>
 
 <%# 경춘천 출발 전철 정보 %>
-<div align="right" style="background: url('/img/station_logo.png') no-repeat; background-position: -280px 12px; background-color: white; border-radius: 30px; padding: 10px; margin-top: 20px;">
-  <span style="margin-right: 30px;">남춘천 발 <b style="color: #42b9ff">경춘선 전철</b> | </span><br/>
-  <% @subway_time.first(1).each_with_index do |info, index| %>
-    <small><%= content_tag(:span, truncate( raw( sanitize(info, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc", style: "margin-right: 30px;") %></small>
-  <% end %>
-</div>
+<% if (user_signed_in?) && (current_user.transfer == '경춘선') %>
+  <%= render "homes/collect/transfer_subway" %>
+<% elsif (user_signed_in?) && (current_user.transfer == '경춘선(급행)') %>
+  <%= render "homes/collect/transfer_subway_rapid" %>
+<% elsif (user_signed_in?) && (current_user.transfer == 'ITX') %>
+  <%= render "homes/collect/transfer_itx" %>
+<% elsif (not user_signed_in?) %>
+  <%= render "homes/collect/transfer_subway" %>
+<% end %>
 
 <%# 자유게시판 %>
 <% @bulletins.each do |bulletin| %>
