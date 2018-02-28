@@ -21,6 +21,6 @@
         <% @subway_rapid_time.first(1).each_with_index do |info, index| %>
             <%= content_tag(:span, truncate( raw( sanitize(info, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc") %>
         <% end %>
-        <span style="margin-right: 20px;">출발합니다.</span>
+        <span class="hidden-md-up" style="margin-right: 20px;">출발합니다.</span>
     <% end %>
 </div>
