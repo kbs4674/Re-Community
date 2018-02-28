@@ -200,6 +200,18 @@
               <%= render "homes/collect/meal" %>
             </div>
           </div>
+          
+          <%# 중고거래 게시판 %>
+          <% @bulletins.each do |bulletin| %>
+            <% if bulletin.title == "아나바다" %>
+              <div class="home_index" style="margin-left: 20px; width: 485px; height: 190px;">
+                <div class="home_index_title">
+                  <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> <%= link_to "#{bulletin.title}", bulletin_posts_path(bulletin.id) %></b>
+                </div>
+                  <%= render "homes/collect/homes_trade", title: bulletin.title, posts: bulletin.posts %>
+              </div>
+            <% end %>
+          <% end %>
         </div>
       </td>
     </tr>
