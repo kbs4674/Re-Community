@@ -99,81 +99,108 @@
           <% end %>
         </td>
     </tr>
-    <tr>
-        <td colspan="2">
-          <%# 구인구직 %>
-          <div class="home_index" style="width: 610px; height: 175px;">
-            <%= render "homes/collect/search&seek_job" %>
-          </div>
-        </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <% @bulletins.each do |bulletin| %>
-          <% if bulletin.title == "새내기 도움말" %>
-              <div class="home_index" style="width: 610px; height: 175px;">
-              <div class="home_index_title_helper">
-                <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> <%= link_to "#{bulletin.title}", bulletin_posts_path(bulletin.id) %></b>
-              </div>
-            <%= render "homes/collect/fresh_student", title: bulletin.title, posts: bulletin.posts %>
+    
+    <% if Time.now.in_time_zone.month >=1 && Time.now.in_time_zone.month <= 4 %>
+      <tr>
+          <td colspan="2">
+            <% @bulletins.each do |bulletin| %>
+              <% if bulletin.title == "새내기 도움말" %>
+                  <div class="home_index" style="width: 610px; height: 175px;">
+                  <div class="home_index_title_helper">
+                    <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> <%= link_to "#{bulletin.title}", bulletin_posts_path(bulletin.id) %></b>
+                  </div>
+                <%= render "homes/collect/fresh_student", title: bulletin.title, posts: bulletin.posts %>
+                </div>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <%# 구인구직 %>
+            <div class="home_index" style="width: 610px; height: 175px;">
+              <%= render "homes/collect/search&seek_job" %>
             </div>
+          </td>
+        </tr>
+    <% else %>
+      <tr>
+          <td colspan="2">
+            <%# 구인구직 %>
+            <div class="home_index" style="width: 610px; height: 175px;">
+              <%= render "homes/collect/search&seek_job" %>
+            </div>
+          </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <% @bulletins.each do |bulletin| %>
+            <% if bulletin.title == "새내기 도움말" %>
+                <div class="home_index" style="width: 610px; height: 175px;">
+                <div class="home_index_title_helper">
+                  <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> <%= link_to "#{bulletin.title}", bulletin_posts_path(bulletin.id) %></b>
+                </div>
+              <%= render "homes/collect/fresh_student", title: bulletin.title, posts: bulletin.posts %>
+              </div>
+            <% end %>
           <% end %>
+        </td>
+      </tr>
+    <% end %>
+    
+    <tr>
+      <td colspan="3">
+        <%# 경춘천 출발 전철 정보 %>
+        <% if (user_signed_in?) && (current_user.transfer == '경춘선') %>
+          <%= render "homes/collect/transfer_subway" %>
+        <% elsif (user_signed_in?) && (current_user.transfer == '경춘선(급행)') %>
+          <%= render "homes/collect/transfer_subway_rapid" %>
+        <% elsif (user_signed_in?) && (current_user.transfer == 'ITX') %>
+          <%= render "homes/collect/transfer_itx" %>
+        <% elsif (not user_signed_in?) %>
+          <%= render "homes/collect/transfer_subway" %>
         <% end %>
       </td>
     </tr>
     <tr>
-        <td colspan="3">
-          <%# 경춘천 출발 전철 정보 %>
-          <% if (user_signed_in?) && (current_user.transfer == '경춘선') %>
-            <%= render "homes/collect/transfer_subway" %>
-          <% elsif (user_signed_in?) && (current_user.transfer == '경춘선(급행)') %>
-            <%= render "homes/collect/transfer_subway_rapid" %>
-          <% elsif (user_signed_in?) && (current_user.transfer == 'ITX') %>
-            <%= render "homes/collect/transfer_itx" %>
-          <% elsif (not user_signed_in?) %>
-            <%= render "homes/collect/transfer_subway" %>
-          <% end %>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="3">
-          <%# 가게 홍보 및 방 정보 게시판 %>
-          <div class="row" style="margin-left: 0px; margin-bottom: 0px;">
-            <% @bulletins.each do |bulletin| %>
-              <% if bulletin.title == "우리가게 홍보" || bulletin.title == "복덕방" %>
-                <% if bulletin.id == 9 %>
-                  <div class="home_index" style="width: 485px; height: 175px;">
-                <% else %>
-                  <div class="home_index" style="margin-left: 20px; width: 485px; height: 175px;">
-                <% end %>
-                  <div class="home_index_title">
-                    <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> <%= link_to "#{bulletin.title}", bulletin_posts_path(bulletin.id) %></b>
-                  </div>
-                <% if bulletin.title == "우리가게 홍보" %>
-                  <%= render "homes/collect/homes_store", title: bulletin.title, posts: bulletin.posts %>
-                <% elsif bulletin.title == "복덕방" %>
-                  <%= render "homes/collect/homes_room_trade", title: bulletin.title, posts: bulletin.posts %>
-                <% end %>
-                </div>
+      <td colspan="3">
+        <%# 가게 홍보 및 방 정보 게시판 %>
+        <div class="row" style="margin-left: 0px; margin-bottom: 0px;">
+          <% @bulletins.each do |bulletin| %>
+            <% if bulletin.title == "우리가게 홍보" || bulletin.title == "복덕방" %>
+              <% if bulletin.id == 9 %>
+                <div class="home_index" style="width: 485px; height: 175px;">
+              <% else %>
+                <div class="home_index" style="margin-left: 20px; width: 485px; height: 175px;">
               <% end %>
+                <div class="home_index_title">
+                  <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> <%= link_to "#{bulletin.title}", bulletin_posts_path(bulletin.id) %></b>
+                </div>
+              <% if bulletin.title == "우리가게 홍보" %>
+                <%= render "homes/collect/homes_store", title: bulletin.title, posts: bulletin.posts %>
+              <% elsif bulletin.title == "복덕방" %>
+                <%= render "homes/collect/homes_room_trade", title: bulletin.title, posts: bulletin.posts %>
+              <% end %>
+              </div>
             <% end %>
-          </div>
-        </td>
+          <% end %>
+        </div>
+      </td>
     </tr>
     <tr>
-        <td colspan="3">
-          <%# 대학 공지사항 및 오늘의 학식 메뉴 %>
-          <div class="row" style="margin-left: 0px; margin-bottom: 0px;">
-            <%# 오늘의 기숙사 식단 메뉴 %>
-            <div class="home_index" style="padding-bottom: 5px; width: 485px; height: 190px;">
-              <div class="home_index_title">
-                <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> 오늘의 실시간 식단 메뉴</b>
-              </div>
-              <div class="col-md-12">
-                <%= render "homes/collect/meal" %>
-              </div>
+      <td colspan="3">
+        <%# 대학 공지사항 및 오늘의 학식 메뉴 %>
+        <div class="row" style="margin-left: 0px; margin-bottom: 0px;">
+          <%# 오늘의 기숙사 식단 메뉴 %>
+          <div class="home_index" style="padding-bottom: 5px; width: 485px; height: 190px;">
+            <div class="home_index_title">
+              <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> 오늘의 실시간 식단 메뉴</b>
+            </div>
+            <div class="col-md-12">
+              <%= render "homes/collect/meal" %>
             </div>
           </div>
-        </td>
+        </div>
+      </td>
     </tr>
 </table>
