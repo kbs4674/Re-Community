@@ -6,7 +6,7 @@
           <div class="row">
             <div class="col-1 col-sm-1 col-md-1"><%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "color: red;") %></div>
             <div class="col-11 col-sm-11 col-md-11 hidden-sm-down" style="margin-left: -40px;"><%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 40, :omission => "..."), class: "etc", style: "color: red; font-weight: normal !important;") %></div>
-            <div class="col-11 col-sm-11 col-md-11 hidden-md-up" style="margin-left: -20px;"><%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 27, :omission => "..."), class: "etc", style: "color: red; font-weight: normal !important;") %></div>
+            <div class="col-11 col-sm-11 col-md-11 hidden-md-up" style="margin-left: -20px;"><%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 22, :omission => "..."), class: "etc", style: "color: red; font-weight: normal !important;") %></div>
           </div>
         <% end %>
       <% else %>
@@ -17,7 +17,7 @@
         <div class="row">
           <div class="col-1 col-sm-1 col-md-1"><%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc") %></div>
           <div class="col-11 col-sm-11 col-md-11 hidden-sm-down" style="margin-left: -40px;"><%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 40, :omission => "..."), class: "etc") %></div>
-          <div class="col-11 col-sm-11 col-md-11 hidden-md-up" style="margin-left: -20px;"><%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 27, :omission => "..."), class: "etc") %></div>
+          <div class="col-11 col-sm-11 col-md-11 hidden-md-up" style="margin-left: -20px;"><%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 22, :omission => "..."), class: "etc") %></div>
         </div>
       <% end %>
     <% end %>

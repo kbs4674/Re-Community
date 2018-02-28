@@ -10,6 +10,9 @@
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#real_estate" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">복덕방</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#trade" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">아나바다</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -33,6 +36,13 @@
                   <% @bulletins.each do |bulletin| %>
                     <% if bulletin.title == "복덕방" %>
                       <%= render "homes/collect/homes_room_trade", title: bulletin.title, posts: bulletin.posts %>
+                    <% end %>
+                  <% end %>
+                </div>
+                <div class="tab-pane fade" id="trade" role="tabpanel">
+                  <% @bulletins.each do |bulletin| %>
+                    <% if bulletin.title == "아나바다" %>
+                      <%= render "homes/collect/homes_trade", title: bulletin.title, posts: bulletin.posts %>
                     <% end %>
                   <% end %>
                 </div>

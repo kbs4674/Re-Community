@@ -1,12 +1,12 @@
 <div class="row" style="padding: 5px; margin-left: 0px;">
-  <div class="hidden-md-up" style="margin-left: 10px;"></div>
   <% posts.order("created_at DESC").first(2).each do |post| %>
   <div style="margin-left: 10px;"></div>
     <% if post.reports.size >= post.num %>
       <% if can? :for_admin, post %>
         <%= link_to bulletin_post_path(post.bulletin, post) do %>
           <div style="position: relative;">
-            <div class="panel-body"><%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "180px", height: "120px;" %></div>
+            <div class="panel-body hidden-sm-down"><%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "180px", height: "120px;" %></div>
+            <div class="panel-body hidden-md-up"><%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "160px", height: "100px;" %></div>
               <div align="center" class="image_overfext etc">
                 <b><%= content_tag(:div, post.location, class: "etc", style: "color: red") %></b>
               </div>
@@ -14,7 +14,8 @@
         <% end %>
       <% else %>
         <div style="position: relative;">
-          <div class="panel-body"><%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "180px", height: "120px;" %></div>
+          <div class="panel-body hidden-sm-down"><%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "180px", height: "120px;" %></div>
+          <div class="panel-body hidden-md-up"><%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "160px", height: "100px;" %></div>
             <div align="center" class="image_overfext etc">
               <b style="color: yellow">열람 제한(블라인드)</b>
             </div>
@@ -24,9 +25,11 @@
       <%= link_to bulletin_post_path(post.bulletin, post) do %>
         <div style="position: relative;">
           <% if post.image.present? %>
-            <div class="panel-body"><%= image_tag ("#{post.image}"), class: "card-img-top", width: "180px", height: "120px;" %></div>
+            <div class="panel-body hidden-sm-down"><%= image_tag ("#{post.image}"), class: "card-img-top", width: "180px", height: "120px;" %></div>
+            <div class="panel-body hidden-md-up"><%= image_tag ("#{post.image}"), class: "card-img-top", width: "160px", height: "100px;" %></div>
           <% else %>
-            <div class="panel-body"><%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "180px", height: "120px;" %></div>
+            <div class="panel-body hidden-sm-down"><%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "180px", height: "120px;" %></div>
+            <div class="panel-body hidden-md-up"><%= image_tag ("/img/no_image.png"), class: "card-img-top", width: "160px", height: "100px;" %></div>
           <% end %>
           <div align="center" class="image_overfext etc">
             <b><%= content_tag(:div, post.location, class: "etc") %></b>

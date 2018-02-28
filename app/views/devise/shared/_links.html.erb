@@ -6,10 +6,18 @@
   <hr/>
   <div class="row" style="margin-top: 10px;">
     <div class="col-7 col-sm-7 col-md-7" align="left" style="border-right: 2px solid #F2F2F2">
-      <span style="font-size: 14px;">
-        Beta 운영 기간에만 제공됩니다!<br/>
-        쉽고 빠르게 로그인하세요!
-      </span>
+      <div class="hidden-sm-down">
+        <span style="font-size: 14px;">
+          Beta 운영 기간에만 제공됩니다!<br/>
+          쉽고 빠르게 로그인하세요!
+        </span>
+      </div>
+      <div class="hidden-md-up">
+        <span style="font-size: 12px;">
+          Beta 운영 기간에만 제공됩니다!<br/>
+          쉽고 빠르게 로그인하세요!
+        </span>
+      </div>
     </div>
     <div class="col-5 col-sm-5 col-md-5">
     <%- resource_class.omniauth_providers.each do |provider| %>
