@@ -26,7 +26,7 @@
     <tr>
         <%# 홈페이지 배너 %>
         <td colspan="2" style="width: 68%; padding-top: 10px;">
-          <%= link_to(image_tag("/img/main_banner.png", width: "97%"), "https://kangwon.ac.kr", target: "_blank") %>
+          <%= link_to(image_tag("/img/banner_beta.png", width: "97%"), "https://open.kakao.com/o/svvDAhI", target: "_blank") %>
         </td>
         <%# Side(우측) Section %>
         <td>
@@ -81,10 +81,22 @@
           </div>
           
           <%# 주간 Hot 이슈 %>
-          <div class="home_index" style="margin-top: 20px; width: 360px; height: 230px; margin-bottom: 200px;">
+          <div class="home_index" style="margin-top: 20px; width: 360px; height: 230px;">
             <div class="home_index_title_issue"><b style="margin-left: 10px; margin-bottom: 5px;">주간 Hot Issue</b></div>
             <%= render "homes/hot_pc" %>
           </div>
+          
+          <%# 외국인 게시판 (Foreigner Board) %>
+          <% @bulletins.each do |bulletin| %>
+            <% if bulletin.title == "Foreigner Board" %>
+              <div class="home_index" style="margin-top: 20px; width: 360px; height: 170px; margin-bottom: 0px;">
+                <div class="home_index_title">
+                  <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> <%= link_to "#{bulletin.title}", bulletin_posts_path(bulletin.id) %></b>
+                </div>
+              <%= render "homes/posts", title: bulletin.title, posts: bulletin.posts %>
+              </div>
+            <% end %>
+          <% end %>
         </td>
     </tr>
     <tr>
@@ -103,7 +115,7 @@
               <div class="home_index_title_helper">
                 <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> <%= link_to "#{bulletin.title}", bulletin_posts_path(bulletin.id) %></b>
               </div>
-            <%= render "homes/posts", title: bulletin.title, posts: bulletin.posts %>
+            <%= render "homes/collect/fresh_student", title: bulletin.title, posts: bulletin.posts %>
             </div>
           <% end %>
         <% end %>
