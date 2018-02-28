@@ -20,6 +20,18 @@
   </ul>
 </div>
 
+<div class="col-12 col-sm-12 home_index"  style="height: 165px;">
+<% @bulletins.each do |bulletin| %>
+  <% if bulletin.title == "새내기 도움말" %>
+      <div class="home_index_title_helper">
+        <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> <%= link_to "#{bulletin.title}", bulletin_posts_path(bulletin.id) %></b>
+      </div>
+    <%= render "homes/collect/fresh_student", title: bulletin.title, posts: bulletin.posts %>
+    </div>
+  <% end %>
+<% end %>
+</div>
+
 <%# 경춘천 출발 전철 정보 %>
 <% if (user_signed_in?) && (current_user.transfer == '경춘선') %>
   <%= render "homes/collect/transfer_subway" %>
