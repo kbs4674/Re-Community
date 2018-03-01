@@ -129,7 +129,7 @@
     <% elsif @post.reports.size >= @post.num %>
         <i class="fas fa-exclamation" aria-hidden="true"></i> <%= @bulletin.title == "Foreigner Board" ? "It has Applied to report." : "신고 처리된 게시글." %>
     <% else %>
-        <% if not @bulletin.member_boss == true || @bulletin.member_univ == true %>
+        <% if not @bulletin.member_boss == true || @bulletin.member_univ == true || @bulletin.admin_only == true %>
             <%= link_to "#{@bulletin.title == "Foreigner Board" ? " Request block post" : " 신고 요청"}", "/bulletins/#{@bulletin.id}/posts/#{@post.id}/report", class: "badge badge-pill badge-danger fas fa-cut", :method => :post, data: { confirm: "#{@bulletin.title == "Foreigner Board" ? "If you request report, it couldn't cancel. Proceed?" : "한번 신고 요청 하시면 취소가 안됩니다. 정말 하시겠습니까??"}" } %>
         <% end %>
     <% end %>
