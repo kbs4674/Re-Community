@@ -14,7 +14,7 @@
                             <% else %>
                                 <span class="badge badge-info" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 답변</span>
                             <% end %>
-                            <%= content_tag(:span, truncate( raw( sanitize(qna.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 20, :omission => "..."), class: "etc", style: "color: red; font-size: 15px;") %>
+                            <%= content_tag(:span, truncate( raw( sanitize(qna.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 11, :omission => "..."), class: "etc", style: "color: red; font-size: 15px;") %>
                         <% end %>
                     <% else %>
                         <font color="#6E6E6E" style="font-size: 15px; margin-left: 5px;"><i class="fas fa-caret-right"></i> <i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
@@ -26,7 +26,7 @@
                         <% else %>
                             <span class="badge badge-info" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 답변</span>
                         <% end %>
-                        <%= content_tag(:span, truncate( raw( sanitize(qna.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 20, :omission => "..."), class: "etc", style: "font-size: 15px;") %>
+                        <%= content_tag(:span, truncate( raw( sanitize(qna.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 11, :omission => "..."), class: "etc", style: "font-size: 15px;") %>
                     <% end %>
                 <% end %>
             </div>

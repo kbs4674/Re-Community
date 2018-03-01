@@ -32,12 +32,14 @@ class HomesController < ApplicationController
         @hot_qna_replys = CommentQna.order(:cached_votes_up => :desc).page(params[:page]).per(5)
         
         #크롤링 목록들
-        #크롤링(nokogiri) : 강원대학교(춘천)캠퍼스 공지사항
-        #doc = Nokogiri::HTML(open("http://home.kangwon.ac.kr/main/html/main/main.jsp"))
-        #notice = doc.css('ul.list > li.noticeLi > a > strong')
-        #@kangwon_notice = notice.map { |cur| cur.text }
-        #notice_link = doc.css('ul.list > li.noticeLi > a').map { |link| link['href'] }
-        #@kangwon_notice_link = notice_link
+        #크롤링(nokogiri) : 강원대학교 공지사항
+        doc = Nokogiri::HTML(open("http://www.kangwon.ac.kr/www/index.do"))
+        campus = doc.css('#container > section.layer.layer3 > div > section.board > ul > li.active > div > ul > li > span.campus')
+        @kangwon_campus = campus.map { |cur| cur.text }
+        notice = doc.css('#container > section.layer.layer3 > div > section.board > ul > li.active > div > ul > li > a')
+        @kangwon_notice = notice.map { |cur| cur.text }
+        notice_link = doc.css('#container > section.layer.layer3 > div > section.board > ul > li.active > div > ul > li > a').map { |link| link['href'] }
+        @kangwon_notice_link = notice_link
         
         #크롤링(nokogiri) : 강원대학교(춘천)캠퍼스 백록관(백반) 학식
         doc2 = Nokogiri::HTML(open("http://knucoop.kangwon.ac.kr/weekly_menu_02.asp"))

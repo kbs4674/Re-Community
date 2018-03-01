@@ -11,7 +11,7 @@
                         <% if can? :for_admin, @posts %>
                             <%= link_to bulletin_post_path(post.bulletin, post) do %>
                                 <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "color: red; font-weight: normal !important; margin-left: 10px;") %>
-                                <%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 25, :omission => "..."), class: "hidden-sm-down etc", style: "color: red; font-weight: normal !important;") %>
+                                <%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 15, :omission => "..."), class: "hidden-sm-down etc", style: "color: red; font-weight: normal !important;") %>
                                 <%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 15, :omission => "..."), class: "hidden-md-up etc", style: "color: red; font-weight: normal !important;") %>
                                 <%= content_tag(:span, "<b>#{post.comment_threads.count}</b>".html_safe, class: "etc", style: "color: red; font-weight: normal !important; font-size: 12px;") %><br/>
                             <% end %>
@@ -21,7 +21,7 @@
                     <% else %>
                         <%= link_to bulletin_post_path(post.bulletin, post) do %>
                             <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "font-weight: normal !important; margin-left: 10px; font-size: 15px;") %>
-                            <%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 25, :omission => "..."), class: "hidden-sm-down etc", style: "font-weight: normal !important;") %>
+                            <%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 15, :omission => "..."), class: "hidden-sm-down etc", style: "font-weight: normal !important;") %>
                             <%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 15, :omission => "..."), class: "hidden-md-up etc", style: "font-weight: normal !important;") %>
                             <%= content_tag(:span, "<b>#{post.comment_threads.count}</b>".html_safe, class: "etc", style: "font-weight: normal !important; font-size: 12px;") %><br/>
                         <% end %>
