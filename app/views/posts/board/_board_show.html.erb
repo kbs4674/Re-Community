@@ -79,7 +79,7 @@
     
     <% # [그리드] Only 모바일 에서 볼 경우 : 글 작성시간 %>
     <div class="col-8" align="right">
-        <span style="margin-right: 10px;"><%= @bulletin.created_at %></span>
+        <span style="margin-right: 10px;"><%= @post.created_at.in_time_zone("Asia/Seoul").strftime('%Y-%m-%d %H:%M') %></span>
         |<i class="fas fa-eye" aria-hidden="true" style="margin-left: 15px;"></i> <%= "#{@post.unique_impression_count}" %>
     </div>
 </div>
