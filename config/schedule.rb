@@ -35,7 +35,7 @@ every 3.days, :at => '4:55 am' do
 end
 
 # 매일 아침식사 최신화
-every :at => '12:53 am' do
+every 1.days :at => '12:55 am' do
     rake "crawling_meal:crawling_meal"
 end
 
