@@ -34,11 +34,20 @@ every 3.days, :at => '4:55 am' do
     command "cd /home/ec2-user/weekly_db_backup;git add .;git commit -m 'weekly_db_backup';git push -u db master"
 end
 
-# 매일 아침식사 최신화
-every :day, :at => '01:05 am' do
+# [매일] 식사 최신화
+every :day, at: ['11:59 pm', '09:01 am', '14:01 pm'] do
     rake "crawling_meal:crawling_meal"
 end
 
+# [매일] 공지사항
+every :day, at: ['5:10 am'] do
+    rake "crawling_notice:crawling_notice"
+end
+
+# [1주일] 크롤링 기록 제거
+every 1.weeks, at: ['5:12 am'] do
+    rake "crawling_notice:crawling_notice"
+end
 
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
