@@ -3,7 +3,7 @@ Kangwon Univ. Community Prototype, Second Challenger
 * Ruby version : Ruby 2.4.1, Rails 5.1.4
 * Team : 김승한 / 이근식 / 서현석 / 김상열 / 김철민
 * Git 자료실 : https://github.com/kbs4674/Re-Community
-* AWS EC2 : <a href="http://52.78.125.110">http://52.78.125.110</a>
+* AWS EC2 : <a href="http://13.125.169.156">http://13.125.169.156</a>
 
 # 홈페이지 유의사항
 1. 해당 프로젝트 파일에 있는 ZIP 압축파일 속에 있는 파일을 /config 디렉토리로 옮겨놓고 시작할 것.<br/>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180227162358) do
+ActiveRecord::Schema.define(version: 20180302133441) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -152,13 +152,13 @@ ActiveRecord::Schema.define(version: 20180227162358) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "crawling_dormitory_btls", force: :cascade do |t|
+  create_table "crawling_dormitory_meal_btls", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "crawling_dormitory_normals", force: :cascade do |t|
+  create_table "crawling_dormitory_meal_normals", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -166,19 +166,8 @@ ActiveRecord::Schema.define(version: 20180227162358) do
 
   create_table "crawling_notices", force: :cascade do |t|
     t.string "title"
-    t.string "link"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "crawling_subway_rapids", force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "crawling_subways", force: :cascade do |t|
-    t.string "title"
+    t.string "url"
+    t.string "campus"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

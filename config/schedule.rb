@@ -22,16 +22,21 @@ every 7.weeks, :at => '4:30 am' do
     rake "naver_login_delete:delete_naver_login_1weeks"
 end
 
-# [1주일 단위] 자료 백업
+# [3일 단위] 자료 백업
 every 3.days, :at => '4:50 am' do
 #every 1.minutes do
     command "cd /home/ec2-user/knu;backup perform --trigger weekly_db_backup"
 end
 
-# [1주일 단위] 백업된 자료 깃에 보내기
+# [3일 단위] 백업된 자료 깃에 보내기
 every 3.days, :at => '4:55 am' do
 #every 2.minutes do
     command "cd /home/ec2-user/weekly_db_backup;git add .;git commit -m 'weekly_db_backup';git push -u db master"
+end
+
+# 매일 아침식사 최신화
+every :at => '12:53 am' do
+    rake "crawling_meal:crawling_meal"
 end
 
 
