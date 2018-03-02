@@ -7,8 +7,9 @@ namespace :crawling_notice do
     @posts.each do |x| #각각 돌면서 Result에 추가해줍니다.
       tit = x.css('a').text
       camp = x.css('span.campus').text
-      url = x.css('a').map { |link| link['href'] }
-      @res = CrawlingNotice.new(title: tit, campus: camp, url: url)
+      url = x.css('a').at("a[href]")
+      url_swap = url['href']
+      @res = CrawlingNotice.new(title: tit, campus: camp, url: url_swap)
       @res.save
     end
   end
