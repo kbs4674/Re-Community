@@ -32,7 +32,7 @@ test_user1 = User.create( email: 'test4674@naver.com', nickname: '테스트계�
 # 커뮤니티
 free = Bulletin.create( title: "자유게시판", content: "자유롭게 이야기 나눌 수 있는 게시판입니다.", user_id: "1" ) #post id : 1
 humor = Bulletin.create( title: "유머게시판", content: "바나나가 웃으면 바나나킥!", user_id: "1" ) #post id : 2
-group = Bulletin.create( title: "동아리 홍보 게시판", content: "동아리 홍보 전용 게시판 입니다!", user_id: "1" ) #post id : 3
+group = Bulletin.create( title: "동아리 홍보 게시판", content: "동아리 홍보 전용 게시판 입니다!", user_id: "1", group: "true" ) #post id : 3
 foreigner = Bulletin.create( title: "Foreigner Board", content: "board For Foreigner Bulletin Board, Please use not only Korean, also your language", user_id: "1" ) #post id : 4
 vote = Bulletin.create( title: "토론장", content: "어떤 한 주제에 대해 찬/반을 가려가며 논의하는 게시판입니다.<br/>'controversia'는 라틴어로 '논쟁' 이란 뜻이 있음.", user_id: "1", vote: "true" ) #post id : 5
 

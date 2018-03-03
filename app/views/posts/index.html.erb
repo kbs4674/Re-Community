@@ -110,7 +110,55 @@
           <%= render 'posts/board/vote_index', post: post %>
         <% end %>
       <% end %>
+    
+    <%# 특수게시물 : 익명 게시판 %>
+    <% elsif @bulletin.info_no_named == true %>
+      <% if (user_signed_in?) && (current_user.has_role? :admin) %>
+        <% @posts.with_deleted.each do |post| %>
+          <%= render 'posts/board/no_named_index', post: post %>
+        <% end %>
+      <% else %>
+        <% @posts.each do |post| %>
+          <%= render 'posts/board/no_named_index', post: post %>
+        <% end %>
+      <% end %>
       
+    <%# 특수게시물 : 구인(search)/구직(seeking) %>
+    <% elsif @bulletin.search_job == true || @bulletin.seeking_job == true %>
+      <% if (user_signed_in?) && (current_user.has_role? :admin) %>
+        <% @posts.with_deleted.each do |post| %>
+          <%= render 'posts/board/job_index', post: post %>
+        <% end %>
+      <% else %>
+        <% @posts.each do |post| %>
+          <%= render 'posts/board/job_index', post: post %>
+        <% end %>
+      <% end %>
+    
+    <%# 특수 게시물 : 방 구해요 %>
+    <% elsif @bulletin.seeking_room == true %>
+      <% if (user_signed_in?) && (current_user.has_role? :admin) %>
+        <% @posts.with_deleted.each do |post| %>
+          <%= render 'posts/board/seeking_room_index', post: post %>
+        <% end %>
+      <% else %>
+        <% @posts.each do |post| %>
+          <%= render 'posts/board/seeking_room_index', post: post %>
+        <% end %>
+      <% end %>
+      
+    <%# 특수 게시물 : 동아리 홍보 %>
+    <% elsif @bulletin.group == true %>
+      <% if (user_signed_in?) && (current_user.has_role? :admin) %>
+        <% @posts.with_deleted.each do |post| %>
+          <%= render 'posts/board/group_index', post: post %>
+        <% end %>
+      <% else %>
+        <% @posts.each do |post| %>
+          <%= render 'posts/board/group_index', post: post %>
+        <% end %>
+      <% end %>
+    
     <%# 특수권한 게시물 : 사장님 공지사항 게시판 %>
     <% elsif @bulletin.member_boss == true %>
       <% if current_user.has_role? :admin %>
@@ -162,43 +210,7 @@
             </div>
         </div>
       <% end %>
-    
-    <%# 특수게시물 : 익명 게시판 %>
-    <% elsif @bulletin.info_no_named == true %>
-      <% if (user_signed_in?) && (current_user.has_role? :admin) %>
-        <% @posts.with_deleted.each do |post| %>
-          <%= render 'posts/board/no_named_index', post: post %>
-        <% end %>
-      <% else %>
-        <% @posts.each do |post| %>
-          <%= render 'posts/board/no_named_index', post: post %>
-        <% end %>
-      <% end %>
       
-    <%# 특수게시물 : 구인(search)/구직(seeking) %>
-    <% elsif @bulletin.search_job == true || @bulletin.seeking_job == true %>
-      <% if (user_signed_in?) && (current_user.has_role? :admin) %>
-        <% @posts.with_deleted.each do |post| %>
-          <%= render 'posts/board/job_index', post: post %>
-        <% end %>
-      <% else %>
-        <% @posts.each do |post| %>
-          <%= render 'posts/board/job_index', post: post %>
-        <% end %>
-      <% end %>
-    
-    <%# 특수 게시물 : 방 구해요 %>
-    <% elsif @bulletin.seeking_room == true %>
-      <% if (user_signed_in?) && (current_user.has_role? :admin) %>
-        <% @posts.with_deleted.each do |post| %>
-          <%= render 'posts/board/seeking_room_index', post: post %>
-        <% end %>
-      <% else %>
-        <% @posts.each do |post| %>
-          <%= render 'posts/board/seeking_room_index', post: post %>
-        <% end %>
-      <% end %>
-    
     <% else %>
       <%# 일반 게시글 %>
       <% if (user_signed_in?) && (current_user.has_role? :admin) %>
@@ -215,7 +227,7 @@
         <% end %>
       <% end %>
     <% end %>
-  
+    
   <br/>
   <div align="right">
     <% if @bulletin.promote_store == true || @bulletin.member_boss == true || @bulletin.member_univ == true || @bulletin.member_real_estate == true || @bulletin.admin_only == true %>

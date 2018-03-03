@@ -156,6 +156,11 @@
         <%= render "posts/special/info_trade_show" %>
     <% end %>
     
+    <%# '동아리' 전용 show %>
+    <% if @bulletin.group == true %>
+        <%= render "posts/special/group_show" %>
+    <% end %>
+    
     <%# 특수게시물 : 가게홍보 게시판 %>
     <% if @bulletin.promote_store == true %>
         <%= render 'posts/special/promote_store_show' %>

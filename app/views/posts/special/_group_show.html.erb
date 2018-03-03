@@ -1,5 +1,5 @@
 <br/><br/>
-<span class="special_form_title">가게 정보</span>
+<span class="special_form_title">동아리 정보</span>
 <div class="special_form_area" style="margin-top: 10px;">
     <%# PC버전 크기에서만 보임. %>
     <div class="hidden-sm-down">
@@ -13,8 +13,8 @@
                     <% end %>
                 </td>
                 <td width="40%" align="center">
-                    <h3>" <%= @post.short_talk %> "</h3><br/>
-                    <div align="left" style="margin-left: 45px;"><span class="badge badge-info" style="padding-top: 5px;">연락처</span> 0<%= @post.phone_num %></b> <%= link_to '<i class="fas fa-phone"></i>'.html_safe, "tel:0#{@post.phone_num}", class: "badge badge-pill badge-success" %></div>
+                    <h3>" <%= @post.group_name %> "</h3><br/>
+                    <div align="left" style="margin-left: 45px;"><span class="badge badge-info" style="padding-top: 5px;">연락</span> <%= @post.sns %></div>
                 </td>
             </tr>
         </table>
@@ -29,8 +29,8 @@
         <% end %>
         <hr/>
         <div class="col-12 col-sm-12 col-md-12">
-            <h3 align="center">" <%= @post.short_talk %> "</h3><br/>
-            <div><span class="badge badge-info" style="padding-top: 5px;">연락처</span> 0<%= @post.phone_num %></b> <%= link_to '<i class="fas fa-phone"></i>'.html_safe, "tel:0#{@post.phone_num}", class: "badge badge-pill badge-success" %></div>
+            <h3 align="center">" <%= @post.group_name %> "</h3><br/>
+            <div><span class="badge badge-info" style="padding-top: 5px;">연락</span> <%= @post.sns %></div>
         </div>
     </div>
 </div>

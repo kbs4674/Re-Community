@@ -213,6 +213,27 @@
     </div>
     <br/>
   <% end %>
+  
+  <%# '동아리' 전용 양식 %>
+  <% if @bulletin.group == true %>
+    <div class="row special_form_area">
+      <div class="col-5 col-sm-5 col-md-5">
+        <span style="color: red">*</span>
+        <%= f.label :"동아리 이름" %>
+        <%= f.text_field :group_name, id: :post_group_name, class: "form-control no-border", required: "true", style: "background: #d9f6fd" %>
+      </div>
+      <div class="col-3 col-sm-3 col-md-3">
+        <span style="color: red">*</span>
+        <%= f.label :"연락처 혹은 SNS계정" %>
+        <%= f.text_field :sns, id: :post_group_name, class: "form-control no-border", style: "background: #d9f6fd", placeholder: "ex. (카톡) kangwon4674" %>
+      </div>
+      <div class="col-4 col-sm-4 col-md-4">
+        <%= f.label :"썸네일 업로드", style: "margin-top: 15px;" %><br/>
+        <%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
+      </div>
+    </div>
+    <br/>
+  <% end %>
     
   <%# 기본 내용 입력 %>
   <div class="form-inputs">

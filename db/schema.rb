@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180303051334) do
+ActiveRecord::Schema.define(version: 20180303120835) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20180303051334) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.boolean "admin_only"
+    t.boolean "group"
     t.index ["deleted_at"], name: "index_bulletins_on_deleted_at"
   end
 
@@ -271,6 +272,8 @@ ActiveRecord::Schema.define(version: 20180303051334) do
     t.integer "cached_weighted_total", default: 0
     t.float "cached_weighted_average", default: 0.0
     t.datetime "deleted_at"
+    t.boolean "group"
+    t.string "group_name"
     t.index ["bulletin_id"], name: "index_posts_on_bulletin_id"
     t.index ["cached_votes_down"], name: "index_posts_on_cached_votes_down"
     t.index ["cached_votes_score"], name: "index_posts_on_cached_votes_score"

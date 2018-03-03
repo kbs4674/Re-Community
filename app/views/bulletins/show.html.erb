@@ -76,6 +76,9 @@
         <% if @bulletin.seeking_room == true %>
             <span class="badge badge-pill badge-default">방 구해요</span>
         <% end %>
+        <% if @bulletin.group == true %>
+            <span class="badge badge-pill badge-default">동아리 홍보</span>
+        <% end %>
         <% if @bulletin.main_hidden == true %>
             <span class="badge badge-pill badge-danger">메인 노출 금지</span>
         <% end %>

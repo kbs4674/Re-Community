@@ -146,6 +146,6 @@ class PostsController < ApplicationController
 
   def post_params
     params[:post][:user_id] = current_user.id
-    params.require(:post).permit(:title, :content, :user_id, :num, :notice, :location, :phone_num, :etc, :skill, :time, :agree, :price_job, :nickname, :room_select, :deposit, :scale, :price_room, :contract_day, :sns, :vender, :trade_way, :price, :remote_ip, :person, :short_talk, :image) 
+    params.require(:post).permit(:title, :content, :user_id, :num, :notice, :location, :phone_num, :etc, :skill, :time, :agree, :price_job, :nickname, :room_select, :deposit, :scale, :price_room, :contract_day, :sns, :vender, :trade_way, :price, :remote_ip, :person, :short_talk, :image, :group_name) 
   end
 end
