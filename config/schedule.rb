@@ -34,8 +34,8 @@ every 3.days, :at => '4:55 am' do
     command "cd /home/ec2-user/weekly_db_backup;git add .;git commit -m 'weekly_db_backup';git push -u db master"
 end
 
-# [매일] 식사 최신화
-every :day, at: ['11:59 pm', '9:01 am', '14:01 pm'] do
+# [2시간 간격] 식사 최신화
+every 2.hours do
     rake "crawling_meal:crawling_meal"
 end
 
