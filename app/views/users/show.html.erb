@@ -30,11 +30,11 @@
                 <div class="row" style="margin-top: 20px;">
                     <div class="col-6 col-sm-4 col-md-4"><i class="far fa-address-card"></i> 닉네임</div>
                     <div class="col-6 col-sm-8 col-md-8 etc">
-                        <% if current_user.profile_icon.present? || current_user.profile_banner.present? %>
-                            <% if current_user.profile_select == "profile_icon" %>
-                                <%= image_tag ("#{current_user.profile_icon}"), width: "20px", height: "20px;" %> <%= current_user.nickname %>
-                            <% elsif current_user.profile_select == "profile_banner" %>
-                                <%= image_tag ("#{current_user.profile_banner}"), width: "70px", height: "20px;" %>
+                        <% if @user.profile_icon.present? || @user.profile_banner.present? %>
+                            <% if @user.profile_select == "profile_icon" %>
+                                <%= image_tag ("#{@user.profile_icon}"), width: "20px", height: "20px;" %> <%= @user.nickname %>
+                            <% elsif @user.profile_select == "profile_banner" %>
+                                <%= image_tag ("#{@user.profile_banner}"), width: "70px", height: "20px;" %>
                             <% else %>
                                 <%= @user.nickname %>
                             <% end %>
@@ -82,12 +82,12 @@
                         <% end %>
                     </div>
                     <div class="col-6 col-sm-4 col-md-4"><i class="fas fa-user-secret"></i> 마지막 접속IP</div>
-                    <div class="col-6 col-sm-8 col-md-8 etc"><%= current_user.last_sign_in_ip %> <%= link_to "", "https://whois.kisa.or.kr/kor/whois/whois_.jsp?query=#{current_user.last_sign_in_ip}", target: "_blank", class: "fas fa-check", style: "color: white; background-color: #949494; border-radius: 100%; padding: 3px; font-size: 10px;"%></div>
+                    <div class="col-6 col-sm-8 col-md-8 etc"><%= @user.last_sign_in_ip %> <%= link_to "", "https://whois.kisa.or.kr/kor/whois/whois_.jsp?query=#{@user.last_sign_in_ip}", target: "_blank", class: "fas fa-check", style: "color: white; background-color: #949494; border-radius: 100%; padding: 3px; font-size: 10px;"%></div>
                     <div class="col-6 col-sm-4 col-md-4"><i class="fas fa-user-secret"></i> 마지막 접속시간</div>
-                    <div class="col-6 col-sm-8 col-md-8 etc"><%= current_user.last_sign_in_at.strftime('%Y-%m-%d %H:%M:%S') %></div>
+                    <div class="col-6 col-sm-8 col-md-8 etc"><%= @user.last_sign_in_at.strftime('%Y-%m-%d %H:%M:%S') %></div>
                     <div class="col-6 col-sm-4 col-md-4"><i class="fas fa-cog"></i> 댓글 자동 펼침</div>
                     <div class="col-6 col-sm-8 col-md-8 etc">
-                        <% if current_user.comment_auto_open == true %>
+                        <% if @user.comment_auto_open == true %>
                             ON
                         <% else %>
                             OFF
@@ -115,7 +115,7 @@
                             <div class="row">
                             <% @posts.order("created_at DESC").each do |post| %>
                                 <% if Time.now - post.created_at <= 1.years %>
-                                    <% if post.user_id == current_user.id %>
+                                    <% if post.user_id == @user.id %>
                                         <div class="col-8 col-sm-9 col-md-8 etc table_separate">
                                         <%= link_to bulletin_post_path(post.bulletin, post) do %>
                                             <%= content_tag(:div, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 50, :omission => "..."), class: "etc") %>
@@ -138,7 +138,7 @@
                             <div class="row">
                             <% @qnas.order("created_at DESC").each do |post| %>
                                 <% if Time.now - post.created_at <= 1.years %>
-                                    <% if post.user_id == current_user.id %>
+                                    <% if post.user_id == @user.id %>
                                     <div class="col-8 col-sm-9 col-md-8 etc table_separate">
                                     <%= link_to post do %>
                                         <%= content_tag(:div, post.title, class: "etc") %>
@@ -165,7 +165,7 @@
                             <div class="row">
                                 <% @comements.order("created_at DESC").each do |post| %>
                                     <% if Time.now - post.created_at <= 1.years %>
-                                        <% if post.user_id == current_user.id %>
+                                        <% if post.user_id == @user.id %>
                                             <% if post.commentable_type == "AllNotice" %>
                                                 <div class="col-8 col-sm-8 col-md-8 etc table_separate">
                                                     <%= link_to all_notice_path(post.commentable) do %>
@@ -202,7 +202,7 @@
                             <div class="row">
                             <% @comement_qnas.order("created_at DESC").each do |qna| %>
                                 <% if Time.now - qna.created_at <= 1.years %>
-                                    <% if qna.user_id == current_user.id %>
+                                    <% if qna.user_id == @user.id %>
                                     <div class="col-3 col-sm-3 col-md-2 table_separate">
                                         <%= link_to qna_path(qna.qna) do %>
                                             <% if qna.get_upvotes.size - qna.get_downvotes.size > 0 %>
