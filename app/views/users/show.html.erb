@@ -46,37 +46,37 @@
                     <div class="col-6 col-sm-8 col-md-8 etc"><%= @user.email %></div>
                     <div class="col-6 col-sm-4 col-md-4"><i class="fas fa-check"></i> 보유권한</div>
                     <div class="col-6 col-sm-8 col-md-8">
-                        <% if current_user.has_role? :admin %>
+                        <% if @user.has_role? :admin %>
                             <b><%= link_to "관리자", rails_admin_path, style: "color: #30da30;" %></b>
                         <% end %>
                         
-                        <% if current_user.has_role? :block_yellow %>
+                        <% if @user.has_role? :block_yellow %>
                             <font color="red"><b>정지계정<font color="yellow">■</font></b></font>
-                        <% elsif current_user.has_role? :block_red %>
+                        <% elsif @user.has_role? :block_red %>
                             <font color="red"><b>정지계정<font color="red">■</font></b></font>
                         <% else %>
-                            <% if current_user.has_role? :student %>
+                            <% if @user.has_role? :student %>
                                 재학생
                             <% end %>
-                            <% if current_user.has_role? :graduate_student %>
+                            <% if @user.has_role? :graduate_student %>
                                 졸업생
                             <% end %>
-                            <% if current_user.has_role? :special_icon %>
+                            <% if @user.has_role? :special_icon %>
                                 <span style="color: #3da7f5; font-weight: bold">Speicial</span>
                             <% end %>
-                            <% if current_user.has_role? :special_vip %>
+                            <% if @user.has_role? :special_vip %>
                                 <span style="color: #ffb370; font-weight: bold">VIP</span>
                             <% end %>
-                            <% if current_user.has_role? :store_boss %>
+                            <% if @user.has_role? :store_boss %>
                                 사장님 계정
                             <% end %>
-                            <% if current_user.has_role? :univ_professor %>
+                            <% if @user.has_role? :univ_professor %>
                                 교수님 계정
                             <% end %>
-                            <% if current_user.has_role? :univ_official %>
+                            <% if @user.has_role? :univ_official %>
                                 학교 관계자님
                             <% end %>
-                            <% if current_user.has_role? :real_estate %>
+                            <% if @user.has_role? :real_estate %>
                                 부동산 중개업
                             <% end %>
                         <% end %>
