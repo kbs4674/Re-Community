@@ -9,8 +9,8 @@ namespace :crawling_univ_schedule do
     doc = Nokogiri::HTML(open("http://www.kangwon.ac.kr/www/index.do"))
     @posts = doc.css("#container > section.layer.layer3 > div > section.schedule > ul > li > a")
     @posts.each do |x|
-      tit = x.css("span.text")
-      time = x.css("span.date")
+      tit = x.css("span.text").text
+      time = x.css("span.date").text
       @res = CrawlingUnivSchedule.new(title: tit, time: time)
       @res.save
     end
