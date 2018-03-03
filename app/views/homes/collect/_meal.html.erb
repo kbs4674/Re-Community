@@ -28,7 +28,7 @@
             <div class="tab-content" style="margin-top: -40px;">
                 <%# 백록관(백반) 식단 %>
                 <div class="tab-pane fade show active" id="back" role="tabpanel">
-                    <% CrawlingBack.all.first(1).each do |info| %>
+                    <% CrawlingBack.order("created_at DESC").first(1).each do |info| %>
                         <div class="col-md-12">
                             <%= content_tag(:span, truncate( raw( sanitize(info.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc") %>
                             <div align="right">
@@ -43,7 +43,7 @@
                 </div>
                 <%# 천지관(백반) 식단 %>
                 <div class="tab-pane fade" id="chun" role="tabpanel">
-                    <% CrawlingChun.all.first(1).each do |info| %>
+                    <% CrawlingChun.order("created_at DESC").first(1).each do |info| %>
                         <div class="col-md-12">
                             <%= content_tag(:span, truncate( raw( sanitize(info.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc") %>
                             <div align="right">
@@ -60,7 +60,7 @@
                 </div>
                 <%# 기숙사 재정생활관 식단 %>
                 <div class="tab-pane fade" id="normal" role="tabpanel">
-                    <% CrawlingDormitoryMealNormal.all.first(1).each do |info| %>
+                    <% CrawlingDormitoryMealNormal.order("created_at DESC").first(1).each do |info| %>
                         <div class="col-md-12">
                             <%= info.title %>
                             <div align="right">
@@ -77,7 +77,7 @@
                 </div>
                 <%# 기숙사 BTL 식단 %>
                 <div class="tab-pane fade" id="BTL" role="tabpanel">
-                    <% CrawlingDormitoryMealBtl.all.first(1).each do |info| %>
+                    <% CrawlingDormitoryMealBtl.order("created_at DESC").first(1).each do |info| %>
                         <div class="col-md-12">
                             <%= info.title %>
                             <div align="right">
