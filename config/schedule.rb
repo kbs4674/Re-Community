@@ -9,14 +9,14 @@
 #
 
 # [1년 단위] 이미 삭제된 게시글 완전히 삭제
-every 30.days, :at => '4:30 am' do
+every 1.month, :at => '4:30 am' do
 #   command "/usr/bin/some_great_command"
 #   runner "MyModel.some_method"
     rake "posts:delete_all_post_1year"
 end
 
 # [1주일 단위] 네이버 로그인기록 삭제
-every 7.weeks, :at => '4:30 am' do
+every 7.days, :at => '4:30 am' do
 #   command "/usr/bin/some_great_command"
 #   runner "MyModel.some_method"
     rake "naver_login_delete:delete_naver_login_1weeks"
@@ -46,7 +46,12 @@ end
 
 # [1주일] 크롤링 기록 제거
 every 1.weeks, at: ['5:12 am'] do
-    rake "crawling_notice:crawling_notice"
+    rake "crawling_delete:crawling_delete"
+end
+
+# [매 한 달] 학사일정 가져오기 및 이전 달 크롤링 기록 제거
+every 1.month, at: '3:00' do
+    rake "crawling_univ_schedule:crawling_univ_schedule"
 end
 
 # every 4.days do

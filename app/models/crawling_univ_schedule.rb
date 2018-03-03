@@ -1,0 +1,2 @@
+class CrawlingUnivSchedule < ApplicationRecord
+end

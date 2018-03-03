@@ -1701,7 +1701,7 @@
 /*             Navigation Tabs                 */
 .nav-tabs-navigation {
   text-align: center;
-  border-bottom: 1px solid #F1EAE0;
+  border-bottom: 1px solid #a7a7a7;
   margin-bottom: 30px;
 }
 .nav-tabs-navigation .nav > .nav-item > .nav-link {
@@ -1758,7 +1758,7 @@
 .nav-tabs .nav-item .nav-link.active:before,
 .nav-tabs .nav-item .nav-link.active:hover:before,
 .nav-tabs .nav-item .nav-link.active:focus:before {
-  border-bottom: 11px solid #F1EAE0;
+  border-bottom: 11px solid #a7a7a7;
   border-left: 11px solid transparent;
   border-right: 11px solid transparent;
   content: "";
