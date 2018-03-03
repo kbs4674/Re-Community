@@ -82,7 +82,13 @@
                         <% end %>
                     </div>
                     <div class="col-6 col-sm-4 col-md-4"><i class="fas fa-user-secret"></i> 마지막 접속IP</div>
-                    <div class="col-6 col-sm-8 col-md-8 etc"><%= @user.last_sign_in_ip %> <%= link_to "", "https://whois.kisa.or.kr/kor/whois/whois_.jsp?query=#{@user.last_sign_in_ip}", target: "_blank", class: "fas fa-check", style: "color: white; background-color: #949494; border-radius: 100%; padding: 3px; font-size: 10px;"%></div>
+                    <div class="col-6 col-sm-8 col-md-8 etc">
+                        <% if @user.last_sign_in_ip == nil %>
+                            -
+                        <% else %>
+                            <%= @user.last_sign_in_ip %> <%= link_to "", "https://whois.kisa.or.kr/kor/whois/whois_.jsp?query=#{@user.last_sign_in_ip}", target: "_blank", class: "fas fa-check", style: "color: white; background-color: #949494; border-radius: 100%; padding: 3px; font-size: 10px;" %>
+                        <% end %>
+                    </div>
                     <div class="col-6 col-sm-4 col-md-4"><i class="fas fa-user-secret"></i> 마지막 접속시간</div>
                     <div class="col-6 col-sm-8 col-md-8 etc"><%= @user.last_sign_in_at.strftime('%Y-%m-%d %H:%M:%S') %></div>
                     <div class="col-6 col-sm-4 col-md-4"><i class="fas fa-cog"></i> 댓글 자동 펼침</div>
