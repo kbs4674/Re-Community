@@ -39,7 +39,7 @@
     <tr>
         <td td colspan="2">
           <%# 답변(좋아요 순) %>
-          <div class="home_index notice" style="width: 97%; height: 50px; margin-top: 0px; margin-bottom: 0px;">
+          <div class="home_index notice" style="width: 97%; height: 50px; margin-top: 10px; margin-bottom: 0px;">
             <ul class="rolling">
               <% @hot_qna_replys.each do |qna| %>
                 <li class="row"><%= render "homes/hots/likes_qna_comment", qna: qna %></li>
