@@ -90,7 +90,13 @@
                         <% end %>
                     </div>
                     <div class="col-6 col-sm-4 col-md-4"><i class="fas fa-user-secret"></i> 마지막 접속시간</div>
-                    <div class="col-6 col-sm-8 col-md-8 etc"><%= @user.last_sign_in_at.strftime('%Y-%m-%d %H:%M:%S') %></div>
+                    <div class="col-6 col-sm-8 col-md-8 etc">
+                        <% if @user.last_sign_in_at == nil %>
+                            -
+                        <% else %>
+                            <%= @user.last_sign_in_at.strftime('%Y-%m-%d %H:%M:%S') %>
+                        <% end %>
+                    </div>
                     <div class="col-6 col-sm-4 col-md-4"><i class="fas fa-cog"></i> 댓글 자동 펼침</div>
                     <div class="col-6 col-sm-8 col-md-8 etc">
                         <% if @user.comment_auto_open == true %>
