@@ -25,8 +25,8 @@
     </tr>
     <tr>
         <%# 홈페이지 배너 %>
-        <td colspan="2" style="width: 68%; padding-top: 10px;">
-          <%= link_to(image_tag("/img/banner_beta.png", width: "97%"), "https://open.kakao.com/o/svvDAhI", target: "_blank") %>
+        <td colspan="2" style="width: 68%;">
+          <%= link_to(image_tag("/img/banner_beta.png", width: "97%"), "https://open.kakao.com/o/svvDAhI", target: "_blank", style: "margin-top: 0px;") %>
         </td>
         <%# Side(우측) Section %>
         <td>
@@ -72,7 +72,7 @@
         </td>
         <td rowspan="3">
           <%# 대학교 공지사항 크롤링 %>
-          <div class="home_index" style="width: 360px; height: auto;">
+          <div class="home_index" style="width: 360px; height: auto; margin-top: -10px;">
             <%= render "homes/collect/notice&schedule" %>
           </div>
           
