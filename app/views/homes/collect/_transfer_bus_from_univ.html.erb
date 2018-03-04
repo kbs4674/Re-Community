@@ -10,9 +10,11 @@
     </b> | </span>
     <span>
     <% CrawlingBus.first(1).each do |info| %>
-        <%= content_tag(:span, truncate( raw( sanitize(info.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc", style: "font-weight: bold") %>
+        <%= content_tag(:span, truncate( raw( sanitize(info.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc", style: "font-weight: bold;") %>
     <% end %>
-     출발합니다.</span>
+    </span>
+    <span style="margin-right: 20px;"> 출발합니다.</span><br/>
+     <small style="margin-right: 25px;">powered by. 강원대학교</small>
 </div>
 
 <%# 모바일 %>
@@ -28,5 +30,5 @@
     <% CrawlingBus.first(1).each do |info| %>
         <%= content_tag(:span, truncate( raw( sanitize(info.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc", style: "font-weight: bold") %>
     <% end %>
-     출발합니다.</span>
+        출발합니다.</span>
 </div>
