@@ -39,8 +39,8 @@
     <%= render "homes/collect/transfer_subway" %>
   <% elsif (user_signed_in?) && (current_user.transfer == '경춘선(급행)') %>
     <%= render "homes/collect/transfer_subway_rapid" %>
-  <% elsif (user_signed_in?) && (current_user.transfer == 'ITX') %>
-    <%= render "homes/collect/transfer_itx" %>
+  <% elsif (user_signed_in?) && (current_user.transfer == '[학교버스] 강원대↔남춘천역') %>
+    <%= render "homes/collect/transfer_bus_from_univ" %>
   <% elsif (not user_signed_in?) %>
     <%= render "homes/collect/transfer_subway" %>
   <% end %>

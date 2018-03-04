@@ -1,0 +1,2 @@
+class CrawlingBus < ApplicationRecord
+end

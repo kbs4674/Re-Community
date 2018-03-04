@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180303120835) do
+ActiveRecord::Schema.define(version: 20180304142401) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -147,6 +147,12 @@ ActiveRecord::Schema.define(version: 20180303120835) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "crawling_buses", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "crawling_chuns", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
@@ -272,7 +278,6 @@ ActiveRecord::Schema.define(version: 20180303120835) do
     t.integer "cached_weighted_total", default: 0
     t.float "cached_weighted_average", default: 0.0
     t.datetime "deleted_at"
-    t.boolean "group"
     t.string "group_name"
     t.index ["bulletin_id"], name: "index_posts_on_bulletin_id"
     t.index ["cached_votes_down"], name: "index_posts_on_cached_votes_down"
