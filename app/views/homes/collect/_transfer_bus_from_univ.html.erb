@@ -18,10 +18,10 @@
 <%# 모바일 %>
 <div class="hidden-md-up" align="right" style="background: url('/img/bus.jpg') no-repeat; background-position: -150px -100px; background-color: white; border-radius: 30px; padding: 10px; margin-top: 20px;">
   <span style="margin-right: 0px;"> <b style="color: #53c371">남춘천역 ↔ 강원대
-    <% if Time.zone.now.strftime("%H").to_i >= 16 && Time.zone.now.strftime("%H").to_i <= 20 %>
-        <b style="color: #7f99ff">하교 버스</b>
+    <% if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 11) %>
+        <b style="color: #7f99ff">등교 버스</b>
     <% else %>
-        <b style="color: #ff9e7f">등교 버스</b>
+        <b style="color: #ff9e7f">하교 버스</b>
     <% end %>
     </b> | </span><br/>
     <span style="font-size: 13px;">
