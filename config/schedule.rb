@@ -55,12 +55,7 @@ every 1.month, at: ['3:00 am'] do
 end
 
 # [매일] 버스 시간표 가져오기(등교)
-every :day, at: ['0:00 am', '8:00 am', '8:20 am', '8:22 am', '8:40 am', '8:45 am', '8:50 am', '8:57 am', '9:10 am', '9:20 am', '9:39 am', '9:45 am', '9:50 am', '9:51 am', '9:55 am', '10:20 am'] do
-    rake "crawling_bus:crawling_bus"
-end
-
-# [매일] 버스 시간표 가져오기(하교)
-every :day, at: ['11:00 am', '16:00 pm', '16:30 pm', '17:00 pm', '17:20 pm', '17:40 pm', '18:00 pm', '18:20 pm', '18:40 pm', '19:00 pm'] do
+every :day, at: ['0:00 am', '8:00 am', '8:20 am', '8:22 am', '8:40 am', '8:45 am', '8:50 am', '8:57 am', '9:10 am', '9:20 am', '9:39 am', '9:45 am', '9:50 am', '9:51 am', '9:55 am', '10:20 am', '11:00 am', '16:00 pm', '16:30 pm', '17:00 pm', '17:20 pm', '17:40 pm', '18:00 pm', '18:20 pm', '18:40 pm', '19:00 pm'] do
     rake "crawling_bus:crawling_bus"
 end
 
