@@ -16,7 +16,7 @@
             <hr style="margin-top: 5px; margin-bottom: 5px; border: 1px solid white;">
             <table border="0" width="100%">
                 <tr>
-                    <td rowspan="2" align="center" style="width: 40%;">
+                    <td rowspan="3" align="center" style="width: 40%;">
                         <% if current_user.new_notifications.unread_by(current_user).count > 0 %>
                           <div class="main_account_ring_button fas fa-bell">
                         <% else %>
@@ -26,6 +26,17 @@
                         </div>
                     </td>
                     <td colspan="2">현재 IP : <%= current_user.current_sign_in_ip %></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        교통시간 조회 :
+                        <% if current_user.transfer == '[학교버스] 강원대↔남춘천역' %>
+                            학교 통학버스
+                        <% else %>
+                            <%= current_user.transfer %>
+                        <% end %>
+                        <%= link_to "<b>수정</b>".html_safe, edit_user_registration_path, style: "color: #0275d8" %>
+                    </td>
                 </tr>
                 <tr>
                     <td ><%= link_to "정보수정", edit_user_registration_path %></td>
