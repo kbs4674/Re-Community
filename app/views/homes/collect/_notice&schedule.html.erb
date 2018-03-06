@@ -35,7 +35,7 @@
                 </div>
                 <%# 학사 일정 %>
                 <div class="tab-pane fade" id="kangwon_univ_schedule" role="tabpanel">
-                  <% CrawlingUnivSchedule.each do |info| %>
+                  <% CrawlingUnivSchedule.all.each do |info| %>
                     <div class="col-md-12" style="font-size: 13px;">
                     <span style="background-color: rgb(109, 48, 207);"><span style="font-family: 나눔고딕, NanumGothic; color: rgb(255, 255, 255); background-color: rgb(236, 185, 255);"><b><span style="background-color: rgb(120, 157, 255);">&nbsp;<%= info.time %>&nbsp;</span></b></span></span> 
                     <%= content_tag(:span, truncate( raw( sanitize(info.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 20, :omission => "..."), class: "etc") %>
