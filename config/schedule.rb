@@ -51,7 +51,7 @@ every :day, at: local('5:10 am') do
 end
 
 # [1주일] 크롤링 기록 제거
-every 1.weeks, at: local('5:12 am') do
+every 2.days, at: local('5:12 am') do
     rake "crawling_delete:crawling_delete"
 end
 
