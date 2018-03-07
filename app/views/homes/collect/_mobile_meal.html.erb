@@ -32,7 +32,7 @@
                         <div class="col-12 col-sm-12">
                             <%= info.title %>
                             <div align="right">
-                                <% if Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 14 %>
+                                <% if Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 %>
                                     <span class="badge badge-pill badge-info"><%= Time.zone.now.strftime('%m. %d') %> 점심</span>
                                 <% else %>
                                     <span class="badge badge-pill badge-primary"><%= Time.zone.now.strftime('%m. %d') %> 저녁</span>
@@ -47,9 +47,9 @@
                         <div class="col-12 col-sm-12">
                             <%= info.title %>
                             <div align="right">
-                                <% if Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 %>
+                                <% if Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i < 9 %>
                                     <span class="badge badge-pill badge-success"><%= Time.zone.now.strftime('%m. %d') %> 아침</span>
-                                <% elsif Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 %>
+                                <% elsif Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 %>
                                     <span class="badge badge-pill badge-info"><%= Time.zone.now.strftime('%m. %d') %> 점심</span>
                                 <% else %>
                                     <span class="badge badge-pill badge-primary"><%= Time.zone.now.strftime('%m. %d') %> 저녁</span>
@@ -64,9 +64,9 @@
                         <div class="col-12 col-sm-12">
                             <%= info.title %>
                             <div align="right">
-                                <% if Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 %>
+                                <% if Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i < 9 %>
                                     <span class="badge badge-pill badge-success"><%= Time.zone.now.strftime('%m. %d') %> 아침</span>
-                                <% elsif Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 %>
+                                <% elsif Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 %>
                                     <span class="badge badge-pill badge-info"><%= Time.zone.now.strftime('%m. %d') %> 점심</span>
                                 <% else %>
                                     <span class="badge badge-pill badge-primary"><%= Time.zone.now.strftime('%m. %d') %> 저녁</span>
@@ -81,9 +81,9 @@
                         <div class="col-12 col-sm-12">
                             <%= info.title %>
                             <div align="right">
-                                <% if Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 %>
+                                <% if Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i < 9 %>
                                     <span class="badge badge-pill badge-success"><%= Time.zone.now.strftime('%m. %d') %> 아침</span>
-                                <% elsif Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 %>
+                                <% elsif Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 %>
                                     <span class="badge badge-pill badge-info"><%= Time.zone.now.strftime('%m. %d') %> 점심</span>
                                 <% else %>
                                     <span class="badge badge-pill badge-primary"><%= Time.zone.now.strftime('%m. %d') %> 저녁</span>

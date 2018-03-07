@@ -72,9 +72,9 @@ namespace :crawling_meal do
     @posts2.each do |x|
       #월요일 식단
       if Time.zone.now.strftime("%A") == "Monday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           chun_meal = doc2.css('tr:nth-child(2) > td:nth-child(3)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           chun_meal = doc2.css('tr:nth-child(5) > td:nth-child(2)').text.strip
         else
           chun_meal = doc2.css('tr:nth-child(8) > td:nth-child(2)').text.strip
@@ -82,9 +82,9 @@ namespace :crawling_meal do
       end
       #화요일 식단
       if Time.zone.now.strftime("%A") == "Tuesday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           chun_meal = doc2.css('tr:nth-child(2) > td:nth-child(4)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           chun_meal = doc2.css('tr:nth-child(5) > td:nth-child(3)').text.strip
         else
           chun_meal = doc2.css('tr:nth-child(8) > td:nth-child(3)').text.strip
@@ -92,9 +92,9 @@ namespace :crawling_meal do
       end
       #수요일 식단
       if Time.zone.now.strftime("%A") == "Wednesday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           chun_meal = doc2.css('tr:nth-child(2) > td:nth-child(5)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           chun_meal = doc2.css('tr:nth-child(5) > td:nth-child(4)').text.strip
         else
           chun_meal = doc2.css('tr:nth-child(8) > td:nth-child(4)').text.strip
@@ -102,9 +102,9 @@ namespace :crawling_meal do
       end
       #목요일 식단
       if Time.zone.now.strftime("%A") == "Thursday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           chun_meal = doc2.css('tr:nth-child(2) > td:nth-child(6)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           chun_meal = doc2.css('tr:nth-child(5) > td:nth-child(5)').text.strip
         else
           chun_meal = doc2.css('tr:nth-child(8) > td:nth-child(5)').text.strip
@@ -112,9 +112,9 @@ namespace :crawling_meal do
       end
       #금요일 식단
       if Time.zone.now.strftime("%A") == "Friday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           chun_meal = doc2.css('tr:nth-child(2) > td:nth-child(7)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           chun_meal = doc2.css('tr:nth-child(5) > td:nth-child(6)').text.strip
         else
           chun_meal = doc2.css('tr:nth-child(8) > td:nth-child(6)').text.strip
@@ -122,9 +122,9 @@ namespace :crawling_meal do
       end
       #토요일 식단
       if Time.zone.now.strftime("%A") == "Saturday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           chun_meal = doc2.css('tr:nth-child(2) > td:nth-child(8)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           chun_meal = doc2.css('tr:nth-child(5) > td:nth-child(7)').text.strip
         else
           chun_meal = doc2.css('tr:nth-child(8) > td:nth-child(7)').text.strip
@@ -141,9 +141,9 @@ namespace :crawling_meal do
     @posts3.each do |x|
       #월요일 식단
       if Time.zone.now.strftime("%A") == "Monday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(2) > td:nth-child(2)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(2) > td:nth-child(3)').text.strip
         else
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(2) > td:nth-child(4)').text.strip
@@ -151,9 +151,9 @@ namespace :crawling_meal do
       end
       #화요일 식단
       if Time.zone.now.strftime("%A") == "Tuesday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(3) > td:nth-child(2)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(3) > td:nth-child(3)').text.strip
         else
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(3) > td:nth-child(4)').text.strip
@@ -161,9 +161,9 @@ namespace :crawling_meal do
       end
       #수요일 식단
       if Time.zone.now.strftime("%A") == "Wednesday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(4) > td:nth-child(2)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(4) > td:nth-child(3)').text.strip
         else
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(4) > td:nth-child(4)').text.strip
@@ -171,9 +171,9 @@ namespace :crawling_meal do
       end
       #목요일 식단
       if Time.zone.now.strftime("%A") == "Thursday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(5) > td:nth-child(2)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(5) > td:nth-child(3)').text.strip
         else
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(5) > td:nth-child(4)').text.strip
@@ -181,9 +181,9 @@ namespace :crawling_meal do
       end
       #금요일 식단
       if Time.zone.now.strftime("%A") == "Friday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(6) > td:nth-child(2)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 8 && Time.zone.now.strftime("%H").to_i <= 14 )
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(6) > td:nth-child(3)').text.strip
         else
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(6) > td:nth-child(4)').text.strip
@@ -191,9 +191,9 @@ namespace :crawling_meal do
       end
       #토요일 식단
       if Time.zone.now.strftime("%A") == "Saturday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(7) > td:nth-child(2)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(7) > td:nth-child(3)').text.strip
         else
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(7) > td:nth-child(4)').text.strip
@@ -201,9 +201,9 @@ namespace :crawling_meal do
       end
       # 일요일 식단
       if Time.zone.now.strftime("%A") == "Sunday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(8) > td:nth-child(2)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(8) > td:nth-child(3)').text.strip
         else
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(8) > td:nth-child(4)').text.strip
@@ -219,9 +219,9 @@ namespace :crawling_meal do
     @posts4.each do |x|
       # 월요일 식단
       if Time.zone.now.strftime("%A") == "Monday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > #foodtab2 > table.table_type01 > tr:nth-child(2) > td:nth-child(2)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > #foodtab2 > table.table_type01 > tr:nth-child(2) > td:nth-child(3)').text.strip
         else
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > #foodtab2 > table.table_type01 > tr:nth-child(2) > td:nth-child(4)').text.strip
@@ -229,9 +229,9 @@ namespace :crawling_meal do
       end
       # 화요일 식단
       if Time.zone.now.strftime("%A") == "Tuesday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(3) > td:nth-child(2)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(3) > td:nth-child(3)').text.strip
         else
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(3) > td:nth-child(4)').text.strip
@@ -239,9 +239,9 @@ namespace :crawling_meal do
       end
       # 수요일 식단
       if Time.zone.now.strftime("%A") == "Wednesday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(4) > td:nth-child(2)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(4) > td:nth-child(3)').text.strip
         else
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(4) > td:nth-child(4)').text.strip
@@ -249,9 +249,9 @@ namespace :crawling_meal do
       end
       # 목요일 식단
       if Time.zone.now.strftime("%A") == "Thursday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(5) > td:nth-child(2)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(5) > td:nth-child(3)').text.strip
         else
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(5) > td:nth-child(4)').text.strip
@@ -259,9 +259,9 @@ namespace :crawling_meal do
       end
       # 금요일 식단
       if Time.zone.now.strftime("%A") == "Friday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(6) > td:nth-child(2)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(6) > td:nth-child(3)').text.strip
         else
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(6) > td:nth-child(4)').text.strip
@@ -269,9 +269,9 @@ namespace :crawling_meal do
       end
       # 토요일 식단
       if Time.zone.now.strftime("%A") == "Saturday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(7) > td:nth-child(2)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(7) > td:nth-child(3)').text.strip
         else
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(7) > td:nth-child(4)').text.strip
@@ -279,9 +279,9 @@ namespace :crawling_meal do
       end
       # 일요일 식단
       if Time.zone.now.strftime("%A") == "Sunday"
-        if (Time.zone.now.strftime("%H").to_i > 0 && Time.zone.now.strftime("%H").to_i <= 9 )
+        if (Time.zone.now.strftime("%H").to_i > 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(8) > td:nth-child(2)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i > 9 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(8) > td:nth-child(3)').text.strip
         else
           dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(8) > td:nth-child(4)').text.strip
