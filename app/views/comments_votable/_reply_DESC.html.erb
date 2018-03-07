@@ -1,4 +1,4 @@
-<% comments.order("created_at ASC").order(:cached_votes_up => :desc).each do |comment| %>  
+<% comments.order("created_at DESC").order(:cached_votes_up => :desc).each do |comment| %>  
 <div class="more_comment_list">
   <div class="comments-show">
     <div id="comment<%= comment.id %>"></div>
@@ -49,7 +49,6 @@
                               <% if not comment.report_comments.size >= comment.num %>
                                 <span style="margin-right: 10px;">|</span>
                                 <span><%= link_to "", comment_comment_destroys_path(comment), class: "fas fa-times", :method => :post, data: { confirm: "정말로 지우시겠습니까?" } %></span>
-                                <%#= link_to "", comment_path(comment), method: :delete, remote: false, data: { confirm: "정말로 지우시겠습니까?" }, class: "fas fa-times" %>
                               <% elsif (comment.report_comments.size >= comment.num) && (current_user.has_role? :admin) %>
                                 <span style="margin-right: 10px;">|</span>
                                 <%= link_to "", comment_path(comment), method: :delete, remote: false, data: { confirm: "이번에 지우면 로그 기록에서도 영영 사라지며, 대댓글도 함께 삭제됩니다. 정말 지우시겠습니까?" }, class: "fas fa-times", style: "color: red" %>
@@ -208,6 +207,7 @@
             <%= f.hidden_field :commentable_type, value: @new_comment.commentable_type %>
             <%= f.hidden_field :comment_id, value: comment.id %>
             <div class="col-12 col-sm-12 col-md-12 field form-group" style="margin-top: 30px;">
+              <%= f.hidden_field :nickname, value: current_user.nickname, required: "true" %>
               <%= f.text_area :body, class: 'form-control', placeholder: '마음의 상처를 입히는 댓글은 피해주세요..ㅠ_ㅠ', required: "true" %>
             </div>
             <div class="offset-0 offset-sm-10 offset-md-11 col-0 col-sm-2 col-md-1">

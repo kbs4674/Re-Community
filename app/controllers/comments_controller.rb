@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_comment
 
   def create
     commentable = commentable_type.constantize.find(commentable_id)
@@ -17,16 +18,16 @@ class CommentsController < ApplicationController
                                            link: request.referrer
     end
 
-  respond_to do |format|
-    if @comment.save
-      make_child_comment
-      format.html  { redirect_to("#{request.referrer}#comment#{@comment.id}", :notice => '댓글이 작성되었습니다.') }
-    else
-      format.html  { redirect_to(request.referrer, :alert => '댓글 내용을 작성해주세요.') }
+    respond_to do |format|
+      if @comment.save
+        make_child_comment
+        format.html  { redirect_to("#{request.referrer}#comment#{@comment.id}", :notice => '댓글이 작성되었습니다.') }
+      else
+        format.html  { redirect_to(request.referrer, :alert => '댓글 내용을 작성해주세요.') }
+      end
     end
   end
-  end
-
+  
   def destroy
     @comment = Comment.find_by(id: params[:id])
     # DB 기록에서도 조차 영구 삭제
@@ -68,6 +69,10 @@ class CommentsController < ApplicationController
   end
   
   private
+  
+  def set_comment
+    @comment = Comment.find_by(id: params[:id])
+  end
 
   def comment_params
     params[:comment][:user_id] = current_user.id

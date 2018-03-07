@@ -13,19 +13,19 @@
     <div align="left" class="col-6 col-sm-5 col-md-4 etc" style="padding: 10px;">
         <% if post.deleted? %>
             <%= link_to bulletin_post_path(post.bulletin, post) do %>
-                <%= content_tag(:div, post.title, class: "etc", style: "color: #8e68e4") %>
+                <%= content_tag(:div, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc", style: "color: #8e68e4;") %>
             <% end %>
         <% elsif post.reports.size >= post.num %>
             <% if can? :for_admin, @post %>
                 <%= link_to bulletin_post_path(post.bulletin, post) do %>
-                    <%= content_tag(:div, post.title, class: "etc", style: "color: red") %>
+                    <%= content_tag(:div, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc", style: "color: red;") %>
                 <% end %>
             <% else %>
                 <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
             <% end %>
         <% else %>
             <%= link_to bulletin_post_path(post.bulletin, post) do %>
-                <%= content_tag(:div, post.title, class: "etc") %>
+                <%= content_tag(:div, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc") %>
             <% end %>
         <% end %>
     </div>

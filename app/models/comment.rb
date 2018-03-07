@@ -1,4 +1,4 @@
-class Comment < ActiveRecord::Base
+class Comment < ApplicationRecord
   # 투표 잼
   acts_as_votable
   # 삭제되는 내용 기록

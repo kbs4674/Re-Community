@@ -3,6 +3,7 @@
     <%= f.hidden_field :commentable_id, value: @new_comment.commentable_id %>
     <%= f.hidden_field :commentable_type, value: @new_comment.commentable_type %>
     <div class="field form-group">
+      <%= f.hidden_field :nickname, value: current_user.nickname, required: "true" %>
       <%= f.text_area :body, class: 'form-control', style: "margin-top: 30px;", placeholder: "#{@bulletin.title == "Foreigner Board" ? "Please, mind your manners." : "마음의 상처를 입히는 댓글은 피해주세요..ㅠ_ㅠ"}", required: "true" %>
     </div>
     <div class="field form-group">

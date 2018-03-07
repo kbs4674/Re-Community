@@ -21,6 +21,19 @@ class CommentQnasController < ApplicationController
     end
   end
   
+  def update
+    @comment_qna = CommentQna.find_by(id: params[:id])
+    respond_to do |format|
+      if @comment_qna.update(comment_qna_params)
+        format.html { redirect_to request.referrer, notice: '댓글이 성공적으로 수정되었습니다.' }
+        format.json { render :show, status: :ok, location: @comment_qna }
+      else
+        format.html { render :edit }
+        format.json { render json: @comment_qna.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
   def really_destroy
     @comment_qna.really_destroy!
   end

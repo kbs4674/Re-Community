@@ -25,6 +25,7 @@ class Post < ApplicationRecord
     # 대댓글이 지원되는 댓글 Gem
     acts_as_commentable
     
+    has_many :comments, dependent: :destroy
     belongs_to :bulletin
     belongs_to :user
     has_many :impressions, :as=>:impressionable

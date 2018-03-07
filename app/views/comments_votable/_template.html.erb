@@ -1,5 +1,11 @@
-<div class="comments-container">  
-  <%= render partial: "comments_votable/reply", locals: {comments: commentable.root_comments} %>
+<div class="comments-container">
+    <% if commentable.comment_threads.count < 30 %>
+        <%# 최신글일 수록 아래에 %>
+        <%= render partial: "comments_votable/reply_ASC", locals: {comments: commentable.root_comments} %>
+    <% else %>
+        <%# 최신글일 수록 위에 %>
+        <%= render partial: "comments_votable/reply_DESC", locals: {comments: commentable.root_comments} %>
+    <% end %>
 </div>
 
 <%= render partial: "comments_votable/form", locals: {new_comment: new_comment} %>

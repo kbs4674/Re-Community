@@ -28,12 +28,13 @@
                 </td>
                 <td>
                     <div class="row">
-                        <div class="col-md-11 hidden-sm-down">
+                        <div class="col-md-10 hidden-sm-down">
                             <%= render 'posts/special/nickname_comment_qna', comment_qna: comment_qna %>
                         </div>
-                        <div class="col-1 hidden-sm-down">
+                        <div align="right" class="col-2 hidden-sm-down">
                             <% if can? :destroy, comment_qna %>
                                 <% if not comment_qna.deleted? %>
+                                    <a onclick="showHide('comment_qna_modify_<%= comment_qna.id %>')" onfocus="this.blur()">수정</a><span style="margin-left: 10px; margin-right: 10px;">|</span> 
                                     <%= link_to "", [comment_qna.qna, comment_qna], method: :delete, remote: true, data: { confirm: "정말로 지우시겠습니까?" }, class: "fas fa-times" %>
                                 <% end %>
                                 <% if comment_qna.deleted? && (current_user.has_role? :admin) %>
@@ -56,13 +57,31 @@
                     <% else %>
                         <%= comment_qna.body.html_safe %>
                     <% end %>
+                    
+                    <div id="comment_qna_modify_<%= comment_qna.id %>" style="display:none;">
+                        <div class="reply-form">
+                          <%= form_with(model: [comment_qna.qna, comment_qna], local: true) do |f| %>
+                            <%= f.hidden_field :comment_qna_id, value: comment_qna.id %>
+                            <div class="col-12 col-sm-12 col-md-12 field form-group" style="margin-top: 30px;">
+                              <%= f.text_area :body, class: "form-control tinymce", rows: "3" %>
+                            </div>
+                            <div class="offset-0 offset-sm-10 offset-md-11 col-0 col-sm-2 col-md-1">
+                              <div class="field form-group">
+                                <%= submit_tag "수정", class: 'btn btn-info btn-sm', style: "float: right;" %><br/><br/>
+                              </div>
+                            </div>
+                          <% end %>
+                        </div>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>
                 </td>
-                <td align="right">
-                    <small class="hidden-sm-down" style="margin-right: 50px;"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= time_ago_in_words(comment_qna.created_at) %>전 [ <%= comment_qna.created_at.strftime('%Y-%m-%d %H:%M') %> ]</small>
+                <td>
+                    <div align="right">
+                        <small class="hidden-sm-down"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= time_ago_in_words(comment_qna.created_at) %>전 [ <%= comment_qna.created_at.strftime('%Y-%m-%d %H:%M') %> ]</small>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -96,14 +115,18 @@
                 <% end %>
             </div>
     
-            <div class="col-7 col-sm-8 col-md-0 etc">
+            <div class="col-5 col-sm-6 col-md-0 etc">
                 <%= render 'posts/special/nickname_comment_qna', comment_qna: comment_qna %>
             </div>
             
-            <div class="col-1 col-sm-1 col-md-0">
+            <div align="right" class="col-3 col-sm-3 col-md-0">
                 <% if can? :destroy, comment_qna %>
                     <% if not comment_qna.deleted? %>
+                        <a onclick="showHide('mobile_comment_qna_modify_<%= comment_qna.id %>')" onfocus="this.blur()">수정</a><span style="margin-left: 10px; margin-right: 10px;">|</span>
                         <%= link_to "", [comment_qna.qna, comment_qna], method: :delete, remote: true, data: { confirm: "정말로 지우시겠습니까?" }, class: "fas fa-times" %>
+                    <% end %>
+                    <% if comment_qna.deleted? && (current_user.has_role? :admin) %>
+                        <%= link_to "", [comment_qna.qna, comment_qna], method: :delete, remote: true, data: { confirm: "이번에 지우면 로그 기록에서도 영영 사라집니다. 정말 지우시겠습니까?" }, class: "fas fa-times", style: "color: red" %>
                     <% end %>
                 <% end %>
             </div>
@@ -121,6 +144,21 @@
                 <% else %>
                     <%= comment_qna.body.html_safe %>
                 <% end %>
+            </div>
+            <div id="mobile_comment_qna_modify_<%= comment_qna.id %>" style="display:none;">
+                <div class="reply-form">
+                    <%= form_with(model: [comment_qna.qna, comment_qna], local: true) do |f| %>
+                        <%= f.hidden_field :comment_qna_id, value: comment_qna.id %>
+                        <div class="col-12 col-sm-12 col-md-12 field form-group" style="margin-top: 30px;">
+                          <%= f.text_area :body, class: "form-control tinymce", rows: "3" %>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-0">
+                          <div class="field form-group">
+                            <%= submit_tag "수정", class: 'btn btn-info btn-sm', style: "float: right;" %><br/><br/>
+                          </div>
+                        </div>
+                    <% end %>
+                </div>
             </div>
             <div class="col-11 col-sm-11 col-md-11" align="right">
                 <small class="hidden-md-up"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= time_ago_in_words(comment_qna.created_at) %>전</small>
