@@ -6,7 +6,7 @@ namespace :crawling_bus do
     end
     
     doc = Nokogiri::HTML(open("http://www.kangwon.ac.kr/www/contents.do?key=215&"))
-    if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 10) # 등교
+    if (Time.zone.now.strftime("%H").to_i >= 0 || Time.zone.now.strftime("%H").to_i <= 10) # 등교
       @posts = doc.css("#contents > table:nth-child(11) > tbody")
       @posts.each do |x|
         # 월요일
