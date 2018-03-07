@@ -58,7 +58,7 @@ namespace :crawling_bus do
             tit = x.css("tr:nth-child(15) > td:nth-child(2)").text
           end
         # 화~목
-        elsif (Time.zone.now.strftime("%A") == "Tuesday" || Time.zone.now.strftime("%A") == "Wednesday" || Time.zone.now.strftime("%A") == "Wednesday")
+        elsif (Time.zone.now.strftime("%A") == "Tuesday" || Time.zone.now.strftime("%A") == "Wednesday" || Time.zone.now.strftime("%A") == "Thursday")
           if (Time.zone.now.strftime("%H").to_i >= 20 || Time.zone.now.strftime("%H").to_i < 8)
             #08:00
             tit = x.css("tr:nth-child(1) > td:nth-child(4)").text
@@ -154,7 +154,7 @@ namespace :crawling_bus do
     else # 하교
       @posts2 = doc.css("#contents > table:nth-child(15) > tbody")
       @posts2.each do |x|
-      if (Time.zone.now.strftime("%H").to_i >= 11 && Time.zone.now.strftime("%H").to_i <= 16 )
+      if (Time.zone.now.strftime("%H").to_i >= 11 || Time.zone.now.strftime("%H").to_i < 16 )
         #16:00
         tit = x.css("tr:nth-child(1) > td:nth-child(2)").text
       elsif (Time.zone.now.strftime("%H").to_i == 16 && Time.zone.now.strftime("%M").to_i == 00)

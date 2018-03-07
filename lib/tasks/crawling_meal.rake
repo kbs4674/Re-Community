@@ -7,7 +7,7 @@ namespace :crawling_meal do
     @posts.each do |x|
       #월요일 식단
       if Time.zone.now.strftime("%A") == "Monday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 14 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i < 14 )
           back_meal = doc.css('tr:nth-child(5) > td:nth-child(2)').text.strip
         else
           back_meal = doc.css('tr:nth-child(7) > td:nth-child(3)').text.strip
@@ -15,7 +15,7 @@ namespace :crawling_meal do
       end
       #화요일 식단
       if Time.zone.now.strftime("%A") == "Tuesday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 14 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i < 14 )
           back_meal = doc.css('tr:nth-child(5) > td:nth-child(3)').text.strip
         else
           back_meal = doc.css('tr:nth-child(7) > td:nth-child(4)').text.strip
@@ -23,7 +23,7 @@ namespace :crawling_meal do
       end
       #수요일 식단
       if Time.zone.now.strftime("%A") == "Wednesday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 14 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i < 14 )
           back_meal = doc.css('tr:nth-child(5) > td:nth-child(4)').text.strip
         else
           back_meal = doc.css('tr:nth-child(7) > td:nth-child(5)').text.strip
@@ -31,7 +31,7 @@ namespace :crawling_meal do
       end
       #목요일 식단
       if Time.zone.now.strftime("%A") == "Thursday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 14 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i < 14 )
           back_meal = doc.css('tr:nth-child(5) > td:nth-child(5)').text.strip
         else
           back_meal = doc.css('tr:nth-child(7) > td:nth-child(6)').text.strip
@@ -39,7 +39,7 @@ namespace :crawling_meal do
       end
       #금요일 식단
       if Time.zone.now.strftime("%A") == "Friday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 14 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i < 14 )
           back_meal = doc.css('tr:nth-child(5) > td:nth-child(6)').text.strip
         else
           back_meal = doc.css('tr:nth-child(7) > td:nth-child(7)').text.strip
@@ -47,7 +47,7 @@ namespace :crawling_meal do
       end
       #토요일 식단
       if Time.zone.now.strftime("%A") == "Saturday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 14 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i < 14 )
           back_meal = doc.css('tr:nth-child(5) > td:nth-child(7)').text.strip
         else
           back_meal = doc.css('tr:nth-child(7) > td:nth-child(8)').text.strip
@@ -55,7 +55,7 @@ namespace :crawling_meal do
       end
       #일요일 식단
       if Time.zone.now.strftime("%A") == "Sunday"
-        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 14 )
+        if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i < 14 )
           back_meal = doc.css('tr:nth-child(5) > td:nth-child(8)').text.strip
         else
           back_meal = doc.css('tr:nth-child(7) > td:nth-child(9)').text.strip
