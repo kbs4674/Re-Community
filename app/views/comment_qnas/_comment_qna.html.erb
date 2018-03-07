@@ -49,13 +49,17 @@
                 <td>
                     <% if comment_qna.deleted? %>
                         <% if can? :for_admin, comment_qna %>
-                            <font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 삭제된 댓글</font><br/>
-                            <%= comment_qna.body.html_safe %>
+                            <div style="margin-top: 10px;">
+                                <font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 삭제된 댓글</font><br/>
+                                <%= comment_qna.body.html_safe %>
+                            </div>
                         <% else %>
-                            <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 삭제된 댓글입니다.</font>
+                            <div style="margin-top: 10px;">
+                                <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 삭제된 댓글입니다.</font>
+                            </div>
                         <% end %>
                     <% else %>
-                        <%= comment_qna.body.html_safe %>
+                        <div style="margin-top: 10px;"><%= comment_qna.body.html_safe %></div>
                     <% end %>
                     
                     <div id="comment_qna_modify_<%= comment_qna.id %>" style="display:none;">
@@ -91,7 +95,7 @@
     <%# 모바일 크기 기준 댓글 열람 %>
     <div class="hidden-md-up">
         <div class="row">
-            <div class="col-3 col-sm-2 col-md-1" align="center">
+            <div class="col-4 col-sm-3 col-md-1" align="center">
                 <% if comment_qna.user != current_user %>
                     <% if ((current_user.voted_up_on? comment_qna) == true) %>
                         <%= link_to "", qna_comment_qna_like_path(comment_qna.qna, comment_qna), method: :put, class: "fas fa-angle-up", style: "color: #43d843;" %>
@@ -114,15 +118,14 @@
                     <% end %>
                 <% end %>
             </div>
-    
-            <div class="col-5 col-sm-6 col-md-0 etc">
+            
+            <div class="col-6 col-sm-7 col-md-0 etc">
                 <%= render 'posts/special/nickname_comment_qna', comment_qna: comment_qna %>
             </div>
             
-            <div align="right" class="col-3 col-sm-3 col-md-0">
+            <div align="right" class="col-1 col-sm-1 col-md-0">
                 <% if can? :destroy, comment_qna %>
                     <% if not comment_qna.deleted? %>
-                        <a onclick="showHide('mobile_comment_qna_modify_<%= comment_qna.id %>')" onfocus="this.blur()">수정</a><span style="margin-left: 10px; margin-right: 10px;">|</span>
                         <%= link_to "", [comment_qna.qna, comment_qna], method: :delete, remote: true, data: { confirm: "정말로 지우시겠습니까?" }, class: "fas fa-times" %>
                     <% end %>
                     <% if comment_qna.deleted? && (current_user.has_role? :admin) %>
@@ -145,6 +148,12 @@
                     <%= comment_qna.body.html_safe %>
                 <% end %>
             </div>
+            
+            <div class="col-11 col-sm-11 col-md-11" align="right">
+                <small class="hidden-md-up"><a onclick="showHide('mobile_comment_qna_modify_<%= comment_qna.id %>')" onfocus="this.blur()"><b>수정</b></a></small><br/>
+                <small class="hidden-md-up"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= time_ago_in_words(comment_qna.created_at) %>전</small>
+            </div>
+            
             <div id="mobile_comment_qna_modify_<%= comment_qna.id %>" style="display:none;">
                 <div class="reply-form">
                     <%= form_with(model: [comment_qna.qna, comment_qna], local: true) do |f| %>
@@ -159,9 +168,6 @@
                         </div>
                     <% end %>
                 </div>
-            </div>
-            <div class="col-11 col-sm-11 col-md-11" align="right">
-                <small class="hidden-md-up"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= time_ago_in_words(comment_qna.created_at) %>전</small>
             </div>
         </div>
         <hr/>
