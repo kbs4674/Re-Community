@@ -61,7 +61,23 @@ every 1.month, at: local('3:00 am') do
 end
 
 # [매일] 버스 시간표 가져오기(등교)
-every :day, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:50 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:39 am'), local('9:45 am'), local('9:50 am'), local('9:51 am'), local('9:55 am'), local('10:20 am'), local('11:00 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
+every :monday, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:50 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:45 am'), local('9:50 am'), local('9:51 am'), local('9:55 am'), local('10:20 am'), local('10:23 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
+    rake "crawling_bus:crawling_bus"
+end
+
+every :tuesday, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:50 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:45 am'), local('9:50 am'), local('9:51 am'), local('9:55 am'), local('10:20 am'), local('10:23 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
+    rake "crawling_bus:crawling_bus"
+end
+
+every :wednesday, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:50 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:45 am'), local('9:50 am'), local('9:51 am'), local('9:55 am'), local('10:20 am'), local('10:23 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
+    rake "crawling_bus:crawling_bus"
+end
+
+every :thursday, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:50 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:45 am'), local('9:50 am'), local('9:51 am'), local('9:55 am'), local('10:20 am'), local('10:23 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
+    rake "crawling_bus:crawling_bus"
+end
+
+every :friday, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:39 am'), local('9:45 am'), local('9:55 am'), local('10:20 am'), local('10:23 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
     rake "crawling_bus:crawling_bus"
 end
 
