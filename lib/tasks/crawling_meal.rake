@@ -183,7 +183,7 @@ namespace :crawling_meal do
       if Time.zone.now.strftime("%A") == "Friday"
         if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(6) > td:nth-child(2)').text.strip
-        elsif (Time.zone.now.strftime("%H").to_i >= 8 && Time.zone.now.strftime("%H").to_i <= 14 )
+        elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i <= 14 )
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(6) > td:nth-child(3)').text.strip
         else
           dormitory_meal_normal = doc3.css('#foodtab1 > #foodtab1_building1 > table.table_type01 > tr:nth-child(6) > td:nth-child(4)').text.strip
