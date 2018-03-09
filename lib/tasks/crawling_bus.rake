@@ -6,12 +6,12 @@ namespace :crawling_bus do
     end
     
     doc = Nokogiri::HTML(open("http://www.kangwon.ac.kr/www/contents.do?key=215&"))
-    if (Time.zone.now.strftime("%H").to_i >= 0 || Time.zone.now.strftime("%H").to_i <= 10) # 등교
+    if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i < 11)
       @posts = doc.css("#contents > table:nth-child(11) > tbody")
       @posts.each do |x|
         # 월요일
         if (Time.zone.now.strftime("%A") == "Monday")
-          if (Time.zone.now.strftime("%H").to_i >= 20 || Time.zone.now.strftime("%H").to_i < 8)
+          if (Time.zone.now.strftime("%H").to_i == 00 && Time.zone.now.strftime("%M").to_i == 00)
             #08:00
             tit = x.css("tr:nth-child(1) > td:nth-child(2)").text
           elsif (Time.zone.now.strftime("%H").to_i == 8 && Time.zone.now.strftime("%M").to_i == 00)
@@ -56,10 +56,13 @@ namespace :crawling_bus do
           elsif (Time.zone.now.strftime("%H").to_i == 10 && Time.zone.now.strftime("%M").to_i == 20)
             #10:23
             tit = x.css("tr:nth-child(15) > td:nth-child(2)").text
+          elsif (Time.zone.now.strftime("%H").to_i == 10 && Time.zone.now.strftime("%M").to_i == 23)
+            #16:00
+            tit = x.css("#contents > table:nth-child(15) > tbody > tr:nth-child(1) > td:nth-child(2)").text
           end
         # 화~목
         elsif (Time.zone.now.strftime("%A") == "Tuesday" || Time.zone.now.strftime("%A") == "Wednesday" || Time.zone.now.strftime("%A") == "Thursday")
-          if (Time.zone.now.strftime("%H").to_i >= 20 || Time.zone.now.strftime("%H").to_i < 8)
+          if (Time.zone.now.strftime("%H").to_i == 00 && Time.zone.now.strftime("%M").to_i == 00)
             #08:00
             tit = x.css("tr:nth-child(1) > td:nth-child(4)").text
           elsif (Time.zone.now.strftime("%H").to_i == 8 && Time.zone.now.strftime("%M").to_i == 00)
@@ -104,10 +107,13 @@ namespace :crawling_bus do
           elsif (Time.zone.now.strftime("%H").to_i == 10 && Time.zone.now.strftime("%M").to_i == 20)
             #10:23
             tit = x.css("tr:nth-child(15) > td:nth-child(4)").text
+          elsif (Time.zone.now.strftime("%H").to_i == 10 && Time.zone.now.strftime("%M").to_i == 23)
+            #16:00
+            tit = x.css("#contents > table:nth-child(15) > tbody > tr:nth-child(1) > td:nth-child(2)").text
           end
         #금요일
         elsif (Time.zone.now.strftime("%A") == "Friday")
-          if (Time.zone.now.strftime("%H").to_i >= 20 || Time.zone.now.strftime("%H").to_i < 8)
+          if (Time.zone.now.strftime("%H").to_i == 00 && Time.zone.now.strftime("%M").to_i == 00)
             #08:00
             tit = x.css("tr:nth-child(1) > td:nth-child(6)").text
           elsif (Time.zone.now.strftime("%H").to_i == 8 && Time.zone.now.strftime("%M").to_i == 00)
@@ -146,18 +152,18 @@ namespace :crawling_bus do
           elsif (Time.zone.now.strftime("%H").to_i == 10 && Time.zone.now.strftime("%M").to_i == 20)
             #10:30
             tit = x.css("tr:nth-child(13) > td:nth-child(6)").text
+          elsif (Time.zone.now.strftime("%H").to_i == 10 && Time.zone.now.strftime("%M").to_i == 30)
+            #16:00
+            tit = x.css("#contents > table:nth-child(15) > tbody > tr:nth-child(1) > td:nth-child(2)").text
           end
         end
         @res = CrawlingBus.new(title: tit)
         @res.save
       end
-    else # 하교
+    elsif (Time.zone.now.strftime("%H").to_i >= 16 || Time.zone.now.strftime("%H").to_i <= 19 ) # 하교
       @posts2 = doc.css("#contents > table:nth-child(15) > tbody")
       @posts2.each do |x|
-      if (Time.zone.now.strftime("%H").to_i >= 11 || Time.zone.now.strftime("%H").to_i < 16 )
-        #16:00
-        tit = x.css("tr:nth-child(1) > td:nth-child(2)").text
-      elsif (Time.zone.now.strftime("%H").to_i == 16 && Time.zone.now.strftime("%M").to_i == 00)
+      if (Time.zone.now.strftime("%H").to_i == 16 && Time.zone.now.strftime("%M").to_i == 00)
         #16:30
         tit = x.css("tr:nth-child(2) > td:nth-child(2)").text
       elsif (Time.zone.now.strftime("%H").to_i == 16 && Time.zone.now.strftime("%M").to_i == 30)
