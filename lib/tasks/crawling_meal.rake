@@ -220,11 +220,11 @@ namespace :crawling_meal do
       # 월요일 식단
       if Time.zone.now.strftime("%A") == "Monday"
         if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 8 )
-          dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > #foodtab2 > table.table_type01 > tr:nth-child(2) > td:nth-child(2)').text.strip
+          dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(2) > td:nth-child(2)').text.strip
         elsif (Time.zone.now.strftime("%H").to_i >= 9 && Time.zone.now.strftime("%H").to_i < 14 )
-          dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > #foodtab2 > table.table_type01 > tr:nth-child(2) > td:nth-child(3)').text.strip
+          dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(2) > td:nth-child(3)').text.strip
         else
-          dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > #foodtab2 > table.table_type01 > tr:nth-child(2) > td:nth-child(4)').text.strip
+          dormitory_meal_BTL = doc3.css('#foodtab2 > table.table_type01 > tr:nth-child(2) > td:nth-child(4)').text.strip
         end
       end
       # 화요일 식단
