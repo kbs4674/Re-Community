@@ -25,8 +25,8 @@ Rails.application.routes.draw do
   
   resources :bulletins do
     resources :posts do
-      get "/like", to:    "posts#upvote"
-      get "/dislike", to: "posts#downvote"
+      put "/like", to:    "posts#upvote"
+      put "/dislike", to: "posts#downvote"
       collection do
         get :search
       end
