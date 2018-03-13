@@ -225,7 +225,7 @@
                 <% end %>
             </div>
             <div class="progress-bar bg-danger" role="progressbar" style="width: <%= @post.get_downvotes.size.to_f / @post.votes_for.size * 100 %>%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
-                <% if @post.get_upvotes.size >= 1 %>
+                <% if @post.get_downvotes.size >= 1 %>
                     <%= (@post.get_downvotes.size.to_f / @post.votes_for.size * 100).round(2) %>%
                 <% end %>
             </div>
@@ -253,7 +253,7 @@
             <% end %>
         </div>
         <div class="progress-bar bg-danger" role="progressbar" style="width: <%= @post.get_downvotes.size.to_f / @post.votes_for.size * 100 %>%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
-            <% if @post.get_upvotes.size >= 1 %>
+            <% if @post.get_downvotes.size >= 1 %>
             <%= (@post.get_downvotes.size.to_f / @post.votes_for.size * 100).round(2) %>%
             <% end %>
         </div>
