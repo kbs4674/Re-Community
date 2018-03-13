@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180304142401) do
+ActiveRecord::Schema.define(version: 20180313053313) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 20180304142401) do
     t.integer "cached_weighted_total", default: 0
     t.float "cached_weighted_average", default: 0.0
     t.datetime "deleted_at"
+    t.integer "post_id"
     t.index ["cached_votes_down"], name: "index_comments_on_cached_votes_down"
     t.index ["cached_votes_score"], name: "index_comments_on_cached_votes_score"
     t.index ["cached_votes_total"], name: "index_comments_on_cached_votes_total"
@@ -138,6 +139,7 @@ ActiveRecord::Schema.define(version: 20180304142401) do
     t.index ["cached_weighted_total"], name: "index_comments_on_cached_weighted_total"
     t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
     t.index ["deleted_at"], name: "index_comments_on_deleted_at"
+    t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
