@@ -29,7 +29,7 @@ class PostsController < ApplicationController
       redirect_to(request.referrer, :notice => '해당 글의 추천을 취소하셨습니다.')
     else
       @post.upvote_by current_user
-      redirect_to(request.referrer, :notice => '해당 글을 추천하셨습니다.')
+      redirect_to(root_path, :notice => '해당 글을 추천하셨습니다.')
     end
   end
  
