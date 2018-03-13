@@ -108,9 +108,9 @@
         <div align="right"><i class="far fa-thumbs-up" aria-hidden="true"></i> <%= @post.get_upvotes.size %> <%= @bulletin.title == "Foreigner Board" ? "Likes!" : "명이 좋아합니다!" %></div>
     <% else %>
         <% if (current_user.voted_up_on? @post) == true %>
-            <div align="right"><%= link_to '<span class="badge badge-pill badge-primary"><i class="far fa-thumbs-up" aria-hidden="true"></i></span>'.html_safe, bulletin_post_like_path(@bulletin, @post) %> <%= @post.get_upvotes.size %> <%= @bulletin.title == "Foreigner Board" ? "Likes!" : "명이 좋아합니다!" %></div>
+            <div align="right"><%= link_to '<span class="badge badge-pill badge-primary"><i class="far fa-thumbs-up" aria-hidden="true"></i></span>'.html_safe, bulletin_post_like_path(@bulletin, @post), method: :get %> <%= @post.get_upvotes.size %> <%= @bulletin.title == "Foreigner Board" ? "Likes!" : "명이 좋아합니다!" %></div>
         <% else %>
-            <div align="right"><%= link_to '<span class="badge badge-pill badge-default"><i class="far fa-thumbs-up" aria-hidden="true"></i></span>'.html_safe, bulletin_post_like_path(@bulletin, @post) %> <%= @post.get_upvotes.size %> <%= @bulletin.title == "Foreigner Board" ? "Likes!" : "명이 좋아합니다!" %></div>
+            <div align="right"><%= link_to '<span class="badge badge-pill badge-default"><i class="far fa-thumbs-up" aria-hidden="true"></i></span>'.html_safe, bulletin_post_like_path(@bulletin, @post), method: :get %> <%= @post.get_upvotes.size %> <%= @bulletin.title == "Foreigner Board" ? "Likes!" : "명이 좋아합니다!" %></div>
         <% end %>
     <% end %>
 </div>
