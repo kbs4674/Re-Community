@@ -21,13 +21,6 @@ every 1.month, at: local('4:25 am') do
     rake "posts:delete_all_post_1year"
 end
 
-# [1시간 단위] sunspot이 자동으로 꺼지는 문제
-every 1.hours do
-#   command "/usr/bin/some_great_command"
-#   runner "MyModel.some_method"
-    command "RAILS_ENV=production rake sunspot:solr:start"
-end
-
 # [1주일 단위] 네이버 로그인기록 삭제
 every 7.days, at: local('4:30 am') do
 #   command "/usr/bin/some_great_command"
