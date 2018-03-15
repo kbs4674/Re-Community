@@ -28,7 +28,6 @@ class QnasController < ApplicationController
       @qna.upvote_by current_user
       redirect_to(request.referrer, :notice => '해당 글을 추천하셨습니다.')
     end
-    redirect_back(fallback_location: root_path)
   end
  
   # 투표 관련 Controller 내용 : 반대
@@ -43,8 +42,6 @@ class QnasController < ApplicationController
       @qna.downvote_from current_user
       redirect_to(request.referrer, :notice => '해당 글을 반대하셨습니다.')
     end
-   
-    redirect_back(fallback_location: root_path)
   end
   
   # GET /qnas
