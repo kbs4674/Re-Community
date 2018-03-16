@@ -11,11 +11,7 @@
             -
         <% end %>
     <% else %>
-        <% if can? :for_admin, post %>
-            <%= content_tag(:div, "#{post.nickname}", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
-        <% else %>
-            <%= post.nickname %>
-        <% end %>
+        <%= render 'posts/special/no_named_nickname_easter_egg', post: post %>
     <% end %>
     </div>
     
