@@ -6,6 +6,7 @@
             <%= content_tag(:div, "", align: "right", class: "fas fa-sort-down col-4 col-sm-4 col-md-4" ) %>
         </div>
     <% end %>
+    <%= content_tag(:small, "* 댓글이 30개 이상 시 최신 댓글 순으로 정렬됩니다.", class: "row col-12 col-sm-12 col-md-12", style: "margin-top: 10px;" ) %>
 </h6>
 <% if current_user.comment_auto_open == true %>
 <div id="comment_list" style="display:display;">

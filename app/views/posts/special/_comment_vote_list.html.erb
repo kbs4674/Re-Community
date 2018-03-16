@@ -2,7 +2,7 @@
 <h6>
     <%= link_to "javascript:function()", :onclick => "showHide('comment_list')", :onfocus => "this.blur()" do %>
         <div class="row">
-            <%= content_tag(:div, " 댓글 (#{ @all_notice.comment_threads.count })", class: "far fa-comments col-8 col-sm-8 col-md-8", align: "left" ) %>
+            <%= content_tag(:div, "#{@bulletin.title == "Foreigner Board" ? " Reply (#{ @post.comment_threads.count })" : " 댓글 (#{ @post.comment_threads.count })"}", class: "far fa-comments col-8 col-sm-8 col-md-8", align: "left" ) %>
             <%= content_tag(:div, "", align: "right", class: "fas fa-sort-down col-4 col-sm-4 col-md-4" ) %>
         </div>
     <% end %>
@@ -13,5 +13,5 @@
 <% else %>
 <div id="comment_list" style="display:none;">
 <% end %>
-    <%= render partial: "comments_votable/template", locals: {commentable: @all_notice, new_comment: @comment} %>
+    <%= render partial: "comments_votable/template", locals: {commentable: @post, new_comment: @comment} %>
 </div>
