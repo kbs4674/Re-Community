@@ -135,7 +135,7 @@
       <div class="hidden-md-up">
         <div class="row" style="margin-top: 15px; margin-bottom: 15px;">
           <div class="row col-8 col-sm-8">
-            <div align="center" class="col-7 col-sm-4">
+            <div align="center" class="col-6 col-sm-4">
               <% if comment.user != current_user %>
                 <% if ((current_user.voted_up_on? comment) == true) %>
                   <%= link_to "", comment_like_path(comment), method: :put, class: "fas fa-angle-up", style: "color: #43d843;" %>
@@ -179,7 +179,7 @@
               <% end %>
             </div>
             
-            <div class="col-5 col-sm-8 etc">
+            <div class="col-6 col-sm-8 etc">
               <%= render 'posts/special/nickname_comment', comment: comment %>
             </div>
           </div>
