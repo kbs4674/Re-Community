@@ -1,4 +1,4 @@
-<% comments.order("created_at ASC").order(:cached_votes_up => :desc).each do |comment| %>  
+<% comments.order("created_at ASC").order(:cached_votes_up => :desc).each do |comment| %>
 <div class="more_comment_list">
   <div class="comments-show">
     <div id="comment<%= comment.id %>"></div>
@@ -70,7 +70,7 @@
                         <% if comment.user.has_role? :admin %>
                           <b style="color: #6E6E6E;"><%= comment.body.html_safe %></b>
                         <% else %>
-                          <b style="color: #6E6E6E;"><%= comment.body %></b>
+                          <b style="color: #6E6E6E;"><%= content_tag(:div, comment.body, style: "white-space: pre-wrap;") %></b>
                         <% end %>
                       <% else %>
                         <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 삭제된 댓글입니다.</font>
@@ -82,7 +82,7 @@
                           <% if comment.user.has_role? :admin %>
                             <b style="color: #6E6E6E;"><%= comment.body.html_safe %></b>
                           <% else %>
-                            <b style="color: #6E6E6E;"><%= comment.body %></b>
+                            <b style="color: #6E6E6E;"><%= content_tag(:div, comment.body, style: "white-space: pre-wrap;") %></b>
                           <% end %>
                         <% else %>
                           <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 신고 처리된 댓글입니다.</font>
@@ -91,7 +91,7 @@
                         <% if comment.user.has_role? :admin %>
                           <%= comment.body.html_safe %>
                         <% else %>
-                          <%= comment.body %>
+                          <%= content_tag(:div, comment.body, style: "white-space: pre-wrap;") %>
                         <% end %>
                       <% end %>
                     <% end %>
@@ -168,7 +168,7 @@
             <% if comment.comment_destroys.size >= 1 %>
               <% if can? :for_admin, comment %>
                 <font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 삭제된 댓글</font><br/>
-                <b style="color: #6E6E6E;"><%= comment.body %></b>
+                <b style="color: #6E6E6E;"><%= content_tag(:div, comment.body, style: "white-space: pre-wrap;") %></b>
               <% else %>
                 <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 삭제된 댓글입니다.</font>
               <% end %>
@@ -176,15 +176,15 @@
               <% if comment.report_comments.size >= comment.num %>
                 <% if can? :for_admin, comment %>
                   <font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 신고 처리된 댓글</font><br/>
-                  <b style="color: #6E6E6E;"><%= comment.body %></b>
+                  <b style="color: #6E6E6E;"><%= content_tag(:div, comment.body, style: "white-space: pre-wrap;") %></b>
                 <% else %>
                   <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 신고 처리된 댓글입니다.</font>
                 <% end %>
               <% else %>
-                <%= comment.body %>
+                <%= content_tag(:div, comment.body, style: "white-space: pre-wrap;") %>
               <% end %>
             <% end %>
-            <div align="right">
+            <div align="right" style="margin-right: 30px;">
               <small class="hidden-md-up"><a onclick="showHide('comment_<%= comment.id %>')" onfocus="this.blur()"><b>답글</b></a></small><br/>
               <small class="hidden-md-up"><%= time_ago_in_words(comment.created_at) %>전</small>
             </div>

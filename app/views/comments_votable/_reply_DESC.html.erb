@@ -1,4 +1,4 @@
-<% comments.order("created_at DESC").order(:cached_votes_up => :desc).each do |comment| %>  
+<% comments.order("created_at DESC").order(:cached_votes_up => :desc).each do |comment| %>
 <div class="more_comment_list">
   <div class="comments-show">
     <div id="comment<%= comment.id %>"></div>
@@ -70,7 +70,7 @@
                         <% if comment.user.has_role? :admin %>
                           <b style="color: #6E6E6E;"><%= comment.body.html_safe %></b>
                         <% else %>
-                          <b style="color: #6E6E6E;"><%= comment.body %></b>
+                          <b style="color: #6E6E6E;"><%= content_tag(:div, comment.body, style: "white-space: pre-wrap;") %></b>
                         <% end %>
                       <% else %>
                         <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 삭제된 댓글입니다.</font>
@@ -82,7 +82,7 @@
                           <% if comment.user.has_role? :admin %>
                             <b style="color: #6E6E6E;"><%= comment.body.html_safe %></b>
                           <% else %>
-                            <b style="color: #6E6E6E;"><%= comment.body %></b>
+                            <b style="color: #6E6E6E;"><%= content_tag(:div, comment.body, style: "white-space: pre-wrap;") %></b>
                           <% end %>
                         <% else %>
                           <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 신고 처리된 댓글입니다.</font>
@@ -91,12 +91,12 @@
                         <% if comment.user.has_role? :admin %>
                           <%= comment.body.html_safe %>
                         <% else %>
-                          <%= comment.body %>
+                          <%= content_tag(:div, comment.body, style: "white-space: pre-wrap;") %>
                         <% end %>
                       <% end %>
                     <% end %>
                     <div align="right">
-                      <small class="hidden-sm-down" style="margin-right: 10px;"><%= time_ago_in_words(comment.created_at) %>전 (<%= comment.created_at.strftime('%Y-%m-%d %H:%M') %>)</small>
+                      <small class="hidden-sm-down"><%= time_ago_in_words(comment.created_at) %>전 (<%= comment.created_at.strftime('%Y-%m-%d %H:%M') %>)</small>
                     </div>
                   </td>
               </tr>
@@ -104,66 +104,62 @@
           <div class="offset-md-1 col-md-11" style="">
             <%= render partial: "comments_votable/no_votable_reply", locals: {comments: comment.children} %>
           </div>
-          <hr/>
       </div>
       <%# PC에서만 보여지는 댓글 종료 %>
       
       <%# 모바일 + 태블릿에서만 보여지는 댓글 %>
       <div class="hidden-md-up">
         <div class="row" style="margin-top: 15px; margin-bottom: 15px;">
-          <div class="col-3 col-sm-2">
-            <% if comment.user != current_user %>
-              <% if ((current_user.voted_up_on? comment) == true) %>
-                <%= link_to "", comment_like_path(comment), method: :put, class: "fas fa-angle-up", style: "color: #43d843;" %>
-              <% else %>
-                <%= link_to "", comment_like_path(comment), method: :put, class: "fas fa-angle-up"%>
+          <div class="row col-7 col-sm-8">
+            <div align="center" class="col-7 col-sm-4">
+              <% if comment.user != current_user %>
+                <% if ((current_user.voted_up_on? comment) == true) %>
+                  <%= link_to "", comment_like_path(comment), method: :put, class: "fas fa-angle-up", style: "color: #43d843;" %>
+                <% else %>
+                  <%= link_to "", comment_like_path(comment), method: :put, class: "fas fa-angle-up"%>
+                <% end %>
               <% end %>
-            <% end %>
-            
-            <% if comment.get_upvotes.size - comment.get_downvotes.size < 0 %>
-              <b style="margin-left: 5px; margin-right: 5px; color: red;"><%= comment.get_upvotes.size - comment.get_downvotes.size %> </b>
-            <% elsif comment.get_upvotes.size - comment.get_downvotes.size > 0 %>
-              <b style="margin-left: 5px; margin-right: 5px; color: #43d843;"> <%= comment.get_upvotes.size - comment.get_downvotes.size %> </b>
-            <% else %>
-              <b style="margin-left: 5px; margin-right: 5px;"><%= comment.get_upvotes.size - comment.get_downvotes.size %></b>
-            <% end %>
-            
-            <% if comment.user != current_user %>
-              <% if ((current_user.voted_down_on? comment) == true) %>
-                <%= link_to "", comment_dislike_path(comment), method: :put, class: "fas fa-angle-down", style: "color: red;" %>
+              
+              <% if comment.get_upvotes.size - comment.get_downvotes.size < 0 %>
+                <b style="margin-left: 5px; margin-right: 5px; color: red;"><%= comment.get_upvotes.size - comment.get_downvotes.size %> </b>
+              <% elsif comment.get_upvotes.size - comment.get_downvotes.size > 0 %>
+                <b style="margin-left: 5px; margin-right: 5px; color: #43d843;"> <%= comment.get_upvotes.size - comment.get_downvotes.size %> </b>
               <% else %>
-                <%= link_to "", comment_dislike_path(comment), method: :put, class: "fas fa-angle-down" %>
+                <b style="margin-left: 5px; margin-right: 5px;"><%= comment.get_upvotes.size - comment.get_downvotes.size %></b>
               <% end %>
-            <% end %>
-          </div>
-          
-          <div class="col-3 col-sm-4 etc">
-            <%= render 'posts/special/nickname_comment', comment: comment %>
+              
+              <% if comment.user != current_user %>
+                <% if ((current_user.voted_down_on? comment) == true) %>
+                  <%= link_to "", comment_dislike_path(comment), method: :put, class: "fas fa-angle-down", style: "color: red;" %>
+                <% else %>
+                  <%= link_to "", comment_dislike_path(comment), method: :put, class: "fas fa-angle-down" %>
+                <% end %>
+              <% end %>
+            </div>
+            
+            <div class="col-5 col-sm-8 etc">
+              <%= render 'posts/special/nickname_comment', comment: comment %>
+            </div>
           </div>
     
-          <div class="col-6 col-sm-6" align="right">
-          <% if not current_user.is_report_comment?(comment) %>
-            <% if not (comment.report_comments.size >= comment.num) || (comment.comment_destroys.size >= 1) %>
-              <span style="margin-right: 10px;"><%= link_to '<i class="fas fa-cut" aria-hidden="true"></i>'.html_safe, comment_report_comment_path(comment), :method => :post, data: { confirm: '한번 신고 요청 하시면 취소가 안됩니다. 정말 하시겠습니까??' }, class: "badge badge-pill badge-danger" %></span>
-              <span style="margin-right: 10px;">|</span>
+          <div align="right" class="col-5 col-sm-4">
+            <% if not current_user.is_report_comment?(comment) %>
+              <% if not (comment.report_comments.size >= comment.num) || (comment.comment_destroys.size >= 1) %>
+                <span style="margin-right: 10px;"><%= link_to '<i class="fas fa-cut" aria-hidden="true"></i>'.html_safe, comment_report_comment_path(comment), :method => :post, data: { confirm: '한번 신고 요청 하시면 취소가 안됩니다. 정말 하시겠습니까??' }, class: "badge badge-pill badge-danger" %></span>
+                <span style="margin-right: 10px;">|</span>
+              <% end %>
             <% end %>
-          <% end %>
-          <span style="margin-right: 10px;"><a onclick="showHide('comment_<%= comment.id %>')" onfocus="this.blur()">답글</a></span>
-          <% if can? :destroy, comment %>
-            <% if not comment.comment_destroys.size >= 1 %>
-              <% if not comment.report_comments.size >= comment.num %>
-                <span style="margin-right: 10px;">|</span>
-                <span><%= link_to "", comment_comment_destroys_path(comment), class: "fas fa-times", :method => :post, data: { confirm: "정말로 지우시겠습니까?" } %></span>
-                <%#= link_to "", comment_path(comment), method: :delete, remote: false, data: { confirm: "정말로 지우시겠습니까?" }, class: "fas fa-times" %>
-              <% elsif (comment.report_comments.size >= comment.num) && (current_user.has_role? :admin) %>
-                <span style="margin-right: 10px;">|</span>
+            <% if can? :destroy, comment %>
+              <% if not comment.comment_destroys.size >= 1 %>
+                <% if not comment.report_comments.size >= comment.num %>
+                  <%= link_to "", comment_comment_destroys_path(comment), class: "fas fa-times", :method => :post, data: { confirm: "정말로 지우시겠습니까?" } %>
+                <% elsif (comment.report_comments.size >= comment.num) && (current_user.has_role? :admin) %>
+                  <%= link_to "", comment_path(comment), method: :delete, remote: false, data: { confirm: "이번에 지우면 로그 기록에서도 영영 사라지며, 대댓글도 함께 삭제됩니다. 정말 지우시겠습니까?" }, class: "fas fa-times", style: "color: red" %>
+                <% end %>
+              <% elsif (comment.comment_destroys.size >= 1) && (current_user.has_role? :admin) %>
                 <%= link_to "", comment_path(comment), method: :delete, remote: false, data: { confirm: "이번에 지우면 로그 기록에서도 영영 사라지며, 대댓글도 함께 삭제됩니다. 정말 지우시겠습니까?" }, class: "fas fa-times", style: "color: red" %>
               <% end %>
-            <% elsif (comment.comment_destroys.size >= 1) && (current_user.has_role? :admin) %>
-              <span style="margin-right: 10px;">|</span>
-              <%= link_to "", comment_path(comment), method: :delete, remote: false, data: { confirm: "이번에 지우면 로그 기록에서도 영영 사라지며, 대댓글도 함께 삭제됩니다. 정말 지우시겠습니까?" }, class: "fas fa-times", style: "color: red" %>
             <% end %>
-          <% end %>
           </div>
         </div>
         
@@ -172,7 +168,7 @@
             <% if comment.comment_destroys.size >= 1 %>
               <% if can? :for_admin, comment %>
                 <font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 삭제된 댓글</font><br/>
-                <b style="color: #6E6E6E;"><%= comment.body %></b>
+                <b style="color: #6E6E6E;"><%= content_tag(:div, comment.body, style: "white-space: pre-wrap;") %></b>
               <% else %>
                 <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 삭제된 댓글입니다.</font>
               <% end %>
@@ -180,15 +176,16 @@
               <% if comment.report_comments.size >= comment.num %>
                 <% if can? :for_admin, comment %>
                   <font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 신고 처리된 댓글</font><br/>
-                  <b style="color: #6E6E6E;"><%= comment.body %></b>
+                  <b style="color: #6E6E6E;"><%= content_tag(:div, comment.body, style: "white-space: pre-wrap;") %></b>
                 <% else %>
                   <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 신고 처리된 댓글입니다.</font>
                 <% end %>
               <% else %>
-                <%= comment.body %>
+                <%= content_tag(:div, comment.body, style: "white-space: pre-wrap;") %>
               <% end %>
             <% end %>
-            <div align="right">
+            <div align="right" style="margin-right: 30px;">
+              <small class="hidden-md-up"><a onclick="showHide('comment_<%= comment.id %>')" onfocus="this.blur()"><b>답글</b></a></small><br/>
               <small class="hidden-md-up"><%= time_ago_in_words(comment.created_at) %>전</small>
             </div>
           </div>
@@ -196,7 +193,6 @@
             <%= render partial: "comments_votable/no_votable_reply", locals: {comments: comment.children} %>
           </div>
         </div>
-        <hr/>
       </div>
       <%# 모바일 + 태블릿에서만 보여지는 댓글 종료 %>
       
@@ -218,6 +214,7 @@
           <% end %>
         </div>
       </div>
+      <hr/>
     </div>
   </div>
 </div>
