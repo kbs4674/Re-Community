@@ -18,9 +18,9 @@
               <% if comment.get_upvotes.size - comment.get_downvotes.size < 0 %>
                 <div>
                   <b style="margin-left: 5px; margin-right: 5px; color: red;">
-                    <% if comment.get_upvotes.size - comment.get_downvotes.size > 1000 %>
+                    <% if comment.get_upvotes.size - comment.get_downvotes.size < 1000 %>
                       <%= comment.get_upvotes.size - comment.get_downvotes.size %>
-                    <% elsif comment.get_upvotes.size - comment.get_downvotes.size > 1000 %>
+                    <% elsif comment.get_upvotes.size - comment.get_downvotes.size >= 1000 %>
                       <%= (comment.get_upvotes.size - comment.get_downvotes.size)/1000 %>.<%= ((comment.get_upvotes.size - comment.get_downvotes.size)%1000)/100 %> K
                     <% end %>
                   </b>
@@ -28,9 +28,9 @@
               <% elsif comment.get_upvotes.size - comment.get_downvotes.size > 0 %>
                 <div>
                   <b style="margin-left: 5px; margin-right: 5px; color: #43d843;">
-                    <% if comment.get_upvotes.size - comment.get_downvotes.size > 1000 %>
+                    <% if comment.get_upvotes.size - comment.get_downvotes.size < 1000 %>
                       <%= comment.get_upvotes.size - comment.get_downvotes.size %>
-                    <% elsif comment.get_upvotes.size - comment.get_downvotes.size > 1000 %>
+                    <% elsif comment.get_upvotes.size - comment.get_downvotes.size >= 1000 %>
                       <%= (comment.get_upvotes.size - comment.get_downvotes.size)/1000 %>.<%= ((comment.get_upvotes.size - comment.get_downvotes.size)%1000)/100 %> K
                     <% end %>
                   </b>
@@ -38,9 +38,9 @@
               <% else %>
                 <div>
                   <b style="margin-left: 5px; margin-right: 5px;">
-                    <% if comment.get_upvotes.size - comment.get_downvotes.size > 1000 %>
+                    <% if comment.get_upvotes.size - comment.get_downvotes.size < 1000 %>
                       <%= comment.get_upvotes.size - comment.get_downvotes.size %>
-                    <% elsif comment.get_upvotes.size - comment.get_downvotes.size > 1000 %>
+                    <% elsif comment.get_upvotes.size - comment.get_downvotes.size >= 1000 %>
                       <%= (comment.get_upvotes.size - comment.get_downvotes.size)/1000 %>.<%= ((comment.get_upvotes.size - comment.get_downvotes.size)%1000)/100 %> K
                     <% end %>
                   </b>
@@ -146,25 +146,25 @@
               
               <% if comment.get_upvotes.size - comment.get_downvotes.size < 0 %>
                 <b style="margin-left: 5px; margin-right: 5px; color: red;">
-                  <% if comment.get_upvotes.size - comment.get_downvotes.size > 1000 %>
+                  <% if comment.get_upvotes.size - comment.get_downvotes.size < 1000 %>
                     <%= comment.get_upvotes.size - comment.get_downvotes.size %>
-                  <% elsif comment.get_upvotes.size - comment.get_downvotes.size > 1000 %>
+                  <% elsif comment.get_upvotes.size - comment.get_downvotes.size >= 1000 %>
                     <%= (comment.get_upvotes.size - comment.get_downvotes.size)/1000 %>.<%= ((comment.get_upvotes.size - comment.get_downvotes.size)%1000)/100 %> K
                   <% end %>
                 </b>
               <% elsif comment.get_upvotes.size - comment.get_downvotes.size > 0 %>
                 <b style="margin-left: 5px; margin-right: 5px; color: #43d843;">
-                  <% if comment.get_upvotes.size - comment.get_downvotes.size > 1000 %>
+                  <% if comment.get_upvotes.size - comment.get_downvotes.size < 1000 %>
                     <%= comment.get_upvotes.size - comment.get_downvotes.size %>
-                  <% elsif comment.get_upvotes.size - comment.get_downvotes.size > 1000 %>
+                  <% elsif comment.get_upvotes.size - comment.get_downvotes.size >= 1000 %>
                     <%= (comment.get_upvotes.size - comment.get_downvotes.size)/1000 %>.<%= ((comment.get_upvotes.size - comment.get_downvotes.size)%1000)/100 %> K
                   <% end %>
                 </b>
               <% else %>
                 <b style="margin-left: 5px; margin-right: 5px;">
-                  <% if comment.get_upvotes.size - comment.get_downvotes.size > 1000 %>
+                  <% if comment.get_upvotes.size - comment.get_downvotes.size < 1000 %>
                     <%= comment.get_upvotes.size - comment.get_downvotes.size %>
-                  <% elsif comment.get_upvotes.size - comment.get_downvotes.size > 1000 %>
+                  <% elsif comment.get_upvotes.size - comment.get_downvotes.size >= 1000 %>
                     <%= (comment.get_upvotes.size - comment.get_downvotes.size)/1000 %>.<%= ((comment.get_upvotes.size - comment.get_downvotes.size)%1000)/100 %> K
                   <% end %>
                 </b>
