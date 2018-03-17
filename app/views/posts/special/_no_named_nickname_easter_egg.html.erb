@@ -1,36 +1,107 @@
 <% if post.nickname == "감자" %>
-    <%= image_tag("/img/easter_egg/easter413.jpg", width: "30px", height: "30px;") %>
+    <% if current_user.has_role? :admin %>
+        <%= image_tag("/img/easter_egg/easter413.jpg", width: "30px", height: "30px;", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+    <% else %>
+        <%= image_tag("/img/easter_egg/easter413.jpg", width: "30px", height: "30px;") %>
+    <% end %>
 <% elsif post.nickname == "곰두리" || post.nickname == "1947" || post.nickname == "19470614" || post.nickname == "1947614" || post.nickname == "0614" || post.nickname == "614" %>
-    <%= image_tag("/img/easter_egg/easter251.png", width: "30px", height: "30px;") %>
+    <% if current_user.has_role? :admin %>
+        <%= image_tag("/img/easter_egg/easter251.png", width: "30px", height: "30px;", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+    <% else %>
+        <%= image_tag("/img/easter_egg/easter251.png", width: "30px", height: "30px;") %>
+    <% end %>
 <% elsif post.nickname == "배그" || post.nickname == "배틀그라운드" || post.nickname == "배틀 그라운드" || post.nickname == "PUBG" %>
-    <div class="hidden-md-up" style="background: url('/img/easter_egg/easter231.png') no-repeat scroll; background-size: 60% 380%; background-position: center -25px;">　</div>
-    <div class="hidden-sm-down" style="background: url('/img/easter_egg/easter231.png') no-repeat scroll; background-size: 30% 320%; background-position: center -20px;">　</div>
+    <% if current_user.has_role? :admin %>
+        <%= image_tag("/img/easter_egg/easter432.png", width: "70px", height: "20px;", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+    <% else %>
+        <%= image_tag("/img/easter_egg/easter432.png", width: "70px", height: "20px;") %>
+    <% end %>
 <% elsif post.nickname == "강냥이" %>
-    <%= image_tag("/img/easter_egg/easter619.gif", width: "<8></8>0px", height: "20px;") %>
+    <% if current_user.has_role? :admin %>
+        <%= image_tag("/img/easter_egg/easter619.gif", width: "<8></8>0px", height: "20px;", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+    <% else %>
+        <%= image_tag("/img/easter_egg/easter619.gif", width: "<8></8>0px", height: "20px;") %>
+    <% end %>
 <% elsif post.nickname == "댕댕이" %>
-    <div style="background: url('/img/easter_egg/easter693.gif') no-repeat scroll; background-size: 80% 420%; background-position: center -37px;">　</div>
+    <% if current_user.has_role? :admin %>
+        <%= content_tag(:div, "　", style: "background: url('/img/easter_egg/easter693.gif') no-repeat scroll; background-size: 80% 420%; background-position: center -37px;", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+    <% else %>
+        <%= content_tag(:div, "　", style: "background: url('/img/easter_egg/easter693.gif') no-repeat scroll; background-size: 80% 420%; background-position: center -37px;") %>
+    <% end %>
 <% elsif post.nickname == "저격" %>
-    <%= image_tag("/img/easter_egg/easter256.png", width: "90px", height: "20px;") %>
+    <% if current_user.has_role? :admin %>
+        <%= image_tag("/img/easter_egg/easter256.png", width: "90px", height: "20px;", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+    <% else %>
+        <%= image_tag("/img/easter_egg/easter256.png", width: "90px", height: "20px;") %>
+    <% end %>
 <% elsif post.nickname == "아이스비" || post.nickname == "아이스 비" || post.nickname == "Ice B" || post.nickname == "ice B" || post.nickname == "IceB" || post.nickname == "iceb" %>
-    <%= image_tag("/img/easter_egg/easter241.png", width: "70px", height: "20px;") %>
+    <% if current_user.has_role? :admin %>
+        <%= image_tag("/img/easter_egg/easter241.png", width: "70px", height: "20px;", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+    <% else %>
+        <%= image_tag("/img/easter_egg/easter241.png", width: "70px", height: "20px;") %>
+    <% end %>
 <% elsif post.nickname == "그리즐리" || post.nickname == "Grizzly" || post.nickname == "grizzly" %>
-    <%= image_tag("/img/easter_egg/easter242.png", width: "70px", height: "20px;") %>
+    <% if current_user.has_role? :admin %>
+        <%= image_tag("/img/easter_egg/easter242.png", width: "70px", height: "20px;", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+    <% else %>
+        <%= image_tag("/img/easter_egg/easter242.png", width: "70px", height: "20px;") %>
+    <% end %>
 <% elsif post.nickname == "팬팬" || post.nickname == "panpan" || post.nickname == "PanPan" %>
-    <%= image_tag("/img/easter_egg/easter243.png", width: "70px", height: "20px;") %>
+    <% if current_user.has_role? :admin %>
+        <%= image_tag("/img/easter_egg/easter243.png", width: "70px", height: "20px;", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+    <% else %>
+        <%= image_tag("/img/easter_egg/easter243.png", width: "70px", height: "20px;") %>
+    <% end %>
 <% elsif post.nickname == "핀" || post.nickname == "Fin" || post.nickname == "fin" %>
-    <%= image_tag("/img/easter_egg/easter244.png", width: "70px", height: "20px;") %>
+    <% if current_user.has_role? :admin %>
+        <%= image_tag("/img/easter_egg/easter244.png", width: "70px", height: "20px;", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+    <% else %>
+        <%= image_tag("/img/easter_egg/easter244.png", width: "70px", height: "20px;") %>
+    <% end %>
 <% elsif post.nickname == "제이크" || post.nickname == "Jake" || post.nickname == "jake" %>
-    <%= image_tag("/img/easter_egg/easter245.png", width: "70px", height: "20px;") %>
+    <% if current_user.has_role? :admin %>
+        <%= image_tag("/img/easter_egg/easter245.png", width: "70px", height: "20px;", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+    <% else %>
+        <%= image_tag("/img/easter_egg/easter245.png", width: "70px", height: "20px;") %>
+    <% end %>
 <% elsif post.nickname == "Be More" || post.nickname == "Be more" || post.nickname == "be more" || post.nickname == "BeMore" || post.nickname == "bemore" %>
-    <%= image_tag("/img/easter_egg/easter246.png", width: "70px", height: "20px;") %>
+    <% if current_user.has_role? :admin %>
+        <%= image_tag("/img/easter_egg/easter246.png", width: "70px", height: "20px;", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+    <% else %>
+        <%= image_tag("/img/easter_egg/easter246.png", width: "70px", height: "20px;") %>
+    <% end %>
 <% elsif post.nickname == "세월호" || post.nickname == "14416" || post.nickname == "140416" || post.nickname == "0416" || post.nickname == "416" || post.nickname == "14.4.16" || post.nickname == "14.04.16" %>
-    <%= image_tag("/img/easter_egg/easter205.png") %>
+    <% if current_user.has_role? :admin %>
+        <%= image_tag("/img/easter_egg/easter205.png", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+    <% else %>
+        <%= image_tag("/img/easter_egg/easter205.png") %>
+    <% end %>
 <% elsif post.nickname == "미투" || post.nickname == "#Me Too" || post.nickname == "#Me too" || post.nickname == "#me too" || post.nickname == "#MeToo" || post.nickname == "#Metoo" || post.nickname == "#metoo" || post.nickname == "MeToo" || post.nickname == "Metoo" || post.nickname == "metoo" %>
-    <%= image_tag("/img/easter_egg/easter206.png", width: "70px", height: "20px;") %>
+    <% if current_user.has_role? :admin %>
+        <%= image_tag("/img/easter_egg/easter206.png", width: "70px", height: "20px;", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+    <% else %>
+        <%= image_tag("/img/easter_egg/easter206.png", width: "70px", height: "20px;") %>
+    <% end %>
+<% elsif post.nickname == "멋쟁이사자처럼" || post.nickname == "멋쟁이 사자처럼" || post.nickname == "Like Lion" || post.nickname == "Like lion" || post.nickname == "like lion" || post.nickname == "LikeLion" || post.nickname == "Likelion" || post.nickname == "likelion" %>
+    <% if current_user.has_role? :admin %>
+        <%= image_tag("/img/easter_egg/easter259.png", width: "70px", height: "20px;", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+    <% else %>
+        <%= image_tag("/img/easter_egg/easter259.png", width: "70px", height: "20px;") %>
+    <% end %>
+<% elsif post.nickname == "캡틴 아메리카" || post.nickname == "캡틴아메리카" || post.nickname == "로저 스티븐스" || post.nickname == "로저" || post.nickname == "로저스티븐스" %>
+    <% if current_user.has_role? :admin %>
+        <%= image_tag("/img/easter_egg/easter482.png", width: "70px", height: "20px;", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+    <% else %>
+        <%= image_tag("/img/easter_egg/easter482.png", width: "70px", height: "20px;") %>
+    <% end %>
+<% elsif post.nickname == "배트맨" || post.nickname == "BatMan" || post.nickname == "Batman" || post.nickname == "batman" %>
+    <% if current_user.has_role? :admin %>
+        <%= image_tag("/img/easter_egg/easter291.png", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+    <% else %>
+        <%= image_tag("/img/easter_egg/easter291.png") %>
+    <% end %>
 <% elsif (not current_user.has_role? :admin) %>
     <%= post.nickname %>
-<% end %>
-
-<% if current_user.has_role? :admin %>
+<% elsif (current_user.has_role? :admin) %>
     <%= content_tag(:span, "#{post.nickname}", data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
 <% end %>

@@ -4,7 +4,7 @@
   <% if @bulletin.info_no_named == true %>
   <div class="form-inputs">
     <%= f.label :"가상 닉네임" %>
-    <%= f.text_field :nickname, id: :post_nickname, class: "col-5 col-sm-4 col-md-3 form-control no-border" %>
+    <%= f.text_field :nickname, id: :post_nickname, class: "col-5 col-sm-4 col-md-3 form-control no-border", :required => "true" %>
     <br/>
   </div>
   <% end %>
