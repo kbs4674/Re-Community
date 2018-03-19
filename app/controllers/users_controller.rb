@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     # 로그인 된 사용자만 접근 가능
     before_action :authenticate_user!
     
-    def test
+    def message
         session[:conversations] ||= []
         @users = User.all.where.not(id: current_user)
         @conversations = Conversation.includes(:recipient, :messages)

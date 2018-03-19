@@ -47,7 +47,7 @@ Rails.application.routes.draw do
   
   devise_for :users, :controllers => { omniauth_callbacks: 'users/omniauth_callbacks' }
   
-  get '/users/test'
+  get '/users/message'
   resources :conversations, only: [:create] do
     member do
       post :close
