@@ -34,6 +34,8 @@ Kangwon Univ. Community Prototype, Second Challenger
 5)whenever 셋팅<br/>
 `whenever --update-crontab`<br/>
 `whenever`<br/>
+6)Redis-server 실행<br/>
+`sudo service redis-server start`
 <br/><br/>
 
 
