@@ -117,3 +117,6 @@ gem 'backup', '~> 5.0.0.beta.2'
 gem 'omniauth'
 gem 'omniauth-naver'
 gem 'omniauth-kakao', :git => 'git://github.com/hcn1519/omniauth-kakao'
+
+# Gem : 액션케이블(채팅)
+gem 'em-hiredis'
