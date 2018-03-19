@@ -54,7 +54,6 @@ Rails.application.routes.draw do
     end
     resources :messages, only: [:create]
   end
-  mount ActionCable.server => '/cable'
   
   #devise_for :users로 인해 별도의 라우터 설정 필요 171012 상열
   resources :users, :only => [:show]

@@ -17,9 +17,6 @@ class User < ApplicationRecord
   # 유저 권한 기본 설정
   after_create :assign_default_role
   
-  has_many :messages
-  has_many :conversations, foreign_key: :sender_id
-  
   has_many :posts
   has_many :qnas
   has_many :bulletins
