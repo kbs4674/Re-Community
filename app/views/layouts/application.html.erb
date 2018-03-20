@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>강원대 커뮤니티</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -20,6 +21,7 @@
     <script type="text/javascript" src="/js/fold&unfold.js"></script>
     <script type="text/javascript" src="/js/checked.js"></script>
     <script type="text/javascript" src="/js/typeahead/typeahead.bundle.min.js"></script>
+    <script type="text/javascript" src="/js/typeahead/handlebars.js"></script>
     
     <!-- 부트스트랩 CDN, AWESOME 폰트 CDN -->  
     <link rel="stylesheet" href="/css/bootstrap.css">
@@ -165,6 +167,7 @@
               <% end %>
               <ul class="dropdown-menu dropdown-menu-right dropdown-info">
                 <li class="dropdown-item"><%= link_to '내 활동'.html_safe, "/users/#{current_user.id}" %></li>
+                <li class="dropdown-item"><%= link_to '곰두리 우체부'.html_safe, "/users/message" %></li>
                 <% if current_user.admin? %>
                   <li class="dropdown-item"><%= link_to '어드민 관리창'.html_safe, rails_admin_path %></li>
                 <% end %>
@@ -268,6 +271,7 @@
               <% end %>
               <ul class="dropdown-menu dropdown-menu-right dropdown-info">
                 <li class="dropdown-item"><%= link_to '내 활동'.html_safe, "/users/#{current_user.id}" %></li>
+                <li class="dropdown-item"><%= link_to '곰두리 우체부'.html_safe, "/users/message" %></li>
                 <% if current_user.admin? %>
                   <li class="dropdown-item"><%= link_to '어드민 관리창'.html_safe, rails_admin_path %></li>
                 <% end %>

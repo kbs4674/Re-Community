@@ -26,49 +26,55 @@
         </div>
         
         <div class="hidden-xs-down col-sm-5 col-md-3">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">유저 목록</h3>
-                </div>
-                
-                <input type="text" id="typeahead">
-                
-                <div class="panel-body" style="margin-top: 50px;">
-                    <ul>
-                        <% @users.each do |user| %>
-                            <li><%= link_to user.nickname.truncate(15, omission: '...'), conversations_path(user_id: user), remote: true, method: :post %></li>
-                        <% end %>
-                    </ul>
-                </div>
+            <div class="panel-heading">
+                <h3 class="panel-title">유저 목록</h3>
+            </div>
+            
+            <div id="custom-templates">
+                <input class="typeahead form-control" type="text" placeholder="검색">
+            </div>
+
+	    <div class="panel-body" style="margin-top: 200px;">
+	        <hr/>
+            <ul>
+                <h3 class="panel-title" style="color: #2687dc;">Admin</h3>
+                <% @users.each do |user| %>
+                    <% if user.has_role? :admin %>
+                        <li><%= link_to user.nickname.truncate(15, omission: '...'), conversations_path(user_id: user), remote: true, method: :post %></li>
+                    <% end %>
+                <% end %>
+            </ul>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-// initialize bloodhound engine
-var bloodhound = new Bloodhound({
-  datumTokenizer: function (d) {
-    return Bloodhound.tokenizers.whitespace(d.value);
-  },
+    var links =
+    [
+        <% @users.each do |user| %>
+            {name: "<%= user.nickname %>"},
+        <% end %>
+    ];
+
+var source = new Bloodhound({
+  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
   queryTokenizer: Bloodhound.tokenizers.whitespace,
-
-  // sends ajax request to /typeahead/%QUERY
-  // where %QUERY is user input
-  remote: '/search_user/%QUERY', 
-  limit: 50
-});
-bloodhound.initialize();
-
-// initialize typeahead widget and hook it up to bloodhound engine
-// #typeahead is just a text input
-$('#typeahead').typeahead(null, {
-  displayKey: 'nickname',
-  source: bloodhound.ttAdapter()
+  local: links
 });
 
-// this is the event that is fired when a user clicks on a suggestion
-$('#typeahead').bind('typeahead:selected', function(event, datum, name) {
-  doSomething(datum.id);
+source.initialize();
+
+$('#custom-templates .typeahead').typeahead(null, {
+  displayKey: 'name',
+  source: source.ttAdapter(),
+  templates: {
+    empty: [
+      '<div style="margin-top: 15px;" class="empty-message">',
+      '해당 계정은 없습니다.',
+      '</div>'
+    ].join('\n'),
+      suggestion: Handlebars.compile('<p style="margin-top: 15px;"><% @users.each do |user| %><%= link_to "#{user.nickname.truncate(12, omission: '...')}<br/>".html_safe, conversations_path(user_id: user), remote: true, method: :post %><% end %></p>')
+  }
 });
 </script>
