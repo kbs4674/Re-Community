@@ -1,9 +1,9 @@
 namespace :crawling_bus do
   desc "TODO"
   task crawling_bus: :environment do
-    CrawlingBus.all.each do |post|
-      post.delete
-    end
+    #CrawlingBus.all.each do |post|
+    #  post.delete
+    #end
     
     doc = Nokogiri::HTML(open("http://www.kangwon.ac.kr/www/contents.do?key=215&"))
     if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i < 11)
