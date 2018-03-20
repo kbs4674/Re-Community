@@ -30,7 +30,7 @@
                 <h3 class="panel-title">유저 목록</h3>
             </div>
             
-            <div id="custom-templates" class="scrollable-dropdown-menu">
+            <div class="scrollable-dropdown-menu">
                 <input class="typeahead form-control" type="text" placeholder="검색">
             </div>
 
@@ -65,8 +65,9 @@ var source = new Bloodhound({
 
 source.initialize();
 
-$('#custom-templates .typeahead').typeahead(null, {
+$('.scrollable-dropdown-menu .typeahead').typeahead(null, {
   displayKey: 'name',
+  limit: 5,
   source: source.ttAdapter(),
   templates: {
     empty: [
