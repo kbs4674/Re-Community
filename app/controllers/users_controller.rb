@@ -2,6 +2,16 @@ class UsersController < ApplicationController
     # 로그인 된 사용자만 접근 가능
     before_action :authenticate_user!
     
+    def search_user
+        users = User.all.map do |user|
+        {
+            nickname: user.nickname
+        }
+        end
+        
+        render json: users
+    end
+    
     def message
         session[:conversations] ||= []
         @users = User.all.where.not(id: current_user)
