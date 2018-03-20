@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
     end
     if not commentable_type == "AllNotice" #공지사항 게시판에는 알림이 안뜨게
       @new_notification = NewNotification.create! user: commentable.user,
-                                           content: "#{current_user.nickname} 님이 댓글을 달았습니다.",
+                                           content: "#{current_user.nickname.truncate(15, omission: '...')} 님이 댓글을 달았습니다.",
                                            link: request.referrer
     end
 

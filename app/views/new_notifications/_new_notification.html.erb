@@ -1,1 +1,1 @@
-<li class="dropdown-item"><%= link_to new_notification.content.truncate(20, omission: '...'), new_notification, class: "etc" %></li>
+<li class="dropdown-item"><%= link_to new_notification.content.html_safe, new_notification, class: "etc" %></li>
