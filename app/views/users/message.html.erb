@@ -30,20 +30,20 @@
                 <h3 class="panel-title">유저 목록</h3>
             </div>
             
-            <div id="custom-templates">
+            <div id="custom-templates" class="scrollable-dropdown-menu">
                 <input class="typeahead form-control" type="text" placeholder="검색">
             </div>
 
-	    <div class="panel-body" style="margin-top: 200px;">
-	        <hr/>
-            <ul>
-                <h3 class="panel-title" style="color: #2687dc;">Admin</h3>
-                <% @users.each do |user| %>
-                    <% if user.has_role? :admin %>
-                        <li><%= link_to user.nickname.truncate(15, omission: '...'), conversations_path(user_id: user), remote: true, method: :post %></li>
+	        <div class="panel-body" style="margin-top: 200px;">
+    	        <hr/>
+                <ul>
+                    <h3 class="panel-title" style="color: #2687dc;">Admin</h3>
+                    <% @users.each do |user| %>
+                        <% if user.has_role? :admin %>
+                            <li><%= link_to user.nickname.truncate(15, omission: '...'), conversations_path(user_id: user), remote: true, method: :post %></li>
+                        <% end %>
                     <% end %>
-                <% end %>
-            </ul>
+                </ul>
             </div>
         </div>
     </div>
