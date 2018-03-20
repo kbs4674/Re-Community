@@ -2,15 +2,18 @@
 <div class="container">
     <div class="row">
         <div class="hidden-sm-up col-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">유저 목록</h3>
-                </div>
+            <div class="panel-heading">
+                <a onclick="showHide('user_search')" onfocus="this.blur()"><h3 class="panel-title">유저 목록/검색<i class="fas fa-sort-down"></i></h3></a>
+            </div>
+            <div id="user_search" style="display:none;">
                 <div id="scrollable-dropdown-menu">
                     <input class="typeahead form-control" type="text" placeholder="검색">
                 </div>
+                <div style="margin-top: 150px;"></div>
             </div>
+        <hr/>
         </div>
+        
         
         <div class="col-sm-7 col-md-9">
             <ul id="conversations-list">
@@ -30,7 +33,7 @@
                 <input class="typeahead form-control" type="text" placeholder="검색">
             </div>
 
-	        <div class="panel-body" style="margin-top: 200px;">
+	        <div class="panel-body" style="margin-top: 150px;">
     	        <hr/>
                 <ul>
                     <h3 class="panel-title" style="color: #2687dc;">Admin</h3>
