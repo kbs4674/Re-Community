@@ -6,12 +6,8 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">유저 목록</h3>
                 </div>
-                <div class="panel-body">
-                    <ul>
-                        <% @users.each do |user| %>
-                            <li><%= link_to user.nickname.truncate(15, omission: '...'), conversations_path(user_id: user), remote: true, method: :post %></li>
-                        <% end %>
-                    </ul>
+                <div id="scrollable-dropdown-menu">
+                    <input class="typeahead form-control" type="text" placeholder="검색">
                 </div>
             </div>
         </div>
