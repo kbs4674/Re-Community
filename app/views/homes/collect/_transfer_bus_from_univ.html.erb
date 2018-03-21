@@ -2,7 +2,7 @@
 <%# PC %>
 <div class="hidden-sm-down" align="right" style="background: url('/img/bus.jpg') no-repeat; background-position: 0px -110px; background-color: white; border-radius: 60px; padding: 10px; margin-top: 20px;">
     <span style="margin-right: 20px;"> <b style="color: #53c371">남춘천역 ↔ 강원대
-    <% if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i <= 11) %>
+    <% if (Time.zone.now.strftime("%H").to_i >= 0 && Time.zone.now.strftime("%H").to_i < 11) %>
         <b style="color: #7f99ff">등교 버스</b>
     <% else %>
         <b style="color: #ff9e7f">하교 버스</b>
