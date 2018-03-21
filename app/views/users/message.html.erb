@@ -58,21 +58,7 @@
             </div>
             
             <div class="panel-body" style="margin-top: 150px;">
-    	        <hr/>
-                <ul>
-                    <h3 class="panel-title" style="color: #2687dc;">7일 간 메세지 기록</h3>
-                    <% @users.each do |user| %>
-                        <% Message.all.uniq(&:user_id).each do |x| %>
-                            <% if (user.id = x.conversation.recipient.id) %>
-                                <li><%= link_to user.nickname.truncate(15, omission: '...'), conversations_path(user_id: user), remote: true, method: :post %></li>
-                            <% end %>
-                        <% end %>
-                    <% end %>
-                </ul>
-            </div>
-            
-	        <div class="panel-body" style="margin-top: 150px;">
-    	        <hr/>
+            <hr/>
                 <ul>
                     <h3 class="panel-title" style="color: #2687dc;">Admin</h3>
                     <% @users.each do |user| %>
