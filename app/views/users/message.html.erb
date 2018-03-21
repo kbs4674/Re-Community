@@ -94,7 +94,7 @@ $('#scrollable-dropdown-menu .typeahead').typeahead(null, {
       '해당 계정은 없습니다.',
       '</div>'
     ].join('\n'),
-      suggestion: Handlebars.compile('<p style="margin-top: 15px;"><% @users.each do |user| %><%= link_to "#{user.nickname.truncate(12, omission: '...')}<br/>".html_safe, conversations_path(user_id: user), remote: true, method: :post %><% end %></p>')
+      suggestion: Handlebars.compile('<p style="margin-top: 15px;"><a href="a">{{name}}</a></p>')
   }
 });
 </script>
