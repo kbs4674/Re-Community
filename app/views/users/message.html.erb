@@ -62,9 +62,11 @@
                 <ul>
                     <h3 class="panel-title" style="color: #2687dc;">7일 간 메세지 기록</h3>
                     <% @users.each do |user| %>
-                        <% Conversation.all.each do |x| %>
-                            <% if x.recipient.id == current_user.id || current_user.id %>
-                                <li><%= link_to user.nickname.truncate(15, omission: '...'), conversations_path(user_id: user), remote: true, method: :post %></li>
+                        <% Conversation.all.each do |c| %>
+                            <% Message.all.each do |x| %>
+                                <% if x.conversation.id == c.id && Time.now - x.created_at <= 1.minutes %>
+                                    <li><%= link_to user.nickname.truncate(15, omission: '...'), conversations_path(user_id: user), remote: true, method: :post %></li>
+                                <% end %>
                             <% end %>
                         <% end %>
                     <% end %>
