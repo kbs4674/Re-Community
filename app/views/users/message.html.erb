@@ -64,7 +64,7 @@
                     <% @users.each do |user| %>
                         <% Conversation.all.each do |c| %>
                             <% Message.all.each do |x| %>
-                                <% if x.conversation.id == c.id && Time.now - x.created_at <= 1.minutes %>
+                                <% if x.conversation.id == c.id && Time.now - x.created_at <= 6.hours %>
                                     <li><%= link_to user.nickname.truncate(15, omission: '...'), conversations_path(user_id: user), remote: true, method: :post %></li>
                                 <% end %>
                             <% end %>
