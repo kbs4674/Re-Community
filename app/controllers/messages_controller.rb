@@ -3,8 +3,13 @@ class MessagesController < ApplicationController
         @conversation = Conversation.includes(:recipient).find(params[:conversation_id])
         @message = @conversation.messages.create(message_params)
         if Message.create
-            if (@message.user.nickname == @conversation.recipient.nickname) || (@message.user.nickname == @conversation.sender.nickname)
+            if @message.user.nickname == @conversation.recipient.nickname
                 @new_notification = NewNotification.create! user: Conversation.find(params[:conversation_id]).sender,
+                                                   content: "#{'<i class="far fa-envelope"></i>'.html_safe} #{current_user.nickname.truncate(15, omission: '...')} 님으로 부터 메세지가 왔습니다.",
+                                                   link: request.referrer
+            
+            elsif @message.user.nickname == @conversation.sender.nickname
+                @new_notification = NewNotification.create! user: Conversation.find(params[:conversation_id]).recipient,
                                                    content: "#{'<i class="far fa-envelope"></i>'.html_safe} #{current_user.nickname.truncate(15, omission: '...')} 님으로 부터 메세지가 왔습니다.",
                                                    link: request.referrer
             end
