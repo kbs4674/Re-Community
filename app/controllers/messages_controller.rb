@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
                 @new_notification = NewNotification.create! user: Conversation.find(params[:conversation_id]).sender,
                                                    content: "#{'<i class="far fa-envelope"></i>'.html_safe} #{current_user.nickname.truncate(15, omission: '...')} 님으로 부터 메세지가 왔습니다.",
                                                    link: request.referrer
-            
+                                                   
             elsif @message.user.nickname == @conversation.sender.nickname
                 @new_notification = NewNotification.create! user: Conversation.find(params[:conversation_id]).recipient,
                                                    content: "#{'<i class="far fa-envelope"></i>'.html_safe} #{current_user.nickname.truncate(15, omission: '...')} 님으로 부터 메세지가 왔습니다.",
