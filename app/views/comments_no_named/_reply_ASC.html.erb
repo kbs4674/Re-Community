@@ -68,9 +68,9 @@
           <% end %>
           <div align="right">
             <% if can? :ip, @post %>
-              <%= content_tag(:small, "IP : #{@post.remote_ip.split('.').take(2).join('.')}.*.*", data: {toggle: "tooltip", placement: "top"}, title: "#{@post.remote_ip}") %><br/>
+              <%= content_tag(:small, "IP : #{comment.remote_ip.split('.').take(2).join('.')}.*.*", data: {toggle: "tooltip", placement: "top"}, title: "#{comment.remote_ip}") %><br/>
             <% else %>
-              <%= content_tag(:small, "IP : #{@post.remote_ip.split('.').take(2).join('.')}.*.*") %><br/>
+              <%= content_tag(:small, "IP : #{comment.remote_ip.split('.').take(2).join('.')}.*.*") %><br/>
             <% end %>
             <small class="hidden-sm-down" style="margin-right: 10px;"><%= time_ago_in_words(comment.created_at) %>전 (<%= comment.created_at.strftime('%Y-%m-%d %H:%M') %>)</small>
             <small class="hidden-md-up"><%= time_ago_in_words(comment.created_at) %>전</small>
