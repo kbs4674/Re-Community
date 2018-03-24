@@ -61,11 +61,11 @@
             <hr/>
                 <ul>
                     <h3 class="panel-title" style="color: #2687dc;">Admin</h3>
-                    <% Message.all.uniq.each do |x| %>
-                        <% Conversation.all.uniq.each do |y| %>
+                    <% Message.all.uniq!.each do |x| %>
+                        <% Conversation.all.uniq!.each do |y| %>
                             <% if Message.create %>
                                 <% if x.user.nickname == y.recipient.nickname %>
-                                    <%= y.sender.nickname%>
+                                    <%= y.sender.nickname %>
                                 <% end %>
                             <% end %>
                         <% end %>
