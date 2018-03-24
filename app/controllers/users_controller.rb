@@ -3,7 +3,6 @@ class UsersController < ApplicationController
     before_action :authenticate_user!
     
     def message
-        @user = User.find(params[:id])
         session[:conversations] ||= []
         @users = User.all.where.not(id: current_user)
         @conversations = Conversation.includes(:recipient, :messages)
