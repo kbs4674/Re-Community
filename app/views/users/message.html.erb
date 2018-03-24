@@ -76,12 +76,12 @@
     var links =
     [
         <% @users.each do |user| %>
-            {name: "<%= user.nickname %>"},
+            {name: "<%= user.nickname %>", id: "<%= user.id %>"},
         <% end %>
     ];
 
 var source = new Bloodhound({
-  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name', 'id'),
   queryTokenizer: Bloodhound.tokenizers.whitespace,
   local: links
 });
@@ -98,7 +98,7 @@ $('#scrollable-dropdown-menu .typeahead').typeahead(null, {
       '해당 계정은 없습니다.',
       '</div>'
     ].join('\n'),
-      suggestion: Handlebars.compile('<div align="left" style="margin-top: 15px;"><% @users.each do |user| %><%= link_to "#{user.nickname.truncate(12, omission: '...')}<br/>".html_safe, conversations_path(user_id: user), remote: true, method: :post %><% end %></div>')
+      suggestion: Handlebars.compile('<div align="left" style="margin-top: 15px;"><%= link_to "{{name}}", '/conversations?user_id={{id}}', remote: true, method: :post %></div>')
   }
 });
 </script>
