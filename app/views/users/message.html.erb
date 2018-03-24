@@ -57,6 +57,22 @@
                 <input class="typeahead form-control" type="text" placeholder="검색">
             </div>
             
+            <div class="panel-body" style="margin-top: 20px;">
+            <hr/>
+                <ul>
+                    <h3 class="panel-title" style="color: #2687dc;">Admin</h3>
+                    <% Message.all.each do |x| %>
+                        <% Conversation.all.each do |y| %>
+                            <% if Message.create %>
+                                <% if x.user.nickname == y.recipient.nickname %>
+                                    <%= y.sender.nickname%>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                </ul>
+            </div>
+            
             <div class="panel-body" style="margin-top: 150px;">
             <hr/>
                 <ul>
