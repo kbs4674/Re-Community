@@ -117,7 +117,7 @@ $('#scrollable-dropdown-menu .typeahead').typeahead(null, {
       '해당 계정은 없습니다.',
       '</div>'
     ].join('\n'),
-      suggestion: Handlebars.compile('<div align="left" style="margin-top: 15px;"><%= link_to "{{name}}", '/conversations?user_id={{id}}', remote: true, method: :post %></div>')
+      suggestion: Handlebars.compile('<div align="left"><%= link_to "{{name}}", '/conversations?user_id={{id}}', remote: true, method: :post %></div>')
   }
 });
 </script>
