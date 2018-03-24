@@ -7,6 +7,7 @@ class UsersController < ApplicationController
         @users = User.all.where.not(id: current_user)
         @conversations = Conversation.includes(:recipient, :messages)
                                      .find(session[:conversations])
+        @conversation_list = Conversation.all
     end
     
     def show
