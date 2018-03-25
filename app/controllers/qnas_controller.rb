@@ -23,10 +23,14 @@ class QnasController < ApplicationController
     #만약 '찬성' 투표를 이미 한 경우 : '찬성' 투표 취소
     if ((current_user.voted_up_on? @qna) == true)
       @qna.unliked_by current_user
-      redirect_to(request.referrer, :notice => '해당 글의 추천을 취소하셨습니다.')
+      redirect_to(request.referrer, :notice => '이제 궁금증이 풀렸어요~!')
     else
       @qna.upvote_by current_user
-      redirect_to(request.referrer, :notice => '해당 글을 추천하셨습니다.')
+      redirect_to(request.referrer, :notice => '나도 궁금해요!')
+      
+      @new_notification = NewNotification.create! user: "#{@qna.upvote_by current_user}",
+                                           content: "#{current_user.nickname.truncate(15, omission: '...')} 님이 댓글을 달았습니다.",
+                                           link: request.referrer
     end
   end
  

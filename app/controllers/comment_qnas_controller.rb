@@ -6,7 +6,7 @@ class CommentQnasController < ApplicationController
     @comment_qna = @qna.comment_qnas.new(comment_qna_params)
     @comment_qna.user_name = current_user.nickname
     @comment_qna.save
-    @new_notification = NewNotification.create! user: @comment_qna.user,
+    @new_notification = NewNotification.create! user: @qna.user,
                                          content: "#{current_user.nickname.truncate(15, omission: '...')} 님이 질문글에 답변하셨습니다.",
                                          link: "#{qna_path(@qna)}#comment_qna_#{@comment_qna.id}"
   end
