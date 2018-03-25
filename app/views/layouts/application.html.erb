@@ -179,6 +179,26 @@
             <li class="nav-item hidden-lg-up">로그인 해주세요!<br/><%= link_to '<p style="margin-left: 10px"></p>시작하기<p style="margin-left: 10px"></p>'.html_safe, "/users/sign_in", class: "nav-link btn btn-secondary btn-round" %></li>
           <% end %>
           
+          <div class="hidden-md-up" style="margin: -10px 0px -10px 0px;">
+            <% if user_signed_in? %>
+              <li class="nav-item dropdown">
+                <% if (current_user.new_notifications.unread_by(current_user).count) >= 1 %>
+                  <%= link_to "#", class: "nav-link dropdown-toggle", data: {toggle: "dropdown" }, role: "button", aria: {haspopup: "true", expanded: "false" } do %>
+                    <%= content_tag(:span, " #{current_user.new_notifications.unread_by(current_user).count}", class: "fas fa-bell", style: "font-weight: bold; color: #ffbe00") %>
+                  <% end %>
+                <% else %>
+                  <%= link_to "#", class: "nav-link dropdown-toggle", data: {toggle: "dropdown" }, role: "button", aria: {haspopup: "true", expanded: "false" } do %>
+                    <%= content_tag(:span, " #{current_user.new_notifications.unread_by(current_user).count}", class: "fas fa-bell", style: "font-weight: bold") %>
+                  <% end %>
+                <% end %>
+                <ul class="dropdown-menu dropdown-menu-right dropdown-info" style="margin-bottom: 20px;">
+                  <li class="dropdown-item"><%= link_to '<b>모든 알림 지우기</b>'.html_safe, new_notifications_read_all_path %></li>
+                  <li class="dropdown-item etc"><%= render partial: "new_notifications/new_notification", collection: current_user.new_notifications.unread_by(current_user) %></li>
+                </ul>
+              </li>
+            <% end %>
+          </div>
+          
           <div style="border-bottom: 1px solid black; margin-left: -30px;" class="hidden-lg-up"></div>
           <% #모바일에서만 보여지는 메뉴 끝 %>
 
@@ -235,25 +255,27 @@
             </ul>
           </li>
           
-          <% if user_signed_in? %>
-            <li class="nav-item dropdown">
-              <% if (current_user.new_notifications.unread_by(current_user).count) >= 1 %>
-                <%= link_to "#", class: "nav-link dropdown-toggle", data: {toggle: "dropdown" }, role: "button", aria: {haspopup: "true", expanded: "false" } do %>
-                  <%= content_tag(:span, " #{current_user.new_notifications.unread_by(current_user).count}", class: "fas fa-bell", style: "font-weight: bold; color: #ffbe00") %>
+          <%# PC에서만 보여지는 메뉴 %>
+          <div class="hidden-sm-down">
+            <% if user_signed_in? %>
+              <li class="nav-item dropdown">
+                <% if (current_user.new_notifications.unread_by(current_user).count) >= 1 %>
+                  <%= link_to "#", class: "nav-link dropdown-toggle", data: {toggle: "dropdown" }, role: "button", aria: {haspopup: "true", expanded: "false" } do %>
+                    <%= content_tag(:span, " #{current_user.new_notifications.unread_by(current_user).count}", class: "fas fa-bell", style: "font-weight: bold; color: #ffbe00") %>
+                  <% end %>
+                <% else %>
+                  <%= link_to "#", class: "nav-link dropdown-toggle", data: {toggle: "dropdown" }, role: "button", aria: {haspopup: "true", expanded: "false" } do %>
+                    <%= content_tag(:span, " #{current_user.new_notifications.unread_by(current_user).count}", class: "fas fa-bell", style: "font-weight: bold") %>
+                  <% end %>
                 <% end %>
-              <% else %>
-                <%= link_to "#", class: "nav-link dropdown-toggle", data: {toggle: "dropdown" }, role: "button", aria: {haspopup: "true", expanded: "false" } do %>
-                  <%= content_tag(:span, " #{current_user.new_notifications.unread_by(current_user).count}", class: "fas fa-bell", style: "font-weight: bold") %>
-                <% end %>
-              <% end %>
-              <ul class="dropdown-menu dropdown-menu-right dropdown-info">
-                <li class="dropdown-item"><%= link_to '<b>모든 알림 지우기</b>'.html_safe, new_notifications_read_all_path %></li>
-                <li class="dropdown-item etc"><%= render partial: "new_notifications/new_notification", collection: current_user.new_notifications.unread_by(current_user) %></li>
-              </ul>
-            </li>
-          <% end %>
-        
-          <% # PC에서만 보여지는 메뉴 %>
+                <ul class="dropdown-menu dropdown-menu-right dropdown-info">
+                  <li class="dropdown-item"><%= link_to '<b>모든 알림 지우기</b>'.html_safe, new_notifications_read_all_path %></li>
+                  <li class="dropdown-item etc"><%= render partial: "new_notifications/new_notification", collection: current_user.new_notifications.unread_by(current_user) %></li>
+                </ul>
+              </li>
+            <% end %>
+          </div>
+          
           <% if user_signed_in? %>
             <li class="nav-item dropdown hidden-md-down">
               <%= link_to "#", class: "nav-link dropdown-toggle", data: {toggle: "dropdown" }, role: "button", aria: {haspopup: "true", expanded: "false" } do %>
