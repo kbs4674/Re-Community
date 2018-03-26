@@ -1,19 +1,20 @@
 <div align="center" style="background: #abe0ff; padding: 9px 0px 3px 0px; box-shadow: 2px 2px 2px 0 #dadada;">
     <% if user_signed_in? %>
         <small>
-            <% if current_user.profile_icon.present? || current_user.profile_banner.present? %>
-                <% if current_user.profile_select == "profile_icon" %>
-                    <%= image_tag ("#{current_user.profile_icon}"), width: "20px", height: "20px;" %> <%= current_user.nickname %>
-                <% elsif current_user.profile_select == "profile_banner" %>
-                    <%= image_tag ("#{current_user.profile_banner}"), width: "70px", height: "20px;" %>
+            <div align="left" style="margin-left: 30px; margin-bottom: 10px;">
+                <% if current_user.profile_icon.present? || current_user.profile_banner.present? %>
+                    <% if current_user.profile_select == "profile_icon" %>
+                        <%= image_tag ("#{current_user.profile_icon}"), width: "20px", height: "20px;" %> <%= current_user.nickname %>
+                    <% elsif current_user.profile_select == "profile_banner" %>
+                        <%= image_tag ("#{current_user.profile_banner}"), width: "70px", height: "20px;" %>
+                    <% else %>
+                        <b><%= current_user.nickname %></b>
+                    <% end %>
                 <% else %>
                     <b><%= current_user.nickname %></b>
                 <% end %>
-            <% else %>
-                <b><%= current_user.nickname %></b>
-            <% end %>
-            님, 안녕하세요!
-            <hr style="margin-top: 5px; margin-bottom: 5px; border: 1px solid white;">
+                님, 안녕하세요!
+            </div>
             <table border="0" width="100%">
                 <tr>
                     <td rowspan="3" align="center" style="width: 40%;">
