@@ -1,6 +1,6 @@
 namespace :crawling_bus_list do
   desc "TODO"
-  task crawling_bus: :environment do
+  task crawling_bus_list: :environment do
     #CrawlingBus.all.each do |post|
     #  post.delete
     #end
