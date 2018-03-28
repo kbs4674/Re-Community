@@ -10,12 +10,15 @@ class CommentQnasController < ApplicationController
     @new_notification = NewNotification.create! user: @qna.user,
                                          content: "#{current_user.nickname.truncate(15, omission: '...')} 님이 질문글에 답변하셨습니다.",
                                          link: "#{qna_path(@qna)}#comment_qna_#{@comment_qna.id}"
-                                         
-    @new_notification2 = NewNotification.create! user: @alarm.user,
-                                         content: "#{current_user.nickname.truncate(15, omission: '...')} 님이 내가 발도장 찍은 질문글에 답변하셨습니다.",
-                                         link: "#{qna_path(@qna)}#comment_qna_#{@comment_qna.id}"
+    User.all.each do |x|
+      if x.is_alarm_qna?(@qna)
+        @new_notification2 = NewNotification.create! user: x,
+                                             content: "#{current_user.nickname.truncate(15, omission: '...')} 님이 내가 발도장 찍은 질문글에 답변하셨습니다.",
+                                             link: "#{qna_path(@qna)}#comment_qna_#{@comment_qna.id}"
+      end
+    end
   end
-
+  
   def destroy
     # 이미 삭제된 글이 또 삭제될 경우 영원히 삭제됨. (이 때, 삭제된 데이터는 로그기록에도 안남음.)
     if @comment_qna.deleted? == true
