@@ -87,7 +87,7 @@ class QnasController < ApplicationController
       @qna.destroy
     end
     respond_to do |format|
-      format.html { redirect_to qnas_url, notice: '게시글이 성공적으로 제거되었습니다.' }
+      format.html { redirect_to qnas_path, notice: '게시글이 성공적으로 제거되었습니다.' }
       format.json { head :no_content }
     end
   end
