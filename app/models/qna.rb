@@ -23,6 +23,7 @@ class Qna < ApplicationRecord
     
     belongs_to :user
     has_many :report_qnas, dependent: :destroy
+    has_many :alarm_qnas, dependent: :destroy
     has_many :impressions, :as=>:impressionable
     has_many :comment_qnas, dependent: :destroy
  

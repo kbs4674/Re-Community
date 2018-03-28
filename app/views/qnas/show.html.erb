@@ -51,12 +51,12 @@
   <% if (not @qna.report_qnas.size >= @qna.num) || ((@qna.report_qnas.size >= @qna.num) && (current_user.has_role? :admin)) %>
     <div style="float: right; font-size: 15px">
       <% if @qna.user == current_user %>
-        <div align="right"><i class="fa fa-paw" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="저도 궁금해요! (발도장 꾹)"></i> <%= @qna.get_upvotes.size %> 명이 궁금해 해요!</div>
+        <div align="right"><i class="fa fa-paw" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="저도 궁금해요! (발도장 꾹)"></i> <%= @qna.alarm_qnas.size %> 명이 궁금해 해요!</div>
       <% else %>
-        <% if (current_user.voted_up_on? @qna) == true %>
-          <div align="right"><%= link_to '<span class="badge badge-pill badge-primary"><i class="fa fa-paw" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="저도 궁금해요! (발도장 꾹)"></i></span>'.html_safe, qna_like_path(@qna), method: :put %> <%= @qna.get_upvotes.size %> 명이 궁금해 해요!</div>
+        <% if current_user.is_alarm_qna?(@qna) %>
+          <div align="right"><%= link_to '<span class="badge badge-pill badge-primary"><i class="fa fa-paw" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="저도 궁금해요! (발도장 꾹)"></i></span>'.html_safe, qna_alarm_qna_path(@qna.id), method: :post %> <%= @qna.alarm_qnas.size %> 명이 궁금해 해요!</div>
         <% else %>
-          <div align="right"><%= link_to '<span class="badge badge-pill badge-default"><i class="fa fa-paw" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="저도 궁금해요! (발도장 꾹)"></i></span>'.html_safe, qna_like_path(@qna), method: :put %> <%= @qna.get_upvotes.size %> 명이 궁금해 해요!</div>
+          <div align="right"><%= link_to '<span class="badge badge-pill badge-default"><i class="fa fa-paw" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="저도 궁금해요! (발도장 꾹)"></i></span>'.html_safe, qna_alarm_qna_path(@qna.id), method: :post %> <%= @qna.alarm_qnas.size %> 명이 궁금해 해요!</div>
         <% end %>
       <% end %>
     </div>

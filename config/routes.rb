@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :new_notifications
   
   resources :qnas do
+    post "/alarm_qna", to: "alarm_qnas#alarm_qna_toggle"
     post "/report_qna", to: "report_qnas#report_qna_toggle"
     put "/like", to:    "qnas#upvote"
     put "/dislike", to: "qnas#downvote"

@@ -1,0 +1,2 @@
+module AlarmQnasHelper
+end

@@ -28,6 +28,7 @@ class User < ApplicationRecord
   has_many :comment_destroys
   has_many :new_notifications
   has_many :all_notices
+  has_many :alarm_qnas
   
   #유저 권한 기본 설정
   def assign_default_role
@@ -48,6 +49,10 @@ class User < ApplicationRecord
   
   def is_comment_destroy?(comment)
     CommentDelete.find_by(user_id: self.id, comment_id: comment.id).present?
+  end
+  
+  def is_alarm_qna?(qna)
+    AlarmQna.find_by(user_id: self.id, qna_id: qna.id).present?
   end
   
   # 외부 로그인 연동
