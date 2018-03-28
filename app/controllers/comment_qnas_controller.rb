@@ -12,7 +12,7 @@ class CommentQnasController < ApplicationController
                                          link: "#{qna_path(@qna)}#comment_qna_#{@comment_qna.id}"
                                          
     @new_notification2 = NewNotification.create! user: @alarm.user,
-                                         content: "#{current_user.nickname.truncate(15, omission: '...')} 님이 '내가 찜한 질문글'에 답변하셨습니다.",
+                                         content: "#{current_user.nickname.truncate(15, omission: '...')} 님이 내가 발도장 찍은 질문글에 답변하셨습니다.",
                                          link: "#{qna_path(@qna)}#comment_qna_#{@comment_qna.id}"
   end
 
