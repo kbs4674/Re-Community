@@ -46,7 +46,7 @@ every :day, at: [local('0:01 am'), local('9:01 am'), local('2:01 pm')] do
 end
 
 # [매일] 공지사항
-every :day, at: [local('9:00 am'), local('11:00 am'), local('1:30 om'), local('3:00 pm'), local('4:00 pm'), local('6:30 pm'), local('9:00 pm')] do
+every :day, at: [local('9:00 am'), local('11:00 am'), local('1:30 pm'), local('3:00 pm'), local('4:00 pm'), local('6:30 pm'), local('9:00 pm')] do
     rake "crawling_notice:crawling_notice"
 end
 
