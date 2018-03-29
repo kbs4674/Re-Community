@@ -22,7 +22,7 @@
             <div class="tab-content" style="margin-top: -40px;">
                 <%# 학교 공지사항 %>
                 <div class="tab-pane fade show active" id="kangwon_univ_notice" role="tabpanel">
-                    <% CrawlingNotice.order("created_at DESC").first(4).each do |info| %>
+                    <% CrawlingNotice.first(4).each do |info| %>
                       <div class="col-md-12">
                         <a href="http://www.kangwon.ac.kr/www/<%= info.url %>" target="_blank">
                             <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "font-weight: normal !important;") %>

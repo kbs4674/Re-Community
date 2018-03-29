@@ -16,9 +16,5 @@ namespace :crawling_delete do
     CrawlingDormitoryMealBtl.where(['created_at <= ?', 2.days.ago]).each do |post|
       post.delete
     end
-    
-    CrawlingNotice.where(['created_at <= ?', 2.months.ago]).each do |post|
-      post.delete
-    end
   end
 end
