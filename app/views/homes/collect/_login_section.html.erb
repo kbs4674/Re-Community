@@ -1,4 +1,4 @@
-<div align="center" style="background: #abe0ff; padding: 9px 0px 3px 0px; box-shadow: 2px 2px 2px 0 #dadada;">
+<div align="center" class="login_section">
     <% if user_signed_in? %>
         <small>
             <div align="left" style="margin-left: 30px; margin-bottom: 10px;">
@@ -47,7 +47,7 @@
         </small>
         <% else %>
             <%= link_to user_session_path do %>
-            <b><%= content_tag(:div, "로그인 하기", class: "etc", style: "background: #67b8ff; padding: 10px; width: 70%; color: white;") %></b>
+            <b><%= content_tag(:div, "로그인 하기", class: "etc login_button") %></b>
         <% end %>
         <div style="margin-top: 5px;"><small>해당 서비스를 이용하시려면 로그인 해주세요.</small></div>
     <% end %>
