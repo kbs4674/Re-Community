@@ -34,7 +34,7 @@
                     <div align="right" class="col-md-12" style="margin-bottom: 10px;"></div>
                 </div>
                 <%# 학사 일정 %>
-                <div class="tab-pane fade" id="kangwon_univ_schedule" role="tabpanel">
+                <div class="tab-pane fade" id="kangwon_univ_schedule" role="tabpanel" style="height: 102px; overflow-y: scroll;">
                   <% CrawlingUnivSchedule.order("created_at DESC").each do |info| %>
                     <div class="col-md-12" style="font-size: 13px;">
                     <span style="background-color: rgb(109, 48, 207);"><span style="font-family: 나눔고딕, NanumGothic; color: rgb(255, 255, 255); background-color: rgb(236, 185, 255);"><b><span style="background-color: rgb(120, 157, 255);">&nbsp;<%= info.time %>&nbsp;</span></b></span></span> 
