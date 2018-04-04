@@ -61,24 +61,34 @@ every 1.month, at: local('3:00 am') do
 end
 
 # [매일] 버스 시간표 가져오기
-every :monday, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:50 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:45 am'), local('9:50 am'), local('9:51 am'), local('9:55 am'), local('10:20 am'), local('11:00 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
-    rake "crawling_bus_list:crawling_bus_list"
+if (TZInfo::Timezone.get('Asia/Seoul').now.strftime("%A") == "Monday")
+    every :day, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:50 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:45 am'), local('9:50 am'), local('9:51 am'), local('9:55 am'), local('10:20 am'), local('11:00 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
+        rake "crawling_bus_list:crawling_bus_list"
+    end
 end
 
-every :tuesday, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:50 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:45 am'), local('9:50 am'), local('9:51 am'), local('9:55 am'), local('10:20 am'), local('11:00 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
-    rake "crawling_bus_list:crawling_bus_list"
+if (TZInfo::Timezone.get('Asia/Seoul').now.strftime("%A") == "Tuesday")
+    every :day, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:50 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:45 am'), local('9:50 am'), local('9:51 am'), local('9:55 am'), local('10:20 am'), local('11:00 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
+        rake "crawling_bus_list:crawling_bus_list"
+    end
 end
 
-every :wednesday, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:50 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:45 am'), local('9:50 am'), local('9:51 am'), local('9:55 am'), local('10:20 am'), local('11:00 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
-    rake "crawling_bus_list:crawling_bus_list"
+if (TZInfo::Timezone.get('Asia/Seoul').now.strftime("%A") == "Wednesday")
+    every :day, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:50 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:45 am'), local('9:50 am'), local('9:51 am'), local('9:55 am'), local('10:20 am'), local('11:00 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
+        rake "crawling_bus_list:crawling_bus_list"
+    end
 end
 
-every :thursday, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:50 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:45 am'), local('9:50 am'), local('9:51 am'), local('9:55 am'), local('10:20 am'), local('11:00 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
-    rake "crawling_bus_list:crawling_bus_list"
+if (TZInfo::Timezone.get('Asia/Seoul').now.strftime("%A") == "Thursday")
+    every :day, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:50 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:45 am'), local('9:50 am'), local('9:51 am'), local('9:55 am'), local('10:20 am'), local('11:00 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
+        rake "crawling_bus_list:crawling_bus_list"
+    end
 end
 
-every :friday, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:39 am'), local('9:45 am'), local('9:55 am'), local('10:20 am'), local('11:00 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
-    rake "crawling_bus_list:crawling_bus_list"
+if (TZInfo::Timezone.get('Asia/Seoul').now.strftime("%A") == "Friday")
+    every :day, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:39 am'), local('9:45 am'), local('9:55 am'), local('10:20 am'), local('11:00 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
+        rake "crawling_bus_list:crawling_bus_list"
+    end
 end
 
 # every 4.days do
