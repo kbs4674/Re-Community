@@ -120,6 +120,7 @@ class PostsController < ApplicationController
   def destroy
     if @post.deleted? == true
       @post.really_destroy!
+      redirect_to request.referrer
     else
       @post.destroy
     end
