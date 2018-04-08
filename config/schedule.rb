@@ -64,30 +64,47 @@ end
 if (TZInfo::Timezone.get('Asia/Seoul').now.strftime("%A") == "Monday")
     every :day, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:50 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:45 am'), local('9:50 am'), local('9:51 am'), local('9:55 am'), local('10:20 am'), local('11:00 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
         rake "crawling_bus_list:crawling_bus_list"
+        command "cd /home/ec2-user/knu;touch monday"
     end
 end
 
 if (TZInfo::Timezone.get('Asia/Seoul').now.strftime("%A") == "Tuesday")
     every :day, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:50 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:45 am'), local('9:50 am'), local('9:51 am'), local('9:55 am'), local('10:20 am'), local('11:00 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
         rake "crawling_bus_list:crawling_bus_list"
+        command "cd /home/ec2-user/knu;touch tuesday"
     end
 end
 
 if (TZInfo::Timezone.get('Asia/Seoul').now.strftime("%A") == "Wednesday")
     every :day, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:50 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:45 am'), local('9:50 am'), local('9:51 am'), local('9:55 am'), local('10:20 am'), local('11:00 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
         rake "crawling_bus_list:crawling_bus_list"
+        command "cd /home/ec2-user/knu;touch wednesday"
     end
 end
 
 if (TZInfo::Timezone.get('Asia/Seoul').now.strftime("%A") == "Thursday")
     every :day, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:50 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:45 am'), local('9:50 am'), local('9:51 am'), local('9:55 am'), local('10:20 am'), local('11:00 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
         rake "crawling_bus_list:crawling_bus_list"
+        command "cd /home/ec2-user/knu;touch thursday"
     end
 end
 
 if (TZInfo::Timezone.get('Asia/Seoul').now.strftime("%A") == "Friday")
     every :day, at: [local('0:00 am'), local('8:00 am'), local('8:20 am'), local('8:22 am'), local('8:40 am'), local('8:45 am'), local('8:57 am'), local('9:10 am'), local('9:20 am'), local('9:39 am'), local('9:45 am'), local('9:55 am'), local('10:20 am'), local('11:00 am'), local('4:00 pm'), local('4:30 pm'), local('5:00 pm'), local('5:20 pm'), local('5:40 pm'), local('6:00 pm'), local('6:20 pm'), local('6:40 pm'), local('7:00 pm')] do
         rake "crawling_bus_list:crawling_bus_list"
+        command "cd /home/ec2-user/knu;touch friday"
+    end
+end
+
+if (TZInfo::Timezone.get('Asia/Seoul').now.strftime("%A") == "Saturday")
+    every :day, at: [local('0:00 am')] do
+        command "cd /home/ec2-user/knu;touch saturday"
+    end
+end
+
+if (TZInfo::Timezone.get('Asia/Seoul').now.strftime("%A") == "Sunday")
+    every :day, at: [local('0:00 am')] do
+        command "cd /home/ec2-user/knu;touch sunday"
     end
 end
 
