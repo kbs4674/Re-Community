@@ -123,10 +123,9 @@ class PostsController < ApplicationController
     else
       @post.destroy
     end
-    redirect_to bulletin_posts_path(@post.bulletin.id)
     
     respond_to do |format|
-      format.html { redirect_to (@bulletin.present? ? bulletin_posts_url : posts_url), notice: '게시글이 성공적으로 제거되었습니다.' }
+      format.html { redirect_to bulletin_posts_path(@post.bulletin.id), notice: '게시글이 성공적으로 제거되었습니다.' }
       format.json { head :no_content }
     end
   end
