@@ -1,3 +1,3 @@
-<div id="comment_qnas_list_<%= @qna.id %>", style="margin-top: 20px;">
+<div id="comment_qnas_list_<%= @post.id %>", style="margin-top: 20px;">
     <%= render @comment_qnas.order(:cached_votes_up => :desc).with_deleted %>
 </div>

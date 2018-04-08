@@ -37,10 +37,6 @@ class Ability
         can [:edit, :update, :destroy], Post, user_id: user.id
         can [:upvote, :downvote], Post
         
-        can [:index, :show, :create, :new], Qna
-        can [:edit, :update, :destroy], Qna, user_id: user.id
-        can [:upvote, :downvote], Qna
-        
         can [:new, :create, :destroy], Comment, user_id: user.id
         can [:new, :create, :destroy], CommentQna, user_id: user.id
         

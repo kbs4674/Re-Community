@@ -47,8 +47,10 @@
     <div class="row notice" style="box-shadow: 2px 2px 2px 0 #dadada; background: #ffffc4;">
       <ul class="rolling">
         <% @post_likes.each do |post| %>
-          <% if (post.get_upvotes.size >= 10) && (Time.now - post.created_at <= 20.days) %>
+          <% if ((post.get_upvotes.size >= 10) || (post.alarm_qnas.size >= 10)) && (Time.now - post.created_at <= 20.days) %>
             <li class="row"><%= render "posts/board/like_index", post: post %></li>
+          <% else %>
+            <li class="row"><div align="center" class="col-12 col-sm-12 col-md-12"><b>Best 추천 글이 올라갈 목록입니다.</b></div></li>
           <% end %>
         <% end %>
       </ul>
@@ -156,6 +158,18 @@
       <% else %>
         <% @posts.each do |post| %>
           <%= render 'posts/board/group_index', post: post %>
+        <% end %>
+      <% end %>
+      
+    <%# 특수 게시물 : 질문답변 게시판 %>
+    <% elsif @bulletin.qna == true %>
+      <% if (user_signed_in?) && (current_user.has_role? :admin) %>
+        <% @posts.with_deleted.each do |qna| %>
+          <%= render 'posts/qna/qna_index', qna: qna %>
+        <% end %>
+      <% else %>
+        <% @posts.each do |qna| %>
+          <%= render 'posts/qna/qna_index', qna: qna %>
         <% end %>
       <% end %>
     

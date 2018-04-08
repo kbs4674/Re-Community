@@ -4,9 +4,9 @@
   </nav>
 </div>
 
-<div id="comment_qnas_form_<%= comment_qna.qna.id %>">
+<div id="comment_qnas_form_<%= comment_qna.post.id %>">
   <% if (not current_user.has_any_role? :block_yellow, :block_red) || (current_user.has_role? :admin) %>
-    <%= form_with(model: [comment_qna.qna, comment_qna], label: false) do |f| %>
+    <%= form_with(model: [comment_qna.post, comment_qna], label: false) do |f| %>
       <div class='form-inputs'>
         <%= tinymce %>
         <%= f.text_area :body, class: "form-control tinymce", rows: "3", placeholder: "'카더라' 등 허위답변 기재는 자제 바랍니다." %>

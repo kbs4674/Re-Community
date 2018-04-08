@@ -12,16 +12,16 @@
     <%# 게시글 제목 %>
     <div align="left" style="margin-top: 10px;" class="col-11 col-sm-11 col-md-10 etc">
       <div class="offset-1 offset-sm-1"></div>
-      <% if qna.report_qnas.size >= qna.num %>
+      <% if qna.reports.size >= qna.num %>
         <% if can? :for_admin, @post %>
-          <%= link_to qna do %>
+          <%= link_to bulletin_post_path(qna.bulletin, qna) do %>
             <h5><%= content_tag(:div, qna.title, class: "etc", style: "color: red") %></h5>
           <% end %>
         <% else %>
           <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
         <% end %>
       <% else %>
-        <%= link_to qna do %>
+        <%= link_to bulletin_post_path(qna.bulletin, qna) do %>
             <% if (current_user.has_role? :admin) && qna.deleted? %>
                 <h5><%= content_tag(:div, qna.title, class: "etc", style: "color: #8e68e4") %></h5>
             <% else %>
@@ -49,16 +49,16 @@
   
     <%# 내용 %>
     <div align="left" style="margin-top: 10px;" class="col-11 col-sm-11 col-md-10 etc">
-      <% if qna.report_qnas.size >= qna.num %>
+      <% if qna.reports.size >= qna.num %>
         <% if can? :for_admin, @qna %>
-          <%= link_to qna do %>
+          <%= link_to bulletin_post_path(qna.bulletin, qna) do %>
             <%= content_tag(:div, qna.content.html_safe, class: "etc", style: "color: red") %>
           <% end %>
         <% else %>
           <font color="#6E6E6E"> </font>
         <% end %>
       <% else %>
-        <%= link_to qna do %>
+        <%= link_to bulletin_post_path(qna.bulletin, qna) do %>
           <%= content_tag(:div, truncate( raw( sanitize(qna.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 110, :omission => "..."), class: "etc") %>
         <% end %>
       <% end %>
@@ -107,16 +107,16 @@
       <%# 게시글 제목 %>
       <div align="left" style="margin-top: 10px;" class="col-11 col-sm-11 col-md-10 etc">
         <div class="offset-1 offset-sm-1"></div>
-        <% if qna.report_qnas.size >= qna.num %>
+        <% if qna.reports.size >= qna.num %>
           <% if can? :for_admin, @post %>
-            <%= link_to qna do %>
+            <%= link_to bulletin_post_path(qna.bulletin, qna) do %>
               <h5><%= content_tag(:div, qna.title, class: "etc", style: "color: red") %></h5>
             <% end %>
           <% else %>
             <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
           <% end %>
         <% else %>
-          <%= link_to qna do %>
+          <%= link_to bulletin_post_path(qna.bulletin, qna) do %>
               <% if (current_user.has_role? :admin) && qna.deleted? %>
                   <h5><%= content_tag(:div, qna.title, class: "etc", style: "color: #8e68e4") %></h5>
               <% else %>
@@ -129,16 +129,16 @@
     
       <%# 내용 %>
       <div align="left" style="margin-top: 10px;" class="col-11 col-sm-11 col-md-10 etc">
-        <% if qna.report_qnas.size >= qna.num %>
+        <% if qna.reports.size >= qna.num %>
           <% if can? :for_admin, @qna %>
-            <%= link_to qna do %>
+            <%= link_to bulletin_post_path(qna.bulletin, qna) do %>
               <%= content_tag(:div, qna.content.html_safe, class: "etc", style: "color: red") %>
             <% end %>
           <% else %>
             <font color="#6E6E6E"> </font>
           <% end %>
         <% else %>
-          <%= link_to qna do %>
+          <%= link_to bulletin_post_path(qna.bulletin, qna) do %>
             <%= content_tag(:div, truncate( raw( sanitize(qna.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 110, :omission => "..."), class: "etc") %><br/>
           <% end %>
         <% end %>

@@ -9,15 +9,9 @@ Rails.application.routes.draw do
   resources :new_notifications
   
   resources :qnas do
-    post "/alarm_qna", to: "alarm_qnas#alarm_qna_toggle"
     post "/report_qna", to: "report_qnas#report_qna_toggle"
     put "/like", to:    "qnas#upvote"
     put "/dislike", to: "qnas#downvote"
-
-    resources :comment_qnas do
-      put "/like", to:    "comment_qnas#upvote"
-      put "/dislike", to: "comment_qnas#downvote"
-    end
   end
   
   resources :searches
@@ -44,6 +38,14 @@ Rails.application.routes.draw do
   resources :bulletins do
     resources :posts
     post "/posts/:post_id/report", to: "reports#report_toggle"
+    post "/posts/:post_id/alarm_qna", to: "alarm_qnas#alarm_qna_toggle"
+  end
+  
+  resources :posts do
+    resources :comment_qnas do
+        put "/like", to:    "comment_qnas#upvote"
+        put "/dislike", to: "comment_qnas#downvote"
+      end
   end
   
   devise_for :users, :controllers => { omniauth_callbacks: 'users/omniauth_callbacks' }

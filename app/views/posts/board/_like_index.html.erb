@@ -57,6 +57,10 @@
     
     <%# 좋아요 %>
     <div align="left" class="col-0 col-sm-0 col-md-3 hidden-sm-down">
-        <i class="far fa-thumbs-up" aria-hidden="true"></i> <%= post.get_upvotes.size %>
+        <% if post.bulletin.title =="질문답변 게시판" %>
+            <i class="fa fa-paw" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="저도 궁금해요! (발도장 꾹)"></i> <%= post.alarm_qnas.size %>
+        <% else %>
+            <i class="far fa-thumbs-up" aria-hidden="true"></i> <%= post.get_upvotes.size %>
+        <% end %>
     </div>
 </div>

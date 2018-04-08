@@ -73,6 +73,18 @@
         <%= render 'posts/board/info_room_trade_show', post: post %>
       <% end %>
     <% end %>
+  
+  <%# 특수 게시물 : 질문답변 게시판 %>
+  <% elsif @bulletin.qna == true %>
+    <% if current_user.has_role? :admin %>
+      <% @posts.with_deleted.each do |qna| %>
+        <%= render 'posts/qna/qna_show', qna: qna %>
+      <% end %>
+    <% else %>
+      <% @posts.each do |qna| %>
+        <%= render 'posts/qna/qna_show', qna: qna %>
+      <% end %>
+    <% end %>
 
   <%# 특수게시물 : 거래 게시판 %>
   <% elsif @bulletin.info_trade == true %>

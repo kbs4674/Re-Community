@@ -98,7 +98,7 @@
 <hr/>
 
 <%# 좋아요 기능 %>
-<% if not @bulletin.info_trade == true || @bulletin.info_room_trade == true || @bulletin.seeking_job == true || @bulletin.search_job == true || @bulletin.vote == true || @bulletin.seeking_room == true || @post.reports.size >= @post.num %>
+<% if not @bulletin.info_trade == true || @bulletin.info_room_trade == true || @bulletin.seeking_job == true || @bulletin.search_job == true || @bulletin.vote == true || @bulletin.seeking_room == true || @post.reports.size >= @post.num || @bulletin.title == "질문답변 게시판" %>
 <div style="float: right; font-size: 15px">
     <% if current_user == @post.user %>
         <div align="right"><i class="far fa-thumbs-up" aria-hidden="true"></i> <%= @post.get_upvotes.size %> <%= @bulletin.title == "Foreigner Board" ? "Likes!" : "명이 좋아합니다!" %></div>
@@ -110,10 +110,24 @@
         <% end %>
     <% end %>
 </div>
+<% elsif @bulletin.title == "질문답변 게시판" %>
+    <% if (not @post.reports.size >= @post.num) || ((@post.reports.size >= @post.num) && (current_user.has_role? :admin)) %>
+        <div style="float: right; font-size: 15px">
+            <% if @post.user == current_user %>
+                <div align="right"><i class="fa fa-paw" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="저도 궁금해요! (발도장 꾹)"></i> <%= @post.alarm_qnas.size %> 명이 궁금해 해요!</div>
+            <% else %>
+                <% if current_user.is_alarm_qna?(@post) %>
+                    <div align="right"><%= link_to '<span class="badge badge-pill badge-primary"><i class="fa fa-paw" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="저도 궁금해요! (발도장 꾹)"></i></span>'.html_safe, "/bulletins/#{@bulletin.id}/posts/#{@post.id}/alarm_qna", method: :post %> <%= @post.alarm_qnas.size %> 명이 궁금해 해요!</div>
+                <% else %>
+                    <div align="right"><%= link_to '<span class="badge badge-pill badge-default"><i class="fa fa-paw" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="저도 궁금해요! (발도장 꾹)"></i></span>'.html_safe, "/bulletins/#{@bulletin.id}/posts/#{@post.id}/alarm_qna", method: :post %> <%= @post.alarm_qnas.size %> 명이 궁금해 해요!</div>
+                <% end %>
+            <% end %>
+        </div>
+    <% end %>
 <% end %>
 
 <%# 좋아요 기능 (게시글이 블라인드 처리 된 경우 AND 관리자인 경우 만 볼 수 있음.) %>
-<% if (current_user.has_role? :admin) && (@post.reports.size >= @post.num)%>
+<% if (current_user.has_role? :admin) && (@post.reports.size >= @post.num) %>
 <div style="float: right; font-size: 15px">
     <div align="right"><i class="far fa-thumbs-up" aria-hidden="true"></i> <%= @post.get_upvotes.size %> <%= @bulletin.title == "Foreigner Board" ? "Likes!" : "명이 좋아합니다!" %></div>
 </div>
@@ -336,6 +350,14 @@
     <% else %>
         <hr/>
         <center><font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true" style="margin-top: 20px;"></i> 허가받지 않은 유저는 댓글 확인이 불가합니다.</font></center>
+    <% end %>
+<% elsif @bulletin.title == "질문답변 게시판" %>
+    <% if (not current_user.has_role? :admin) && (@post.reports.size >= @post.num) %>
+        <hr/>
+        <center><font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true" style="margin-top: 20px;"></i> 블라인드 처리된 게시글에서는 댓글 확인이 불가합니다.</font></center>
+    <% else %>
+        <hr/>
+        <%= render "comment_qnas/comment_qnas" %>
     <% end %>
 <% else %>
     <% if (not current_user.has_role? :admin) && (@post.reports.size >= @post.num) %>

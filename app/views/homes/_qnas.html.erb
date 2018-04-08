@@ -1,31 +1,33 @@
-<div class="home_index_title"><b style="margin-left: 10px; margin-bottom: 5px;"><%= link_to '<i class="fas fa-check"></i> 질문답변 게시판'.html_safe, qnas_path, style: "font-family: 'NanumGothic', '나눔고딕', sas-serif;" %></b></div>
+<div class="home_index_title"><b style="margin-left: 10px; margin-bottom: 5px;"><%= link_to '<i class="fas fa-check"></i> 질문답변 게시판'.html_safe, bulletin_posts_path(20), style: "font-family: 'NanumGothic', '나눔고딕', sas-serif;" %></b></div>
 <div style="padding: 5px;">
-    <% @qnas.first(5).each do |qna| %>
-        <% if qna.report_qnas.size >= qna.num %>
-            <% if can? :for_admin, @qna %>
-                <%= link_to qna do %>
-                    <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "color: red; margin-left: 10px;") %>
-                    <% if qna.comment_qnas.count == 0 %>
-                        <span class="badge badge-default">답변 대기</span>
-                    <% else %>
-                        <span class="badge badge-info"><%= qna.comment_qnas.count %> 개의 답변</span>
+    <% @posts.first(5).each do |qna| %>
+        <% if qna.bulletin.title == "질문답변 게시판" %>
+            <% if qna.reports.size >= qna.num %>
+                <% if can? :for_admin, @qna %>
+                    <%= link_to bulletin_post_path(qna.bulletin, qna) do %>
+                        <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "color: red; margin-left: 10px;") %>
+                        <% if qna.comment_qnas.count == 0 %>
+                            <span class="badge badge-default">답변 대기</span>
+                        <% else %>
+                            <span class="badge badge-info"><%= qna.comment_qnas.count %> 개의 답변</span>
+                        <% end %>
+                        <span class="etc hidden-sm-down"><%= content_tag(:span, truncate( raw( sanitize(qna.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 15, :omission => "..."), style: "color: red; font-weight: normal !important;") %><br/></span>
+                        <span class="etc hidden-md-up"><%= content_tag(:span, truncate( raw( sanitize(qna.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 19, :omission => "..."), style: "color: red; font-weight: normal !important;") %><br/></span>
                     <% end %>
-                    <span class="etc hidden-sm-down"><%= content_tag(:span, truncate( raw( sanitize(qna.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 15, :omission => "..."), style: "color: red; font-weight: normal !important;") %><br/></span>
-                    <span class="etc hidden-md-up"><%= content_tag(:span, truncate( raw( sanitize(qna.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 19, :omission => "..."), style: "color: red; font-weight: normal !important;") %><br/></span>
+                <% else %>
+                    <font color="#6E6E6E" style="margin-left: 10px;"><i class="fas fa-caret-right"></i> <i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font><br/>
                 <% end %>
             <% else %>
-                <font color="#6E6E6E" style="margin-left: 10px;"><i class="fas fa-caret-right"></i> <i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font><br/>
-            <% end %>
-        <% else %>
-            <%= link_to qna do %>
-                <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "font-weight: normal !important; margin-left: 10px;") %>
-                <% if qna.comment_qnas.count == 0 %>
-                    <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
-                <% else %>
-                    <span class="badge badge-info" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
+                <%= link_to bulletin_post_path(qna.bulletin, qna) do %>
+                    <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "font-weight: normal !important; margin-left: 10px;") %>
+                    <% if qna.comment_qnas.count == 0 %>
+                        <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
+                    <% else %>
+                        <span class="badge badge-info" style="padding-top: 5px;"><%= qna.comment_qnas.count %> 개의 답변</span>
+                    <% end %>
+                    <span class="etc hidden-sm-down"><%= content_tag(:span, truncate( raw( sanitize(qna.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 15, :omission => "...")) %><br/></span>
+                    <span class="etc hidden-md-up"><%= content_tag(:span, truncate( raw( sanitize(qna.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 19, :omission => "...")) %><br/></span>
                 <% end %>
-                <span class="etc hidden-sm-down"><%= content_tag(:span, truncate( raw( sanitize(qna.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 15, :omission => "...")) %><br/></span>
-                <span class="etc hidden-md-up"><%= content_tag(:span, truncate( raw( sanitize(qna.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 19, :omission => "...")) %><br/></span>
             <% end %>
         <% end %>
     <% end %>

@@ -63,6 +63,8 @@ class PostsController < ApplicationController
   end
 
   def show
+    @comment_qnas = @post.comment_qnas.page params[:page]
+    
     @bulletin = Bulletin.find(params[:bulletin_id])
     @all_notices = AllNotice.all
     @posts = Post.where(bulletin_id: @bulletin).order("created_at DESC").page(params[:page]).per(5)

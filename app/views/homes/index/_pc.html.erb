@@ -24,68 +24,46 @@
         </td>      
     </tr>
     <tr>
-        <%# 홈페이지 배너 %>
-        <td colspan="2" style="width: 68%;">
-          <%= link_to(image_tag("/img/banner_beta.png", width: "97%"), "https://open.kakao.com/o/svvDAhI", target: "_blank", style: "margin-top: 0px;") %>
-        </td>
-        <%# Side(우측) Section %>
-        <td>
-          <%# 우측 로그인정보 %>
-          <div style="margin-top: 11px;">
-            <%= render "homes/collect/login_section" %>
-          </div>
-        </td>
+      <%# 홈페이지 배너 %>
+      <td colspan="2" style="width: 68%;">
+        <%= link_to(image_tag("/img/banner_beta.png", width: "97%"), "https://open.kakao.com/o/svvDAhI", target: "_blank", style: "margin-top: 0px;") %>
+      </td>
+      <%# Side(우측) Section %>
+      <td>
+        <%# 우측 로그인정보 %>
+        <div style="margin-top: 11px;">
+          <%= render "homes/collect/login_section" %>
+        </div>
+      </td>
     </tr>
     <tr>
-        <td td colspan="2">
-          <%# 답변(좋아요 순) %>
-          <div class="home_index notice" style="width: 97%; height: 50px; margin-top: 10px; margin-bottom: 0px;">
-            <ul class="rolling">
-              <% @hot_qna_replys.each do |qna| %>
-                <li class="row"><%= render "homes/hots/likes_qna_comment", qna: qna %></li>
-              <% end %>
-            </ul>
-          </div>
-          
-          <%# 자유게시판 %>
-          <div class="row" style="margin-left: 0px; margin-bottom: 0px;">
+      <td td colspan="2">
+        <%# 답변(좋아요 순) %>
+        <div class="row notice" style="width: 97%; height: 50px; box-shadow: 2px 2px 2px 0 #dadada; background-color: #fff; margin-left: 0px;">
+          <ul class="rolling">
             <% @bulletins.each do |bulletin| %>
-              <% if bulletin.title == "자유게시판" %>
-                <% if (bulletin.id % 3) == 1 %>
-                  <div class="home_index" style="width: 320px; height: 175px;">
-                <% else %>
-                  <div class="home_index" style="margin-left: 20px; width: 320px; height: 175px;">
+              <% if bulletin.title == "질문답변 게시판" %>
+                <% @hot_qna_replys.each do |qna| %>
+                  <% if (qna.get_upvotes.size - qna.get_downvotes.size) > 1 && Time.now - qna.created_at <= 7.days %>
+                    <li class="row"><%= render "homes/hots/likes_qna_comment", qna: qna %></li>
+                  <% else %>
+                    <li class="row"><div align="center" class="col-12 col-sm-12 col-md-12"><b>Best 답변 댓글이 올라갈 목록입니다.</b></div></li>
+                  <% end %>
                 <% end %>
-                  <div class="home_index_title">
-                    <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> <%= link_to "#{bulletin.title}", bulletin_posts_path(bulletin.id) %></b>
-                  </div>
-                <%= render "homes/posts", title: bulletin.title, posts: bulletin.posts %>
-                </div>
               <% end %>
             <% end %>
-            
-            <%# 익명 게시판 %>
-            <div class="home_index" style="margin-left: 10px; width: 280px; height: 175px;">
-              <%= render "homes/collect/no_named_list" %>
-            </div>
-          </div>
-        </td>
-        <td rowspan="3">
-          <%# 대학교 공지사항 크롤링 %>
-          <div class="home_index" style="width: 360px; height: auto; margin-top: -10px;">
-            <%= render "homes/collect/notice&schedule" %>
-          </div>
-          
-          <%# 주간 Hot 이슈 %>
-          <div class="home_index" style="margin-top: 20px; width: 360px; height: 230px;">
-            <div class="home_index_title_issue"><b style="margin-left: 10px; margin-bottom: 5px;">주간 Hot Issue</b></div>
-            <%= render "homes/hot_pc" %>
-          </div>
-          
-          <%# 외국인 게시판 (Foreigner Board) %>
+          </ul>
+        </div>
+        
+        <%# 자유게시판 %>
+        <div class="row" style="margin-left: 0px; margin-bottom: 0px;">
           <% @bulletins.each do |bulletin| %>
-            <% if bulletin.title == "Foreigner Board" %>
-              <div class="home_index" style="margin-top: 20px; width: 360px; height: 170px; margin-bottom: 0px;">
+            <% if bulletin.title == "자유게시판" %>
+              <% if (bulletin.id % 3) == 1 %>
+                <div class="home_index" style="width: 320px; height: 175px;">
+              <% else %>
+                <div class="home_index" style="margin-left: 20px; width: 320px; height: 175px;">
+              <% end %>
                 <div class="home_index_title">
                   <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> <%= link_to "#{bulletin.title}", bulletin_posts_path(bulletin.id) %></b>
                 </div>
@@ -93,7 +71,37 @@
               </div>
             <% end %>
           <% end %>
-        </td>
+          
+          <%# 익명 게시판 %>
+          <div class="home_index" style="margin-left: 10px; width: 280px; height: 175px;">
+            <%= render "homes/collect/no_named_list" %>
+          </div>
+        </div>
+      </td>
+      <td rowspan="3">
+        <%# 대학교 공지사항 크롤링 %>
+        <div class="home_index" style="width: 360px; height: auto; margin-top: -10px;">
+          <%= render "homes/collect/notice&schedule" %>
+        </div>
+        
+        <%# 주간 Hot 이슈 %>
+        <div class="home_index" style="margin-top: 20px; width: 360px; height: 230px;">
+          <div class="home_index_title_issue"><b style="margin-left: 10px; margin-bottom: 5px;">주간 Hot Issue</b></div>
+          <%= render "homes/hot_pc" %>
+        </div>
+        
+        <%# 외국인 게시판 (Foreigner Board) %>
+        <% @bulletins.each do |bulletin| %>
+          <% if bulletin.title == "Foreigner Board" %>
+            <div class="home_index" style="margin-top: 20px; width: 360px; height: 170px; margin-bottom: 0px;">
+              <div class="home_index_title">
+                <b style="margin-left: 10px;"><i class="" aria-hidden="true"></i> <%= link_to "#{bulletin.title}", bulletin_posts_path(bulletin.id) %></b>
+              </div>
+            <%= render "homes/posts", title: bulletin.title, posts: bulletin.posts %>
+            </div>
+          <% end %>
+        <% end %>
+      </td>
     </tr>
     
     <% if Time.now.in_time_zone.month >= 1 && Time.now.in_time_zone.month <= 4 %>

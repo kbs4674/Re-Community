@@ -1,7 +1,7 @@
 namespace :crawling_notice do
   desc "TODO"
   task crawling_notice: :environment do
-    CrawlingNotice.all.each do |post|
+    CrawlingNotice.where(['created_at <= ?', 3.days.ago]).each do |post|
       post.delete
     end
     

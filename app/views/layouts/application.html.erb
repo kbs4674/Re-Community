@@ -8,13 +8,13 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     
-    <!-- jquery, 드랍박스 활성화 -->
+    <%# jquery, 드랍박스 활성화 %>
     <script type="text/javascript" src="/js/drop-down.js"></script>
     
-    <!-- 카카오톡 썸네일 -->
+    <%# 카카오톡 썸네일 %>
     <meta property="og:image" content="/img/op_thum.png">
     
-    <!-- 개인 CSS / JS -->  
+    <%# 개인 CSS / JS %>  
     <link rel="stylesheet" href="/css/image-box.css">
     <link rel="stylesheet" href="/css/login.css">
     <script type="text/javascript" src="/js/tool-tip.js"></script>
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="/js/typeahead/typeahead.bundle.min.js"></script>
     <script type="text/javascript" src="/js/typeahead/handlebars.js"></script>
     
-    <!-- 부트스트랩 CDN, AWESOME 폰트 CDN -->  
+    <%# 부트스트랩 CDN, AWESOME 폰트 CDN %>  
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="//v4-alpha.getbootstrap.com/assets/css/docs.min.css">
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">-->
@@ -32,15 +32,16 @@
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>-->
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>-->
     
-    <!-- 상단 메뉴 관련 -->
+    <%# 상단 메뉴 관련 %>
     <link rel="stylesheet" type="text/css" href="/nav-bar/paper-kit.css">
     <script src="/nav-bar/paper-kit.js"></script>
     <script src="/nav-bar/tether.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <%# 폰트어썸 4버전 %>
-    <!-- <link rel="stylesheet" href="/css/font-awesome.css"> -->
     <%# 폰트어썸 5버전 %>
     <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet">
+    <%# 부드러운 스크롤바 %>
+    <link rel="stylesheet" type="text/css" href="/smooth-scroll/jquery.mCustomScrollbar.css">
+    <script src="/smooth-scroll/jquery.mCustomScrollbar.concat.min.js"></script>
     
     <%# 폰트 %>
     <style>
@@ -80,8 +81,10 @@
             $(".more_comment_list:hidden").slice(0, 5).show(); // select next 10 hidden divs and show them           
         });
     });
+    </script>
     
-    /* 롤링 스크롤링 (최다 좋아요 기능 관련) */
+    <%# 롤링 스크롤링 (최다 좋아요 기능 관련) %>
+    <script>
     $(document).ready(function(){
       	var height =  $(".notice").height(); //공지사항의 높이값을 구해주고~~
       	var num = $(".rolling li").length; // 공지사항의 개수를 알아볼수 있어요! length라는 것으로!
@@ -99,7 +102,7 @@
       	noticeRollingOff = setInterval(noticeRolling, 2500); //자동롤링답게 setInterval를 사용해서 1000 = 1초마다 함수 실행!!
       	$(".rolling").append($(".rolling li").first().clone()); //올리다보면 마지막이 안보여서 clone을 통해 첫번째li 복사!
       
-      	$(".rolling_stop").click(function(){
+      	$(".rolling_stop").load(function(){
       		clearInterval(noticeRollingOff); //stop을 누르면 clearInterval을 통해 자동롤링을 해제합니다.
       	});
       	$(".rolling_start").click(function(){
@@ -220,7 +223,7 @@
           </li>
           <% #PC에서만 보여지는 메뉴 끝 %>
           
-          <li class="nav-item"><%= link_to '질문'.html_safe, qnas_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to '질문'.html_safe, bulletin_posts_path(20), class: "nav-link" %></li>
           
           <li class="nav-item dropdown">
             <%= link_to '익명'.html_safe, "#", class: "nav-link dropdown-toggle", data: {toggle: "dropdown" }, role: "button", aria: {haspopup: "true", expanded: "false" } %>

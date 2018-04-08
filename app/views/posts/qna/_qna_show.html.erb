@@ -1,0 +1,59 @@
+<%# 일반 게시물 %>
+<div class="row separate_board" bgcolor="white" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+    <div align="center" class="col-0 col-sm-0 col-md-1 hidden-sm-down" style="padding: 10px;">
+    <%= qna.id %>
+    </div>
+  
+  <%# 닉네임 %>
+    <div align="center" class="col-0 col-sm-0 col-md-2 hidden-sm-down etc" style="padding: 10px;">
+        <%= render 'posts/special/nickname_qna_index', qna: qna %>
+    </div>
+        
+    <% # 게시글 제목 %>
+    <div align="left" class="col-6 col-sm-5 col-md-4 etc" style="padding: 10px;">
+        <% if qna.reports.size >= qna.num %>
+            <% if can? :for_admin, @qnas %>
+                <%= link_to qna do %>
+                    <%= content_tag(:div, qna.title, class: "etc", style: "color: red") %>
+                <% end %>
+            <% else %>
+                <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
+            <% end %>
+        <% else %>
+            <%= link_to qna do %>
+                <%= content_tag(:div, qna.title, class: "etc") %>
+            <% end %>
+        <% end %>
+    </div>
+
+    <div class="row col-6 col-sm-7 col-md-5" style="margin-left: 15px;">
+        <%# 댓글 %>
+        <div align="left" class="col-12 col-sm-4 col-md-3 arrow_left separate_board_inside">
+            <% if qna.notice == true %>
+                <span class="badge badge-primary">공지사항</span>
+            <% else %>
+                <% if qna.comment_qnas.count == 0 %>
+                    <span class="badge badge-default">답변 대기</span>
+                <% else %>
+                    <span class="badge badge-info">
+                        <% if qna.comment_qnas.count < 1000 %>
+                            <%= qna.comment_qnas.count %> 개의 답변
+                        <% else %>
+                            <%= qna.comment_qnas.count/1000 %> K개의 답변
+                        <% end %>
+                    </span>
+                <% end %>
+            <% end %>
+        </div>
+        
+        <%# 궁금해요 %>
+        <div align="left" class="col-0 col-sm-3 col-md-3 separate_board_inside hidden-xs-down">
+            <i class="fa fa-paw" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="저도 궁금해요! (발도장 꾹)"></i> <%= qna.alarm_qnas.size %>
+        </div>
+        
+        <%# 시간 %>
+        <div align="left" class="col-0 col-sm-5 col-md-6 separate_board_inside hidden-xs-down">
+            <small><%= "#{time_ago_in_words(qna.created_at)} 전" %></small>
+        </div>
+    </div>
+</div>

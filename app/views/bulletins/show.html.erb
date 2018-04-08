@@ -73,6 +73,9 @@
         <% if @bulletin.vote == true %>
             <span class="badge badge-pill badge-default">투표</span>
         <% end %>
+        <% if @bulletin.qna == true %>
+            <span class="badge badge-pill badge-default">질문답변</span>
+        <% end %>
         <% if @bulletin.seeking_room == true %>
             <span class="badge badge-pill badge-default">방 구해요</span>
         <% end %>

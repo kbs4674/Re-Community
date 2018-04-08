@@ -51,8 +51,8 @@ class User < ApplicationRecord
     CommentDelete.find_by(user_id: self.id, comment_id: comment.id).present?
   end
   
-  def is_alarm_qna?(qna)
-    AlarmQna.find_by(user_id: self.id, qna_id: qna.id).present?
+  def is_alarm_qna?(post)
+    AlarmQna.find_by(user_id: self.id, post_id: post.id).present?
   end
   
   # 외부 로그인 연동

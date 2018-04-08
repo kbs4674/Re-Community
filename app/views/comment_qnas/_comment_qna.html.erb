@@ -6,9 +6,9 @@
                 <td colspan="1" rowspan="2" width="5%" align="center">
                     <% if comment_qna.user != current_user %>
                         <% if ((current_user.voted_up_on? comment_qna) == true) %>
-                            <%= link_to "", qna_comment_qna_like_path(comment_qna.qna, comment_qna), method: :put, class: "fas fa-angle-up", style: "color: #43d843;" %>
+                            <%= link_to "", post_comment_qna_like_path(comment_qna.post, comment_qna), method: :put, class: "fas fa-angle-up", style: "color: #43d843;" %>
                         <% else %>
-                            <%= link_to "", qna_comment_qna_like_path(comment_qna.qna, comment_qna), method: :put, class: "fas fa-angle-up"%>
+                            <%= link_to "", post_comment_qna_like_path(comment_qna.post, comment_qna), method: :put, class: "fas fa-angle-up"%>
                         <% end %>
                     <% end %>
                     <% if comment_qna.get_upvotes.size - comment_qna.get_downvotes.size < 0 %>
@@ -20,9 +20,9 @@
                     <% end %>
                     <% if comment_qna.user != current_user %>
                         <% if ((current_user.voted_down_on? comment_qna) == true) %>
-                            <%= link_to "", qna_comment_qna_dislike_path(comment_qna.qna, comment_qna), method: :put, class: "fas fa-angle-down", style: "color: red;" %>
+                            <%= link_to "", post_comment_qna_dislike_path(comment_qna.post, comment_qna), method: :put, class: "fas fa-angle-down", style: "color: red;" %>
                         <% else %>
-                            <%= link_to "", qna_comment_qna_dislike_path(comment_qna.qna, comment_qna), method: :put, class: "fas fa-angle-down" %>
+                            <%= link_to "", post_comment_qna_dislike_path(comment_qna.post, comment_qna), method: :put, class: "fas fa-angle-down" %>
                         <% end %>
                     <% end %>
                 </td>
@@ -35,10 +35,10 @@
                             <% if can? :destroy, comment_qna %>
                                 <% if not comment_qna.deleted? %>
                                     <a onclick="showHide('comment_qna_modify_<%= comment_qna.id %>')" onfocus="this.blur()">수정</a><span style="margin-left: 10px; margin-right: 10px;">|</span> 
-                                    <%= link_to "", [comment_qna.qna, comment_qna], method: :delete, remote: true, data: { confirm: "정말로 지우시겠습니까?" }, class: "fas fa-times" %>
+                                    <%= link_to "", [comment_qna.post, comment_qna], method: :delete, remote: true, data: { confirm: "정말로 지우시겠습니까?" }, class: "fas fa-times" %>
                                 <% end %>
                                 <% if comment_qna.deleted? && (current_user.has_role? :admin) %>
-                                    <%= link_to "", [comment_qna.qna, comment_qna], method: :delete, remote: true, data: { confirm: "이번에 지우면 로그 기록에서도 영영 사라집니다. 정말 지우시겠습니까?" }, class: "fas fa-times", style: "color: red" %>
+                                    <%= link_to "", [comment_qna.post, comment_qna], method: :delete, remote: true, data: { confirm: "이번에 지우면 로그 기록에서도 영영 사라집니다. 정말 지우시겠습니까?" }, class: "fas fa-times", style: "color: red" %>
                                 <% end %>
                             <% end %>
                         </div>
@@ -64,7 +64,7 @@
                     
                     <div id="comment_qna_modify_<%= comment_qna.id %>" style="display:none;">
                         <div class="reply-form">
-                          <%= form_with(model: [comment_qna.qna, comment_qna], local: true) do |f| %>
+                          <%= form_with(model: [comment_qna.post, comment_qna], local: true) do |f| %>
                             <%= f.hidden_field :comment_qna_id, value: comment_qna.id %>
                             <div class="col-12 col-sm-12 col-md-12 field form-group" style="margin-top: 30px;">
                               <%= f.text_area :body, class: "form-control tinymce", rows: "3" %>
@@ -98,9 +98,9 @@
             <div class="col-4 col-sm-3 col-md-1" align="center">
                 <% if comment_qna.user != current_user %>
                     <% if ((current_user.voted_up_on? comment_qna) == true) %>
-                        <%= link_to "", qna_comment_qna_like_path(comment_qna.qna, comment_qna), method: :put, class: "fas fa-angle-up", style: "color: #43d843;" %>
+                        <%= link_to "", post_comment_qna_like_path(comment_qna.post, comment_qna), method: :put, class: "fas fa-angle-up", style: "color: #43d843;" %>
                     <% else %>
-                        <%= link_to "", qna_comment_qna_like_path(comment_qna.qna, comment_qna), method: :put, class: "fas fa-angle-up"%>
+                        <%= link_to "", post_comment_qna_like_path(comment_qna.post, comment_qna), method: :put, class: "fas fa-angle-up"%>
                     <% end %>
                 <% end %>
                 <% if comment_qna.get_upvotes.size - comment_qna.get_downvotes.size < 0 %>
@@ -112,9 +112,9 @@
                 <% end %>
                 <% if comment_qna.user != current_user %>
                     <% if ((current_user.voted_down_on? comment_qna) == true) %>
-                        <%= link_to "", qna_comment_qna_dislike_path(comment_qna.qna, comment_qna), method: :put, class: "fas fa-angle-down", style: "color: red;" %>
+                        <%= link_to "", post_comment_qna_dislike_path(comment_qna.post, comment_qna), method: :put, class: "fas fa-angle-down", style: "color: red;" %>
                     <% else %>
-                        <%= link_to "", qna_comment_qna_dislike_path(comment_qna.qna, comment_qna), method: :put, class: "fas fa-angle-down" %>
+                        <%= link_to "", post_comment_qna_dislike_path(comment_qna.post, comment_qna), method: :put, class: "fas fa-angle-down" %>
                     <% end %>
                 <% end %>
             </div>
@@ -126,10 +126,10 @@
             <div align="right" class="col-1 col-sm-1 col-md-0">
                 <% if can? :destroy, comment_qna %>
                     <% if not comment_qna.deleted? %>
-                        <%= link_to "", [comment_qna.qna, comment_qna], method: :delete, remote: true, data: { confirm: "정말로 지우시겠습니까?" }, class: "fas fa-times" %>
+                        <%= link_to "", [comment_qna.post, comment_qna], method: :delete, remote: true, data: { confirm: "정말로 지우시겠습니까?" }, class: "fas fa-times" %>
                     <% end %>
                     <% if comment_qna.deleted? && (current_user.has_role? :admin) %>
-                        <%= link_to "", [comment_qna.qna, comment_qna], method: :delete, remote: true, data: { confirm: "이번에 지우면 로그 기록에서도 영영 사라집니다. 정말 지우시겠습니까?" }, class: "fas fa-times", style: "color: red" %>
+                        <%= link_to "", [comment_qna.post, comment_qna], method: :delete, remote: true, data: { confirm: "이번에 지우면 로그 기록에서도 영영 사라집니다. 정말 지우시겠습니까?" }, class: "fas fa-times", style: "color: red" %>
                     <% end %>
                 <% end %>
             </div>
@@ -156,7 +156,7 @@
             
             <div id="mobile_comment_qna_modify_<%= comment_qna.id %>" style="display:none;">
                 <div class="reply-form">
-                    <%= form_with(model: [comment_qna.qna, comment_qna], local: true) do |f| %>
+                    <%= form_with(model: [comment_qna.post, comment_qna], local: true) do |f| %>
                         <%= f.hidden_field :comment_qna_id, value: comment_qna.id %>
                         <div class="col-12 col-sm-12 col-md-12 field form-group" style="margin-top: 30px;">
                           <%= f.text_area :body, class: "form-control tinymce", rows: "3" %>

@@ -10,6 +10,7 @@ class CommentQna < ApplicationRecord
   # rolify + cancancan
   resourcify
   
-  belongs_to :qna
+  #belongs_to :qna
+  belongs_to :post
   belongs_to :user
 end

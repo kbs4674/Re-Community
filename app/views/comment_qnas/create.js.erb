@@ -1,6 +1,6 @@
 <% if @comment_qna.errors.size == 0 %>
-  $('<%=j render @comment_qna %>').appendTo($("#comment_qnas_list_<%=@qna.id %>")).hide().fadeIn('fast');
-  $("#comment_qnas_form_<%= @qna.id %> form")[0].reset();
+  $('<%=j render @comment_qna %>').appendTo($("#comment_qnas_list_<%=@post.id %>")).hide().fadeIn('fast');
+  $("#comment_qnas_form_<%= @post.id %> form")[0].reset();
 <% else %>
   alert("댓글을 작성해주세요.");
 <% end %>

@@ -31,6 +31,9 @@ class Post < ApplicationRecord
     has_many :impressions, :as=>:impressionable
     has_many :reports, dependent: :destroy
     
+    has_many :comment_qnas, dependent: :destroy
+    has_many :alarm_qnas, dependent: :destroy
+    
     # 조회수(Impression) 설정
     def impression_count
         impressions.size

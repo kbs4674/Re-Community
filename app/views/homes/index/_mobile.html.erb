@@ -7,18 +7,9 @@
       <%= render "homes/notices" %>
   </div>
   
-  <%# QNA 게시판 목록 (render 처리) %>
+  <%# 질문답변 게시판 %>
   <div class="col-12 col-sm-12 home_index" style="height: 165px;">
     <%= render "homes/qnas" %>
-  </div>
-  
-  <%# 답변(좋아요 순) %>
-  <div class="col-12 col-sm-12 home_index notice" style="height: 50px; margin-top: 20px; line-height: 50px;">
-    <ul class="rolling">
-      <% @hot_qna_replys.each do |qna| %>
-        <li class="row"><%= render "homes/hots/likes_qna_comment", qna: qna %></li>
-      <% end %>
-    </ul>
   </div>
   
   <div class="col-12 col-sm-12 home_index"  style="height: 165px;">
@@ -32,7 +23,6 @@
     <% end %>
   <% end %>
   </div>
-  
   
   <%# 경춘천 출발 전철 정보 %>
   <% if (user_signed_in?) && (current_user.transfer == '경춘선') %>

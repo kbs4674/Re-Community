@@ -1,19 +1,19 @@
 class CommentQnasController < ApplicationController
-  before_action :set_qna
+  before_action :set_post
   before_action :set_comment_qna, only: :destroy
 
   def create
-    @comment_qna = @qna.comment_qnas.new(comment_qna_params)
+    @comment_qna = @post.comment_qnas.new(comment_qna_params)
     @comment_qna.user_name = current_user.nickname
     @comment_qna.save
-    @new_notification = NewNotification.create! user: @qna.user,
+    @new_notification = NewNotification.create! user: @post.user,
                                          content: "#{current_user.nickname.truncate(15, omission: '...')} 님이 질문글에 답변하셨습니다.",
-                                         link: "#{qna_path(@qna)}#comment_qna_#{@comment_qna.id}"
+                                         link: "#{request.referrer}#{"#comment_qna"}_#{@comment_qna.id}"
     User.all.each do |x|
-      if x.is_alarm_qna?(@qna)
+      if x.is_alarm_qna?(@post)
         @new_notification2 = NewNotification.create! user: x,
                                              content: "#{current_user.nickname.truncate(15, omission: '...')} 님이 내가 발도장 찍은 질문글에 답변하셨습니다.",
-                                             link: "#{qna_path(@qna)}#comment_qna_#{@comment_qna.id}"
+                                          link: "#{request.referrer}#{"#comment_qna"}_#{@comment_qna.id}"
       end
     end
   end
@@ -77,12 +77,12 @@ class CommentQnasController < ApplicationController
 
   private
 
-  def set_qna
-    @qna = Qna.find(params[:qna_id])
+  def set_post
+    @post = Post.find(params[:post_id])
   end
 
   def set_comment_qna
-    @comment_qna = @qna.comment_qnas.with_deleted.find(params[:id])
+    @comment_qna = @post.comment_qnas.with_deleted.find(params[:id])
   end
 
   def comment_qna_params
