@@ -60,3 +60,6 @@ for_boss = Bulletin.create( title: "학교 관계자 공지사항", content: "�
 
 helper = Bulletin.create( title: "새내기 도움말", content: "새내기들에게 도움이 될 수 있는 정보를 모아놨습니다.", admin_only: "true", user_id: "1" ) #post id : 18
 request = Bulletin.create( title: "홈페이지 피드백 게시판", content: "홈페이지 피드백에 대해 남길 수 있는 게시판", main_hidden: "true", user_id: "1" ) #post id : 19
+
+#비공개 게시판
+qna = Bulletin.create( title: "질문답변 게시판", content: "질문답변 게시판", user_id: "1", qna: "true") #post id : 20

@@ -63,7 +63,6 @@ gem 'devise-i18n'
 
 # Gem : 부트스트랩 관련
 gem 'jquery-rails'
-gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 
 # devise
@@ -117,6 +116,3 @@ gem 'backup', '~> 5.0.0.beta.2'
 gem 'omniauth'
 gem 'omniauth-naver'
 gem 'omniauth-kakao', :git => 'git://github.com/hcn1519/omniauth-kakao'
-
-# Gem : OpenAPI
-gem 'unirest'
