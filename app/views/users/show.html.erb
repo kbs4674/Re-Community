@@ -148,21 +148,23 @@
                         <hr/>
                         <div style="padding: 10px; overflow-y:scroll; overflow-x: hidden; height: 200px;">
                             <div class="row">
-                            <% @qnas.order("created_at DESC").each do |post| %>
-                                <% if Time.now - post.created_at <= 1.years %>
-                                    <% if post.user_id == @user.id %>
-                                    <div class="col-8 col-sm-9 col-md-8 etc table_separate">
-                                    <%= link_to post do %>
-                                        <%= content_tag(:div, post.title, class: "etc") %>
-                                    <% end %>
-                                    </div>
-                                    <div class="col-3 col-sm-2 col-md-3 table_separate">
-                                        <% if post.comment_qnas.count == 0 %>
-                                            <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
-                                        <% else %>
-                                            <span class="badge badge-info" style="padding-top: 5px;"><%= post.comment_qnas.count %> 개의 답변</span>
+                            <% @posts.order("created_at DESC").each do |post| %>
+                                <% if post.bulletin.title == "질문답변 게시판" %>
+                                    <% if Time.now - post.created_at <= 1.years %>
+                                        <% if post.user_id == @user.id %>
+                                        <div class="col-8 col-sm-9 col-md-8 etc table_separate">
+                                        <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                                            <%= content_tag(:div, post.title, class: "etc") %>
                                         <% end %>
-                                    </div>
+                                        </div>
+                                        <div class="col-3 col-sm-2 col-md-3 table_separate">
+                                            <% if post.comment_qnas.count == 0 %>
+                                                <span class="badge badge-default" style="padding-top: 5px;">답변 대기</span>
+                                            <% else %>
+                                                <span class="badge badge-info" style="padding-top: 5px;"><%= post.comment_qnas.count %> 개의 답변</span>
+                                            <% end %>
+                                        </div>
+                                        <% end %>
                                     <% end %>
                                 <% end %>
                             <% end %>
@@ -216,7 +218,7 @@
                                 <% if Time.now - qna.created_at <= 1.years %>
                                     <% if qna.user_id == @user.id %>
                                     <div class="col-3 col-sm-3 col-md-2 table_separate">
-                                        <%= link_to qna_path(qna.qna) do %>
+                                        <%= link_to bulletin_post_path(qna.post.bulletin.id, qna.post.id) do %>
                                             <% if qna.get_upvotes.size - qna.get_downvotes.size > 0 %>
                                                 <%= content_tag(:div, " <b>#{qna.get_upvotes.size - qna.get_downvotes.size}</b>".html_safe, class: "far fa-thumbs-up etc", style: "color: #43d843") %>
                                             <% elsif qna.get_upvotes.size - qna.get_downvotes.size < 0 %>
@@ -227,7 +229,7 @@
                                         <% end %>
                                     </div>
                                     <div class="col-8 col-sm-8 col-md-9 table_separate">
-                                        <%= link_to qna_path(qna.qna) do %>
+                                        <%= link_to bulletin_post_path(qna.post.bulletin.id, qna.post.id) do %>
                                             <%= content_tag(:div, truncate( raw( sanitize(qna.body, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 30, :omission => "..."), class: "etc") %>
                                         <% end %>
                                     </div>

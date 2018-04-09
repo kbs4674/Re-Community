@@ -18,7 +18,6 @@ class UsersController < ApplicationController
         @bulletins = Bulletin.all
         @posts = Post.all
         
-        @qnas = Qna.all
         @comements = Comment.all
         @comement_qnas = CommentQna.all
     end

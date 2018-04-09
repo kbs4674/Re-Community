@@ -1,6 +1,6 @@
 <div class="home_index_title"><b style="margin-left: 10px; margin-bottom: 5px;"><%= link_to '<i class="fas fa-check"></i> 질문답변 게시판'.html_safe, bulletin_posts_path(20), style: "font-family: 'NanumGothic', '나눔고딕', sas-serif;" %></b></div>
 <div style="padding: 5px;">
-    <% @posts.first(5).each do |qna| %>
+    <% @posts.each do |qna| %>
         <% if qna.bulletin.title == "질문답변 게시판" %>
             <% if qna.reports.size >= qna.num %>
                 <% if can? :for_admin, @qna %>

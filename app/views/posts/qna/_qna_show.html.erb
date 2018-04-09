@@ -13,14 +13,14 @@
     <div align="left" class="col-6 col-sm-5 col-md-4 etc" style="padding: 10px;">
         <% if qna.reports.size >= qna.num %>
             <% if can? :for_admin, @qnas %>
-                <%= link_to qna do %>
+                <%= link_to bulletin_post_path(qna.bulletin, qna) do %>
                     <%= content_tag(:div, qna.title, class: "etc", style: "color: red") %>
                 <% end %>
             <% else %>
                 <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
             <% end %>
         <% else %>
-            <%= link_to qna do %>
+            <%= link_to bulletin_post_path(qna.bulletin, qna) do %>
                 <%= content_tag(:div, qna.title, class: "etc") %>
             <% end %>
         <% end %>

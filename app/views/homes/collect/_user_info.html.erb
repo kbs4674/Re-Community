@@ -1,0 +1,31 @@
+<small style="color: gray">
+    <i class="far fa-user"></i>
+    <% if post.bulletin.info_no_named == true %>
+        <% if post.reports.size >= post.num %>
+            <% if can? :for_admin, post %>
+                <%= content_tag(:span, truncate( raw( sanitize("#{post.nickname}", :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 10, :omission => "..."), data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}", style: "color: red") %>
+            <% else %>
+                -
+            <% end %>
+        <% else %>
+            <% if can? :for_admin, post %>
+                <%= content_tag(:span, truncate( raw( sanitize("#{post.nickname}", :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 10, :omission => "..."), data: {toggle: "tooltip", placement: "top"}, title: "#{post.user != nil ? post.user.nickname : post.user_name}") %>
+            <% else %>
+                <%= content_tag(:span, truncate( raw( sanitize("#{post.nickname}", :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 10, :omission => "...")) %>
+            <% end %>
+        <% end %>
+    <%# 일반 게시판 : 닉네임 %>
+    <% else %>
+      <%= render 'posts/special/nickname_post_index', post: post %>
+    <% end %>
+    
+    <span style="margin-left: 10px; margin-right: 10px;">|</span>
+    
+    <% # 시간 %>
+    <span> <i class="far fa-clock"></i> <%= "#{time_ago_in_words(post.created_at)} 전" %></span>
+    
+    <span style="margin-left: 10px; margin-right: 10px;">|</span>
+    
+    <% # 게시판 작성 위치 %>
+    <span><%= post.bulletin.title %></span>
+</small>

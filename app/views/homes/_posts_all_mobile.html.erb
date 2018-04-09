@@ -1,5 +1,5 @@
 <div style="padding: 5px;">
-  <% @posts_all.each do |post| %>
+  <% @posts_all_mobile.each do |post| %>
     <% if not post.bulletin.main_hidden == true %>
       <% if post.reports.size >= post.num %>
         <% if can? :for_admin, @posts %>
@@ -8,6 +8,11 @@
               <div class="col-1 col-sm-1"><%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "color: red; font-weight: normal !important; margin-left: 10px;") %></div>
               <div class="col-11 col-sm-11" style="margin-left: -5px;"><%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 17, :omission => "..."), class: "etc", style: "color: red; font-weight: normal !important;") %></div>
             </div>
+            
+            <div align="right" class="col-12 col-sm-12">
+              <%= render 'homes/collect/user_info', post: post %>
+            </div>
+            <hr/>
           <% end %>
         <% else %>
           <font color="#6E6E6E" style="margin-left: 10px;"><i class="fas fa-caret-right"></i> <i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font><br/>
@@ -18,6 +23,11 @@
             <div class="col-1 col-sm-1"><%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "font-weight: normal !important; margin-left: 10px;") %></div>
             <div class="col-11 col-sm-11" style="margin-left: -5px;"><%= content_tag(:span, truncate( raw( sanitize(post.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 17, :omission => "..."), class: "etc") %></div>
           </div>
+          
+          <div align="right" class="col-12 col-sm-12">
+            <%= render 'homes/collect/user_info', post: post %>
+          </div>
+          <hr/>
         <% end %>
       <% end %>
     <% end %>

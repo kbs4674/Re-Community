@@ -152,32 +152,32 @@
 
 <% if (not @post.reports.size >= @post.num) || (current_user.has_role? :admin) %>
     <%# '구인' 전용 show %>
-    <% if @bulletin.search_job == true %>
+    <% if (@bulletin.search_job == true && @post.notice == false) %>
         <%= render "posts/special/search_job_show" %>
     <% end %>
     
     <%# '구직' 전용 show %>
-    <% if @bulletin.seeking_job == true %>
+    <% if (@bulletin.seeking_job == true && @post.notice == false) %>
         <%= render "posts/special/seeking_job_show" %>
     <% end %>
     
     <%# '방 거래' 전용 show %>
-    <% if @bulletin.info_room_trade == true %>
+    <% if (@bulletin.info_room_trade == true && @post.notice == false) %>
         <%= render "posts/special/info_room_trade_show" %>
     <% end %>
     
     <%# '물품 거래' 전용 show %>
-    <% if @bulletin.info_trade == true %>
+    <% if (@bulletin.info_trade == true && @post.notice == false) %>
         <%= render "posts/special/info_trade_show" %>
     <% end %>
     
     <%# '동아리' 전용 show %>
-    <% if @bulletin.group == true %>
+    <% if (@bulletin.group == true && @post.notice == false) %>
         <%= render "posts/special/group_show" %>
     <% end %>
     
-    <%# 특수게시물 : 가게홍보 게시판 %>
-    <% if @bulletin.promote_store == true %>
+    <%# 가게홍보 게시판 %>
+    <% if (@bulletin.promote_store == true && @post.notice == false) %>
         <%= render 'posts/special/promote_store_show' %>
     <% end %>
 <% end %>
