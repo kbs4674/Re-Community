@@ -16,6 +16,10 @@
           <% end %>
         <% else %>
           <font color="#6E6E6E" style="margin-left: 10px;"><i class="fas fa-caret-right"></i> <i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font><br/>
+          <div align="right" class="col-12 col-sm-12">
+              <%= render 'homes/collect/user_info', post: post %>
+            </div>
+          <hr/>
         <% end %>
       <% else %>
         <%= link_to bulletin_post_path(post.bulletin, post) do %>
