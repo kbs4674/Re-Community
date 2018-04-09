@@ -21,29 +21,33 @@
             <!-- Tab panes -->
             <div class="tab-content" style="margin-top: -40px;">
                 <%# 학교 공지사항 %>
-                <div class="tab-pane fade show active mCustomScrollbar" id="kangwon_univ_notice" role="tabpanel" style="height: 102px;">
-                    <% CrawlingNotice.order("created_at DESC").each do |info| %>
-                      <div class="col-md-12">
-                        <a href="http://www.kangwon.ac.kr/www/<%= info.url %>" target="_blank">
-                            <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "font-weight: normal !important;") %>
-                            <%= content_tag(:span, truncate( raw( sanitize(info.campus, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 10, :omission => "..."), class: "etc badge badge-primary") %>
-                            <%= content_tag(:span, truncate( raw( sanitize(info.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 20, :omission => "..."), class: "etc") %>
-                        </a>
-                      </div>
-                    <% end %>
-                    <div align="right" class="col-md-12" style="margin-bottom: 10px;"></div>
-                </div>
-                <%# 학사 일정 %>
-                <div class="tab-pane fade mCustomScrollbar" id="kangwon_univ_schedule" role="tabpanel" style="height: 102px;">
-                  <% CrawlingUnivSchedule.order("created_at DESC").each do |info| %>
-                    <div class="col-md-12" style="font-size: 13px;">
-                    <span style="background-color: rgb(109, 48, 207);"><span style="font-family: 나눔고딕, NanumGothic; color: rgb(255, 255, 255); background-color: rgb(236, 185, 255);"><b><span style="background-color: rgb(120, 157, 255);">&nbsp;<%= info.time %>&nbsp;</span></b></span></span> 
-                    <%= content_tag(:span, truncate( raw( sanitize(info.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 20, :omission => "..."), class: "etc") %>
+                <div class="tab-pane fade show active tse-scrollable scroll" id="kangwon_univ_notice" role="tabpanel" style="height: 102px;">
+                    <div class="tse-content">
+                        <% CrawlingNotice.order("created_at DESC").each do |info| %>
+                            <div class="col-md-12">
+                                <a href="http://www.kangwon.ac.kr/www/<%= info.url %>" target="_blank">
+                                    <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "font-weight: normal !important;") %>
+                                    <%= content_tag(:span, truncate( raw( sanitize(info.campus, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 10, :omission => "..."), class: "etc badge badge-primary") %>
+                                    <%= content_tag(:span, truncate( raw( sanitize(info.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 20, :omission => "..."), class: "etc") %>
+                                </a>
+                            </div>
+                        <% end %>
                     </div>
-                  <% end %>
-                  <div align="right" class="col-md-12" style="margin-bottom: 10px;">
-                    <%= link_to "+ 더 보기", "http://www.kangwon.ac.kr/www/selectTnSchafsSchdulListUS.do?sc1=%ED%95%99%EC%82%AC%EC%9D%BC%EC%A0%95&key=157&", class: "badge badge-default", style: "color: white", target: "_blank" %>
-                  </div>
+                </div>
+                
+                <%# 학사 일정 %>
+                <div class="tab-pane fade tse-scrollable scroll" id="kangwon_univ_schedule" role="tabpanel" style="height: 102px;">
+                    <div class="tse-content">
+                        <% CrawlingUnivSchedule.order("created_at DESC").each do |info| %>
+                            <div class="col-md-12" style="font-size: 13px;">
+                            <span style="background-color: rgb(109, 48, 207);"><span style="font-family: 나눔고딕, NanumGothic; color: rgb(255, 255, 255); background-color: rgb(236, 185, 255);"><b><span style="background-color: rgb(120, 157, 255);">&nbsp;<%= info.time %>&nbsp;</span></b></span></span> 
+                            <%= content_tag(:span, truncate( raw( sanitize(info.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 20, :omission => "..."), class: "etc") %>
+                            </div>
+                        <% end %>
+                        <div align="right" class="col-md-12" style="margin-bottom: 10px;">
+                            <%= link_to "+ 더 보기", "http://www.kangwon.ac.kr/www/selectTnSchafsSchdulListUS.do?sc1=%ED%95%99%EC%82%AC%EC%9D%BC%EC%A0%95&key=157&", class: "badge badge-default", style: "color: white", target: "_blank" %>
+                        </div>
+                    </div>
                 </div>
             </div>
         </td>
