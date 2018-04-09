@@ -5,10 +5,10 @@
                 <div class="nav-tabs-wrapper">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#kangwon_univ_notice_m" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">강원대 공지</a>
+                            <a class="nav-link active" data-toggle="tab" href="#kangwon_univ_notice" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">강원대 공지</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#kangwon_univ_schedule_m" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">학사일정</a>
+                            <a class="nav-link" data-toggle="tab" href="#kangwon_univ_schedule" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">학사일정</a>
                         </li>
                     </ul>
                 </div>
@@ -21,7 +21,7 @@
             <!-- Tab panes -->
             <div class="tab-content" style="margin-top: -40px;">
                 <%# 학교 공지사항 %>
-                <div class="tab-pane fade show active tse-scrollable scroll" id="kangwon_univ_notice_m" role="tabpanel" style="height: 102px;">
+                <div class="tab-pane fade show active tse-scrollable scroll" id="kangwon_univ_notice" role="tabpanel" style="height: 102px;">
                     <div class="tse-content">
                         <% CrawlingNotice.order("created_at DESC").each do |info| %>
                             <div class="col-md-12">
@@ -36,7 +36,7 @@
                 </div>
                 
                 <%# 학사 일정 %>
-                <div class="tab-pane fade tse-scrollable scroll" id="kangwon_univ_schedule_m" role="tabpanel" style="height: 102px;">
+                <div class="tab-pane fade tse-scrollable scroll" id="kangwon_univ_schedule" role="tabpanel" style="height: 102px;">
                     <div class="tse-content">
                         <% CrawlingUnivSchedule.order("created_at DESC").each do |info| %>
                             <div class="col-md-12" style="font-size: 13px;">
