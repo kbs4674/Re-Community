@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
         format.html  { redirect_to("#{request.referrer}#comment#{@comment.id}", :notice => '댓글이 작성되었습니다.') }
           if @comment.parent != nil
             @new_notification2 = NewNotification.create! user: @comment.parent.user,
-                                             content: "#{current_user.nickname.truncate(15, omission: '...')} 님이 답 댓글을 달았습니다.",
+                                             content: "#{current_user.nickname.truncate(15, omission: '...')} 님이 답댓글을 달았습니다.",
                                              link: request.referrer
           end
       else
