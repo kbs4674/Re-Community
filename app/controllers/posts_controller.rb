@@ -122,11 +122,11 @@ class PostsController < ApplicationController
       @post.really_destroy!
     else
       @post.destroy
-    end
-    
-    respond_to do |format|
+      
+      respond_to do |format|
       format.html { redirect_to bulletin_posts_path(@post.bulletin.id), notice: '게시글이 성공적으로 제거되었습니다.' }
       format.json { head :no_content }
+    end
     end
   end
 
