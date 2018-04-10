@@ -50,13 +50,13 @@ every :day, at: [local('9:00 am'), local('11:00 am'), local('1:30 pm'), local('3
     rake "crawling_notice:crawling_notice"
 end
 
-# [1주일] 크롤링 기록 제거
+# [2일] 크롤링 기록 제거
 every 2.days, at: local('5:12 am') do
     rake "crawling_delete:crawling_delete"
 end
 
-# [매 한 달] 학사일정 가져오기 및 이전 달 크롤링 기록 제거
-every 1.month, at: local('3:00 am') do
+# [매 10일] 학사일정 가져오기 및 이전 달 크롤링 기록 제거
+every 10.days, at: local('3:00 am') do
     rake "crawling_univ_schedule:crawling_univ_schedule"
 end
 
