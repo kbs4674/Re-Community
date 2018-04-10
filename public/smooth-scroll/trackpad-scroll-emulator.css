@@ -6,7 +6,7 @@
  
  .tse-scrollable {
   position: relative;
-  width: 380px;
+  width: 350px;
   overflow: hidden;
   }
   .tse-scrollable .tse-scroll-content {
@@ -15,7 +15,7 @@
     }
     /* No longer using ::scrollbar too, since it breaks Chrome 25 */
     .tse-scrollable .tse-scroll-content::-webkit-scrollbar {
-      width: 0;
+      width: auto;
       height: 0;
       }
 .tse-scrollbar {
