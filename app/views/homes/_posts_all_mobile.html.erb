@@ -1,5 +1,5 @@
 <div style="padding: 5px;">
-  <% @posts_all_mobile.where(['created_at >= ?', 1.months.ago]).each do |post| %>
+  <% @posts_all_mobile.each do |post| %>
     <% if not post.bulletin.main_hidden == true %>
       <% if post.reports.size >= post.num %>
         <% if can? :for_admin, @posts %>
