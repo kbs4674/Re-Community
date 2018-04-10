@@ -2,7 +2,8 @@ class HomesController < ApplicationController
     def index
         @bulletins = Bulletin.all
         @posts_all = Post.order("created_at DESC").page(params[:page]).first(5)
-        @posts_all_mobile = Post.order("created_at DESC").where(['created_at >= ?', 1.months.ago]).page(params[:page]).per(10)
+        #@posts_all_mobile = Post.order("created_at DESC").where(['created_at >= ?', 1.months.ago]).page(params[:page]).per(10)
+        @posts_all_mobile = Post.order("created_at DESC").where(['created_at >= ?', 1.years.ago]).page(params[:page]).per(10)
         @notices_all = AllNotice.order("created_at DESC").page(params[:page]).per(5)
         @posts = Post.order("created_at DESC").page params[:page]
 
