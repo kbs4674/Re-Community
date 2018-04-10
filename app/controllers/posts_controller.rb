@@ -120,6 +120,7 @@ class PostsController < ApplicationController
   def destroy
     if @post.deleted? == true
       @post.really_destroy!
+      redirect_to bulletin_posts_path(@post.bulletin.id)
     else
       @post.destroy
     end
