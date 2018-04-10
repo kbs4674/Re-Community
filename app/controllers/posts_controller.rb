@@ -116,6 +116,13 @@ class PostsController < ApplicationController
       end
     end
   end
+  
+  def restore
+    @post = Post.with_deleted.find(params[:post_id])
+    @post.restore
+    
+    redirect_to bulletin_posts_path(@post.bulletin.id), notice: '게시글이 성공적으로 복구되었습니다.'
+  end
 
   def destroy
     if @post.deleted? == true

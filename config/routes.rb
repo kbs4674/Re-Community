@@ -39,6 +39,7 @@ Rails.application.routes.draw do
     resources :posts
     post "/posts/:post_id/report", to: "reports#report_toggle"
     post "/posts/:post_id/alarm_qna", to: "alarm_qnas#alarm_qna_toggle"
+    post "/posts/:post_id/restore", to: "posts#restore"
   end
   
   resources :posts do
