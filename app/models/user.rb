@@ -18,7 +18,6 @@ class User < ApplicationRecord
   after_create :assign_default_role
   
   has_many :posts
-  has_many :qnas
   has_many :bulletins
   has_many :comments
   has_many :comment_qnas
@@ -39,8 +38,8 @@ class User < ApplicationRecord
     Report.find_by(user_id: self.id, post_id: post.id).present?
   end
   
-  def is_report_qna?(qna)
-    ReportQna.find_by(user_id: self.id, qna_id: qna.id).present?
+  def is_report_qna?(post)
+    ReportQna.find_by(user_id: self.id, post_id: post.id).present?
   end
 
   def is_report_comment?(comment)

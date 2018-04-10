@@ -1,6 +1,10 @@
 <% if @bulletin.promote_store == true || @bulletin.member_boss == true || @bulletin.member_univ == true || @bulletin.admin_only %>
-    <% if current_user.has_any_role? :store_boss, :admin %>
+    <% if ((@bulletin.title == "사장님 공지사항" || @bulletin.title == "학교 관계자 공지사항") && @bulletin.admin_only == true) && (current_user.has_role? :admin) %>
         <%= render 'form' %>
+    <% elsif (not (@bulletin.title == "사장님 공지사항" || @bulletin.title == "학교 관계자 공지사항")) %>
+        <%= render 'form' %>
+    <%# elsif (@bulletin.member_boss == true) && (current_user.has_any_role? :store_boss, :real_estate) %>
+        <%#= render 'form' %>
     <% else %>
         <div class="alert alert-danger" role="alert">
             <div align="center">

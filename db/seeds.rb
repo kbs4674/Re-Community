@@ -17,7 +17,7 @@ user.add_role :store_boss #사장
 user.add_role :real_estate #부동산
 user.add_role :univ_professor #교수님
 user.add_role :univ_official #대학 관계자 및 직원
-user.add_role :graduate_student #대학 관계자 및 직원
+user.add_role :graduate_student #졸업생
 user.add_role :special_icon #Special 계정(아이콘 닉네임 적용 허용)
 user.add_role :special_vip #Special 계정(배너형 이미지 닉네임 적용 허용)
 

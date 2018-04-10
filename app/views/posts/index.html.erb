@@ -80,11 +80,13 @@
     <%= render 'posts/special/vote_notice_index' %>
   <% else %>
     <%# 공지 게시글 %>
-    <% @posts.each do |post| %>
-      <% if post.notice == true %>
-        <div class="row table_sub_notice separate_board" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
-          <%= render 'posts/board/notice_normal_board', post: post %>
-        </div>
+    <% if (@bulletin.title == "사장님 공지사항" && (current_user.has_any_role? :admin, :store_boss)) || (@bulletin.title == "학교 관계자 공지사항" && (current_user.has_any_role? :admin, :univ_official, :univ_professor)) || (not (@bulletin.title == "사장님 공지사항" || @bulletin.title == "학교 관계자 공지사항")) %>
+      <% @posts.each do |post| %>
+        <% if post.notice == true %>
+          <div class="row table_sub_notice separate_board" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+            <%= render 'posts/board/notice_normal_board', post: post %>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
@@ -245,12 +247,13 @@
   <br/>
   <div align="right">
     <% if @bulletin.promote_store == true || @bulletin.member_boss == true || @bulletin.member_univ == true || @bulletin.member_real_estate == true %>
-      <%# if (user_signed_in?) && (current_user.has_role? :store_boss) %>
-      <% if user_signed_in? %>
+      <% if ((@bulletin.title == "사장님 공지사항" || @bulletin.title == "학교 관계자 공지사항") && @bulletin.admin_only == true) && (current_user.has_role? :admin) %>
         <%= link_to "글 쓰기", new_bulletin_post_path(@bulletin), class: "btn btn-primary" %>
+      <% elsif (not (@bulletin.title == "사장님 공지사항" || @bulletin.title == "학교 관계자 공지사항")) %>
+        <%= link_to "글 쓰기", new_bulletin_post_path(@bulletin), class: "btn btn-primary" %>
+      <%# elsif (user_signed_in?) && (current_user.has_role? :store_boss) %>
+        <%#= link_to "글 쓰기", new_bulletin_post_path(@bulletin), class: "btn btn-primary" %>
       <% end %>
-    <% elsif (@bulletin.admin_only == true) && (current_user.has_role? :admin) %>
-      <%= link_to "글 쓰기", new_bulletin_post_path(@bulletin), class: "btn btn-primary" %>
     <% else %>
       <% if user_signed_in? %>
         <% if (not current_user.has_any_role? :block_yellow, :block_red) || (current_user.has_role? :admin) %>
