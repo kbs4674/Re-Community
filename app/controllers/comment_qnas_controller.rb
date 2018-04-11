@@ -22,8 +22,6 @@ class CommentQnasController < ApplicationController
     # 이미 삭제된 글이 또 삭제될 경우 영원히 삭제됨. (이 때, 삭제된 데이터는 로그기록에도 안남음.)
     if @comment_qna.deleted? == true
       @comment_qna.really_destroy!
-      
-      redirect_to request.referrer, notice: '댓글이 영구적으로 삭제되었습니다.'
     else
       # 최초로 삭제될 경우 겉으론 삭제된 것 처럼 보이나, 삭제된 데이터의 기록이 남아있음.
       @comment_qna.destroy
