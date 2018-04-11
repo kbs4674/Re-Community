@@ -50,7 +50,7 @@
         <% if @bulletin.promote_store == true %>
             <%= @post.title.html_safe %>
         <% else %>
-            <% if @bulletin.promote_store == true || @bulletin.member_boss == true || @bulletin.member_univ == true || @bulletin.admin_only %>
+            <% if @bulletin.promote_store == true || @bulletin.member_boss == true || @bulletin.member_univ == true %>
                 <% if (@bulletin.title == "사장님 공지사항" || @bulletin.title == "학교 관계자 공지사항") && (current_user.has_any_role? :store_boss, :real_estate, :univ_professor, :univ_official) %>
                     <%= @post.title %>
                 <% else %>
