@@ -39,11 +39,12 @@
                             <% end %>
                             
                             <% if can? :destroy, comment_qna %>
-                                <span style="margin-left: 10px; margin-right: 10px;">|</span>
                                 <% if not comment_qna.deleted? %>
+                                    <span style="margin-left: 10px; margin-right: 10px;">|</span>
                                     <%= link_to "", [comment_qna.post, comment_qna], method: :delete, remote: true, data: { confirm: "정말로 지우시겠습니까?" }, class: "fas fa-times" %>
                                 <% end %>
                                 <% if comment_qna.deleted? && (current_user.has_role? :admin) %>
+                                    <span style="margin-left: 10px; margin-right: 10px;">|</span>
                                     <%= link_to "", [comment_qna.post, comment_qna], method: :delete, remote: true, data: { confirm: "이번에 지우면 로그 기록에서도 영영 사라집니다. 정말 지우시겠습니까?" }, class: "fas fa-times", style: "color: red" %>
                                 <% end %>
                             <% end %>
