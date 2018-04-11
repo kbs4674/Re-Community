@@ -32,8 +32,10 @@
                             <%= render 'posts/special/nickname_comment_qna', comment_qna: comment_qna %>
                         </div>
                         <div align="right" class="col-2 hidden-sm-down">
-                            <% if can? :edit, comment_qna %>
-                                <a onclick="showHide('comment_qna_modify_<%= comment_qna.id %>')" onfocus="this.blur()">수정</a>
+                            <% if not comment_qna.deleted? %>
+                                <% if can? :edit, comment_qna %>
+                                    <a onclick="showHide('comment_qna_modify_<%= comment_qna.id %>')" onfocus="this.blur()">수정</a>
+                                <% end %>
                             <% end %>
                             
                             <% if can? :destroy, comment_qna %>
@@ -154,8 +156,10 @@
             </div>
             
             <div class="col-11 col-sm-11 col-md-11" align="right">
-                <% if can? :edit, comment_qna %>
-                    <small class="hidden-md-up"><a onclick="showHide('mobile_comment_qna_modify_<%= comment_qna.id %>')" onfocus="this.blur()"><b>수정</b></a></small><br/>
+                <% if not comment_qna.deleted? %>
+                    <% if can? :edit, comment_qna %>
+                        <small class="hidden-md-up"><a onclick="showHide('mobile_comment_qna_modify_<%= comment_qna.id %>')" onfocus="this.blur()"><b>수정</b></a></small><br/>
+                    <% end %>
                 <% end %>
                 <small class="hidden-md-up"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= time_ago_in_words(comment_qna.created_at) %>전</small>
             </div>
