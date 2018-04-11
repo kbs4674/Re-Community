@@ -41,7 +41,7 @@ class Ability
       else
         cannot [:index, :show, :new, :create], Bulletin
         cannot [:create, :new], AllNotice
-        cannot [:index, show], Post
+        cannot [:index, :show], Post
         can [:index, :show], AllNotice
       end
     end
