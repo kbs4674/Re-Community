@@ -44,7 +44,7 @@
             <% @bulletins.each do |bulletin| %>
               <% if bulletin.title == "질문답변 게시판" %>
                 <% @hot_qna_replys.each do |qna| %>
-                  <% if (qna.get_upvotes.size - qna.get_downvotes.size) > 1 && Time.now - qna.created_at <= 7.days %>
+                  <% if (qna.get_upvotes.size - qna.get_downvotes.size) >= 1 && Time.now - qna.created_at <= 7.days %>
                     <li class="row"><%= render "homes/hots/likes_qna_comment", qna: qna %></li>
                   <% else %>
                     <li class="row"><div align="center" class="col-12 col-sm-12 col-md-12"><b>Best 답변 댓글이 올라갈 목록입니다.</b></div></li>
