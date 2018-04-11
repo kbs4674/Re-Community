@@ -32,9 +32,13 @@
                             <%= render 'posts/special/nickname_comment_qna', comment_qna: comment_qna %>
                         </div>
                         <div align="right" class="col-2 hidden-sm-down">
+                            <% if can? :edit, comment_qna %>
+                                <a onclick="showHide('comment_qna_modify_<%= comment_qna.id %>')" onfocus="this.blur()">수정</a>
+                            <% end %>
+                            
                             <% if can? :destroy, comment_qna %>
+                                <span style="margin-left: 10px; margin-right: 10px;">|</span>
                                 <% if not comment_qna.deleted? %>
-                                    <a onclick="showHide('comment_qna_modify_<%= comment_qna.id %>')" onfocus="this.blur()">수정</a><span style="margin-left: 10px; margin-right: 10px;">|</span> 
                                     <%= link_to "", [comment_qna.post, comment_qna], method: :delete, remote: true, data: { confirm: "정말로 지우시겠습니까?" }, class: "fas fa-times" %>
                                 <% end %>
                                 <% if comment_qna.deleted? && (current_user.has_role? :admin) %>
@@ -150,7 +154,9 @@
             </div>
             
             <div class="col-11 col-sm-11 col-md-11" align="right">
-                <small class="hidden-md-up"><a onclick="showHide('mobile_comment_qna_modify_<%= comment_qna.id %>')" onfocus="this.blur()"><b>수정</b></a></small><br/>
+                <% if can? :edit, comment_qna %>
+                    <small class="hidden-md-up"><a onclick="showHide('mobile_comment_qna_modify_<%= comment_qna.id %>')" onfocus="this.blur()"><b>수정</b></a></small><br/>
+                <% end %>
                 <small class="hidden-md-up"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= time_ago_in_words(comment_qna.created_at) %>전</small>
             </div>
             

@@ -9,16 +9,17 @@ class Ability
       elsif user.has_role? (:block_yellow)
         cannot [:index, :show, :new, :create], Bulletin
         cannot [:create, :new], Post
-        cannot [:new, :create, :destroy], Comment, user_id: user.id
-        cannot [:create, :destroy], CommentQna, user_id: user.id
+        cannot [:new, :create, :destroy, :edit, :update], Comment, user_id: user.id
+        cannot [:new, :create, :destroy, :edit, :update], CommentQna, user_id: user.id
         can [:index, :show], Post
         can [:index, :show], AllNotice
         can [:show], User, id: user.id
       elsif user.has_role? (:block_red)
         cannot [:index, :show, :new, :create], Bulletin
         cannot [:index, :show, :new, :create], Post
-        cannot [:new, :create, :destroy], Comment, user_id: user.id
-        cannot [:create, :destroy], CommentQna, user_id: user.id
+        cannot [:destroy, :edit, :update], Post, user_id: user.id
+        cannot [:new, :create, :destroy, :edit, :update], Comment, user_id: user.id
+        cannot [:new, :create, :destroy, :edit, :update], CommentQna, user_id: user.id
         can [:index, :show], AllNotice
         can [:show], User, id: user.id
       elsif user.has_any_role? :student, :univ_official, :univ_professor, :store_boss, :real_estate
@@ -30,19 +31,18 @@ class Ability
         cannot [:create, :new], AllNotice
         can [:index, :show], AllNotice
         
-        can [:index, :show, :create, :new], Post
+        can [:index, :show, :create, :new, :upvote, :downvote], Post
         can [:edit, :update, :destroy], Post, user_id: user.id
-        can [:upvote, :downvote], Post
         
-        can [:new, :create, :destroy], Comment, user_id: user.id
-        can [:new, :create, :destroy], CommentQna, user_id: user.id
+        can [:new, :create, :destroy, :edit, :update], Comment, user_id: user.id
+        can [:new, :create, :destroy, :edit, :update], CommentQna, user_id: user.id
         
         can [:show], User, id: user.id
       else
         cannot [:index, :show, :new, :create], Bulletin
         cannot [:create, :new], AllNotice
+        cannot [:index, show], Post
         can [:index, :show], AllNotice
-        can [:index], Post
       end
     end
 end
