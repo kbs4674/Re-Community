@@ -10,11 +10,6 @@
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#kangwon_univ_schedule" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">학사일정</a>
                         </li>
-                        <% if (user_signed_in?) && (not (current_user.has_any_role? :block_red, :store_boss, :real_estate)) %>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#kangwon_univ_job" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">Job</a>
-                        </li>
-                        <% end %>
                     </ul>
                 </div>
             </div>

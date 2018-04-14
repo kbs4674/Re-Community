@@ -10,11 +10,6 @@
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#kangwon_univ_schedule_m" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">학사일정</a>
                         </li>
-                        <% if (user_signed_in?) && (not (current_user.has_any_role? :block_red, :store_boss, :real_estate)) %>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#kangwon_univ_job_m" role="tab" style="margin-bottom: 0px; color: black; font-size: 15px;">Job</a>
-                        </li>
-                        <% end %>
                     </ul>
                 </div>
             </div>
@@ -52,21 +47,6 @@
                         <div align="right" class="col-12 col-sm-12" style="margin-bottom: 10px;">
                             <%= link_to "+ 더 보기", "http://www.kangwon.ac.kr/www/selectTnSchafsSchdulListUS.do?sc1=%ED%95%99%EC%82%AC%EC%9D%BC%EC%A0%95&key=157&", class: "badge badge-default", style: "color: white", target: "_blank" %>
                         </div>
-                    </div>
-                </div>
-                
-                <%# 취업지원과 일자리 %>
-                <div class="tab-pane fade active tse-scrollable scroll" id="kangwon_univ_notice_m" role="tabpanel" style="height: 102px;">
-                    <div class="tse-content">
-                        <% CrawlingJob.order("created_at DESC").each do |info| %>
-                            <div class="col-12 col-sm-12">
-                                <a href="http://www.kangwon.ac.kr/www/<%= info.url %>" target="_blank">
-                                    <%= content_tag(:span, '<i class="fas fa-caret-right"></i>'.html_safe, class: "etc", style: "font-weight: normal !important;") %>
-                                    <%= content_tag(:span, truncate( raw( sanitize(info.campus, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 10, :omission => "..."), class: "etc badge badge-primary") %>
-                                    <%= content_tag(:span, truncate( raw( sanitize(info.title, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 20, :omission => "..."), class: "etc") %>
-                                </a>
-                            </div>
-                        <% end %>
                     </div>
                 </div>
             </div>
