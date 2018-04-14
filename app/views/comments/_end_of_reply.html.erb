@@ -35,7 +35,7 @@
         <% if comment.comment_destroys.size >= 1 %>
           <% if can? :for_admin, comment %>
             <font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 삭제된 댓글</font><br/>
-            <b style="color: #6E6E6E;"><%= content_tag(:div, comment.body, style: "white-space: pre-wrap;") %></b>
+            <b style="color: #6E6E6E;"><%= content_tag(:div, comment.body.html_safe, style: "white-space: pre-wrap;") %></b>
           <% else %>
             <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 삭제된 댓글입니다.</font>
           <% end %>
@@ -43,7 +43,7 @@
           <% if comment.report_comments.size >= comment.num %>
             <% if can? :for_admin, comment %>
               <font color="red"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 신고 처리된 댓글</font><br/>
-              <b style="color: #6E6E6E;"><%= content_tag(:div, comment.body, style: "white-space: pre-wrap;") %></b>
+              <b style="color: #6E6E6E;"><%= content_tag(:div, comment.body.html_safe, style: "white-space: pre-wrap;") %></b>
             <% else %>
               <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 신고 처리된 댓글입니다.</font>
             <% end %>
