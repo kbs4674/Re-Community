@@ -40,7 +40,7 @@ Kangwon Univ. Community Prototype, Second Challenge
 `whenever --update-crontab`<br/>
 `whenever`<br/>
 6)Redis-server 실행<br/>
-`sudo service redis-server start`
+`sudo service redis-server start`<br/>
 7)서버 실행<br/>
 `RAILS_ENV=production rails s -p 80 -b 0.0.0.0`
 <br/><br/>
