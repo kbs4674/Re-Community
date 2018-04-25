@@ -1,9 +1,13 @@
 # README
-Kangwon Univ. Community Prototype, Second Challenger
+Kangwon Univ. Community Prototype, Second Challenge
 * Ruby version : Ruby 2.4.1, Rails 5.1.4
 * Team : 김승한 / 이근식 / 서현석 / 김상열 / 김철민
 * Git 자료실 : https://github.com/kbs4674/Re-Community
 * AWS EC2 : <a href="http://13.125.169.156">http://13.125.169.156</a>
+
+# 저작권 보호 / Copyright 문구
+* 해당 자료는 아직 Beta Test가 진행중인 프로젝트 자료입니다.
+* kbs4674@naver.com, kbs4674@likelion.org, blog.naver.com/kbs4674, README.md 에 적힌 팀원 외에는 자료 무단 유출 사용을 불허합니다.
 
 # 홈페이지 유의사항
 1. 해당 프로젝트 파일에 있는 ZIP 압축파일 속에 있는 파일을 /config 디렉토리로 옮겨놓고 시작할 것.<br/>
