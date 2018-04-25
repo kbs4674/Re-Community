@@ -21,52 +21,54 @@
   <% if @search_post_results.empty? %>
     <h2 align="center" style="margin-top: 50px;">검색결과가 없습니다.</h2>
   <% else %>
-    <% @search_post_results.each do |post| %>
-    <div class="row" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
-      <%# 게시글 제목 %>
-      <div align="left" class="col-12 col-sm-12 col-md-12 etc", style="margin-top: 10px;">
-      <h5>
-      <b>
-        <% if post.reports.size >= post.num %>
-          <% if can? :for_admin, post %>
-            <%= link_to bulletin_post_path(post.bulletin, post) do %>
-              <%= content_tag(:div, post.title, class: "etc", style: "color: red") %>
+    <div class="fade-anim">
+      <% @search_post_results.each do |post| %>
+        <div class="row" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+          <%# 게시글 제목 %>
+          <div align="left" class="col-12 col-sm-12 col-md-12 etc", style="margin-top: 10px;">
+          <h5>
+          <b>
+            <% if post.reports.size >= post.num %>
+              <% if can? :for_admin, post %>
+                <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                  <%= content_tag(:div, post.title, class: "etc", style: "color: red") %>
+                <% end %>
+              <% else %>
+                <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
+              <% end %>
+            <% else %>
+              <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                <%= content_tag(:div, post.title, class: "etc") %>
+              <% end %>
             <% end %>
-          <% else %>
-            <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
-          <% end %>
-        <% else %>
-          <%= link_to bulletin_post_path(post.bulletin, post) do %>
-            <%= content_tag(:div, post.title, class: "etc") %>
-          <% end %>
-        <% end %>
-      </b>
-      </h5>
-      </div>
-      
-      <%# 게시글 내용 %>
-      <div align="left" class="col-12 col-sm-12 col-md-12 etc", style="margin-top: 10px;">
-        <% if post.reports.size >= post.num %>
-          <% if current_user.has_role? :admin %>
-            <%= content_tag(:div, truncate( raw( sanitize(post.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 70, :omission => "..."), class: "etc", style: "color: red") %>
-          <% else %>
-            <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
-          <% end %>
-        <% else %>
-          <%= link_to bulletin_post_path(post.bulletin, post) do %>
-            <%= content_tag(:div, truncate( raw( sanitize(post.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 70, :omission => "..."), class: "etc") %>
-          <% end %>
-        <% end %>
-      </div>
-      
-      <%# 빈 여백으로 남겨둘 것. %>
-      <div class="col-6 col-sm-6 col-md-6 table_separate hidden-sm-down"></div>
-      
-      <div align="right" class="col-12 col-sm-12 col-md-6 etc table_separate">
-        <%= render 'homes/collect/user_info', post: post %>
-      </div>
+          </b>
+          </h5>
+          </div>
+          
+          <%# 게시글 내용 %>
+          <div align="left" class="col-12 col-sm-12 col-md-12 etc", style="margin-top: 10px;">
+            <% if post.reports.size >= post.num %>
+              <% if current_user.has_role? :admin %>
+                <%= content_tag(:div, truncate( raw( sanitize(post.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 70, :omission => "..."), class: "etc", style: "color: red") %>
+              <% else %>
+                <font color="#6E6E6E"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 블라인드 처리 된 게시글입니다.</font>
+              <% end %>
+            <% else %>
+              <%= link_to bulletin_post_path(post.bulletin, post) do %>
+                <%= content_tag(:div, truncate( raw( sanitize(post.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 70, :omission => "..."), class: "etc") %>
+              <% end %>
+            <% end %>
+          </div>
+          
+          <%# 빈 여백으로 남겨둘 것. %>
+          <div class="col-6 col-sm-6 col-md-6 table_separate hidden-sm-down"></div>
+          
+          <div align="right" class="col-12 col-sm-12 col-md-6 etc table_separate">
+            <%= render 'homes/collect/user_info', post: post %>
+          </div>
+        </div>
+      <% end %>
     </div>
-    <% end %>
   <% end %>
   
   <div class="d-flex flex-column", style="margin-bottom: 10px; margin-top: 30px;">

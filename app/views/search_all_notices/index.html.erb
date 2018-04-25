@@ -21,47 +21,49 @@
   <% if @all_notice_results.empty? %>
     <h2 align="center" style="margin-top: 50px;">검색결과가 없습니다.</h2>
   <% else %>
-    <% @all_notice_results.each do |post| %>
-    <div class="row" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
-      <%# 게시글 제목 %>
-      <div align="left" class="col-12 col-sm-12 col-md-12 etc", style="margin-top: 10px;">
-      <h5>
-      <b>
-        <%= link_to post do %>
-            <%= content_tag(:div, post.title, class: "etc") %>
-        <% end %>
-      </b>
-      </h5>
-      </div>
-      
-      <%# 게시글 내용 %>
-      <div align="left" class="col-12 col-sm-12 col-md-12 etc", style="margin-top: 10px;">
-        <%= link_to post do %>
-            <%= content_tag(:div, truncate( raw( sanitize(post.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 70, :omission => "..."), class: "etc") %>
-        <% end %>
-      </div>
-      
-      <%# 빈 여백으로 남겨둘 것. %>
-      <div class="col-6 col-sm-6 col-md-6 table_separate hidden-sm-down"></div>
-      
-      <div align="right" class="col-12 col-sm-12 col-md-6 etc table_separate">
-        <small style="color: gray">
-          <i class="far fa-user"></i>
-            <%= render 'posts/special/nickname_post_index', post: post %>
-  
-          <span style="margin-left: 10px; margin-right: 10px;">|</span>
+    <div class="fade-anim">
+      <% @all_notice_results.each do |post| %>
+        <div class="row" onMouseOver="this.style.backgroundColor='#ECECEC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+          <%# 게시글 제목 %>
+          <div align="left" class="col-12 col-sm-12 col-md-12 etc", style="margin-top: 10px;">
+          <h5>
+          <b>
+            <%= link_to post do %>
+                <%= content_tag(:div, post.title, class: "etc") %>
+            <% end %>
+          </b>
+          </h5>
+          </div>
           
-          <%# 시간 %>
-          <span> <i class="far fa-clock"></i> <%= "#{time_ago_in_words(post.created_at)} 전" %></span>
+          <%# 게시글 내용 %>
+          <div align="left" class="col-12 col-sm-12 col-md-12 etc", style="margin-top: 10px;">
+            <%= link_to post do %>
+                <%= content_tag(:div, truncate( raw( sanitize(post.content, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 70, :omission => "..."), class: "etc") %>
+            <% end %>
+          </div>
           
-          <span style="margin-left: 10px; margin-right: 10px;">|</span>
+          <%# 빈 여백으로 남겨둘 것. %>
+          <div class="col-6 col-sm-6 col-md-6 table_separate hidden-sm-down"></div>
           
-          <% # 게시판 작성 위치 %>
-          <span>공지사항</span>
-        </small>
-      </div>
+          <div align="right" class="col-12 col-sm-12 col-md-6 etc table_separate">
+            <small style="color: gray">
+              <i class="far fa-user"></i>
+                <%= render 'posts/special/nickname_post_index', post: post %>
+      
+              <span style="margin-left: 10px; margin-right: 10px;">|</span>
+              
+              <%# 시간 %>
+              <span> <i class="far fa-clock"></i> <%= "#{time_ago_in_words(post.created_at)} 전" %></span>
+              
+              <span style="margin-left: 10px; margin-right: 10px;">|</span>
+              
+              <% # 게시판 작성 위치 %>
+              <span>공지사항</span>
+            </small>
+          </div>
+        </div>
+      <% end %>
     </div>
-    <% end %>
   <% end %>
   
   <div class="d-flex flex-column", style="margin-bottom: 10px; margin-top: 30px;">
