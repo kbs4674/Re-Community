@@ -1,7 +1,7 @@
 class ImagesController < ApplicationController
  
   def new
-    @image = Image.build.params(image_params)
+    @image = Image.buildbu
   end
  
   def show
