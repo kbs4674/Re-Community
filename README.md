@@ -6,6 +6,7 @@ Kangwon Univ. Community Prototype, Second Challenge
 * AWS EC2 : <a href="http://13.125.169.156">http://13.125.169.156</a>
 
 # 저작권 보호 / Copyright 문구
+* "기밀유지" 프로젝트
 * 해당 자료는 아직 Beta Test가 진행중인 프로젝트 자료입니다.
 * kbs4674@naver.com, kbs4674@likelion.org, blog.naver.com/kbs4674, README.md 에 적힌 팀원 외에는 자료 무단 유출 사용을 불허합니다.
 
