@@ -20,6 +20,22 @@ class UsersController < ApplicationController
         
         @comements = Comment.all
         @comement_qnas = CommentQna.all
+        
+        # Json 연동
+        respond_to do |format|
+          format.html
+          format.json { render json: @user }
+        end
+    end
+    
+    def user_list
+        @users = User.all
+        
+        # Json 연동
+        respond_to do |format|
+          format.html
+          format.json { render json: @users }
+        end
     end
     
     def user_params

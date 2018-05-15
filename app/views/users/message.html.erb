@@ -111,12 +111,12 @@
 </div>
 
 <script>
-    var links =
-    [
-        <% @users.each do |user| %>
-            {name: "<%= user.nickname %>", id: "<%= user.id %>"},
-        <% end %>
-    ];
+var links =
+[
+    <% @users.each do |user| %>
+        {name: "<%= user.nickname %>", id: "<%= user.id %>"},
+    <% end %>
+];
 
 var source = new Bloodhound({
   datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name', 'id'),
