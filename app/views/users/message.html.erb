@@ -111,23 +111,31 @@
 </div>
 
 <script>
+<%# 참고사이트 : http://jsfiddle.net/dhirajbodicherla/pegp21r7/9/ %>
+/*
+<%# 과거 local방식 DB 불러와서 사용코드 (오버헤드, 보안 문제 때문에 이제 사용 안함) %>
 var links =
 [
-    <% @users.each do |user| %>
-        {name: "<%= user.nickname %>", id: "<%= user.id %>"},
-    <% end %>
+    <%# @users.each do |user| %>
+        {"id": <%# user.id %>, "nickname": "<%# user.nickname %>"},
+    <%# end %>
 ];
+*/
 
 var source = new Bloodhound({
-  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name', 'id'),
+  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nickname', 'id'),
   queryTokenizer: Bloodhound.tokenizers.whitespace,
-  local: links
+  <%# local: links %>
+  prefetch: {
+      url: '/users/user_list.json',
+      ttl: 0
+  }
 });
 
 source.initialize();
 
 $('#scrollable-dropdown-menu .typeahead').typeahead(null, {
-  displayKey: 'name',
+  displayKey: 'nickname',
   limit: 5,
   source: source.ttAdapter(),
   templates: {
@@ -136,7 +144,7 @@ $('#scrollable-dropdown-menu .typeahead').typeahead(null, {
       '해당 계정은 없습니다.',
       '</div>'
     ].join('\n'),
-      suggestion: Handlebars.compile('<div align="left"><%= link_to "{{name}}", '/conversations?user_id={{id}}', remote: true, method: :post %></div>')
+      suggestion: Handlebars.compile('<div align="left"><%= link_to "{{nickname}}", '/conversations?user_id={{id}}', remote: true, method: :post %></div>')
   }
 });
 </script>
