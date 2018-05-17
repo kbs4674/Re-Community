@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     
     def show
         @user = User.find(params[:id])
-        # 권한을 가진 자만 접근가능! / 해당 def만 rolife+cancancan 적용.
+        # 권한을 가진 자만 접근가능! / 해당 def만 rolify+cancancan 적용.
         authorize! :show, @user
         
         @bulletins = Bulletin.all
@@ -20,16 +20,10 @@ class UsersController < ApplicationController
         
         @comements = Comment.all
         @comement_qnas = CommentQna.all
-        
-        # Json 연동
-        respond_to do |format|
-          format.html
-          format.json { render json: @user }
-        end
     end
     
     def user_list
-        @users = User.all
+        @users = User.select("id, nickname")
         
         # Json 연동
         respond_to do |format|
