@@ -2,7 +2,7 @@
 <%# PC %>
 <div class="hidden-sm-down" align="right" style="background: url('/img/station_logo.png') no-repeat; background-position: 0px 10px; background-color: white; border-radius: 60px; padding: 10px; margin-top: 20px;">
     <span style="margin-right: 30px;">남춘천 발 <b style="color: #42b9ff">ITX</b> | </span>
-    <% @itx_dep_time_result.first(2).each_with_index do |info, index| %>
+    <% @itx_dep_time_result.first(1).each do |info| %>
       <% if (info >= Time.now.in_time_zone("Asia/Seoul").strftime('%Y%m%d%H%M%S')) %>
         <%= content_tag(:span, truncate( raw( sanitize(info, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc", style: "margin-right: 10px;") %>
       <% end %>
@@ -14,7 +14,7 @@
 <%# 모바일 %>
 <div class="hidden-md-up" align="right" style="background: url('/img/station_logo.png') no-repeat; background-position: -320px 12px; background-color: white; border-radius: 30px; padding: 10px; margin-top: 20px;">
   <span style="margin-right: 30px;">남춘천 발 <b style="color: #42b9ff">ITX</b> | </span><br/>
-  <% @itx_dep_time_result.first(2).each_with_index do |info, index| %>
+  <% @itx_dep_time_result.first(1).each do |info| %>
     <% if (info >= Time.now.in_time_zone("Asia/Seoul").strftime('%Y%m%d%H%M%S')) %>
       <small><%= content_tag(:span, truncate( raw( sanitize(info, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc", style: "margin-right: 10px;") %></small>
     <% end %>
