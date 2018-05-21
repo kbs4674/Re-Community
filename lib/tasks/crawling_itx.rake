@@ -5,7 +5,7 @@ namespace :crawling_itx do
         require 'rest_client'
         require 'cgi'
         
-        CrawlingItx.each do |x|
+        CrawlingItx.all.each do |x|
             x.destroy
         end
 
