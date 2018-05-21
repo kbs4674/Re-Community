@@ -1,7 +1,7 @@
 <%# ITX 출발 정보 %>
 <%# PC %>
 <div class="hidden-sm-down" align="right" style="background: url('/img/ITX.png') no-repeat; background-position: 0px -40px; background-color: white; border-radius: 60px; padding: 10px; margin-top: 20px;">
-    <span style="margin-right: 30px;">남춘천 발 <b style="color: #42b9ff">ITX</b> | </span>
+    <span style="margin-right: 30px;">남춘천 발 <b style="color: #06a729">ITX</b> | </span>
     <% @itx_dep_time_list.first(1).each do |info| %>
       <%= content_tag(:span, truncate( raw( sanitize("#{info.title.last(6).remove.first(2)}시 #{info.title.last(4).remove.first(2)}분 출발", :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc", style: "margin-right: 10px;") %>
     <% end %>
@@ -11,7 +11,7 @@
 
 <%# 모바일 %>
 <div class="hidden-md-up" align="right" style="background: url('/img/ITX.png') no-repeat; background-position: -110px -40px; background-color: white; border-radius: 30px; padding: 10px; margin-top: 20px;">
-  <span style="margin-right: 10px;">남춘천 발 <b style="color: #42b9ff">ITX</b> | </span>
+  <span style="margin-right: 10px;">남춘천 발 <b style="color: #06a729">ITX</b> | </span>
   <% @itx_dep_time_list.first(1).each do |info| %>
     <small><%= content_tag(:span, truncate( raw( sanitize("#{info.title.last(6).remove.first(2)}시 #{info.title.last(4).remove.first(2)}분 출발", :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc", style: "margin-right: 10px;") %></small>
   <% end %>
