@@ -1,7 +1,3 @@
-require 'rubygems'
-require 'rest_client'
-require 'cgi'
-
 class HomesController < ApplicationController
     def index
         @bulletins = Bulletin.all
@@ -38,12 +34,6 @@ class HomesController < ApplicationController
         @subway_rapid_time = subway_rapid.map { |cur| cur.text }
         
         #ITX 기차
-        url = 'http://openapi.tago.go.kr/openapi/service/TrainInfoService/getStrtpntAlocFndTrainInfo?serviceKey=5gyn5FLcQFtbUEczDFKJjTIUWNw3%2FgNJRvCmb4uGDVT2kwrBO%2F7LSJoqM85znphfkenFzGf6e0WTU%2FeYsH%2FGKw%3D%3D'
-        headers = { :params => { CGI::escape('numOfRows') => '30', CGI::escape('depPlaceId') => 'NAT140840', CGI::escape('arrPlaceId') => 'NAT010032', CGI::escape('depPlandTime') => "#{Time.now.strftime('%Y%m%d')}", CGI::escape('trainGradeCode') => '09' } }
-        @itx_time_list = RestClient::Request.execute :method => 'GET', :url => url , :headers => headers
-        @itx_result = @itx_time_list.body
-        @doc = Nokogiri::XML(@itx_result)
-        @itx_dep_time = @doc.xpath("//depplandtime")
-        @itx_dep_time_result = @itx_dep_time.map { |cur| cur.text }
+        @itx_dep_time_list = CrawlingItx.all
     end
 end
