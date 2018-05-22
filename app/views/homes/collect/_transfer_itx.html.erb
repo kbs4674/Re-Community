@@ -1,15 +1,16 @@
 <%# ITX 출발 정보 %>
 <%# PC %>
-<div class="hidden-sm-down" align="right" style="background: url('/img/ITX2.png') no-repeat; background-position: 100px -35px; background-color: white; border-radius: 60px; padding: 10px; margin-top: 20px;">
-    <span style="margin-right: 30px;">남춘천 발 <b style="color: #06a729">ITX</b> | </span>
+<div class="hidden-sm-down" align="right" style="background: url('/img/ITX2.png') no-repeat; background-position: 50px -35px; background-color: white; border-radius: 60px; padding: 10px; margin-top: 20px;">
+    <span style="margin-right: 20px;">남춘천 발 <b style="color: #06a729">ITX</b> | </span>
     <% @itx_dep_time_list.first(1).each do |info| %>
       <%= content_tag(:span, truncate( raw( sanitize("#{info.title.last(6).remove.first(2)}시 #{info.title.last(4).remove.first(2)}분 출발", :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc", style: "margin-right: 10px;") %>
-    <% end %><br/>
+    <% end %>
     <% @itx_dep_time_list.drop(1).first(1).each do |info| %>
-      <%= content_tag(:span, "<b>다음기차 | </b>".html_safe, style: "margin-right: 30px;") %>
+      <%= content_tag(:span, "<b>Next</b>".html_safe, style: "margin-right: 5px; font-size: 10px; background-color: #16a255; color: white; padding: 5px; border-radius: 5px;") %>
       <%= content_tag(:span, truncate( raw( sanitize("#{info.title.last(6).remove.first(2)}시 #{info.title.last(4).remove.first(2)}분 출발", :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc", style: "margin-right: 10px;") %>
     <% end %>
     <br/>
+    <small style="margin-right: 15px;">Powered By. Korail</small>
 </div>
 
 <%# 모바일 %>
@@ -20,7 +21,7 @@
   <% end %><br/>
   <% @itx_dep_time_list.drop(1).first(1).each do |info| %>
     <small>
-      <%= content_tag(:span, "<b>다음기차 | </b>".html_safe, style: "margin-right: 10px;") %>
+      <%= content_tag(:span, "<b>Next</b>".html_safe, style: "margin-right: 10px; font-size: 12px; background-color: #16a255; color: white; padding: 3px; border-radius: 5px;") %>
       <%= content_tag(:span, truncate( raw( sanitize("#{info.title.last(6).remove.first(2)}시 #{info.title.last(4).remove.first(2)}분 출발", :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 100, :omission => "..."), class: "etc", style: "margin-right: 10px;") %>
     </small>
   <% end %>
