@@ -31,12 +31,10 @@ ActiveRecord::Schema.define(version: 20180521105746) do
 
   create_table "alarm_qnas", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "qna_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "post_id"
     t.index ["post_id"], name: "index_alarm_qnas_on_post_id"
-    t.index ["qna_id"], name: "index_alarm_qnas_on_qna_id"
     t.index ["user_id"], name: "index_alarm_qnas_on_user_id"
   end
 
@@ -91,7 +89,6 @@ ActiveRecord::Schema.define(version: 20180521105746) do
   end
 
   create_table "comment_qnas", force: :cascade do |t|
-    t.integer "qna_id"
     t.text "body"
     t.string "user_name"
     t.integer "user_id"
@@ -105,7 +102,6 @@ ActiveRecord::Schema.define(version: 20180521105746) do
     t.integer "cached_weighted_score", default: 0
     t.integer "cached_weighted_total", default: 0
     t.float "cached_weighted_average", default: 0.0
-    t.integer "comment_qnas_id"
     t.integer "post_id"
     t.index ["cached_votes_down"], name: "index_comment_qnas_on_cached_votes_down"
     t.index ["cached_votes_score"], name: "index_comment_qnas_on_cached_votes_score"
@@ -114,10 +110,8 @@ ActiveRecord::Schema.define(version: 20180521105746) do
     t.index ["cached_weighted_average"], name: "index_comment_qnas_on_cached_weighted_average"
     t.index ["cached_weighted_score"], name: "index_comment_qnas_on_cached_weighted_score"
     t.index ["cached_weighted_total"], name: "index_comment_qnas_on_cached_weighted_total"
-    t.index ["comment_qnas_id"], name: "index_comment_qnas_on_comment_qnas_id"
     t.index ["deleted_at"], name: "index_comment_qnas_on_deleted_at"
     t.index ["post_id"], name: "index_comment_qnas_on_post_id"
-    t.index ["qna_id"], name: "index_comment_qnas_on_qna_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -323,7 +317,6 @@ ActiveRecord::Schema.define(version: 20180521105746) do
     t.float "cached_weighted_average", default: 0.0
     t.datetime "deleted_at"
     t.string "group_name"
-    t.integer "comment_qna_id"
     t.integer "alarm_qnas_count"
     t.index ["bulletin_id"], name: "index_posts_on_bulletin_id"
     t.index ["cached_votes_down"], name: "index_posts_on_cached_votes_down"
@@ -333,36 +326,7 @@ ActiveRecord::Schema.define(version: 20180521105746) do
     t.index ["cached_weighted_average"], name: "index_posts_on_cached_weighted_average"
     t.index ["cached_weighted_score"], name: "index_posts_on_cached_weighted_score"
     t.index ["cached_weighted_total"], name: "index_posts_on_cached_weighted_total"
-    t.index ["comment_qna_id"], name: "index_posts_on_comment_qna_id"
     t.index ["deleted_at"], name: "index_posts_on_deleted_at"
-  end
-
-  create_table "qnas", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
-    t.integer "num"
-    t.integer "user_id"
-    t.string "user_name"
-    t.boolean "notice", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.integer "impressions_count"
-    t.integer "cached_votes_total", default: 0
-    t.integer "cached_votes_score", default: 0
-    t.integer "cached_votes_up", default: 0
-    t.integer "cached_votes_down", default: 0
-    t.integer "cached_weighted_score", default: 0
-    t.integer "cached_weighted_total", default: 0
-    t.float "cached_weighted_average", default: 0.0
-    t.index ["cached_votes_down"], name: "index_qnas_on_cached_votes_down"
-    t.index ["cached_votes_score"], name: "index_qnas_on_cached_votes_score"
-    t.index ["cached_votes_total"], name: "index_qnas_on_cached_votes_total"
-    t.index ["cached_votes_up"], name: "index_qnas_on_cached_votes_up"
-    t.index ["cached_weighted_average"], name: "index_qnas_on_cached_weighted_average"
-    t.index ["cached_weighted_score"], name: "index_qnas_on_cached_weighted_score"
-    t.index ["cached_weighted_total"], name: "index_qnas_on_cached_weighted_total"
-    t.index ["deleted_at"], name: "index_qnas_on_deleted_at"
   end
 
   create_table "read_marks", force: :cascade do |t|
